@@ -1,0 +1,64 @@
+{
+  "nav": {
+    "home": "Nyumbani",
+    "properties": "Nyumba",
+    "services": "Huduma",
+    "about": "Kuhusu Sisi",
+    "blog": "Blogu",
+    "careers": "Kazi",
+    "contact": "Wasiliana Nasi"
+  },
+  "hero": {
+    "tagline": "Usimamizi Bora wa Mali Nairobi",
+    "headline": "Mali Yako, Ujuzi Wetu",
+    "subheadline": "Chabrin Agencies hutoa huduma za usimamizi wa mali, upangaji, na tathmini katika maeneo makuu ya Nairobi.",
+    "cta_primary": "Tazama Nyumba",
+    "cta_secondary": "Wasiliana Nasi"
+  },
+  "properties": {
+    "title": "Nyumba Zinazopatikana",
+    "filter_zone": "Chuja kwa Eneo",
+    "filter_type": "Aina ya Mali",
+    "all_zones": "Maeneo Yote",
+    "all_types": "Aina Zote",
+    "bedrooms": "Vyumba vya Kulala",
+    "bathrooms": "Bafuni",
+    "rent": "Kodi ya Kila Mwezi",
+    "zone": "Eneo",
+    "area": "Mtaa",
+    "enquire": "Uliza",
+    "whatsapp": "WhatsApp",
+    "no_results": "Hakuna nyumba zinazopatikana kwa vichujio vilivyochaguliwa.",
+    "loading": "Inapakia nyumba..."
+  },
+  "contact": {
+    "title": "Wasiliana Nasi",
+    "subtitle": "Tuma swali na timu yetu itajibu ndani ya siku moja ya kazi.",
+    "name": "Jina Kamili",
+    "email": "Anwani ya Barua Pepe",
+    "phone": "Nambari ya Simu",
+    "message": "Ujumbe",
+    "property_ref": "Nambari ya Rejeleo ya Nyumba (si lazima)",
+    "consent": "Nakubali usindikaji wa data zangu za kibinafsi kama ilivyoelezwa katika Sera ya Faragha.",
+    "submit": "Tuma Swali",
+    "submitting": "Inatuma...",
+    "success": "Asante! Tutawasiliana nawe hivi karibuni.",
+    "error": "Kuna tatizo. Tafadhali jaribu tena."
+  },
+  "footer": {
+    "tagline": "Usimamizi Bora wa Mali — Nairobi, Kenya",
+    "rights": "Haki zote zimehifadhiwa.",
+    "privacy": "Sera ya Faragha",
+    "company_number": "Nambari ya Kampuni",
+    "earb": "Usajili wa EARB"
+  },
+  "common": {
+    "loading": "Inapakia...",
+    "error": "Kosa limetokea.",
+    "back": "Rudi",
+    "read_more": "Soma Zaidi",
+    "view_all": "Angalia Yote",
+    "per_month": "/ mwezi",
+    "kes": "KES"
+  }
+}

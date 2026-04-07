@@ -1,6 +1,4 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
+# ── Dependencies ──────────────────────────────────────────────────────────────
 /node_modules
 /.pnp
 .pnp.*
@@ -10,32 +8,69 @@
 !.yarn/releases
 !.yarn/versions
 
-# testing
-/coverage
-
-# next.js
+# ── Next.js Build Output ───────────────────────────────────────────────────────
 /.next/
 /out/
-
-# production
 /build
+/dist
 
-# misc
+# ── Environment Variables (NEVER commit these) ────────────────────────────────
+.env
+.env.local
+.env.development
+.env.development.local
+.env.test
+.env.test.local
+.env.production
+.env.production.local
+.env*.local
+.env*
+# Allow the example template (contains no real secrets)
+!.env.example
+
+# ── Sanity Studio Build ────────────────────────────────────────────────────────
+/studio/.next/
+/studio/node_modules/
+/studio/dist/
+
+# ── DigitalOcean / Deployment Secrets ─────────────────────────────────────────
+.do/
+deploy_key
+deploy_key.pub
+*.ppk
+
+# ── Testing ───────────────────────────────────────────────────────────────────
+/coverage
+.vitest/
+/test-results/
+/playwright-report/
+/playwright/.cache/
+/e2e/screenshots/
+
+# ── OS & Editor ───────────────────────────────────────────────────────────────
 .DS_Store
-*.pem
+Thumbs.db
+*.swp
+*.swo
+.vscode/settings.json
+.vscode/launch.json
+.idea/
+*.iml
 
-# debug
+# ── Logs ──────────────────────────────────────────────────────────────────────
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+lerna-debug.log*
 .pnpm-debug.log*
+logs/
+pm2-logs/
 
-# env files (can opt-in for committing if needed)
-.env*
-
-# vercel
-.vercel
-
-# typescript
+# ── TypeScript ────────────────────────────────────────────────────────────────
 *.tsbuildinfo
 next-env.d.ts
+
+# ── Misc ──────────────────────────────────────────────────────────────────────
+.turbo
+*.pem
