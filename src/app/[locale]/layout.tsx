@@ -2,6 +2,8 @@ import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { locales } from "@/i18n/request";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 import type { Locale } from "@/types";
 
 interface LocaleLayoutProps {
@@ -19,20 +21,23 @@ export default async function LocaleLayout({
 }: LocaleLayoutProps) {
   const { locale } = await params;
 
-  // Validate locale
   if (!hasLocale(locales, locale)) {
     notFound();
   }
 
-  // Enable static rendering
   setRequestLocale(locale as Locale);
 
-  // Load translations for this locale
   const messages = await getMessages();
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
-      {children}
+      <div className="flex flex-col min-h-screen">
+        <Navbar />
+        <main className="flex-1">
+          {children}
+        </main>
+        <Footer />
+      </div>
     </NextIntlClientProvider>
   );
 }

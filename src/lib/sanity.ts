@@ -1,6 +1,7 @@
 import { createClient } from "@sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
-import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type SanityImageSource = any;
 
 /**
  * Sanity CMS client — manages blog, careers, team, and page content.
