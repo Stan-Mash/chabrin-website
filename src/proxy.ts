@@ -2,7 +2,7 @@ import createMiddleware from "next-intl/middleware";
 import { locales, defaultLocale } from "@/i18n/request";
 
 /**
- * next-intl middleware — handles locale detection and routing.
+ * next-intl proxy (formerly middleware) — handles locale detection and routing.
  *
  * Routing behaviour:
  *  - /              → redirects to /en (or detected browser locale)

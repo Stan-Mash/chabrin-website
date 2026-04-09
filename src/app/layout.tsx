@@ -1,10 +1,8 @@
 import type { Metadata, Viewport } from "next";
-import { Plus_Jakarta_Sans, Geist } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
-
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -66,7 +64,7 @@ export default function RootLayout({
   return (
     <html
       suppressHydrationWarning
-      className={cn("h-full", "antialiased", plusJakartaSans.variable, "font-sans", geist.variable)}
+      className={cn("h-full antialiased", plusJakartaSans.variable)}
     >
       <body className="min-h-full flex flex-col font-sans bg-surface text-brand-navy">
         {children}
