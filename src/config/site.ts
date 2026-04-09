@@ -15,9 +15,11 @@ export const siteConfig = {
   },
   contact: {
     email: "info@chabrinagencies.com",
-    phone: "+254 700 000 000", // Update with real number
-    whatsapp: "+254700000000",  // Update with real number (no spaces/dashes)
-    address: "Nairobi, Kenya",
+    phone: "+254 720 854 389",
+    phone2: "+254 745 912 688",
+    whatsapp: "254720854389",
+    address: "Nacico Plaza, 5th Floor, Room 517, Landhies Road, Nairobi",
+    pobox: "P.O Box 16659-00620, Nairobi",
   },
   social: {
     facebook: "https://facebook.com/chabrinagencies",

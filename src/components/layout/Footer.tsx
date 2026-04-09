@@ -131,7 +131,16 @@ export default function Footer() {
                   {siteConfig.contact.phone}
                 </a>
               </li>
-              <li>{siteConfig.contact.address}</li>
+              <li>
+                <a
+                  href={`tel:${siteConfig.contact.phone2.replace(/\s/g, "")}`}
+                  className="hover:text-white transition-colors"
+                >
+                  {siteConfig.contact.phone2}
+                </a>
+              </li>
+              <li className="leading-relaxed">{siteConfig.contact.address}</li>
+              <li className="text-white/40 text-xs">{siteConfig.contact.pobox}</li>
               <li className="pt-2">
                 <a
                   href={`https://wa.me/${siteConfig.contact.whatsapp}`}
