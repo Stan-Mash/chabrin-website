@@ -138,3 +138,36 @@ npm run lint         # ESLint check
 ## Machine (Work Desktop)
 - Node: `C:\nodejs\node-v22.14.0-win-x64`
 - PATH prefix needed: `PATH="/c/nodejs/node-v22.14.0-win-x64:$PATH"`
+
+---
+
+## Server & Deployment
+
+**Droplet:** `165.227.138.108` (Ubuntu 22.04, 2 vCPU, 4GB RAM, 78GB disk)
+**SSH:** `ssh deploy@165.227.138.108` or `ssh root@165.227.138.108`
+**App path:** `/var/www/chabrin`
+**Process manager:** PM2 (cluster mode, 2 instances)
+**Web server:** Nginx → proxies `localhost:3000`
+**SSL:** Let's Encrypt via Certbot (auto-renew, valid to Jul 2026)
+**Database:** PostgreSQL 14, db: `chabrin_public`, user: `chabrin_web`
+
+### Deploy command (after every push to main):
+```bash
+ssh deploy@165.227.138.108 "cd /var/www/chabrin && git pull origin main && npm ci && npm run build && pm2 reload chabrin-web"
+```
+
+### PM2 commands:
+```bash
+pm2 list                  # Show running processes
+pm2 logs chabrin-web      # Tail app logs
+pm2 reload chabrin-web    # Zero-downtime reload
+pm2 restart chabrin-web   # Full restart
+```
+
+### First deploy checklist (pending — fill in as services are provisioned):
+- [ ] DigitalOcean Spaces bucket created → update SPACES_* in .env.production
+- [ ] Sanity.io project created → update SANITY_* in .env.production
+- [ ] Cloudflare Turnstile site created → update TURNSTILE_* in .env.production
+- [ ] Mapbox token obtained → update NEXT_PUBLIC_MAPBOX_TOKEN in .env.production
+- [ ] Remove `SKIP_ENV_VALIDATION=1` from .env.production once all above are done
+- [ ] Re-run `npm run build && pm2 reload chabrin-web` after each update
