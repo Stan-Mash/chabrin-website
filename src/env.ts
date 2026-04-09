@@ -10,6 +10,12 @@ import { z } from "zod";
  */
 export const env = createEnv({
   /**
+   * Skip validation in development when real service credentials
+   * aren't set up yet. Validation is always enforced in production.
+   */
+  skipValidation: process.env.NODE_ENV === "development",
+
+  /**
    * Server-side environment variables.
    * These are NEVER exposed to the browser.
    */
