@@ -10,10 +10,14 @@ import { z } from "zod";
  */
 export const env = createEnv({
   /**
-   * Skip validation in development when real service credentials
-   * aren't set up yet. Validation is always enforced in production.
+   * Skip validation in development, or when SKIP_ENV_VALIDATION=1 is set.
+   * The latter is used during initial server provisioning before all
+   * third-party services (Sanity, Spaces, Mapbox) are configured.
+   * Remove SKIP_ENV_VALIDATION from .env.production once all services are live.
    */
-  skipValidation: process.env.NODE_ENV === "development",
+  skipValidation:
+    process.env.NODE_ENV === "development" ||
+    process.env.SKIP_ENV_VALIDATION === "1",
 
   /**
    * Server-side environment variables.
