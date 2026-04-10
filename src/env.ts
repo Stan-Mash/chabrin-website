@@ -58,6 +58,30 @@ export const env = createEnv({
       .string()
       .min(1)
       .describe("Cloudflare Turnstile secret key — used in Server Actions only"),
+
+    // ── Email (SMTP) ──────────────────────────────────────────────────────
+    SMTP_HOST: z
+      .string()
+      .min(1)
+      .describe("SMTP server hostname (e.g., mail.example.com)"),
+    SMTP_PORT: z
+      .string()
+      .regex(/^\d+$/)
+      .transform(Number)
+      .describe("SMTP server port (587 for TLS, 465 for SSL)"),
+    SMTP_USER: z
+      .string()
+      .min(1)
+      .describe("SMTP authentication username"),
+    SMTP_PASS: z
+      .string()
+      .min(1)
+      .describe("SMTP authentication password"),
+    SMTP_FROM: z
+      .string()
+      .email()
+      .optional()
+      .describe("From email address (defaults to SMTP_USER if not set)"),
   },
 
   /**

@@ -3,6 +3,7 @@ import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
+import { OrganizationSchema } from "@/components/layout/StructuredData";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -70,6 +71,9 @@ export default function RootLayout({
       suppressHydrationWarning
       className={cn("h-full antialiased", plusJakartaSans.variable)}
     >
+      <head>
+        <OrganizationSchema />
+      </head>
       <body className="min-h-full flex flex-col font-sans bg-surface text-brand-navy">
         {children}
       </body>

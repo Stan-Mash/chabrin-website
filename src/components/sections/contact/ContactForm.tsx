@@ -1,9 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
+import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useLocale } from "next-intl";
 import { z } from "zod";
+import { Turnstile } from "@marsidev/react-turnstile";
+import { sendContactEmail } from "@/actions/send-email";
 
 const schema = z.object({
   name:    z.string().min(2, "Please enter your full name"),
@@ -12,6 +16,7 @@ const schema = z.object({
   subject: z.enum(["general", "management", "tenant", "valuation", "other"]),
   message: z.string().min(20, "Message must be at least 20 characters"),
   consent: z.literal(true, "You must agree to the Privacy Policy to proceed"),
+  token:   z.string().optional(),
 });
 
 type FormData = z.infer<typeof schema>;
@@ -32,30 +37,57 @@ const inputClass = (hasError: boolean) =>
   }`;
 
 export default function ContactForm() {
+  const locale = useLocale();
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const turnstileRef = useRef<{ getResponse: () => string | null }>(null);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<FormData>({
+  } = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: { subject: "general" },
   });
 
-  const onSubmit = async (data: FormData) => {
+  const onSubmit = async (data: z.infer<typeof schema>) => {
     setStatus("submitting");
     try {
+      // Get Turnstile token
+      const token = turnstileRef.current?.getResponse();
+      
+      const payload = { ...data, token };
+
+      // Send to API for server-side validation & bot verification
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify(payload),
       });
-      if (!res.ok) throw new Error("Request failed");
+
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({ error: "Request failed" }));
+        throw new Error(errorData.error || "Request failed");
+      }
+
+      // Also trigger email send via server action
+      await sendContactEmail({
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        subject: data.subject,
+        message: data.message,
+      });
+
       setStatus("success");
       reset();
-    } catch {
+      // Reset Turnstile widget
+      if (turnstileRef.current) {
+        turnstileRef.current = null;
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
       setStatus("error");
     }
   };
@@ -170,9 +202,18 @@ export default function ContactForm() {
           )}
         </div>
 
-        {/* Turnstile placeholder */}
-        <div className="p-4 rounded-xl bg-surface border border-slate-200 text-sm text-slate-500 text-center">
-          🔐 Bot protection (Cloudflare Turnstile) will be enabled once configured.
+        {/* Turnstile Bot Protection */}
+        <div className="flex justify-center">
+          <Turnstile
+            ref={turnstileRef as any}
+            siteId={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ""}
+            onSuccess={() => {
+              // Token captured, form can be submitted
+            }}
+            onError={() => {
+              setStatus("error");
+            }}
+          />
         </div>
 
         {/* KDPA Consent */}
@@ -185,9 +226,9 @@ export default function ContactForm() {
             />
             <span className="text-sm text-slate-600 leading-relaxed">
               I agree to the processing of my personal data in accordance with the{" "}
-              <a href="/en/privacy-policy" className="text-brand-cyan hover:underline font-medium">
+              <Link href={`/${locale}/privacy-policy`} className="text-brand-cyan hover:underline font-medium">
                 Privacy Policy
-              </a>
+              </Link>
               {" "}in compliance with the Kenya Data Protection Act 2019.{" "}
               <span className="text-brand-cyan">*</span>
             </span>
