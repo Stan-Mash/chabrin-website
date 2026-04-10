@@ -4,11 +4,11 @@ export default function Timeline() {
   const t = useTranslations("about");
 
   const MILESTONES = [
-    { year: "2009", title: t("milestone_2009_title"), desc: t("milestone_2009_desc") },
-    { year: "2012", title: t("milestone_2012_title"), desc: t("milestone_2012_desc") },
+    { year: "1990s", title: t("milestone_1990s_title"), desc: t("milestone_1990s_desc") },
+    { year: "2000s", title: t("milestone_2000s_title"), desc: t("milestone_2000s_desc") },
+    { year: "2010", title: t("milestone_2010_title"), desc: t("milestone_2010_desc") },
     { year: "2015", title: t("milestone_2015_title"), desc: t("milestone_2015_desc") },
-    { year: "2018", title: t("milestone_2018_title"), desc: t("milestone_2018_desc") },
-    { year: "2022", title: t("milestone_2022_title"), desc: t("milestone_2022_desc") },
+    { year: "2020", title: t("milestone_2020_title"), desc: t("milestone_2020_desc") },
     { year: "2024", title: t("milestone_2024_title"), desc: t("milestone_2024_desc") },
   ];
 
