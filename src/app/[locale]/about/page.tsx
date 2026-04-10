@@ -10,7 +10,7 @@ type Props = { params: Promise<{ locale: string }> };
 
 export const metadata: Metadata = {
   title: "About Us | Chabrin Agencies Limited",
-  description: "Over 30 years of trusted property management — from Nairobi to Kenol and Athi River. Meet the team behind Chabrin Agencies.",
+  description: "Over 30 years of trusted property management across Nairobi, Kiambu, Murang'a, Kajiado and beyond. Meet the team behind Chabrin Agencies.",
 };
 
 export default async function AboutPage({ params }: Props) {

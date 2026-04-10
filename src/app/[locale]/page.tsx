@@ -19,11 +19,11 @@ export async function generateMetadata({
 
   return {
     title: isSwahili
-      ? "Usimamizi wa Mali Nairobi | Chabrin Agencies Limited"
-      : "Premier Property Management Nairobi | Chabrin Agencies Limited",
+      ? "Usimamizi wa Mali Kenya | Chabrin Agencies Limited"
+      : "Premier Property Management Kenya | Chabrin Agencies Limited",
     description: isSwahili
-      ? "Huduma za usimamizi wa mali, upangaji na tathmini Nairobi. Chabrin Agencies."
-      : "Professional property management, leasing and valuation services across Nairobi. Trusted by 500+ landlords.",
+      ? "Huduma za usimamizi wa mali, upangaji na tathmini katika Nairobi, Kiambu, Murang'a, Kajiado na zaidi. Chabrin Agencies."
+      : "Professional property management, leasing and valuation services across Nairobi, Kiambu, Murang'a, Kajiado and beyond. Trusted by 1,200+ landlords.",
   };
 }
 

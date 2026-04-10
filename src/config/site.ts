@@ -6,7 +6,7 @@ export const siteConfig = {
   name: "Chabrin Agencies Limited",
   shortName: "Chabrin",
   description:
-    "Premier property management, leasing, and valuation services in Nairobi, Kenya.",
+    "Premier property management, leasing, and valuation services across Nairobi, Kiambu, Murang'a, Kajiado, and beyond.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://chabrinagencies.com",
   ogImage: "/og-image.png",
   locale: {

@@ -9,7 +9,7 @@ type Props = { params: Promise<{ locale: string }> };
 export const metadata: Metadata = {
   title: "Contact Us | Chabrin Agencies Limited",
   description:
-    "Get in touch with Chabrin Agencies. Send an enquiry, request a property management consultation, or ask about available properties in Nairobi.",
+    "Get in touch with Chabrin Agencies. Send an enquiry, request a property management consultation, or ask about available properties across Kenya.",
 };
 
 export default async function ContactPage({ params }: Props) {

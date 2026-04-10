@@ -43,10 +43,10 @@ export default function Accreditations() {
         {/* CTA Strip */}
         <div className="rounded-3xl bg-brand-navy px-8 py-12 text-center">
           <h3 className="text-2xl md:text-3xl font-extrabold text-white mb-3">
-            {t("accreditations_cta_title") || "Ready to work with Nairobi\u2019s trusted property managers?"}
+            {t("accreditations_cta_title")}
           </h3>
           <p className="text-slate-300 mb-8 max-w-xl mx-auto">
-            {t("accreditations_cta_subtitle") || "Whether you\u2019re a landlord looking for professional management or a tenant seeking your next home \u2014 we\u2019re here to help."}
+            {t("accreditations_cta_subtitle")}
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link
