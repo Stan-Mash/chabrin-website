@@ -47,10 +47,12 @@ export default function ContactForm() {
   const onSubmit = async (data: FormData) => {
     setStatus("submitting");
     try {
-      // TODO: wire to /api/contact once Cloudflare Turnstile keys are configured
-      await new Promise((r) => setTimeout(r, 1200));
-      // Avoid logging PII — only log subject for diagnostics
-      console.info("[ContactForm] Submitted:", { subject: data.subject });
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) throw new Error("Request failed");
       setStatus("success");
       reset();
     } catch {
