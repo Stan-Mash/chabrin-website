@@ -1,55 +1,59 @@
-const SERVICES = [
-  {
-    id: "management",
-    icon: "🏢",
-    title: "Property Management",
-    desc: "End-to-end management of your investment property — from rent collection to maintenance coordination. We act as your professional representative, handling every aspect of your property on your behalf.",
-    features: [
-      "Monthly rent collection & remittance",
-      "Tenant screening & vetting",
-      "Maintenance coordination & supplier management",
-      "Monthly financial reporting & statements",
-    ],
-  },
-  {
-    id: "leasing",
-    icon: "🔑",
-    title: "Leasing & Tenant Placement",
-    desc: "Reduce vacancy periods with our targeted leasing service. We market your property, qualify applicants, conduct due diligence, and execute legally sound lease agreements.",
-    features: [
-      "Professional property marketing & photography",
-      "Applicant screening (ID, credit, employer verification)",
-      "Lease drafting & digital signing",
-      "Move-in inspection & handover documentation",
-    ],
-  },
-  {
-    id: "valuation",
-    icon: "📊",
-    title: "Property Valuation",
-    desc: "Accurate, EARB-compliant property valuations for sale, purchase, insurance, and bank financing purposes. Our registered valuers deliver defensible reports accepted by major financial institutions.",
-    features: [
-      "Residential & commercial valuations",
-      "Insurance replacement cost reports",
-      "Bank/mortgage valuation reports",
-      "Rental assessment & market analysis",
-    ],
-  },
-  {
-    id: "facilities",
-    icon: "🔧",
-    title: "Facilities Management",
-    desc: "Proactive care for your property's physical infrastructure — ensuring buildings remain safe, functional, and compliant with Kenya's building codes.",
-    features: [
-      "Preventive maintenance scheduling",
-      "Emergency repair coordination (24/7 response)",
-      "Service contractor procurement & oversight",
-      "Annual compliance inspections",
-    ],
-  },
-];
+import { useTranslations } from "next-intl";
 
 export default function ServicesList() {
+  const t = useTranslations("services_page");
+
+  const SERVICES = [
+    {
+      id: "management",
+      icon: "🏢",
+      title: t("management_title"),
+      desc:  t("management_desc"),
+      features: [
+        t("management_f1"),
+        t("management_f2"),
+        t("management_f3"),
+        t("management_f4"),
+      ],
+    },
+    {
+      id: "leasing",
+      icon: "🔑",
+      title: t("leasing_title"),
+      desc:  t("leasing_desc"),
+      features: [
+        t("leasing_f1"),
+        t("leasing_f2"),
+        t("leasing_f3"),
+        t("leasing_f4"),
+      ],
+    },
+    {
+      id: "valuation",
+      icon: "📊",
+      title: t("valuation_title"),
+      desc:  t("valuation_desc"),
+      features: [
+        t("valuation_f1"),
+        t("valuation_f2"),
+        t("valuation_f3"),
+        t("valuation_f4"),
+      ],
+    },
+    {
+      id: "facilities",
+      icon: "🔧",
+      title: t("facilities_title"),
+      desc:  t("facilities_desc"),
+      features: [
+        t("facilities_f1"),
+        t("facilities_f2"),
+        t("facilities_f3"),
+        t("facilities_f4"),
+      ],
+    },
+  ];
+
   return (
     <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">

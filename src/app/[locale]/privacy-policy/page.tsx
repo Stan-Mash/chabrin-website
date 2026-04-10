@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { useTranslations } from "next-intl";
 import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
@@ -9,16 +10,18 @@ export const metadata: Metadata = {
 const LAST_UPDATED = "10 April 2026";
 
 export default function PrivacyPolicyPage() {
+  const t = useTranslations("privacy");
+
   return (
     <main className="min-h-screen bg-white">
       {/* Hero */}
       <section className="bg-brand-navy text-white py-16 px-4">
         <div className="max-w-3xl mx-auto">
           <p className="text-brand-cyan text-sm font-semibold uppercase tracking-widest mb-3">
-            Legal
+            {t("eyebrow")}
           </p>
-          <h1 className="text-3xl md:text-4xl font-bold mb-4">Privacy Policy</h1>
-          <p className="text-slate-300 text-sm">Last updated: {LAST_UPDATED}</p>
+          <h1 className="text-3xl md:text-4xl font-bold mb-4">{t("hero_title")}</h1>
+          <p className="text-slate-300 text-sm">{t("last_updated")}: {LAST_UPDATED}</p>
         </div>
       </section>
 
@@ -135,7 +138,7 @@ export default function PrivacyPolicyPage() {
             respond within 21 days as required by the KDPA.
           </p>
 
-          <h2>9. Children's Privacy</h2>
+          <h2>9. Children&apos;s Privacy</h2>
           <p>
             Our services are not directed to children under 18 years of age. We do not knowingly
             collect personal data from children. If you believe a child has provided us with personal
@@ -152,7 +155,7 @@ export default function PrivacyPolicyPage() {
           <h2>11. Changes to This Policy</h2>
           <p>
             We may update this Privacy Policy from time to time. We will notify you of material
-            changes by updating the "Last updated" date at the top of this page. Continued use of
+            changes by updating the &quot;Last updated&quot; date at the top of this page. Continued use of
             our website after changes constitutes acceptance of the updated policy.
           </p>
 

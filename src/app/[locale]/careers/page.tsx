@@ -1,50 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
   title: "Careers",
   description: "Join Chabrin Agencies Limited. We're looking for talented property professionals to grow with us in Nairobi.",
 };
-
-const VALUES = [
-  {
-    icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    ),
-    title: "Integrity First",
-    desc: "We do the right thing — for our clients, our colleagues, and our community.",
-  },
-  {
-    icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
-      </svg>
-    ),
-    title: "Growth Mindset",
-    desc: "Continuous learning is embedded in everything we do — training, mentorship, and professional development.",
-  },
-  {
-    icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
-      </svg>
-    ),
-    title: "Collaborative Team",
-    desc: "A close-knit team where your contributions are recognised and your voice matters.",
-  },
-  {
-    icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
-      </svg>
-    ),
-    title: "Industry Impact",
-    desc: "We manage hundreds of properties across Nairobi — your work directly shapes the city's housing landscape.",
-  },
-];
 
 const OPENINGS = [
   {
@@ -106,6 +68,47 @@ const OPENINGS = [
 ];
 
 export default function CareersPage() {
+  const t = useTranslations("careers");
+
+  const VALUES = [
+    {
+      icon: (
+        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      ),
+      title: t("value_integrity_title"),
+      desc:  t("value_integrity_desc"),
+    },
+    {
+      icon: (
+        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+        </svg>
+      ),
+      title: t("value_growth_title"),
+      desc:  t("value_growth_desc"),
+    },
+    {
+      icon: (
+        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
+        </svg>
+      ),
+      title: t("value_team_title"),
+      desc:  t("value_team_desc"),
+    },
+    {
+      icon: (
+        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
+        </svg>
+      ),
+      title: t("value_impact_title"),
+      desc:  t("value_impact_desc"),
+    },
+  ];
+
   return (
     <main className="min-h-screen bg-white">
 
@@ -113,14 +116,13 @@ export default function CareersPage() {
       <section className="bg-brand-navy text-white py-16 px-4">
         <div className="max-w-5xl mx-auto">
           <p className="text-brand-cyan text-sm font-semibold uppercase tracking-widest mb-3">
-            Careers
+            {t("eyebrow")}
           </p>
           <h1 className="text-3xl md:text-4xl font-bold mb-4">
-            Grow Your Career in Property
+            {t("hero_title")}
           </h1>
           <p className="text-slate-300 max-w-xl">
-            Join a team of dedicated property professionals shaping Nairobi's real estate
-            landscape since 2009. We invest in our people as much as our properties.
+            {t("hero_subtitle")}
           </p>
         </div>
       </section>
@@ -129,7 +131,7 @@ export default function CareersPage() {
       <section className="py-16 px-4 bg-slate-50">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-2xl font-bold text-brand-navy mb-10 text-center">
-            Why Work at Chabrin?
+            {t("why_title")}
           </h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {VALUES.map((v) => (
@@ -149,9 +151,9 @@ export default function CareersPage() {
       {/* Open Positions */}
       <section className="py-16 px-4">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-2xl font-bold text-brand-navy mb-2">Open Positions</h2>
+          <h2 className="text-2xl font-bold text-brand-navy mb-2">{t("openings_title")}</h2>
           <p className="text-slate-500 mb-10">
-            All roles are based at our Nairobi office — Nacico Plaza, Landhies Road.
+            {t("openings_subtitle")}
           </p>
 
           <div className="space-y-6">
@@ -171,11 +173,11 @@ export default function CareersPage() {
                       </span>
                       <span className="text-xs font-semibold px-3 py-1 rounded-full
                                        bg-brand-cyan/10 text-brand-cyan">
-                        {job.type}
+                        {t("fulltime")}
                       </span>
                       <span className="text-xs font-semibold px-3 py-1 rounded-full
                                        bg-slate-100 text-slate-600">
-                        📍 {job.location}
+                        📍 {t("location")}
                       </span>
                     </div>
                   </div>
@@ -185,7 +187,7 @@ export default function CareersPage() {
                                text-sm font-bold hover:bg-brand-cyan hover:text-brand-navy
                                transition-colors"
                   >
-                    Apply Now
+                    {t("apply_btn")}
                   </Link>
                 </div>
 
@@ -193,7 +195,7 @@ export default function CareersPage() {
 
                 <div>
                   <p className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
-                    Requirements
+                    {t("requirements_label")}
                   </p>
                   <ul className="space-y-1.5">
                     {job.requirements.map((req) => (
@@ -216,10 +218,9 @@ export default function CareersPage() {
       {/* Spontaneous Application */}
       <section className="py-16 px-4 bg-brand-navy text-white">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-2xl font-bold mb-4">Don't See a Suitable Role?</h2>
+          <h2 className="text-2xl font-bold mb-4">{t("spontaneous_title")}</h2>
           <p className="text-slate-300 mb-8 leading-relaxed">
-            We're always interested in meeting talented property professionals. Send us your
-            CV and a brief introduction — we'll keep it on file for future opportunities.
+            {t("spontaneous_desc")}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
@@ -227,7 +228,7 @@ export default function CareersPage() {
               className="px-8 py-3.5 rounded-full bg-brand-cyan text-brand-navy font-bold
                          text-sm hover:bg-white transition-colors"
             >
-              Send Your CV
+              {t("spontaneous_cta")}
             </a>
             <Link
               href="/en/contact"
@@ -235,7 +236,7 @@ export default function CareersPage() {
                          font-bold text-sm hover:border-brand-cyan hover:text-brand-cyan
                          transition-colors"
             >
-              Contact Us
+              {t("spontaneous_contact")}
             </Link>
           </div>
           <p className="text-slate-400 text-sm mt-6">

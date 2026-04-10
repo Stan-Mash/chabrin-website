@@ -51,7 +51,7 @@ export default function Hero() {
                          leading-[1.05] tracking-tight mb-6">
             {t("headline")}
             <span className="block text-brand-cyan mt-1">
-              Our Expertise.
+              {t("headline_accent")}
             </span>
           </h1>
 
@@ -88,9 +88,9 @@ export default function Hero() {
           <div className="flex flex-wrap items-center gap-6 mt-12 pt-10
                           border-t border-white/10">
             {[
-              { icon: "✓", label: "EARB Registered" },
-              { icon: "✓", label: "ODPC Compliant" },
-              { icon: "✓", label: "Nairobi Specialists" },
+              { icon: "✓", label: t("trust_earb") },
+              { icon: "✓", label: t("trust_odpc") },
+              { icon: "✓", label: t("trust_nairobi") },
             ].map(({ icon, label }) => (
               <div key={label} className="flex items-center gap-2">
                 <span className="w-5 h-5 rounded-full bg-brand-cyan/20 flex items-center

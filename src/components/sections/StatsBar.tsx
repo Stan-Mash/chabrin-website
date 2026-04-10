@@ -1,11 +1,15 @@
-const STATS = [
-  { value: "500+",  label: "Properties Managed",  suffix: "" },
-  { value: "12",    label: "Nairobi Zones Covered", suffix: "" },
-  { value: "15+",   label: "Years of Experience",  suffix: "" },
-  { value: "98%",   label: "Client Retention",     suffix: "" },
-];
+import { useTranslations } from "next-intl";
 
 export default function StatsBar() {
+  const t = useTranslations("stats");
+
+  const STATS = [
+    { value: t("properties_value"), label: t("properties_label") },
+    { value: t("zones_value"),      label: t("zones_label") },
+    { value: t("years_value"),      label: t("years_label") },
+    { value: t("retention_value"),  label: t("retention_label") },
+  ];
+
   return (
     <section className="bg-white border-b border-slate-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

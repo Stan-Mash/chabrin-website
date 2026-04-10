@@ -1,39 +1,40 @@
 import Link from "next/link";
-import { useLocale } from "next-intl";
-
-const SERVICES = [
-  {
-    id:       "management",
-    icon:     "🏢",
-    title:    "Property Management",
-    desc:     "End-to-end management of residential and commercial properties. Rent collection, maintenance coordination, tenant relations, and monthly reporting.",
-    href:     "/services#management",
-  },
-  {
-    id:       "leasing",
-    icon:     "📋",
-    title:    "Leasing & Letting",
-    desc:     "Professional tenant sourcing, vetting, and placement. We handle lease preparation, digital signing, and handover documentation.",
-    href:     "/services#leasing",
-  },
-  {
-    id:       "valuation",
-    icon:     "📊",
-    title:    "Property Valuation",
-    desc:     "Accurate market valuations for residential, commercial, and industrial properties across Nairobi — backed by current data and local expertise.",
-    href:     "/services#valuation",
-  },
-  {
-    id:       "facilities",
-    icon:     "🔧",
-    title:    "Facilities Management",
-    desc:     "Planned and reactive maintenance, contractor management, and compliance oversight to protect the long-term value of your property.",
-    href:     "/services#facilities",
-  },
-];
+import { useTranslations, useLocale } from "next-intl";
 
 export default function Services() {
+  const t      = useTranslations("services_section");
   const locale = useLocale();
+
+  const SERVICES = [
+    {
+      id:   "management",
+      icon: "🏢",
+      title: t("management_title"),
+      desc:  t("management_desc"),
+      href:  "/services#management",
+    },
+    {
+      id:   "leasing",
+      icon: "📋",
+      title: t("leasing_title"),
+      desc:  t("leasing_desc"),
+      href:  "/services#leasing",
+    },
+    {
+      id:   "valuation",
+      icon: "📊",
+      title: t("valuation_title"),
+      desc:  t("valuation_desc"),
+      href:  "/services#valuation",
+    },
+    {
+      id:   "facilities",
+      icon: "🔧",
+      title: t("facilities_title"),
+      desc:  t("facilities_desc"),
+      href:  "/services#facilities",
+    },
+  ];
 
   return (
     <section className="py-20 md:py-28 bg-surface">
@@ -42,14 +43,13 @@ export default function Services() {
         {/* ── Section header ─────────────────────────────────────────── */}
         <div className="max-w-2xl mb-14">
           <p className="text-brand-cyan text-sm font-bold tracking-widest uppercase mb-3">
-            What We Do
+            {t("eyebrow")}
           </p>
           <h2 className="text-3xl md:text-4xl font-bold text-brand-navy leading-tight mb-4">
-            Full-Spectrum Property Services
+            {t("title")}
           </h2>
           <p className="text-slate-500 text-lg leading-relaxed">
-            From finding the right tenant to managing your entire portfolio —
-            Chabrin delivers professional property services across Nairobi.
+            {t("subtitle")}
           </p>
         </div>
 
@@ -82,7 +82,7 @@ export default function Services() {
 
               {/* Learn more arrow */}
               <div className="flex items-center gap-1.5 mt-5 text-brand-cyan text-sm font-semibold">
-                <span>Learn more</span>
+                <span>{t("learn_more")}</span>
                 <svg
                   className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1"
                   fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}
@@ -106,7 +106,7 @@ export default function Services() {
             className="inline-flex items-center gap-2 text-brand-navy font-semibold
                        hover:text-brand-cyan transition-colors text-sm"
           >
-            View all services
+            {t("view_all")}
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
             </svg>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 export const metadata: Metadata = {
   title: "Blog & Insights",
@@ -73,6 +74,7 @@ const CATEGORY_COLORS: Record<string, string> = {
 };
 
 export default function BlogPage() {
+  const t = useTranslations("blog");
   const [featured, ...rest] = POSTS;
 
   return (
@@ -82,14 +84,13 @@ export default function BlogPage() {
       <section className="bg-brand-navy text-white py-16 px-4">
         <div className="max-w-5xl mx-auto">
           <p className="text-brand-cyan text-sm font-semibold uppercase tracking-widest mb-3">
-            Insights &amp; News
+            {t("eyebrow")}
           </p>
           <h1 className="text-3xl md:text-4xl font-bold mb-4">
-            Property Market Insights
+            {t("hero_title")}
           </h1>
           <p className="text-slate-300 max-w-xl">
-            Guides, market updates, and expert commentary from Chabrin's property
-            professionals — helping landlords and tenants make informed decisions.
+            {t("hero_subtitle")}
           </p>
         </div>
       </section>
@@ -100,7 +101,7 @@ export default function BlogPage() {
           {/* Featured post */}
           <div>
             <p className="text-xs font-bold uppercase tracking-widest text-brand-cyan mb-6">
-              Featured
+              {t("featured_label")}
             </p>
             <article className="group rounded-2xl border border-slate-100 overflow-hidden shadow-sm
                                 hover:shadow-md transition-shadow bg-white">
@@ -120,7 +121,7 @@ export default function BlogPage() {
                 <div className="flex items-center justify-between">
                   <span className="text-xs text-slate-400">{featured.date} · {featured.readTime}</span>
                   <span className="text-sm font-semibold text-brand-cyan">
-                    Coming soon →
+                    {t("coming_soon_arrow")}
                   </span>
                 </div>
               </div>
@@ -130,7 +131,7 @@ export default function BlogPage() {
           {/* Grid */}
           <div>
             <p className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-6">
-              All Articles
+              {t("all_label")}
             </p>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {rest.map((post) => (
@@ -155,7 +156,7 @@ export default function BlogPage() {
                     </p>
                     <div className="flex items-center justify-between mt-auto">
                       <span className="text-xs text-slate-400">{post.date} · {post.readTime}</span>
-                      <span className="text-xs font-semibold text-brand-cyan">Soon →</span>
+                      <span className="text-xs font-semibold text-brand-cyan">{t("soon_short")}</span>
                     </div>
                   </div>
                 </article>
@@ -165,17 +166,16 @@ export default function BlogPage() {
 
           {/* Newsletter CTA */}
           <div className="bg-brand-navy rounded-2xl p-10 text-center text-white">
-            <h2 className="text-2xl font-bold mb-3">Stay Updated</h2>
+            <h2 className="text-2xl font-bold mb-3">{t("newsletter_title")}</h2>
             <p className="text-slate-300 mb-6 max-w-lg mx-auto">
-              Full articles and a newsletter are coming soon. In the meantime, reach out to
-              our team directly for property advice.
+              {t("newsletter_subtitle")}
             </p>
             <Link
               href="/en/contact"
               className="inline-block px-8 py-3 rounded-full bg-brand-cyan text-brand-navy
                          font-bold text-sm hover:bg-white transition-colors"
             >
-              Talk to Our Experts
+              {t("newsletter_cta")}
             </Link>
           </div>
 

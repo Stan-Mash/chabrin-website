@@ -1,35 +1,39 @@
-const PILLARS = [
-  {
-    id:    "licensed",
-    title: "Fully Licensed & Regulated",
-    desc:  "Registered with the Estate Agents Registration Board (EARB) and compliant with the Kenya Data Protection Act. Your property is in safe, accountable hands.",
-    stat:  "EARB",
-    statLabel: "Registered",
-  },
-  {
-    id:    "responsive",
-    title: "Dedicated Client Teams",
-    desc:  "Every property is assigned a dedicated manager — not a call centre. Direct communication, fast response times, and real accountability.",
-    stat:  "24h",
-    statLabel: "Response SLA",
-  },
-  {
-    id:    "tech",
-    title: "Technology-Enabled",
-    desc:  "Powered by our proprietary CHIPS platform for real-time reporting, digital lease signing, and transparent financial tracking for every landlord.",
-    stat:  "100%",
-    statLabel: "Digital Reporting",
-  },
-  {
-    id:    "local",
-    title: "Deep Nairobi Knowledge",
-    desc:  "15+ years of on-the-ground experience across all major Nairobi zones. We know the market, the regulations, and the right price.",
-    stat:  "15+",
-    statLabel: "Years in Nairobi",
-  },
-];
+import { useTranslations } from "next-intl";
 
 export default function WhyChabrin() {
+  const t = useTranslations("why_chabrin");
+
+  const PILLARS = [
+    {
+      id:        "licensed",
+      title:     t("licensed_title"),
+      desc:      t("licensed_desc"),
+      stat:      t("licensed_stat"),
+      statLabel: t("licensed_stat_label"),
+    },
+    {
+      id:        "responsive",
+      title:     t("responsive_title"),
+      desc:      t("responsive_desc"),
+      stat:      t("responsive_stat"),
+      statLabel: t("responsive_stat_label"),
+    },
+    {
+      id:        "tech",
+      title:     t("tech_title"),
+      desc:      t("tech_desc"),
+      stat:      t("tech_stat"),
+      statLabel: t("tech_stat_label"),
+    },
+    {
+      id:        "local",
+      title:     t("local_title"),
+      desc:      t("local_desc"),
+      stat:      t("local_stat"),
+      statLabel: t("local_stat_label"),
+    },
+  ];
+
   return (
     <section className="py-20 md:py-28 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -37,14 +41,13 @@ export default function WhyChabrin() {
         {/* ── Section header ─────────────────────────────────────────── */}
         <div className="max-w-2xl mb-14">
           <p className="text-brand-cyan text-sm font-bold tracking-widest uppercase mb-3">
-            Why Choose Us
+            {t("eyebrow")}
           </p>
           <h2 className="text-3xl md:text-4xl font-bold text-brand-navy leading-tight mb-4">
-            The Chabrin Standard
+            {t("title")}
           </h2>
           <p className="text-slate-500 text-lg leading-relaxed">
-            We measure ourselves against what matters to landlords and tenants —
-            transparency, responsiveness, and results.
+            {t("subtitle")}
           </p>
         </div>
 

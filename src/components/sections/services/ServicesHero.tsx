@@ -1,4 +1,8 @@
+import { useTranslations } from "next-intl";
+
 export default function ServicesHero() {
+  const t = useTranslations("services_page");
+
   return (
     <section className="relative bg-brand-navy overflow-hidden py-24 md:py-32">
       <div className="absolute top-0 right-0 w-96 h-96 bg-brand-cyan/10 rounded-full blur-3xl translate-x-1/3 -translate-y-1/3" />
@@ -8,15 +12,13 @@ export default function ServicesHero() {
         <div className="max-w-3xl">
           <span className="inline-flex items-center gap-2 mb-6">
             <span className="w-8 h-0.5 bg-brand-cyan" />
-            <span className="text-brand-cyan text-sm font-semibold tracking-widest uppercase">What We Offer</span>
+            <span className="text-brand-cyan text-sm font-semibold tracking-widest uppercase">{t("eyebrow")}</span>
           </span>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6">
-            Comprehensive<br />
-            <span className="text-brand-cyan">Property Services</span>
+            {t("hero_title")}
           </h1>
           <p className="text-lg text-slate-300 max-w-2xl leading-relaxed">
-            From leasing to valuation — Chabrin Agencies delivers the full spectrum of professional
-            property services in Nairobi, backed by 15+ years of expertise and a registered team of professionals.
+            {t("hero_subtitle")}
           </p>
         </div>
       </div>

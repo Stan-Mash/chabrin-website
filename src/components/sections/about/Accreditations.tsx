@@ -1,22 +1,28 @@
 import Link from "next/link";
-
-const BADGES = [
-  { icon: "🏛️", label: "EARB Registered",    desc: "Estate Agents Registration Board of Kenya" },
-  { icon: "🔒", label: "ODPC Compliant",      desc: "Office of the Data Protection Commissioner" },
-  { icon: "📋", label: "Registered Company",  desc: "Incorporated under the Companies Act of Kenya" },
-  { icon: "⏱️", label: "15+ Years",           desc: "Over a decade and a half of trusted service" },
-];
+import { useTranslations } from "next-intl";
 
 export default function Accreditations() {
+  const t = useTranslations("about");
+
+  const BADGES = [
+    { icon: "🏛️", label: t("badge_earb_title"),    desc: t("badge_earb_desc") },
+    { icon: "🔒", label: t("badge_odpc_title"),    desc: t("badge_odpc_desc") },
+    { icon: "📋", label: t("badge_company_title"), desc: t("badge_company_desc") },
+    { icon: "⏱️", label: t("badge_years_title"),   desc: t("badge_years_desc") },
+  ];
+
   return (
     <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
+          <p className="text-brand-cyan text-sm font-semibold tracking-widest uppercase mb-3">
+            {t("accreditations_eyebrow")}
+          </p>
           <h2 className="text-3xl font-extrabold text-brand-navy mb-3">
-            Accreditations &amp; Trust
+            {t("accreditations_title")}
           </h2>
           <p className="text-slate-500 max-w-xl mx-auto">
-            We operate within Kenya&apos;s full regulatory framework — giving you complete confidence.
+            {t("accreditations_subtitle")}
           </p>
         </div>
 
@@ -37,11 +43,10 @@ export default function Accreditations() {
         {/* CTA Strip */}
         <div className="rounded-3xl bg-brand-navy px-8 py-12 text-center">
           <h3 className="text-2xl md:text-3xl font-extrabold text-white mb-3">
-            Ready to work with Nairobi&apos;s trusted property managers?
+            {t("accreditations_cta_title") || "Ready to work with Nairobi\u2019s trusted property managers?"}
           </h3>
           <p className="text-slate-300 mb-8 max-w-xl mx-auto">
-            Whether you&apos;re a landlord looking for professional management or a tenant
-            seeking your next home — we&apos;re here to help.
+            {t("accreditations_cta_subtitle") || "Whether you\u2019re a landlord looking for professional management or a tenant seeking your next home \u2014 we\u2019re here to help."}
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link
@@ -49,14 +54,14 @@ export default function Accreditations() {
               className="px-8 py-3 rounded-full bg-brand-cyan text-white font-bold
                          hover:bg-brand-cyan-dark transition-colors shadow-cyan"
             >
-              Get in Touch
+              {t("cta_contact")}
             </Link>
             <Link
               href="/en/properties"
               className="px-8 py-3 rounded-full border-2 border-white text-white font-bold
                          hover:bg-white/10 transition-colors"
             >
-              View Properties
+              {t("cta_properties")}
             </Link>
           </div>
         </div>

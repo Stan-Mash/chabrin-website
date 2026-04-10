@@ -1,3 +1,5 @@
+import { useTranslations } from "next-intl";
+
 const TEAM = [
   { initials: "CC", name: "Charles Chabrin", title: "Managing Director", bio: "A chartered property manager with over 20 years in Kenya's real estate sector. Leads Chabrin's strategic direction and client relationships." },
   { initials: "AM", name: "Amina Mwangi", title: "Head of Operations", bio: "Oversees day-to-day property management across all zones, ensuring service standards and tenant satisfaction." },
@@ -5,13 +7,18 @@ const TEAM = [
 ];
 
 export default function Leadership() {
+  const t = useTranslations("about");
+
   return (
     <section className="py-20 bg-surface">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-14">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-brand-navy mb-4">Our Leadership</h2>
+          <p className="text-brand-cyan text-sm font-semibold tracking-widest uppercase mb-3">
+            {t("leadership_eyebrow")}
+          </p>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-brand-navy mb-4">{t("leadership_title")}</h2>
           <p className="text-slate-500 max-w-xl mx-auto">
-            Experienced professionals dedicated to delivering exceptional property management services.
+            {t("leadership_subtitle")}
           </p>
         </div>
 

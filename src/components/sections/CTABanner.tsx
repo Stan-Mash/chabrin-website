@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { useLocale } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { siteConfig } from "@/config/site";
 
 export default function CTABanner() {
+  const t      = useTranslations("cta_banner");
   const locale = useLocale();
 
   return (
@@ -26,14 +27,13 @@ export default function CTABanner() {
           {/* ── Left — text ────────────────────────────────────────── */}
           <div className="max-w-xl text-center lg:text-left">
             <p className="text-brand-cyan text-sm font-bold tracking-widest uppercase mb-4">
-              Property Owners
+              {t("eyebrow")}
             </p>
             <h2 className="text-3xl md:text-4xl font-bold text-white leading-tight mb-4">
-              Let Us Manage Your Property
+              {t("title")}
             </h2>
             <p className="text-white/65 text-lg leading-relaxed">
-              Join hundreds of landlords who trust Chabrin to maximise their rental
-              income, minimise vacancy, and handle everything in between.
+              {t("subtitle")}
             </p>
           </div>
 
@@ -50,8 +50,8 @@ export default function CTABanner() {
                          min-w-[180px] text-center"
             >
               <span className="text-2xl">📩</span>
-              <span className="text-base font-bold">Get in Touch</span>
-              <span className="text-xs font-normal opacity-70">We respond within 24h</span>
+              <span className="text-base font-bold">{t("cta_contact")}</span>
+              <span className="text-xs font-normal opacity-70">{t("cta_contact_sub")}</span>
             </Link>
 
             {/* Secondary — WhatsApp */}
@@ -65,8 +65,8 @@ export default function CTABanner() {
                          min-w-[180px] text-center"
             >
               <span className="text-2xl">💬</span>
-              <span className="text-base font-bold">WhatsApp Us</span>
-              <span className="text-xs font-normal opacity-50">Instant response</span>
+              <span className="text-base font-bold">{t("cta_whatsapp")}</span>
+              <span className="text-xs font-normal opacity-50">{t("cta_whatsapp_sub")}</span>
             </a>
           </div>
         </div>
