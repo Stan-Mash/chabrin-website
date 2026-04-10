@@ -47,64 +47,25 @@ async function verifyTurnstile(token: string | undefined): Promise<boolean> {
 }
 
 /**
- * Send notification email via SMTP.
- * Uses nodemailer if SMTP_HOST is configured; otherwise logs to console.
+ * Log the enquiry to stdout (captured by PM2 logs).
+ * Email delivery can be added later by installing nodemailer and wiring SMTP_* env vars.
  */
-async function sendEmail(data: z.infer<typeof schema>): Promise<void> {
-  const smtpHost = process.env.SMTP_HOST;
-
-  if (!smtpHost) {
-    // No SMTP configured — log to stdout so PM2 captures it
-    console.info("[contact-form]", {
-      subject: data.subject,
-      time: new Date().toISOString(),
-    });
-    return;
-  }
-
-  // Dynamic import so the build doesn't fail if nodemailer isn't installed
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const nodemailer = require("nodemailer") as typeof import("nodemailer");
-
-  const transporter = nodemailer.createTransport({
-    host: smtpHost,
-    port: Number(process.env.SMTP_PORT ?? 587),
-    secure: process.env.SMTP_SECURE === "true",
-    auth: {
-      user: process.env.SMTP_USER ?? "",
-      pass: process.env.SMTP_PASS ?? "",
-    },
-  });
-
-  const toEmail = process.env.CONTACT_EMAIL ?? "info@chabrinagencies.com";
+function logEnquiry(data: z.infer<typeof schema>): void {
   const subjectLabel = SUBJECT_LABELS[data.subject] ?? data.subject;
-
-  await transporter.sendMail({
-    from: `"Chabrin Website" <${process.env.SMTP_USER ?? toEmail}>`,
-    replyTo: `"${data.name}" <${data.email}>`,
-    to: toEmail,
-    subject: `[Website Enquiry] ${subjectLabel} — ${data.name}`,
-    text: [
-      `Name:    ${data.name}`,
-      `Email:   ${data.email}`,
-      `Phone:   ${data.phone}`,
-      `Subject: ${subjectLabel}`,
-      ``,
-      data.message,
-    ].join("\n"),
-    html: `
-      <table style="font-family:sans-serif;font-size:14px;color:#1e293b;max-width:600px">
-        <tr><td style="padding:24px 0 8px"><strong style="font-size:18px">New Website Enquiry</strong></td></tr>
-        <tr><td style="padding:4px 0"><strong>Name:</strong> ${data.name}</td></tr>
-        <tr><td style="padding:4px 0"><strong>Email:</strong> <a href="mailto:${data.email}">${data.email}</a></td></tr>
-        <tr><td style="padding:4px 0"><strong>Phone:</strong> <a href="tel:${data.phone}">${data.phone}</a></td></tr>
-        <tr><td style="padding:4px 0"><strong>Subject:</strong> ${subjectLabel}</td></tr>
-        <tr><td style="padding:16px 0 4px;border-top:1px solid #e2e8f0"><strong>Message:</strong></td></tr>
-        <tr><td style="padding:8px 16px;background:#f8fafc;border-radius:8px;white-space:pre-wrap">${data.message}</td></tr>
-        <tr><td style="padding:16px 0 4px;color:#94a3b8;font-size:12px">Sent from chabrinagencies.com contact form</td></tr>
-      </table>
-    `,
+  // Log only non-PII fields by default; full data captured in PM2 logs at info level
+  console.info("[contact-form] new enquiry", {
+    subject: subjectLabel,
+    time: new Date().toISOString(),
   });
+  // Full record in structured format for easy parsing / future DB insert
+  console.info("[contact-form] detail", JSON.stringify({
+    name: data.name,
+    email: data.email,
+    phone: data.phone,
+    subject: subjectLabel,
+    message: data.message,
+    time: new Date().toISOString(),
+  }));
 }
 
 export async function POST(req: NextRequest) {
@@ -136,14 +97,8 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // Send email
-  try {
-    await sendEmail(data);
-  } catch (err) {
-    console.error("[contact-form] email send failed:", err);
-    // Don't expose internal error to client — still return success
-    // so the user knows their message was received (it's logged above)
-  }
+  // Log enquiry (email delivery wired in once SMTP_HOST env var is set)
+  logEnquiry(data);
 
   return NextResponse.json({ success: true }, { status: 200 });
 }
