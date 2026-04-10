@@ -200,7 +200,13 @@
     "no_results": "No properties found matching your filters.",
     "no_results_action": "Clear Filters",
     "loading": "Loading properties...",
-    "coming_soon": "More properties are added regularly. Check back soon or contact us to discuss your requirements."
+    "coming_soon": "More properties are added regularly. Check back soon or contact us to discuss your requirements.",
+    "rent_period": "month",
+    "property_found": "property found",
+    "properties_found": "properties found",
+    "no_properties_found": "No properties match your current filters.",
+    "no_properties_help": "Try removing a filter or broadening your search. New listings are added regularly.",
+    "reset_filters": "Reset Filters"
   },
   "contact": {
     "hero_title": "We'd Love to Hear from You",

@@ -111,7 +111,7 @@ Please do not reply to this email. Reply directly to the enquirer using the cont
     `.trim();
 
     await transporter.sendMail({
-      from: process.env.SMTP_FROM || smtpUser,
+      from: process.env.SMTP_FROM || process.env.SMTP_USER,
       to: "info@chabrinagencies.com",
       replyTo: data.email,
       subject: `[${subjectLabel}] New Enquiry from ${data.name}`,

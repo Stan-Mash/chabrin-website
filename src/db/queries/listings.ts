@@ -1,4 +1,5 @@
 import { sql } from "@/lib/db";
+import type { ParameterOrJSON } from "postgres";
 
 /**
  * Database queries for property listings.
@@ -29,6 +30,10 @@ export interface ListingRow {
   updated_at: string;
 }
 
+// postgres `sql.unsafe` accepts this param type
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type SqlParam = ParameterOrJSON<any>;
+
 /**
  * Fetch all published listings with optional filtering.
  * Supports filtering by zone and property type.
@@ -47,7 +52,7 @@ export async function getPublishedListings(
   offset = 0
 ): Promise<ListingRow[]> {
   let query = `
-    SELECT 
+    SELECT
       id, reference, title, property_type, status, zone, area,
       bedrooms, bathrooms, size_m2, rent_kes, deposit_kes,
       features, images, published_at, updated_at
@@ -55,7 +60,7 @@ export async function getPublishedListings(
     WHERE status = 'available' AND published_at IS NOT NULL
   `;
 
-  const params: (string | number)[] = [];
+  const params: SqlParam[] = [];
 
   if (zone) {
     params.push(zone);
@@ -70,7 +75,7 @@ export async function getPublishedListings(
   query += ` ORDER BY published_at DESC LIMIT $${params.length + 1} OFFSET $${params.length + 2}`;
   params.push(limit, offset);
 
-  return sql<ListingRow[]>(query, params);
+  return sql.unsafe<ListingRow[]>(query, params);
 }
 
 /**
@@ -83,18 +88,15 @@ export async function getPublishedListings(
 export async function getListingByReference(
   reference: string
 ): Promise<ListingRow | null> {
-  const results = await sql<ListingRow[]>(
-    `
-    SELECT 
+  const results = await sql<ListingRow[]>`
+    SELECT
       id, reference, title, property_type, status, zone, area,
       bedrooms, bathrooms, size_m2, rent_kes, deposit_kes,
       features, images, published_at, updated_at
     FROM public_listings
-    WHERE reference = $1 AND published_at IS NOT NULL
+    WHERE reference = ${reference} AND published_at IS NOT NULL
     LIMIT 1
-    `,
-    [reference]
-  );
+  `;
 
   return results.length > 0 ? results[0] : null;
 }
@@ -106,14 +108,12 @@ export async function getListingByReference(
  * @returns Array of zone names sorted alphabetically
  */
 export async function getAvailableZones(): Promise<string[]> {
-  const results = await sql<{ zone: string }[]>(
-    `
-    SELECT DISTINCT zone 
+  const results = await sql<{ zone: string }[]>`
+    SELECT DISTINCT zone
     FROM public_listings
     WHERE published_at IS NOT NULL
     ORDER BY zone ASC
-    `
-  );
+  `;
 
   return results.map((r) => r.zone);
 }
@@ -125,14 +125,12 @@ export async function getAvailableZones(): Promise<string[]> {
  * @returns Array of property type names
  */
 export async function getAvailablePropertyTypes(): Promise<string[]> {
-  const results = await sql<{ property_type: string }[]>(
-    `
+  const results = await sql<{ property_type: string }[]>`
     SELECT DISTINCT property_type
     FROM public_listings
     WHERE published_at IS NOT NULL
     ORDER BY property_type ASC
-    `
-  );
+  `;
 
   return results.map((r) => r.property_type);
 }
@@ -155,7 +153,7 @@ export async function countAvailableListings(
     WHERE status = 'available' AND published_at IS NOT NULL
   `;
 
-  const params: (string | number)[] = [];
+  const params: SqlParam[] = [];
 
   if (zone) {
     params.push(zone);
@@ -167,6 +165,6 @@ export async function countAvailableListings(
     query += ` AND property_type = $${params.length}`;
   }
 
-  const results = await sql<{ count: number }[]>(query, params);
+  const results = await sql.unsafe<{ count: number }[]>(query, params);
   return results[0]?.count ?? 0;
 }

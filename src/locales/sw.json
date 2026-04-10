@@ -200,7 +200,13 @@
     "no_results": "Hakuna mali zinazopatikana kwa vichujio vilivyochaguliwa.",
     "no_results_action": "Futa Vichujio",
     "loading": "Inapakia mali...",
-    "coming_soon": "Mali zaidi zinaongezwa mara kwa mara. Angalia tena hivi karibuni au wasiliana nasi kujadili mahitaji yako."
+    "coming_soon": "Mali zaidi zinaongezwa mara kwa mara. Angalia tena hivi karibuni au wasiliana nasi kujadili mahitaji yako.",
+    "rent_period": "mwezi",
+    "property_found": "mali imepatikana",
+    "properties_found": "mali zimepatikana",
+    "no_properties_found": "Hakuna mali zinazolingana na vichujio vyako.",
+    "no_properties_help": "Jaribu kuondoa kichujio au kupanua utafutaji wako. Orodha mpya zinaongezwa mara kwa mara.",
+    "reset_filters": "Weka upya Vichujio"
   },
   "contact": {
     "hero_title": "Tungependa Kusikia Kutoka Kwako",

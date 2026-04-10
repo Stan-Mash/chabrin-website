@@ -25,7 +25,7 @@ export function OrganizationSchema() {
     image: `${siteConfig.url}${siteConfig.ogImage}`,
     telephone: siteConfig.contact.phone,
     email: siteConfig.contact.email,
-    foundingDate: "2020",
+    foundingDate: "1990",
     areaServed: [
       {
         "@type": "City",

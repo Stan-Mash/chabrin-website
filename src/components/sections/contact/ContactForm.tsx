@@ -206,7 +206,7 @@ export default function ContactForm() {
         <div className="flex justify-center">
           <Turnstile
             ref={turnstileRef as any}
-            siteId={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ""}
+            siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ""}
             onSuccess={() => {
               // Token captured, form can be submitted
             }}
