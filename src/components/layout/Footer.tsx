@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { useTranslations, useLocale } from "next-intl";
 import { siteConfig } from "@/config/site";
 
@@ -32,18 +33,15 @@ export default function Footer() {
 
           {/* ── Brand column ──────────────────────────────────────────── */}
           <div className="lg:col-span-1">
-            <Link href={lp("/")} className="flex items-center gap-3 mb-5 group w-fit">
-              <div className="w-10 h-10 rounded-lg bg-brand-cyan flex items-center justify-center
-                              group-hover:bg-brand-cyan-dark transition-colors flex-shrink-0">
-                <span className="text-brand-navy font-bold text-sm">CAL</span>
-              </div>
-              <div className="leading-tight">
-                <p className="font-bold text-white text-sm tracking-wide leading-none">
-                  CHABRIN AGENCIES
-                </p>
-                <p className="text-brand-cyan text-[10px] font-bold tracking-[0.2em] leading-none mt-0.5">
-                  LIMITED
-                </p>
+            <Link href={lp("/")} className="inline-flex mb-5 w-fit">
+              <div className="bg-white rounded-xl p-2">
+                <Image
+                  src="/logo-icon.png"
+                  alt="Chabrin Agencies Limited"
+                  width={80}
+                  height={80}
+                  className="h-12 w-auto"
+                />
               </div>
             </Link>
             <p className="text-white/60 text-sm leading-relaxed mb-6">

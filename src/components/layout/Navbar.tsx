@@ -52,23 +52,17 @@ export default function Navbar() {
           {/* ── Logo ──────────────────────────────────────────────────────── */}
           <Link
             href={localePath("/")}
-            className="flex items-center gap-3 flex-shrink-0 group"
+            className="flex items-center flex-shrink-0"
             aria-label="Chabrin Agencies — Home"
           >
-            {/* Icon mark */}
-            <div className="w-9 h-9 rounded-lg bg-brand-navy flex items-center justify-center
-                            group-hover:bg-brand-navy-dark transition-colors flex-shrink-0">
-              <span className="text-brand-cyan font-bold text-sm tracking-tight">CAL</span>
-            </div>
-            {/* Wordmark — hidden on very small screens */}
-            <div className="hidden xs:block leading-tight">
-              <p className="font-bold text-brand-navy text-sm tracking-wide leading-none">
-                CHABRIN AGENCIES
-              </p>
-              <p className="text-brand-cyan text-[10px] font-bold tracking-[0.2em] leading-none mt-0.5">
-                LIMITED
-              </p>
-            </div>
+            <Image
+              src="/logo-full.png"
+              alt="Chabrin Agencies Limited"
+              width={160}
+              height={56}
+              className="h-10 w-auto"
+              priority
+            />
           </Link>
 
           {/* ── Desktop Navigation ────────────────────────────────────────── */}
