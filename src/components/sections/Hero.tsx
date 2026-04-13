@@ -175,18 +175,25 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* Bottom row: two stat cards */}
+            {/* Bottom row: two credential cards */}
             <div className="grid grid-cols-2 gap-4">
               <div className="bg-brand-cyan/15 border border-brand-cyan/25 rounded-xl p-4 backdrop-blur-sm">
-                <p className="text-brand-cyan font-extrabold text-2xl leading-none mb-1">1,200+</p>
-                <p className="text-white/55 text-xs leading-snug">Properties managed across 7 zones</p>
+                <div className="flex items-center gap-2 mb-1">
+                  <svg className="w-4 h-4 text-brand-cyan flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                  </svg>
+                  <p className="text-brand-cyan font-extrabold text-sm leading-none">EARB Licensed</p>
+                </div>
+                <p className="text-white/55 text-xs leading-snug">Registered with Kenya's Estate Agents Board</p>
               </div>
               <div className="bg-white/8 border border-white/12 rounded-xl p-4 backdrop-blur-sm">
                 <div className="flex items-center gap-2 mb-1">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  <p className="text-white font-extrabold text-2xl leading-none">98%</p>
+                  <svg className="w-4 h-4 text-white/70 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <p className="text-white font-extrabold text-sm leading-none">24h Response</p>
                 </div>
-                <p className="text-white/55 text-xs leading-snug">Client retention rate</p>
+                <p className="text-white/55 text-xs leading-snug">Guaranteed landlord & tenant response SLA</p>
               </div>
             </div>
 
