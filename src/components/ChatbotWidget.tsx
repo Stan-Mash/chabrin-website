@@ -40,10 +40,10 @@ const FAQS: FaqEntry[] = [
     },
   },
   {
-    patterns: ["chips", "platform", "software", "system", "portal", "technology", "digital", "online", "app", "dashboard"],
+    patterns: ["portal", "technology", "digital", "online", "app", "dashboard", "platform", "software", "system"],
     response: {
-      en: "**CHIPS** (Chabrin Integrated Property Hub System) is our proprietary management platform. As a landlord you get:\n\n✅ Real-time financial dashboards\n✅ Digital lease signing\n✅ Tenant communication portal\n✅ Maintenance request tracking\n✅ Monthly rent disbursement visibility\n\nIt's designed to give you complete transparency — from any device, at any time.",
-      sw: "**CHIPS** (Chabrin Integrated Property Hub System) ni jukwaa letu la ndani la usimamizi. Kama mmiliki unapata:\n\n✅ Dashibodi za fedha za wakati halisi\n✅ Kusaini mikataba kwa dijiti\n✅ Mawasiliano ya wapangaji\n✅ Ufuatiliaji wa maombi ya matengenezo\n✅ Mwonekano wa malipo ya kodi ya kila mwezi",
+      en: "Chabrin provides landlords with full digital visibility into their portfolio:\n\n✅ Real-time financial dashboards\n✅ Digital lease signing\n✅ Tenant communication tools\n✅ Maintenance request tracking\n✅ Monthly rent disbursement reports\n\nEverything is designed for complete transparency — accessible from any device, at any time.",
+      sw: "Chabrin inawapa wamiliki mwonekano kamili wa kidijitali wa mali zao:\n\n✅ Dashibodi za fedha za wakati halisi\n✅ Kusaini mikataba kwa kidijitali\n✅ Zana za mawasiliano na wapangaji\n✅ Ufuatiliaji wa maombi ya matengenezo\n✅ Ripoti za malipo ya kodi ya kila mwezi",
     },
   },
   {
@@ -77,15 +77,15 @@ const FAQS: FaqEntry[] = [
   {
     patterns: ["maintenance", "repair", "emergency", "fix", "broken", "plumbing", "electrical", "issue", "problem", "fault"],
     response: {
-      en: "Chabrin offers **24/7 emergency maintenance response** through our vetted contractor network:\n\n🔧 Plumbing, electrical, structural & general repairs\n📱 All requests tracked via the CHIPS platform\n🔔 Landlords notified for every job raised\n💰 Maintenance costs transparently reported monthly\n\nPreventive maintenance schedules are also included for managed properties.",
-      sw: "Chabrin inatoa **majibu ya matengenezo ya dharura 24/7** kupitia mtandao wetu wa makandarasi:\n\n🔧 Mabomba, umeme, muundo & ukarabati wa jumla\n📱 Maombi yote yanafuatiliwa kupitia jukwaa la CHIPS\n🔔 Wamiliki wanaarifu kwa kila kazi iliyoanzishwa\n💰 Gharama za matengenezo zinaarifu wazi kila mwezi",
+      en: "Chabrin offers **24/7 emergency maintenance response** through our vetted contractor network:\n\n🔧 Plumbing, electrical, structural & general repairs\n📱 All requests tracked and reported digitally\n🔔 Landlords notified for every job raised\n💰 Maintenance costs transparently reported monthly\n\nPreventive maintenance schedules are also included for managed properties.",
+      sw: "Chabrin inatoa **majibu ya matengenezo ya dharura 24/7** kupitia mtandao wetu wa makandarasi:\n\n🔧 Mabomba, umeme, muundo & ukarabati wa jumla\n📱 Maombi yote yanafuatiliwa na kuripotiwa kwa kidijitali\n🔔 Wamiliki wanaarifu kwa kila kazi iliyoanzishwa\n💰 Gharama za matengenezo zinaarifu wazi kila mwezi",
     },
   },
   {
     patterns: ["payment", "rent payment", "pay rent", "mpesa", "bank transfer", "cheque", "collection", "how rent is paid", "disbursement"],
     response: {
-      en: "Rent collection at Chabrin:\n\n💳 **Channels** — M-Pesa, bank transfer, cheque\n📅 **Disbursement** — by the **10th of each month**, net of fees\n📊 **Statement** — detailed financial statement included\n📱 **Tracking** — real-time visibility via CHIPS dashboard\n\nLate payments are managed proactively — we follow up with tenants so you don't have to.",
-      sw: "Ukusanyaji wa kodi katika Chabrin:\n\n💳 **Njia** — M-Pesa, uhamisho wa benki, hundi\n📅 **Malipo** — ifikapo **tarehe 10 ya kila mwezi**, baada ya kukata ada\n📊 **Taarifa** — taarifa ya kina ya fedha imejumuishwa\n📱 **Ufuatiliaji** — mwonekano wa wakati halisi kupitia CHIPS",
+      en: "Rent collection at Chabrin:\n\n💳 **Channels** — M-Pesa, bank transfer, cheque\n📅 **Disbursement** — by the **10th of each month**, net of fees\n📊 **Statement** — detailed financial statement included\n📱 **Tracking** — real-time visibility via your landlord dashboard\n\nLate payments are managed proactively — we follow up with tenants so you don't have to.",
+      sw: "Ukusanyaji wa kodi katika Chabrin:\n\n💳 **Njia** — M-Pesa, uhamisho wa benki, hundi\n📅 **Malipo** — ifikapo **tarehe 10 ya kila mwezi**, baada ya kukata ada\n📊 **Taarifa** — taarifa ya kina ya fedha imejumuishwa\n📱 **Ufuatiliaji** — mwonekano wa wakati halisi kupitia dashibodi yako",
     },
   },
   {
@@ -98,7 +98,7 @@ const FAQS: FaqEntry[] = [
   {
     patterns: ["report", "financial report", "monthly report", "statement", "landlord report", "how often"],
     response: {
-      en: "Landlords receive a **monthly financial statement** by the 5th of each month, covering:\n\n• Total rent collected\n• Management fee breakdown\n• Maintenance costs (with receipts)\n• Net disbursement amount\n• Occupancy status per unit\n\nAll reports are accessible digitally via the CHIPS dashboard — available 24/7.",
+      en: "Landlords receive a **monthly financial statement** by the 5th of each month, covering:\n\n• Total rent collected\n• Management fee breakdown\n• Maintenance costs (with receipts)\n• Net disbursement amount\n• Occupancy status per unit\n\nAll reports are delivered digitally and accessible 24/7 via your landlord portal.",
       sw: "Wamiliki hupokea **taarifa ya fedha ya kila mwezi** ifikapo tarehe 5, ikijumuisha:\n\n• Jumla ya kodi iliyokusanywa\n• Muundo wa ada ya usimamizi\n• Gharama za matengenezo (na risiti)\n• Kiasi cha malipo ya jumla\n• Hali ya ukaliaji kwa kila kitengo",
     },
   },
@@ -123,15 +123,15 @@ const FAQS: FaqEntry[] = [
 const SUGGESTIONS = {
   en: [
     "What are your management fees?",
-    "How do I list my property?",
-    "What zones do you cover?",
-    "How does CHIPS work?",
+    "How do you screen tenants?",
+    "Where are you located?",
+    "I am a tenant needing help.",
   ],
   sw: [
     "Ada za usimamizi ni ngapi?",
-    "Ninawezaje kuorodhesha mali yangu?",
-    "Mnafunika maeneo gani?",
-    "CHIPS inafanya kazi vipi?",
+    "Mnawachunguza wapangaji vipi?",
+    "Mko wapi?",
+    "Mimi ni mpangaji nahitaji msaada.",
   ],
 };
 
@@ -193,8 +193,8 @@ export default function ChatbotWidget() {
   const nextId = () => String(++idCounter.current);
 
   const GREETING = isEn
-    ? "Hi! I'm the Chabrin property assistant. I can answer questions about our management fees, zones, CHIPS platform, tenant vetting, and more.\n\nWhat would you like to know?"
-    : "Habari! Mimi ni msaidizi wa mali wa Chabrin. Ninaweza kujibu maswali kuhusu ada zetu za usimamizi, maeneo, jukwaa la CHIPS, uchunguzi wa wapangaji, na zaidi.\n\nUngependa kujua nini?";
+    ? "Hi! I'm the Chabrin Property Assistant. I can help you with management fees, tenant screening, property listings, and general inquiries. What would you like to know?"
+    : "Habari! Mimi ni Msaidizi wa Mali wa Chabrin. Ninaweza kukusaidia kuhusu ada za usimamizi, uchunguzi wa wapangaji, orodha za mali, na maswali ya jumla. Ungependa kujua nini?";
 
   // Initialise greeting when widget opens
   useEffect(() => {
@@ -288,15 +288,13 @@ export default function ChatbotWidget() {
           setShowSuggestions(false);
         }, 450);
       } else {
-        setLastQuery(text);
         setTimeout(() => {
           addMessage(
             "bot",
             isEn
-              ? `I don't have the exact answer to that right now — but one of our property advisors can help you.\n\nCould I get your **name** so our team can follow up?`
-              : `Sijui jibu sahihi la hilo sasa hivi — lakini mshauri wetu wa mali anaweza kukusaidia.\n\nNitapata **jina lako** ili timu yetu iweze kufuatilia?`
+              ? "That is a great question. For specific details, I recommend speaking directly with one of our property experts. You can click the WhatsApp button above to chat with our team right now!"
+              : "Hiyo ni swali zuri. Kwa maelezo maalum, napendekeza kuzungumza moja kwa moja na mmoja wa wataalamu wetu wa mali. Unaweza kubonyeza kitufe cha WhatsApp hapo juu kuzungumza na timu yetu sasa hivi!"
           );
-          setLeadStep("ask_name");
         }, 450);
       }
     },
