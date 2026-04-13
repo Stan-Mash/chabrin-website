@@ -24,31 +24,18 @@ const OPENINGS = [
     ],
   },
   {
-    title: "Leasing Officer",
+    title: "Field Officer",
     type: "Full-time",
     location: "Nairobi (On-site)",
-    department: "Leasing",
+    department: "Operations",
     summary:
-      "Handle tenant placement, lease negotiations, and property viewings. Build relationships with both landlords and prospective tenants.",
+      "Carry out on-site property inspections, coordinate maintenance works, and serve as the primary point of contact for tenants and contractors in the field. Support property managers with day-to-day field operations across assigned zones.",
     requirements: [
-      "Diploma or Degree in Real Estate, Business, or related field",
-      "1+ years experience in leasing or sales",
-      "Excellent interpersonal and presentation skills",
-      "Valid driving licence is an advantage",
-    ],
-  },
-  {
-    title: "Property Valuer (Graduate Trainee)",
-    type: "Full-time",
-    location: "Nairobi (On-site)",
-    department: "Valuation",
-    summary:
-      "Support senior valuers in conducting property inspections, market research, and preparing valuation reports under mentorship.",
-    requirements: [
-      "Degree in Land Economics, Real Estate, or Geospatial Engineering",
-      "Registered with ISK (or eligible to register)",
-      "Strong analytical and report-writing skills",
-      "0–2 years experience (recent graduates welcome)",
+      "Diploma or Degree in Real Estate, Property Management, or related field",
+      "1+ years experience in a field-based property or facilities role",
+      "Strong interpersonal skills and the ability to work independently",
+      "Valid driving licence required",
+      "Good knowledge of Nairobi and surrounding counties",
     ],
   },
   {
