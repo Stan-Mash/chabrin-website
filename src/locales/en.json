@@ -206,7 +206,20 @@
     "properties_found": "properties found",
     "no_properties_found": "No properties match your current filters.",
     "no_properties_help": "Try removing a filter or broadening your search. New listings are added regularly.",
-    "reset_filters": "Reset Filters"
+    "reset_filters": "Reset Filters",
+    "concierge_badge": "Concierge Search",
+    "concierge_title": "We'll Find It For You",
+    "concierge_desc": "We don't have listings in this zone today, but our valuation team can find one for you. Tell us what you're looking for and we'll search our off-market network.",
+    "concierge_cta": "Request a Property",
+    "concierge_modal_title": "Concierge Property Request",
+    "concierge_modal_subtitle": "Tell us your requirements and our team will call you back",
+    "concierge_name": "Full Name",
+    "concierge_phone": "Phone Number",
+    "concierge_budget": "Budget (KES / month)",
+    "concierge_notes": "Additional Requirements",
+    "concierge_submit": "Send Request",
+    "concierge_success_title": "Request Received!",
+    "concierge_success_desc": "Our valuation team will review your requirements and call you back within one business day to discuss available options."
   },
   "contact": {
     "hero_title": "We'd Love to Hear from You",
@@ -313,5 +326,25 @@
     "view_all": "View All",
     "per_month": "/ month",
     "kes": "KES"
+  },
+  "market_report": {
+    "eyebrow": "Free Intelligence Report",
+    "title_line1": "The 2026 Nairobi",
+    "title_line2": "Rental Market Report",
+    "subtitle": "Data-driven analysis of Nairobi's rental market across all 7 zones — built for serious property investors, developers, and landlords making decisions in 2026.",
+    "contents_label": "What's Inside",
+    "form_eyebrow": "Free Download",
+    "form_title": "Get the Full Report",
+    "form_subtitle": "Instant access — no spam, professional insights only.",
+    "name_label": "Full Name",
+    "email_label": "Professional Email",
+    "privacy_note": "Your information is handled in accordance with our Privacy Policy and the Kenya Data Protection Act 2019. We will not share your details with third parties.",
+    "cta": "Download Free Report",
+    "submitting": "Preparing your report...",
+    "success_title": "Your Report is Ready!",
+    "success_desc": "Your download should start automatically. We've also sent a copy to your email. Welcome to the Chabrin investor community.",
+    "download_again": "Download Again",
+    "error_msg": "Something went wrong. Please try again.",
+    "social_proof": "Downloaded by 240+ Nairobi property investors this quarter"
   }
 }

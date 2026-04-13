@@ -39,6 +39,7 @@ const inputClass = (hasError: boolean) =>
 export default function ContactForm() {
   const locale = useLocale();
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [turnstileVerified, setTurnstileVerified] = useState(false);
   const turnstileRef = useRef<{ getResponse: () => string | null }>(null);
 
   const {
@@ -203,17 +204,68 @@ export default function ContactForm() {
         </div>
 
         {/* Turnstile Bot Protection */}
-        <div className="flex justify-center">
-          <Turnstile
-            ref={turnstileRef as any}
-            siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ""}
-            onSuccess={() => {
-              // Token captured, form can be submitted
-            }}
-            onError={() => {
-              setStatus("error");
-            }}
-          />
+        <div className="space-y-3">
+          <div className="flex justify-center">
+            <Turnstile
+              ref={turnstileRef as any}
+              siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ""}
+              onSuccess={() => setTurnstileVerified(true)}
+              onError={() => {
+                setTurnstileVerified(false);
+                setStatus("error");
+              }}
+              onExpire={() => setTurnstileVerified(false)}
+            />
+          </div>
+
+          {/* Animated "Secured by Cloudflare" badge — appears once verified */}
+          <div
+            aria-live="polite"
+            aria-label={turnstileVerified ? "Bot protection verified" : undefined}
+            className={`
+              flex items-center justify-center gap-2 py-2 px-4 rounded-xl
+              border transition-all duration-500 ease-out
+              ${turnstileVerified
+                ? "opacity-100 translate-y-0 border-green-200 bg-green-50"
+                : "opacity-0 translate-y-1 border-transparent bg-transparent pointer-events-none"
+              }
+            `}
+          >
+            {/* Animated checkmark */}
+            <span
+              className={`
+                flex items-center justify-center w-5 h-5 rounded-full
+                transition-all duration-300 delay-100
+                ${turnstileVerified ? "bg-green-500 scale-100" : "bg-transparent scale-0"}
+              `}
+              aria-hidden="true"
+            >
+              <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            </span>
+
+            {/* Cloudflare logo + text */}
+            <div className="flex items-center gap-1.5">
+              {/* Cloudflare cloud icon */}
+              <svg
+                className="w-4 h-4 text-orange-500"
+                viewBox="0 0 120 60"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path d="M81.5 32.3c.4-1.3.6-2.7.6-4.1 0-9.3-7.6-16.9-16.9-16.9-6 0-11.3 3.1-14.3 7.8-1.3-.6-2.8-1-4.4-1-5.9 0-10.7 4.8-10.7 10.7 0 .9.1 1.7.3 2.5H35c-4.4 0-8 3.6-8 8s3.6 8 8 8h46.1c4.4 0 8-3.6 8-8 0-3.8-2.6-6.9-6.2-7.7l-1.4.7z" />
+              </svg>
+              <span className="text-xs font-semibold text-slate-600">
+                Secured by{" "}
+                <span className="text-orange-500 font-bold">Cloudflare</span>
+              </span>
+            </div>
+
+            <span className="text-xs text-green-600 font-semibold">
+              ✓ Verified
+            </span>
+          </div>
         </div>
 
         {/* KDPA Consent */}

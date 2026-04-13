@@ -206,7 +206,20 @@
     "properties_found": "mali zimepatikana",
     "no_properties_found": "Hakuna mali zinazolingana na vichujio vyako.",
     "no_properties_help": "Jaribu kuondoa kichujio au kupanua utafutaji wako. Orodha mpya zinaongezwa mara kwa mara.",
-    "reset_filters": "Weka upya Vichujio"
+    "reset_filters": "Weka upya Vichujio",
+    "concierge_badge": "Utafutaji wa Concierge",
+    "concierge_title": "Tutakutafutia",
+    "concierge_desc": "Hatuna orodha katika eneo hili leo, lakini timu yetu ya tathmini inaweza kukupata moja. Tuambie unachotafuta na tutaonekana katika mtandao wetu wa nje ya soko.",
+    "concierge_cta": "Omba Mali",
+    "concierge_modal_title": "Ombi la Mali la Concierge",
+    "concierge_modal_subtitle": "Tuambie mahitaji yako na timu yetu itakupigia simu",
+    "concierge_name": "Jina Kamili",
+    "concierge_phone": "Nambari ya Simu",
+    "concierge_budget": "Bajeti (KES / mwezi)",
+    "concierge_notes": "Mahitaji ya Ziada",
+    "concierge_submit": "Tuma Ombi",
+    "concierge_success_title": "Ombi Limepokelewa!",
+    "concierge_success_desc": "Timu yetu ya tathmini itakagua mahitaji yako na kukupigia simu ndani ya siku moja ya kazi kujadili chaguo zinazopatikana."
   },
   "contact": {
     "hero_title": "Tungependa Kusikia Kutoka Kwako",
@@ -313,5 +326,25 @@
     "view_all": "Angalia Yote",
     "per_month": "/ mwezi",
     "kes": "KES"
+  },
+  "market_report": {
+    "eyebrow": "Ripoti ya Akili ya Bure",
+    "title_line1": "Ripoti ya Soko la Kodi",
+    "title_line2": "Nairobi 2026",
+    "subtitle": "Uchambuzi unaotegemea data wa soko la kodi la Nairobi katika maeneo yote 7 — ulioundwa kwa wawekezaji wa mali wazito, wasanidi wa mali, na wamiliki wanaofanya maamuzi mwaka 2026.",
+    "contents_label": "Yaliyomo",
+    "form_eyebrow": "Pakua Bure",
+    "form_title": "Pata Ripoti Kamili",
+    "form_subtitle": "Ufikiaji wa haraka — bila barua taka, maarifa ya kitaalamu pekee.",
+    "name_label": "Jina Kamili",
+    "email_label": "Barua Pepe ya Kitaalamu",
+    "privacy_note": "Taarifa zako zinashughulikiwa kwa mujibu wa Sera yetu ya Faragha na Sheria ya Ulinzi wa Data ya Kenya 2019. Hatutashiriki maelezo yako na wahusika wengine.",
+    "cta": "Pakua Ripoti Bure",
+    "submitting": "Inaandaa ripoti yako...",
+    "success_title": "Ripoti Yako Iko Tayari!",
+    "success_desc": "Upakuaji wako unapaswa kuanza moja kwa moja. Pia tumekutumia nakala kwa barua pepe yako. Karibu katika jumuiya ya wawekezaji wa Chabrin.",
+    "download_again": "Pakua Tena",
+    "error_msg": "Kuna tatizo. Tafadhali jaribu tena.",
+    "social_proof": "Iligawiwa na wawekezaji 240+ wa mali wa Nairobi robo hii"
   }
 }
