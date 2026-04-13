@@ -34,13 +34,13 @@ export default function Footer() {
           {/* ── Brand column ──────────────────────────────────────────── */}
           <div className="lg:col-span-1">
             <Link href={lp("/")} className="inline-flex mb-5 w-fit">
-              <div className="bg-white rounded-xl p-2">
+              <div className="bg-white rounded-xl p-3">
                 <Image
                   src="/logo-icon.png"
                   alt="Chabrin Agencies Limited"
-                  width={80}
-                  height={80}
-                  className="h-12 w-auto"
+                  width={120}
+                  height={120}
+                  className="h-20 w-auto"
                 />
               </div>
             </Link>
