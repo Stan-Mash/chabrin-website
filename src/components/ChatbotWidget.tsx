@@ -26,6 +26,14 @@ interface FaqEntry {
 
 const FAQS: FaqEntry[] = [
   {
+    // Contact/location entry is FIRST so "where", "located" etc. resolve here before the zones entry
+    patterns: ["contact", "phone", "call", "email", "office", "address", "speak", "talk to", "human", "agent", "person", "team", "where are you", "where is", "located", "location", "where"],
+    response: {
+      en: "Reach our team directly:\n\n📞 **+254 720 854 389** / +254 745 912 688\n📧 **info@chabrinagencies.co.ke**\n📍 Nacico Plaza, 5th Floor, Room 517\n    Landhies Road, Nairobi\n\n🕐 Mon–Fri: 8:00 AM – 5:30 PM\n🕐 Saturday: 9:00 AM – 1:00 PM\n\nOr WhatsApp us for an instant response — we usually reply within minutes!",
+      sw: "Wasiliana na timu yetu moja kwa moja:\n\n📞 **+254 720 854 389** / +254 745 912 688\n📧 **info@chabrinagencies.co.ke**\n📍 Nacico Plaza, Ghorofa ya 5, Chumba 517\n    Landhies Road, Nairobi\n\n🕐 Jumatatu–Ijumaa: 8:00 AM – 5:30 PM\n🕐 Jumamosi: 9:00 AM – 1:00 PM",
+    },
+  },
+  {
     patterns: ["management fee", "fees", "how much", "charge", "cost", "pricing", "percentage", "rate"],
     response: {
       en: "Our property management fee is typically **5–10% of the monthly rent**, depending on the property type and services. This covers tenant management, rent collection, maintenance coordination, and monthly reporting.\n\nWould you like a tailored quote? Our team can prepare one for you — just share your property details.",
@@ -54,10 +62,10 @@ const FAQS: FaqEntry[] = [
     },
   },
   {
-    patterns: ["zone", "zones", "area", "areas", "cover", "coverage", "location", "where", "nairobi", "westlands", "kilimani", "karen", "kiambu", "upper hill", "lavington", "eastlands", "machakos", "kajiado"],
+    patterns: ["zone", "zones", "area", "areas", "cover", "coverage", "nairobi", "westlands", "kilimani", "karen", "kiambu", "upper hill", "lavington", "eastlands", "machakos", "kajiado", "thika", "ruiru", "kasarani", "kitengela", "embakasi"],
     response: {
-      en: "Chabrin manages properties across **7 zones (A–G)**:\n\n🔵 **Zone A** — Westlands, Parklands, Runda\n🔵 **Zone B** — Kilimani, Lavington, Hurlingham\n🔵 **Zone C** — Karen, Langata, Hardy\n🔵 **Zone D** — Upper Hill, Milimani\n🟢 **Zone E** — Eastlands, Umoja, Donholm\n🟢 **Zone F** — Kiambu & Thika Road Corridor\n🟢 **Zone G** — Kajiado, Machakos, Murang'a\n\nWe have the strongest concentration in Zones A–D.",
-      sw: "Chabrin inasimamia mali katika **maeneo 7 (A–G)**:\n\n🔵 **Eneo A** — Westlands, Parklands, Runda\n🔵 **Eneo B** — Kilimani, Lavington\n🔵 **Eneo C** — Karen, Langata\n🔵 **Eneo D** — Upper Hill, Milimani\n🟢 **Eneo E** — Eastlands, Umoja\n🟢 **Eneo F** — Kiambu & Thika Road\n🟢 **Eneo G** — Kajiado, Machakos, Murang'a",
+      en: "Chabrin manages properties across **7 metropolitan zones**:\n\n📍 **Zone A** — Northern Commuter Corridor (Murang'a → Githurai 45)\n📍 **Zone B** — Kasarani-Ruaraka Belt (Githurai 44 → Lucky Summer)\n📍 **Zone C** — Inner East Urban Core (Huruma, Mathare, Eastleigh)\n📍 **Zone D** — Classic Eastlands Hub (Dandora, Kariobangi, Buruburu)\n📍 **Zone E** — Premium, CBD & Inner Ring (Westlands, Kilimani, CBD)\n📍 **Zone F** — Greater Eastlands (Umoja, Kayole, Imara Daima)\n📍 **Zone G** — Southern Metro & Airport Corridor (Embakasi → Kitengela)\n\nWe cover the entire Nairobi Metropolitan area — from Murang'a down to Kitengela.",
+      sw: "Chabrin inasimamia mali katika **maeneo 7 ya jiji**:\n\n📍 **Eneo A** — Njia ya Kaskazini (Murang'a → Githurai 45)\n📍 **Eneo B** — Ukanda wa Kasarani-Ruaraka\n📍 **Eneo C** — Mji wa Mashariki (Huruma, Mathare, Eastleigh)\n📍 **Eneo D** — Kitovu cha Eastlands (Dandora, Kariobangi, Buruburu)\n📍 **Eneo E** — Premium, CBD & Pete ya Ndani\n📍 **Eneo F** — Eastlands Kubwa (Umoja, Kayole, Imara Daima)\n📍 **Eneo G** — Ukanda wa Kusini (Embakasi → Kitengela)",
     },
   },
   {
@@ -107,13 +115,6 @@ const FAQS: FaqEntry[] = [
     response: {
       en: "Chabrin Agencies is **fully licensed and regulated**:\n\n🏛️ **EARB Registered** — Estate Agents Registration Board of Kenya\n🔒 **KDPA Compliant** — Kenya Data Protection Act 2019\n🏢 **Registered Company** — Registrar of Companies, Kenya\n⭐ **30+ Years** of experience since the 1990s\n\nYour property is in safe, accountable, and professionally regulated hands.",
       sw: "Chabrin Agencies ina **leseni kamili na inadhibitiwa**:\n\n🏛️ **Imesajiliwa EARB** — Bodi ya Usajili wa Mawakala wa Mali ya Kenya\n🔒 **Inafuata KDPA** — Sheria ya Ulinzi wa Data ya Kenya 2019\n🏢 **Kampuni Iliyosajiliwa** — Msajili wa Makampuni, Kenya\n⭐ **Miaka 30+** ya uzoefu tangu miaka ya 1990",
-    },
-  },
-  {
-    patterns: ["contact", "phone", "call", "email", "office", "address", "speak", "talk to", "human", "agent", "person", "team", "where are you"],
-    response: {
-      en: "Reach our team directly:\n\n📞 **+254 720 854 389** / +254 745 912 688\n📧 **info@chabrinagencies.co.ke**\n📍 Nacico Plaza, 5th Floor, Room 517\n    Landhies Road, Nairobi\n\n🕐 Mon–Fri: 8:00 AM – 5:30 PM\n🕐 Saturday: 9:00 AM – 1:00 PM\n\nOr WhatsApp us for an instant response — we usually reply within minutes!",
-      sw: "Wasiliana na timu yetu moja kwa moja:\n\n📞 **+254 720 854 389** / +254 745 912 688\n📧 **info@chabrinagencies.co.ke**\n📍 Nacico Plaza, Ghorofa ya 5, Chumba 517\n    Landhies Road, Nairobi\n\n🕐 Jumatatu–Ijumaa: 8:00 AM – 5:30 PM\n🕐 Jumamosi: 9:00 AM – 1:00 PM",
     },
   },
 ];
@@ -185,7 +186,6 @@ export default function ChatbotWidget() {
   const [leadStep, setLeadStep] = useState<LeadStep>("idle");
   const [leadName, setLeadName] = useState("");
   const [lastQuery, setLastQuery] = useState("");
-  const [showSuggestions, setShowSuggestions] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const idCounter = useRef(0);
@@ -217,13 +217,20 @@ export default function ChatbotWidget() {
     setMessages((prev) => [...prev, { id: nextId(), role, text }]);
   }, []);
 
+  const handleReset = useCallback(() => {
+    setMessages([{ id: nextId(), role: "bot", text: GREETING }]);
+    setInput("");
+    setLeadStep("idle");
+    setLeadName("");
+    setLastQuery("");
+  }, [GREETING]); // eslint-disable-line react-hooks/exhaustive-deps
+
   const handleSend = useCallback(
     async (rawText: string) => {
       const text = rawText.trim();
       if (!text) return;
 
       setInput("");
-      setShowSuggestions(false);
       addMessage("user", text);
 
       // ── Lead capture flow ──
@@ -285,7 +292,6 @@ export default function ChatbotWidget() {
       if (answer) {
         setTimeout(() => {
           addMessage("bot", answer);
-          setShowSuggestions(false);
         }, 450);
       } else {
         setTimeout(() => {
@@ -388,6 +394,18 @@ export default function ChatbotWidget() {
               {isEn ? "Online — here to help" : "Mtandaoni — hapa kusaidia"}
             </p>
           </div>
+          <button
+            onClick={handleReset}
+            aria-label={isEn ? "Start a new chat" : "Anza mazungumzo mapya"}
+            title={isEn ? "New chat" : "Mazungumzo mapya"}
+            className="flex-shrink-0 flex items-center gap-1 text-white/60 hover:text-white
+                       text-xs px-2 py-1 rounded-lg hover:bg-white/10 transition-colors"
+          >
+            <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+            {isEn ? "New" : "Upya"}
+          </button>
           <a
             href={whatsappUrl}
             target="_blank"
@@ -442,7 +460,7 @@ export default function ChatbotWidget() {
         </div>
 
         {/* ── Suggestions ── */}
-        {showSuggestions && messages.length > 0 && leadStep === "idle" && (
+        {messages.length > 0 && leadStep === "idle" && (
           <div className="px-4 pt-2 pb-1 bg-surface border-t border-slate-100 flex-shrink-0">
             <p className="text-xs text-slate-400 mb-2 font-medium">
               {isEn ? "Quick questions:" : "Maswali ya haraka:"}
