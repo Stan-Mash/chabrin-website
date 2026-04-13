@@ -47,6 +47,11 @@ export function OrganizationSchema() {
         name: "Kajiado",
         addressCountry: "KE",
       },
+      {
+        "@type": "City",
+        name: "Machakos",
+        addressCountry: "KE",
+      },
     ],
     address: {
       "@type": "PostalAddress",
