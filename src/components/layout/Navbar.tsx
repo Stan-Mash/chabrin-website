@@ -58,9 +58,9 @@ export default function Navbar() {
             <Image
               src="/logo-full.png"
               alt="Chabrin Agencies Limited"
-              width={240}
-              height={84}
-              className="h-16 w-auto"
+              width={498}
+              height={175}
+              className="h-14 w-auto"
               priority
             />
           </Link>
