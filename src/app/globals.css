@@ -107,3 +107,8 @@ body {
 
 /* ── Selection ───────────────────────────────────────────────────────────── */
 ::selection { background-color: var(--brand-cyan); color: #fff; }
+
+/* ── Leaflet popup font override ─────────────────────────────────────────── */
+.font-century-gothic {
+  font-family: "Century Gothic", "AppleGothic", "Gill Sans", ui-sans-serif, system-ui, sans-serif;
+}
