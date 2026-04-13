@@ -211,7 +211,7 @@ export default function CareersPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href={`mailto:${siteConfig.contact.email}?subject=Spontaneous%20Application`}
+              href={`mailto:${siteConfig.contact.careersEmail}?subject=Spontaneous%20Application`}
               className="px-8 py-3.5 rounded-full bg-brand-cyan text-brand-navy font-bold
                          text-sm hover:bg-white transition-colors"
             >
@@ -227,8 +227,8 @@ export default function CareersPage() {
             </Link>
           </div>
           <p className="text-slate-400 text-sm mt-6">
-            Email: <a href={`mailto:${siteConfig.contact.email}`}
-              className="text-brand-cyan hover:underline">{siteConfig.contact.email}</a>
+            Email: <a href={`mailto:${siteConfig.contact.careersEmail}`}
+              className="text-brand-cyan hover:underline">{siteConfig.contact.careersEmail}</a>
           </p>
         </div>
       </section>

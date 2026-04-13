@@ -5,7 +5,7 @@ import { env } from "@/env";
 
 /**
  * Email delivery service using nodemailer.
- * Sends formatted enquiries to info@chabrinagencies.com
+ * Sends formatted enquiries to info@chabrinagencies.co.ke
  *
  * ⚠️  SECURITY RULES:
  *  1. This is a Server Action — runs on server only, never client-side.
@@ -55,7 +55,7 @@ function getTransporter() {
 }
 
 /**
- * Send a formatted contact form enquiry to info@chabrinagencies.com
+ * Send a formatted contact form enquiry to info@chabrinagencies.co.ke
  * @param data - Contact form data (validated on client + server)
  * @returns - Success or error response
  */
@@ -112,7 +112,7 @@ Please do not reply to this email. Reply directly to the enquirer using the cont
 
     await transporter.sendMail({
       from: process.env.SMTP_FROM || process.env.SMTP_USER,
-      to: "info@chabrinagencies.com",
+      to: "info@chabrinagencies.co.ke",
       replyTo: data.email,
       subject: `[${subjectLabel}] New Enquiry from ${data.name}`,
       text: textContent,
@@ -121,7 +121,7 @@ Please do not reply to this email. Reply directly to the enquirer using the cont
 
     // Log event (non-PII) to stdout for PM2 logs
     console.info("[contact-form-email] sent", {
-      to: "info@chabrinagencies.com",
+      to: "info@chabrinagencies.co.ke",
       subject: subjectLabel,
       time: new Date().toISOString(),
     });
