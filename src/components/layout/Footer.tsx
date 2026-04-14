@@ -47,26 +47,6 @@ export default function Footer() {
             <p className="text-white/60 text-sm leading-relaxed mb-6">
               {tFoot("tagline")}
             </p>
-            {/* Social icons */}
-            <div className="flex gap-3">
-              {[
-                { label: "Facebook",  href: siteConfig.social.facebook,  icon: "f" },
-                { label: "Instagram", href: siteConfig.social.instagram, icon: "in" },
-                { label: "LinkedIn",  href: siteConfig.social.linkedin,  icon: "li" },
-              ].map(({ label, href, icon }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center
-                             text-white/50 hover:border-brand-cyan hover:text-brand-cyan transition-colors text-xs font-bold"
-                >
-                  {icon}
-                </a>
-              ))}
-            </div>
           </div>
 
           {/* ── Services ──────────────────────────────────────────────── */}

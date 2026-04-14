@@ -113,34 +113,7 @@ export default function ContactInfo() {
         </div>
       </div>
 
-      {/* ── Social ─────────────────────────────────────────────────────── */}
-      <div className="bg-white rounded-2xl p-5 shadow-card">
-        <p className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-3">
-          Follow Us
-        </p>
-        <div className="flex gap-3">
-          {[
-            { href: siteConfig.social.facebook,  label: "Facebook",  icon: "f"  },
-            { href: siteConfig.social.instagram, label: "Instagram", icon: "in" },
-            { href: siteConfig.social.linkedin,  label: "LinkedIn",  icon: "li" },
-          ].map(({ href, label, icon }) => (
-            <a
-              key={label}
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={label}
-              className="w-10 h-10 rounded-full bg-surface border border-slate-200 flex items-center
-                         justify-center text-brand-navy font-bold text-xs hover:bg-brand-navy
-                         hover:text-white hover:border-brand-navy transition-colors"
-            >
-              {icon}
-            </a>
-          ))}
-        </div>
-      </div>
-
-      {/* ── Find us ────────────────────────────────────────────────────── */}
+{/* ── Find us ────────────────────────────────────────────────────── */}
       <div className="bg-brand-navy/5 border border-brand-navy/10 rounded-2xl p-5">
         <p className="text-xs font-semibold text-brand-navy uppercase tracking-wide mb-2">
           📌 How to Find Us
