@@ -17,7 +17,7 @@ export default function ZoneMap({ activeZone, setActiveZone }: ZoneMapProps) {
       zoom={10}
       scrollWheelZoom={false}
       style={{ height: "100%", width: "100%" }}
-      aria-label="Chabrin Agencies management zones across Nairobi Metropolitan"
+      aria-label="Chabrin Agencies management corridors across Nairobi Metropolitan"
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> contributors'
@@ -43,10 +43,10 @@ export default function ZoneMap({ activeZone, setActiveZone }: ZoneMapProps) {
             <Popup maxWidth={220}>
               <div style={{ fontFamily: "system-ui, sans-serif", padding: "2px 4px" }}>
                 <p style={{ fontWeight: 700, color: "#001a70", margin: "0 0 4px", fontSize: 13 }}>
-                  Zone {zone.id} — {zone.name}
+                  {zone.name}
                 </p>
                 <p style={{ color: "#64748b", fontSize: 12, margin: 0 }}>
-                  Click to view full zone details in the side panel.
+                  {zone.desc}
                 </p>
               </div>
             </Popup>

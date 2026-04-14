@@ -32,7 +32,7 @@ export default function InteractiveMapWrapper() {
       {/* ── Map ── */}
       <div
         className="lg:col-span-2 h-[520px] rounded-2xl overflow-hidden shadow-lg border border-slate-200"
-        aria-label="Interactive map of Chabrin management zones across Nairobi Metropolitan"
+        aria-label="Interactive map of Chabrin management corridors across Nairobi Metropolitan"
       >
         <ZoneMap activeZone={activeZone} setActiveZone={setActiveZone} />
       </div>
@@ -44,7 +44,7 @@ export default function InteractiveMapWrapper() {
         aria-live="polite"
         aria-atomic="true"
       >
-        {/* Zone header */}
+        {/* Corridor header */}
         <div className="px-6 pt-6 pb-4 border-b" style={{ borderColor: "rgba(0,229,204,0.2)" }}>
           <div className="flex items-center gap-3 mb-3">
             <span
