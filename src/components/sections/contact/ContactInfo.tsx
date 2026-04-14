@@ -2,8 +2,8 @@ import Link from "next/link";
 import { siteConfig } from "@/config/site";
 
 const HOURS = [
-  { day: "Monday – Friday", hours: "8:00 AM – 5:30 PM" },
-  { day: "Saturday",        hours: "9:00 AM – 1:00 PM" },
+  { day: "Monday – Friday", hours: "8:00 AM – 5:00 PM" },
+  { day: "Saturday",        hours: "9:30 AM – 1:00 PM" },
   { day: "Sunday",          hours: "Closed"             },
 ];
 

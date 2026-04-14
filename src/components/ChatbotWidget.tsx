@@ -29,15 +29,15 @@ const FAQS: FaqEntry[] = [
     // Contact/location entry is FIRST so "where", "located" etc. resolve here before the zones entry
     patterns: ["contact", "phone", "call", "email", "office", "address", "speak", "talk to", "human", "agent", "person", "team", "where are you", "where is", "located", "location", "where"],
     response: {
-      en: "Reach our team directly:\n\n📞 **+254 720 854 389** / +254 745 912 688\n📧 **info@chabrinagencies.co.ke**\n📍 Nacico Plaza, 5th Floor, Room 517\n    Landhies Road, Nairobi\n\n🕐 Mon–Fri: 8:00 AM – 5:30 PM\n🕐 Saturday: 9:00 AM – 1:00 PM\n\nOr WhatsApp us for an instant response — we usually reply within minutes!",
-      sw: "Wasiliana na timu yetu moja kwa moja:\n\n📞 **+254 720 854 389** / +254 745 912 688\n📧 **info@chabrinagencies.co.ke**\n📍 Nacico Plaza, Ghorofa ya 5, Chumba 517\n    Landhies Road, Nairobi\n\n🕐 Jumatatu–Ijumaa: 8:00 AM – 5:30 PM\n🕐 Jumamosi: 9:00 AM – 1:00 PM",
+      en: "Reach our team directly:\n\n📞 **+254 720 854 389** / +254 745 912 688\n📧 **info@chabrinagencies.co.ke**\n📍 Nacico Plaza, 5th Floor, Room 517\n    Landhies Road, Nairobi\n\n🕐 Mon–Fri: 8:00 AM – 5:00 PM\n🕐 Saturday: 9:30 AM – 1:00 PM\n\nOr WhatsApp us for an instant response — we usually reply within minutes!",
+      sw: "Wasiliana na timu yetu moja kwa moja:\n\n📞 **+254 720 854 389** / +254 745 912 688\n📧 **info@chabrinagencies.co.ke**\n📍 Nacico Plaza, Ghorofa ya 5, Chumba 517\n    Landhies Road, Nairobi\n\n🕐 Jumatatu–Ijumaa: 8:00 AM – 5:00 PM\n🕐 Jumamosi: 9:30 AM – 1:00 PM",
     },
   },
   {
     patterns: ["management fee", "fees", "how much", "charge", "cost", "pricing", "percentage", "rate"],
     response: {
-      en: "Our property management fee is typically **5–10% of the monthly rent**, depending on the property type and services. This covers tenant management, rent collection, maintenance coordination, and monthly reporting.\n\nWould you like a tailored quote? Our team can prepare one for you — just share your property details.",
-      sw: "Ada yetu ya usimamizi wa mali kwa kawaida ni **5–10% ya kodi ya kila mwezi**, kulingana na aina ya mali na huduma. Hii inajumuisha usimamizi wa wapangaji, ukusanyaji wa kodi, uratibu wa matengenezo, na ripoti za kila mwezi.\n\nUnataka bei maalum? Timu yetu inaweza ikuandalie.",
+      en: "Great question! Our fees are structured to reflect the **full value we deliver** — not just a number.\n\nEvery fee covers:\n✅ Tenant sourcing & rigorous vetting\n✅ Rent collection & disbursement\n✅ 24/7 maintenance coordination\n✅ Monthly financial reporting\n✅ Legal compliance & lease management\n\nBecause every portfolio is different, we tailor our pricing to your property type, number of units, and the level of service you need. The best next step is a **free 15-minute consultation** — our team will give you a clear, honest quote with no obligation.\n\nTap the WhatsApp button above or visit our Contact page to get started!",
+      sw: "Swali zuri! Ada zetu zinaakisi **thamani kamili tunayotoa** — si nambari tu.\n\nKila ada inajumuisha:\n✅ Utafutaji wa wapangaji na uchunguzi wa kina\n✅ Ukusanyaji na usambazaji wa kodi\n✅ Uratibu wa matengenezo 24/7\n✅ Ripoti za fedha za kila mwezi\n✅ Uzingatiaji wa kisheria na usimamizi wa mikataba\n\nKwa sababu kila portfolio ni tofauti, tunapanga bei kulingana na aina ya mali yako na kiwango cha huduma unachohitaji. Hatua bora inayofuata ni **mashauriano ya dakika 15 bila malipo** — timu yetu itakupa bei wazi na ya uaminifu bila sharti lolote.\n\nBonyeza kitufe cha WhatsApp hapo juu au tembelea ukurasa wetu wa Mawasiliano!",
     },
   },
   {
