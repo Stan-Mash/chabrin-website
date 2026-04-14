@@ -3,8 +3,9 @@ import { siteConfig } from "@/config/site";
 
 const HOURS = [
   { day: "Monday – Friday", hours: "8:00 AM – 5:00 PM" },
-  { day: "Saturday",        hours: "9:30 AM – 1:00 PM" },
+  { day: "Saturday",        hours: "8:30 AM – 12:00 PM" },
   { day: "Sunday",          hours: "Closed"             },
+  { day: "Public Holidays", hours: "Closed"             },
 ];
 
 export default function ContactInfo() {

@@ -29,8 +29,8 @@ const FAQS: FaqEntry[] = [
     // Contact/location entry is FIRST so "where", "located" etc. resolve here before the zones entry
     patterns: ["contact", "phone", "call", "email", "office", "address", "speak", "talk to", "human", "agent", "person", "team", "where are you", "where is", "located", "location", "where"],
     response: {
-      en: "Reach our team directly:\n\n📞 **+254 720 854 389** / +254 745 912 688\n📧 **info@chabrinagencies.co.ke**\n📍 Nacico Plaza, 5th Floor, Room 517\n    Landhies Road, Nairobi\n\n🕐 Mon–Fri: 8:00 AM – 5:00 PM\n🕐 Saturday: 9:30 AM – 1:00 PM\n\nOr WhatsApp us for an instant response — we usually reply within minutes!",
-      sw: "Wasiliana na timu yetu moja kwa moja:\n\n📞 **+254 720 854 389** / +254 745 912 688\n📧 **info@chabrinagencies.co.ke**\n📍 Nacico Plaza, Ghorofa ya 5, Chumba 517\n    Landhies Road, Nairobi\n\n🕐 Jumatatu–Ijumaa: 8:00 AM – 5:00 PM\n🕐 Jumamosi: 9:30 AM – 1:00 PM",
+      en: "Reach our team directly:\n\n📞 **+254 720 854 389** / +254 745 912 688\n📧 **info@chabrinagencies.co.ke**\n📍 Nacico Plaza, 5th Floor, Room 517\n    Landhies Road, Nairobi\n\n🕐 Mon–Fri: 8:00 AM – 5:00 PM\n🕐 Saturday: 8:30 AM – 12:00 PM\n🕐 Public Holidays: Closed\n\nOr WhatsApp us for an instant response — we usually reply within minutes!",
+      sw: "Wasiliana na timu yetu moja kwa moja:\n\n📞 **+254 720 854 389** / +254 745 912 688\n📧 **info@chabrinagencies.co.ke**\n📍 Nacico Plaza, Ghorofa ya 5, Chumba 517\n    Landhies Road, Nairobi\n\n🕐 Jumatatu–Ijumaa: 8:00 AM – 5:00 PM\n🕐 Jumamosi: 8:30 AM – 12:00 PM\n🕐 Likizo za Umma: Imefungwa",
     },
   },
   {

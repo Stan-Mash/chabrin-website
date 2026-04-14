@@ -145,8 +145,8 @@ export default function Footer() {
                 </p>
                 <p className="text-xs text-white/50 leading-relaxed">
                   Mon – Fri: <span className="text-white/70">8:00 AM – 5:00 PM</span><br />
-                  Saturday: <span className="text-white/70">9:30 AM – 1:00 PM</span><br />
-                  <span className="text-white/30">Sunday: Closed</span>
+                  Saturday: <span className="text-white/70">8:30 AM – 12:00 PM</span><br />
+                  <span className="text-white/30">Sunday & Public Holidays: Closed</span>
                 </p>
               </li>
               <li className="pt-2">
