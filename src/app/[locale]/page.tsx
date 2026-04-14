@@ -1,12 +1,13 @@
 import { setRequestLocale } from "next-intl/server";
 import type { Metadata } from "next";
 import type { Locale } from "@/types";
-import Hero          from "@/components/sections/Hero";
-import StatsBar      from "@/components/sections/StatsBar";
-import Services      from "@/components/sections/Services";
-import WhyChabrin    from "@/components/sections/WhyChabrin";
-import ReachSection  from "@/components/sections/properties/ReachSection";
-import CTABanner     from "@/components/sections/CTABanner";
+import Hero                from "@/components/sections/Hero";
+import StatsBar            from "@/components/sections/StatsBar";
+import Services            from "@/components/sections/Services";
+import WhyChabrin          from "@/components/sections/WhyChabrin";
+import ReachSection        from "@/components/sections/properties/ReachSection";
+import MarketReportSection from "@/components/sections/MarketReportSection";
+import CTABanner           from "@/components/sections/CTABanner";
 
 interface HomePageProps {
   params: Promise<{ locale: Locale }>;
@@ -39,6 +40,7 @@ export default async function HomePage({ params }: HomePageProps) {
       <Services />
       <WhyChabrin />
       <ReachSection />
+      <MarketReportSection />
       <CTABanner />
     </>
   );
