@@ -167,20 +167,6 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* Floating lease-signed toast */}
-            <div className="absolute -top-5 -right-4 bg-white rounded-xl px-4 py-3
-                            shadow-2xl flex items-center gap-3 border border-slate-100">
-              <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center flex-shrink-0">
-                <svg className="w-4 h-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                </svg>
-              </div>
-              <div>
-                <p className="text-brand-navy font-bold text-xs leading-none mb-0.5">Lease Signed</p>
-                <p className="text-slate-400 text-[10px]">Kilimani · Just now</p>
-              </div>
-            </div>
-
           </div>
         </div>
       </div>
