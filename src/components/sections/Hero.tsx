@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { useTranslations, useLocale } from "next-intl";
 
 export default function Hero() {
@@ -96,82 +97,51 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* ── Right: Visual showcase ───────────────────────────────── */}
+          {/* ── Right: Property photo showcase ──────────────────────── */}
           <div className="hidden lg:flex flex-col gap-4 relative">
 
-            {/* Main property card */}
-            <div className="bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl
-                            p-6 shadow-2xl">
-              {/* Card header */}
-              <div className="flex items-center justify-between mb-5">
-                <span className="text-xs font-bold uppercase tracking-widest text-brand-cyan">
-                  Featured Listing
+            {/* Main photo card */}
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10"
+                 style={{ height: "340px" }}>
+              <Image
+                src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=900&q=80"
+                alt="Premium residential property managed by Chabrin Agencies, Nairobi"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1280px) 50vw, 500px"
+                priority
+              />
+              {/* Dark gradient overlay — bottom */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+
+              {/* Bottom overlay text */}
+              <div className="absolute bottom-0 left-0 right-0 px-5 pb-5">
+                <div className="flex items-end justify-between">
+                  <div>
+                    <p className="text-brand-cyan text-[10px] font-bold uppercase tracking-widest mb-1">
+                      Premium Portfolio
+                    </p>
+                    <p className="text-white font-bold text-lg leading-tight">
+                      Nairobi Metropolitan
+                    </p>
+                    <p className="text-white/60 text-xs mt-0.5">
+                      Westlands · Kilimani · Karen · Kasarani & beyond
+                    </p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-brand-cyan font-extrabold text-2xl leading-none">30+</p>
+                    <p className="text-white/50 text-[10px] uppercase tracking-wide mt-0.5">Years</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Top-left badge */}
+              <div className="absolute top-4 left-4 flex items-center gap-1.5 bg-black/40
+                              backdrop-blur-sm border border-white/15 rounded-full px-3 py-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-brand-cyan animate-pulse" />
+                <span className="text-white text-[10px] font-semibold tracking-wide uppercase">
+                  1,200+ Properties Managed
                 </span>
-                <span className="flex items-center gap-1.5 text-xs font-semibold
-                                 bg-emerald-400/20 text-emerald-300 px-3 py-1 rounded-full">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  Available
-                </span>
-              </div>
-
-              {/* Property visual placeholder */}
-              <div className="w-full h-36 rounded-xl bg-gradient-to-br from-brand-navy-light/60
-                              to-brand-cyan/20 border border-white/10 mb-5 flex items-center
-                              justify-center relative overflow-hidden">
-                <div className="absolute inset-0 opacity-10"
-                  style={{
-                    backgroundImage: "linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px)",
-                    backgroundSize: "20px 20px",
-                  }}
-                />
-                <svg className="w-14 h-14 text-white/25" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
-                  <path strokeLinecap="round" strokeLinejoin="round"
-                    d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-                </svg>
-              </div>
-
-              {/* Property details */}
-              <h3 className="text-white font-bold text-lg mb-1">3-Bedroom Apartment</h3>
-              <div className="flex items-center gap-2 text-white/50 text-sm mb-4">
-                <svg className="w-3.5 h-3.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                </svg>
-                Westlands, Nairobi · Zone B
-              </div>
-
-              <div className="flex items-end justify-between">
-                <div>
-                  <p className="text-white/40 text-xs mb-0.5">Monthly Rent</p>
-                  <p className="text-white font-bold text-2xl">
-                    KES 85,000
-                    <span className="text-white/40 text-sm font-normal"> /mo</span>
-                  </p>
-                </div>
-                <div className="flex gap-3 text-white/50 text-xs">
-                  <span className="flex items-center gap-1">
-                    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75" />
-                    </svg>
-                    3 bed
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    2 bath
-                  </span>
-                </div>
-              </div>
-
-              {/* Managed badge */}
-              <div className="mt-4 pt-4 border-t border-white/10 flex items-center gap-2">
-                <div className="w-5 h-5 rounded bg-brand-cyan/20 flex items-center justify-center flex-shrink-0">
-                  <svg className="w-3 h-3 text-brand-cyan" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                </div>
-                <span className="text-white/45 text-xs">Professionally managed by Chabrin Agencies</span>
               </div>
             </div>
 
@@ -207,7 +177,7 @@ export default function Hero() {
               </div>
               <div>
                 <p className="text-brand-navy font-bold text-xs leading-none mb-0.5">Lease Signed</p>
-                <p className="text-slate-400 text-[10px]">Karen, Zone A · Just now</p>
+                <p className="text-slate-400 text-[10px]">Kilimani · Just now</p>
               </div>
             </div>
 
