@@ -8,7 +8,7 @@ import { saveNewsletterSignup } from "@/actions/save-enquiry";
 
 const REPORT_STATS = [
   { value: "18%", label: { en: "Avg. yield — Westlands", sw: "Mavuno ya wastani — Westlands" } },
-  { value: "KES 95K", label: { en: "Median 3BR rent — Zone B", sw: "Kodi ya wastani 3BR — Eneo B" } },
+  { value: "KES 95K", label: { en: "Median 3BR rent — Kasarani Belt", sw: "Kodi ya wastani 3BR — Kasarani" } },
   { value: "+12%", label: { en: "Rental growth YoY 2025", sw: "Ukuaji wa kodi mwaka hadi mwaka 2025" } },
   { value: "7.2wk", label: { en: "Avg. time to let — Nairobi", sw: "Wastani wa wakati wa kupangisha — Nairobi" } },
 ];
@@ -17,7 +17,7 @@ const REPORT_STATS = [
 
 const REPORT_CONTENTS = {
   en: [
-    "Zone-by-zone rental price benchmarks (A–G)",
+    "Corridor-by-corridor rental price benchmarks",
     "Yield analysis for residential & commercial stock",
     "Tenant demand drivers: employment, infrastructure, migration",
     "2026 outlook: interest rates, supply pipeline, and policy shifts",
@@ -25,7 +25,7 @@ const REPORT_CONTENTS = {
     "Chabrin proprietary data: 1,200+ managed units",
   ],
   sw: [
-    "Vigezo vya bei ya kodi kwa kila eneo (A–G)",
+    "Vigezo vya bei ya kodi kwa kila ukanda",
     "Uchambuzi wa mavuno kwa hisa za makazi na biashara",
     "Vichocheo vya mahitaji ya wapangaji: ajira, miundombinu",
     "Matarajio ya 2026: viwango vya riba, usambazaji wa mali",
