@@ -13,14 +13,25 @@ import { env } from "@/env";
  *  4. Never log the buffer, key, or credentials to console.
  */
 
-const spacesClient = new S3Client({
-  endpoint: env.SPACES_ENDPOINT,
-  region: "us-east-1", // DO Spaces requires this value regardless of region
-  credentials: {
-    accessKeyId: env.SPACES_KEY,
-    secretAccessKey: env.SPACES_SECRET,
-  },
-  forcePathStyle: false,
+// Lazily initialised — only constructed when Spaces vars are present
+function getSpacesClient(): S3Client {
+  if (!env.SPACES_ENDPOINT || !env.SPACES_KEY || !env.SPACES_SECRET) {
+    throw new Error("DigitalOcean Spaces is not configured. Set SPACES_* env vars.");
+  }
+  return new S3Client({
+    endpoint: env.SPACES_ENDPOINT,
+    region: "us-east-1", // DO Spaces requires this value regardless of region
+    credentials: {
+      accessKeyId: env.SPACES_KEY,
+      secretAccessKey: env.SPACES_SECRET,
+    },
+    forcePathStyle: false,
+  });
+}
+
+/** @deprecated Use uploadToSpaces() instead of accessing the client directly */
+const spacesClient = new Proxy({} as S3Client, {
+  get: (_t, prop) => getSpacesClient()[prop as keyof S3Client],
 });
 
 const ALLOWED_IMAGE_TYPES = [
@@ -58,9 +69,9 @@ export async function uploadToSpaces(
     })
     .toBuffer();
 
-  await spacesClient.send(
+  await getSpacesClient().send(
     new PutObjectCommand({
-      Bucket: env.SPACES_BUCKET,
+      Bucket: env.SPACES_BUCKET ?? "",
       Key: key,
       Body: strippedBuffer,
       ContentType: mimeType,
@@ -69,7 +80,7 @@ export async function uploadToSpaces(
     })
   );
 
-  return `${env.SPACES_CDN_URL}/${key}`;
+  return `${env.SPACES_CDN_URL ?? ""}/${key}`;
 }
 
 export { spacesClient };

@@ -35,22 +35,27 @@ export const env = createEnv({
       .describe("PostgreSQL connection string for the public listings DB"),
 
     // ── DigitalOcean Spaces (S3-compatible object storage) ─────────────────
-    SPACES_KEY: z.string().min(1).describe("DO Spaces access key ID"),
-    SPACES_SECRET: z.string().min(1).describe("DO Spaces secret access key"),
-    SPACES_BUCKET: z.string().min(1).describe("DO Spaces bucket name"),
+    // Optional until bucket is provisioned — image upload feature not yet live
+    SPACES_KEY: z.string().min(1).optional().describe("DO Spaces access key ID"),
+    SPACES_SECRET: z.string().min(1).optional().describe("DO Spaces secret access key"),
+    SPACES_BUCKET: z.string().min(1).optional().describe("DO Spaces bucket name"),
     SPACES_ENDPOINT: z
       .string()
       .url()
+      .optional()
       .describe("DO Spaces endpoint URL e.g. https://nyc3.digitaloceanspaces.com"),
     SPACES_CDN_URL: z
       .string()
       .url()
+      .optional()
       .describe("DO Spaces CDN URL e.g. https://chabrin.nyc3.cdn.digitaloceanspaces.com"),
 
     // ── Sanity CMS ────────────────────────────────────────────────────────
+    // Optional until Sanity project is provisioned — blog/careers not yet live
     SANITY_API_TOKEN: z
       .string()
       .min(1)
+      .optional()
       .describe("Sanity read token for server-side CMS queries"),
 
     // ── Cloudflare Turnstile (server-side secret) ─────────────────────────
@@ -92,14 +97,17 @@ export const env = createEnv({
     NEXT_PUBLIC_SANITY_PROJECT_ID: z
       .string()
       .min(1)
+      .optional()
       .describe("Sanity project ID"),
     NEXT_PUBLIC_SANITY_DATASET: z
       .enum(["production", "staging"])
       .default("production")
       .describe("Sanity dataset name"),
+    // Optional — Mapbox replaced by Leaflet/OSM, token not currently used
     NEXT_PUBLIC_MAPBOX_TOKEN: z
       .string()
       .min(1)
+      .optional()
       .describe("Mapbox GL JS public token"),
     NEXT_PUBLIC_TURNSTILE_SITE_KEY: z
       .string()
