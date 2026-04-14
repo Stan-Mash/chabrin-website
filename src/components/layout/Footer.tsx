@@ -139,6 +139,16 @@ export default function Footer() {
               </li>
               <li className="leading-relaxed">{siteConfig.contact.address}</li>
               <li className="text-white/40 text-xs">{siteConfig.contact.pobox}</li>
+              <li className="pt-1 border-t border-white/10 mt-1">
+                <p className="text-[10px] font-bold tracking-widest uppercase text-brand-cyan/70 mb-2">
+                  Office Hours
+                </p>
+                <p className="text-xs text-white/50 leading-relaxed">
+                  Mon – Fri: <span className="text-white/70">8:00 AM – 5:00 PM</span><br />
+                  Saturday: <span className="text-white/70">9:30 AM – 1:00 PM</span><br />
+                  <span className="text-white/30">Sunday: Closed</span>
+                </p>
+              </li>
               <li className="pt-2">
                 <a
                   href={`https://wa.me/${siteConfig.contact.whatsapp}`}

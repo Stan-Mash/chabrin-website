@@ -35,6 +35,23 @@ export default function CTABanner() {
             <p className="text-white/65 text-lg leading-relaxed">
               {t("subtitle")}
             </p>
+
+            {/* ── Office hours strip ── */}
+            <div className="mt-6 inline-flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-white/50">
+              <span className="flex items-center gap-1.5">
+                <svg className="w-3.5 h-3.5 text-brand-cyan flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>Mon – Fri <strong className="text-white/80 font-semibold">8:00 AM – 5:00 PM</strong></span>
+              </span>
+              <span className="text-white/20 hidden sm:inline">·</span>
+              <span className="flex items-center gap-1.5">
+                <svg className="w-3.5 h-3.5 text-brand-cyan flex-shrink-0 sm:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>Saturday <strong className="text-white/80 font-semibold">9:30 AM – 1:00 PM</strong></span>
+              </span>
+            </div>
           </div>
 
           {/* ── Right — action cards ───────────────────────────────── */}
