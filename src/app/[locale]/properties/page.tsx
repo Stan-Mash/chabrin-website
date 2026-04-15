@@ -8,7 +8,7 @@ type Props = { params: Promise<{ locale: string }> };
 export const metadata: Metadata = {
   title: "Search Properties | Chabrin Agencies Limited",
   description:
-    "Browse available residential and commercial properties managed by Chabrin Agencies across Nairobi and surroundings. Filter by region, type, bedrooms and budget — with an interactive map.",
+    "Browse available residential and commercial properties managed by Chabrin Agencies across Nairobi, Kiambu, Murang'a and Kajiado. Filter by region, type, bedrooms and budget — with an interactive map.",
 };
 
 export default async function PropertiesPage({ params }: Props) {

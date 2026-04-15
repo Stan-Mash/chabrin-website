@@ -43,7 +43,7 @@ export default function PropertiesHero() {
       {/* ── Background image ── */}
       <Image
         src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1600&q=75"
-        alt="Modern Nairobi apartment building"
+        alt="Modern apartment building in the greater Nairobi metropolitan region"
         fill
         priority
         className="object-cover object-center"
@@ -76,11 +76,11 @@ export default function PropertiesHero() {
         {/* Headline */}
         <h1 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-extrabold text-white leading-tight mb-3">
           Find Your Perfect Space<br />
-          <span style={{ color: "#00C9C9" }}>Anywhere in Nairobi</span>
+          <span style={{ color: "#00C9C9" }}>Nairobi, Kiambu, Murang&apos;a &amp; Kajiado</span>
         </h1>
         <p className="text-white/65 text-sm sm:text-base max-w-xl mx-auto mb-7 leading-relaxed">
-          Browse professionally managed residential and commercial properties across
-          7 metropolitan corridors — from budget studios to executive villas.
+          Professionally managed properties across 7 corridors — from Murang&apos;a and
+          Thika in the north to Kitengela, Athi River and Ongata Rongai in the south.
         </p>
 
         {/* ── Search box ── */}
@@ -99,7 +99,7 @@ export default function PropertiesHero() {
                 type="search"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Area or type — e.g. Kasarani, Westlands, Villa..."
+                placeholder="Area or type — e.g. Kasarani, Kitengela, Thika, Villa..."
                 className="w-full py-2 text-sm text-slate-700 placeholder:text-slate-400 bg-transparent outline-none"
                 aria-label="Search area or property type"
               />
