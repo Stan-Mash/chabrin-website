@@ -8,15 +8,8 @@
  *   Mobile:        Card grid only, with a floating "Show Map ↔ Show List" toggle
  *
  * Data security — THE MABATI RULE:
- *   - Only listings where web_visible === true AND status === "vacant" are rendered
- *   - Occupied / invisible listings are filtered before any DOM output
- *   - This filtering is the FIRST operation in this component
- *
- * Strategic Regions (replaces "Zone" language):
- *   The managementZones array from InteractiveMapWrapper maps zone IDs → corridor names.
- *   We add area-level centroid coordinates (KDPA-safe — approximate only).
- *
- * New dependency: framer-motion (AnimatePresence for card transitions)
+ *   Only listings where web_visible === true AND status === "vacant" are rendered.
+ *   Filtering is the FIRST operation — this component never receives unsafe data.
  */
 
 import { useState, useMemo, useCallback, useEffect } from "react";
@@ -24,6 +17,7 @@ import dynamic from "next/dynamic";
 import { AnimatePresence, motion } from "framer-motion";
 import PropertyCard from "./PropertyCard";
 import { PropertyCardSkeleton } from "./PropertyCardSkeleton";
+import { siteConfig } from "@/config/site";
 
 // ── Lazy-load the map (Leaflet requires window) ───────────────────────────────
 
@@ -42,28 +36,27 @@ const InteractiveSearchMap = dynamic(
 // ── Types ─────────────────────────────────────────────────────────────────────
 
 export interface SearchListing {
-  id:            string;
-  reference:     string;
-  title:         string;
-  property_type: string;
-  status:        "vacant" | "occupied";
-  web_visible:   boolean;
-  strategic_region: string; // replaces "Zone X" language
-  area:          string;
-  bedrooms:      number | null;
-  bathrooms:     number | null;
-  size_m2:       number | null;
-  rent_kes:      number;
-  deposit_kes:   number;
-  features:      string[];
-  images:        string[];
-  lat:           number;
-  lng:           number;
-  published_at:  string;
+  id:               string;
+  reference:        string;
+  title:            string;
+  property_type:    string;
+  status:           "vacant" | "occupied";
+  web_visible:      boolean;
+  strategic_region: string;
+  area:             string;
+  bedrooms:         number | null;
+  bathrooms:        number | null;
+  size_m2:          number | null;
+  rent_kes:         number;
+  deposit_kes:      number;
+  features:         string[];
+  images:           string[];
+  lat:              number;
+  lng:              number;
+  published_at:     string;
 }
 
 // ── Area centroid coordinates (KDPA-safe — approximate neighbourhood centres) ─
-// Used to place pins on the map. Never exact property GPS.
 
 const AREA_CENTROIDS: Record<string, [number, number]> = {
   // Zone A — Northern Commuter Corridor
@@ -124,26 +117,20 @@ const AREA_CENTROIDS: Record<string, [number, number]> = {
   "Mlolongo":         [-1.3985, 36.9526],
 };
 
-/** Resolve centroid for a listing — falls back to Nairobi centre if area unknown */
 function resolveCentroid(area: string): [number, number] {
-  // Try exact match first
   if (AREA_CENTROIDS[area]) return AREA_CENTROIDS[area];
-  // Try partial match
   const key = Object.keys(AREA_CENTROIDS).find((k) =>
     area.toLowerCase().includes(k.toLowerCase()) || k.toLowerCase().includes(area.toLowerCase())
   );
   return key ? AREA_CENTROIDS[key] : [-1.286389, 36.817223];
 }
 
-/** Add a small random jitter (±0.003°, ~300m) so stacked pins don't overlap */
 function jitter(coord: [number, number]): [number, number] {
   return [
     coord[0] + (Math.random() - 0.5) * 0.006,
     coord[1] + (Math.random() - 0.5) * 0.006,
   ];
 }
-
-// ── Strategic region display name mapping ─────────────────────────────────────
 
 const STRATEGIC_REGIONS: Record<string, string> = {
   A: "Northern Commuter Corridor",
@@ -155,9 +142,9 @@ const STRATEGIC_REGIONS: Record<string, string> = {
   G: "Airport & Southern Metro",
 };
 
-// ── Mock dataset (15 listings) ────────────────────────────────────────────────
-// In production, replace with getPublishedListings() from @/db/queries/listings
-// web_visible=false or status="occupied" listings are NEVER rendered.
+// ── Mock dataset ──────────────────────────────────────────────────────────────
+// In production, replace with getPublishedListings() from @/db/queries/listings.
+// Images are representative Unsplash photos — replaced with DO Spaces URLs in prod.
 
 const MOCK_LISTINGS_RAW: (Omit<SearchListing, "lat" | "lng" | "strategic_region"> & { zone: string })[] = [
   {
@@ -175,7 +162,11 @@ const MOCK_LISTINGS_RAW: (Omit<SearchListing, "lat" | "lng" | "strategic_region"
     rent_kes: 125000,
     deposit_kes: 250000,
     features: ["Ensuite master", "Gym access", "Secure parking", "Backup generator"],
-    images: [],
+    images: [
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1540518614846-7eded433c457?auto=format&fit=crop&w=800&q=80",
+    ],
     published_at: "2026-01-15T08:00:00Z",
   },
   {
@@ -193,7 +184,10 @@ const MOCK_LISTINGS_RAW: (Omit<SearchListing, "lat" | "lng" | "strategic_region"
     rent_kes: 42000,
     deposit_kes: 84000,
     features: ["Tiled throughout", "Balcony", "Borehole water", "Security"],
-    images: [],
+    images: [
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80",
+    ],
     published_at: "2026-01-20T08:00:00Z",
   },
   {
@@ -211,7 +205,10 @@ const MOCK_LISTINGS_RAW: (Omit<SearchListing, "lat" | "lng" | "strategic_region"
     rent_kes: 320000,
     deposit_kes: 640000,
     features: ["High-speed fibre", "AC throughout", "Reception area", "Parking x4"],
-    images: [],
+    images: [
+      "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=800&q=80",
+    ],
     published_at: "2026-01-22T08:00:00Z",
   },
   {
@@ -229,7 +226,10 @@ const MOCK_LISTINGS_RAW: (Omit<SearchListing, "lat" | "lng" | "strategic_region"
     rent_kes: 68000,
     deposit_kes: 136000,
     features: ["Private garden", "2-car garage", "DSQ", "Borehole water"],
-    images: [],
+    images: [
+      "https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+    ],
     published_at: "2026-01-25T08:00:00Z",
   },
   {
@@ -247,7 +247,10 @@ const MOCK_LISTINGS_RAW: (Omit<SearchListing, "lat" | "lng" | "strategic_region"
     rent_kes: 14500,
     deposit_kes: 29000,
     features: ["Tiled", "Security", "Close to matatu stage"],
-    images: [],
+    images: [
+      "https://images.unsplash.com/photo-1505873242700-f289a29e1724?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=800&q=80",
+    ],
     published_at: "2026-01-28T08:00:00Z",
   },
   {
@@ -265,7 +268,11 @@ const MOCK_LISTINGS_RAW: (Omit<SearchListing, "lat" | "lng" | "strategic_region"
     rent_kes: 280000,
     deposit_kes: 560000,
     features: ["Swimming pool", "Garden", "2 DSQ", "Solar panels", "Electric gate"],
-    images: [],
+    images: [
+      "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80",
+    ],
     published_at: "2026-02-01T08:00:00Z",
   },
   {
@@ -283,7 +290,10 @@ const MOCK_LISTINGS_RAW: (Omit<SearchListing, "lat" | "lng" | "strategic_region"
     rent_kes: 28000,
     deposit_kes: 56000,
     features: ["Balcony", "Secure parking", "CCTV", "Modern fittings"],
-    images: [],
+    images: [
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1540518614846-7eded433c457?auto=format&fit=crop&w=800&q=80",
+    ],
     published_at: "2026-02-03T08:00:00Z",
   },
   {
@@ -301,7 +311,10 @@ const MOCK_LISTINGS_RAW: (Omit<SearchListing, "lat" | "lng" | "strategic_region"
     rent_kes: 55000,
     deposit_kes: 110000,
     features: ["Street frontage", "24h security", "Storage room"],
-    images: [],
+    images: [
+      "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=800&q=80",
+    ],
     published_at: "2026-02-05T08:00:00Z",
   },
   {
@@ -319,7 +332,10 @@ const MOCK_LISTINGS_RAW: (Omit<SearchListing, "lat" | "lng" | "strategic_region"
     rent_kes: 32000,
     deposit_kes: 64000,
     features: ["Tiled", "Parking", "Quiet compound"],
-    images: [],
+    images: [
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=800&q=80",
+    ],
     published_at: "2026-02-07T08:00:00Z",
   },
   {
@@ -337,16 +353,19 @@ const MOCK_LISTINGS_RAW: (Omit<SearchListing, "lat" | "lng" | "strategic_region"
     rent_kes: 38000,
     deposit_kes: 76000,
     features: ["Spacious rooms", "Back-up water", "Good access road"],
-    images: [],
+    images: [
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80",
+    ],
     published_at: "2026-02-09T08:00:00Z",
   },
-  // These are intentionally excluded (data security check):
+  // Intentionally excluded (data security check):
   {
     id: "a1b2c3d4-0011",
     reference: "CAL-NBO-2026-011",
     title: "HIDDEN — Occupied Unit (should never render)",
     property_type: "apartment",
-    status: "occupied",    // ← excluded by Mabati Rule
+    status: "occupied",
     web_visible: true,
     zone: "E",
     area: "Kilimani",
@@ -365,7 +384,7 @@ const MOCK_LISTINGS_RAW: (Omit<SearchListing, "lat" | "lng" | "strategic_region"
     title: "HIDDEN — web_visible false (should never render)",
     property_type: "apartment",
     status: "vacant",
-    web_visible: false,    // ← excluded by Mabati Rule
+    web_visible: false,
     zone: "B",
     area: "Kasarani",
     bedrooms: 1,
@@ -380,7 +399,7 @@ const MOCK_LISTINGS_RAW: (Omit<SearchListing, "lat" | "lng" | "strategic_region"
   {
     id: "a1b2c3d4-0013",
     reference: "CAL-NBO-2026-013",
-    title: "2-Bedroom — Zimmerman, Quiet Court",
+    title: "2-Bedroom — Zimmerman, Quiet Compound",
     property_type: "apartment",
     status: "vacant",
     web_visible: true,
@@ -391,14 +410,17 @@ const MOCK_LISTINGS_RAW: (Omit<SearchListing, "lat" | "lng" | "strategic_region"
     size_m2: 78,
     rent_kes: 26000,
     deposit_kes: 52000,
-    features: ["Compound with parking", "Borehole", "Good road"],
-    images: [],
-    published_at: "2026-02-12T08:00:00Z",
+    features: ["Compound parking", "Borehole", "Good road access"],
+    images: [
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80",
+    ],
+    published_at: "2026-03-26T08:00:00Z",
   },
   {
     id: "a1b2c3d4-0014",
     reference: "CAL-NBO-2026-014",
-    title: "Warehouse — Embakasi, 500 m² Industrial Unit",
+    title: "Industrial Warehouse — Embakasi, 500 m²",
     property_type: "warehouse",
     status: "vacant",
     web_visible: true,
@@ -409,9 +431,12 @@ const MOCK_LISTINGS_RAW: (Omit<SearchListing, "lat" | "lng" | "strategic_region"
     size_m2: 500,
     rent_kes: 275000,
     deposit_kes: 550000,
-    features: ["Loading bay", "3-phase power", "Security 24h", "Hardstand"],
-    images: [],
-    published_at: "2026-02-14T08:00:00Z",
+    features: ["Loading bay", "3-phase power", "Security 24h", "Hardstand yard"],
+    images: [
+      "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=800&q=80",
+    ],
+    published_at: "2026-04-01T08:00:00Z",
   },
   {
     id: "a1b2c3d4-0015",
@@ -428,19 +453,20 @@ const MOCK_LISTINGS_RAW: (Omit<SearchListing, "lat" | "lng" | "strategic_region"
     rent_kes: 35000,
     deposit_kes: 70000,
     features: ["Furnished option", "Swimming pool", "Gym", "24h security"],
-    images: [],
-    published_at: "2026-02-16T08:00:00Z",
+    images: [
+      "https://images.unsplash.com/photo-1505873242700-f289a29e1724?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=800&q=80",
+    ],
+    published_at: "2026-04-09T08:00:00Z",
   },
 ];
 
 // ── Resolve lat/lng and strategic_region for each listing ────────────────────
 
-// We keep jitter stable across renders using a module-level cache
 const jitterCache = new Map<string, [number, number]>();
 
 function resolveListings(): SearchListing[] {
   return MOCK_LISTINGS_RAW
-    // THE MABATI RULE — filter before any render
     .filter((l) => l.web_visible && l.status === "vacant")
     .map((l) => {
       if (!jitterCache.has(l.id)) {
@@ -458,112 +484,201 @@ function resolveListings(): SearchListing[] {
 
 const ALL_LISTINGS = resolveListings();
 
-// ── Filter helpers ────────────────────────────────────────────────────────────
-
-const REGION_OPTIONS = [
-  { value: "", label: "All Regions" },
-  ...Object.entries(STRATEGIC_REGIONS).map(([, name]) => ({ value: name, label: name })),
-];
+// ── Filter / sort options ─────────────────────────────────────────────────────
 
 const TYPE_OPTIONS = [
-  { value: "", label: "All Types" },
-  { value: "apartment",  label: "Apartment" },
-  { value: "townhouse",  label: "Townhouse" },
-  { value: "villa",      label: "Villa" },
-  { value: "office",     label: "Office" },
-  { value: "retail",     label: "Retail" },
-  { value: "warehouse",  label: "Warehouse" },
-  { value: "land",       label: "Land" },
-];
-
-const BED_OPTIONS = [
-  { value: "", label: "Any Beds" },
-  { value: "1", label: "1 Bed" },
-  { value: "2", label: "2 Beds" },
-  { value: "3", label: "3 Beds" },
-  { value: "4", label: "4+ Beds" },
+  { value: "",          label: "All Types" },
+  { value: "apartment", label: "Apartment" },
+  { value: "townhouse", label: "Townhouse" },
+  { value: "villa",     label: "Villa" },
+  { value: "office",    label: "Office" },
+  { value: "retail",    label: "Retail" },
+  { value: "warehouse", label: "Warehouse" },
+  { value: "land",      label: "Land" },
 ];
 
 const PRICE_OPTIONS = [
-  { value: "",       label: "Any Price" },
-  { value: "30000",  label: "Up to KES 30k" },
-  { value: "60000",  label: "Up to KES 60k" },
-  { value: "100000", label: "Up to KES 100k" },
-  { value: "200000", label: "Up to KES 200k" },
+  { value: "",        label: "Any Price" },
+  { value: "30000",   label: "Up to KES 30k" },
+  { value: "60000",   label: "Up to KES 60k" },
+  { value: "100000",  label: "Up to KES 100k" },
+  { value: "200000",  label: "Up to KES 200k" },
 ];
+
+const SORT_OPTIONS = [
+  { value: "newest",     label: "Newest First" },
+  { value: "price-asc",  label: "Price: Low → High" },
+  { value: "price-desc", label: "Price: High → Low" },
+];
+
+const BED_OPTIONS = [
+  { value: "",  label: "Any" },
+  { value: "1", label: "1" },
+  { value: "2", label: "2" },
+  { value: "3", label: "3" },
+  { value: "4", label: "4+" },
+];
+
+// ── Bed pills ─────────────────────────────────────────────────────────────────
+
+function BedPills({ value, onChange }: { value: string; onChange: (v: string) => void }) {
+  return (
+    <div
+      className="flex items-center rounded-xl border border-slate-200 overflow-hidden flex-shrink-0"
+      role="group"
+      aria-label="Filter by number of bedrooms"
+    >
+      {BED_OPTIONS.map((o, i) => (
+        <button
+          key={o.value}
+          onClick={() => onChange(o.value)}
+          aria-pressed={value === o.value}
+          className={`px-3 py-2 text-xs font-semibold transition-colors focus:outline-none focus:ring-inset focus:ring-2 focus:ring-[#00C9C9]/50 ${
+            i < BED_OPTIONS.length - 1 ? "border-r border-slate-200" : ""
+          } ${
+            value === o.value
+              ? "bg-[#0D1B8E] text-white"
+              : "bg-white text-slate-600 hover:bg-slate-50"
+          }`}
+        >
+          {o.label}
+          {o.label !== "Any" && o.label !== "4+" && <span className="sr-only"> beds</span>}
+        </button>
+      ))}
+    </div>
+  );
+}
 
 // ── Filter bar ────────────────────────────────────────────────────────────────
 
 interface FilterBarProps {
-  region: string;
-  type: string;
-  beds: string;
-  maxPrice: string;
-  total: number;
-  onChange: (key: "region" | "type" | "beds" | "maxPrice", val: string) => void;
-  onClear: () => void;
+  searchQuery: string;
+  type:        string;
+  beds:        string;
+  maxPrice:    string;
+  sortBy:      string;
+  total:       number;
+  hasFilters:  boolean;
+  onSearch:    (v: string) => void;
+  onChange:    (key: "type" | "beds" | "maxPrice" | "sortBy", val: string) => void;
+  onClear:     () => void;
 }
 
-function FilterBar({ region, type, beds, maxPrice, total, onChange, onClear }: FilterBarProps) {
-  const isFiltered = region || type || beds || maxPrice;
-  const selectCls = "w-full px-3 py-2 rounded-xl border border-slate-200 text-[#0D1B8E] text-sm font-medium bg-white focus:outline-none focus:border-[#00C9C9] focus:ring-2 focus:ring-[#00C9C9]/20 appearance-none cursor-pointer";
+function FilterBar({
+  searchQuery, type, beds, maxPrice, sortBy,
+  total, hasFilters, onSearch, onChange, onClear,
+}: FilterBarProps) {
+  const selectCls =
+    "w-full pl-3 pr-8 py-2 rounded-xl border border-slate-200 text-[#0D1B8E] text-xs font-medium bg-white " +
+    "focus:outline-none focus:border-[#00C9C9] focus:ring-2 focus:ring-[#00C9C9]/20 appearance-none cursor-pointer";
 
   return (
     <div
-      className="sticky top-0 z-30 bg-white/95 backdrop-blur border-b border-slate-100 shadow-sm"
+      className="sticky top-0 z-30 bg-white/97 backdrop-blur border-b border-slate-100 shadow-sm"
       role="search"
       aria-label="Filter properties"
     >
       <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 py-3">
-        <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
-          {/* Region */}
-          <div className="relative flex-1 min-w-[160px]">
-            <label htmlFor="sr-filter" className="sr-only">Strategic Region</label>
-            <select id="sr-filter" value={region} onChange={(e) => onChange("region", e.target.value)} className={selectCls}>
-              {REGION_OPTIONS.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
-            </select>
-            <ChevDown />
+        <div className="flex flex-col sm:flex-row sm:flex-wrap lg:flex-nowrap items-start sm:items-center gap-2 lg:gap-2.5">
+
+          {/* ── Text search ── */}
+          <div className="relative w-full sm:flex-1 sm:min-w-[200px]">
+            <svg
+              className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400"
+              fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}
+              aria-hidden="true"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round"
+                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+            </svg>
+            <input
+              type="search"
+              value={searchQuery}
+              onChange={(e) => onSearch(e.target.value)}
+              placeholder="Search area, e.g. Kasarani, Westlands…"
+              className="w-full pl-8 pr-8 py-2 rounded-xl border border-slate-200 text-xs text-[#0D1B8E]
+                         placeholder:text-slate-400 bg-white focus:outline-none focus:border-[#00C9C9]
+                         focus:ring-2 focus:ring-[#00C9C9]/20"
+              aria-label="Search by area or property name"
+            />
+            {searchQuery && (
+              <button
+                onClick={() => onSearch("")}
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 hover:text-slate-600 focus:outline-none"
+                aria-label="Clear search"
+              >
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            )}
           </div>
 
-          {/* Type */}
-          <div className="relative flex-1 min-w-[140px]">
+          {/* ── Type ── */}
+          <div className="relative flex-shrink-0 w-full sm:w-auto sm:min-w-[130px]">
             <label htmlFor="type-filter" className="sr-only">Property Type</label>
-            <select id="type-filter" value={type} onChange={(e) => onChange("type", e.target.value)} className={selectCls}>
+            <select
+              id="type-filter"
+              value={type}
+              onChange={(e) => onChange("type", e.target.value)}
+              className={selectCls}
+            >
               {TYPE_OPTIONS.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
             </select>
             <ChevDown />
           </div>
 
-          {/* Beds */}
-          <div className="relative flex-1 min-w-[120px]">
-            <label htmlFor="beds-filter" className="sr-only">Bedrooms</label>
-            <select id="beds-filter" value={beds} onChange={(e) => onChange("beds", e.target.value)} className={selectCls}>
-              {BED_OPTIONS.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
-            </select>
-            <ChevDown />
+          {/* ── Beds pills ── */}
+          <div className="flex-shrink-0">
+            <BedPills value={beds} onChange={(v) => onChange("beds", v)} />
           </div>
 
-          {/* Max price */}
-          <div className="relative flex-1 min-w-[160px]">
+          {/* ── Max price ── */}
+          <div className="relative flex-shrink-0 w-full sm:w-auto sm:min-w-[140px]">
             <label htmlFor="price-filter" className="sr-only">Maximum Rent</label>
-            <select id="price-filter" value={maxPrice} onChange={(e) => onChange("maxPrice", e.target.value)} className={selectCls}>
+            <select
+              id="price-filter"
+              value={maxPrice}
+              onChange={(e) => onChange("maxPrice", e.target.value)}
+              className={selectCls}
+            >
               {PRICE_OPTIONS.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
             </select>
             <ChevDown />
           </div>
 
-          {/* Result count + clear */}
-          <div className="flex items-center gap-3 ml-auto flex-shrink-0">
-            <span className="text-sm text-slate-500 whitespace-nowrap" aria-live="polite" aria-atomic="true">
+          {/* ── Sort ── */}
+          <div className="relative flex-shrink-0 w-full sm:w-auto sm:min-w-[150px]">
+            <label htmlFor="sort-filter" className="sr-only">Sort by</label>
+            <select
+              id="sort-filter"
+              value={sortBy}
+              onChange={(e) => onChange("sortBy", e.target.value)}
+              className={selectCls}
+            >
+              {SORT_OPTIONS.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
+            </select>
+            <ChevDown />
+          </div>
+
+          {/* ── Count + clear ── */}
+          <div className="flex items-center gap-3 flex-shrink-0 sm:ml-auto">
+            <span
+              className="text-xs text-slate-500 whitespace-nowrap"
+              aria-live="polite"
+              aria-atomic="true"
+            >
               <span className="font-bold text-[#0D1B8E]">{total}</span>
               {" "}{total === 1 ? "property" : "properties"}
             </span>
-            {isFiltered && (
+            {hasFilters && (
               <button
                 onClick={onClear}
-                className="text-xs font-semibold text-slate-500 hover:text-[#0D1B8E] border border-slate-200 hover:border-[#0D1B8E] px-3 py-1.5 rounded-lg transition-colors"
+                className="text-xs font-semibold text-slate-500 hover:text-[#0D1B8E]
+                           border border-slate-200 hover:border-[#0D1B8E]
+                           px-3 py-1.5 rounded-lg transition-colors focus:outline-none"
               >
-                Clear
+                ✕ Clear
               </button>
             )}
           </div>
@@ -576,11 +691,8 @@ function FilterBar({ region, type, beds, maxPrice, total, onChange, onClear }: F
 function ChevDown() {
   return (
     <svg
-      className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      strokeWidth={2}
+      className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400"
+      fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}
       aria-hidden="true"
     >
       <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
@@ -610,7 +722,8 @@ function MobileMapToggle({ showMap, onToggle }: { showMap: boolean; onToggle: ()
         ) : (
           <>
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+              <path strokeLinecap="round" strokeLinejoin="round"
+                d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
             </svg>
             Show Map
           </>
@@ -623,6 +736,9 @@ function MobileMapToggle({ showMap, onToggle }: { showMap: boolean; onToggle: ()
 // ── Empty state ───────────────────────────────────────────────────────────────
 
 function EmptyState({ onClear }: { onClear: () => void }) {
+  const whatsapp = `https://wa.me/${siteConfig.contact.whatsapp}?text=${encodeURIComponent(
+    "Hello, I am looking for a property and cannot find a match on your website. Can you help?"
+  )}`;
   return (
     <div className="flex flex-col items-center justify-center py-20 text-center px-4">
       <div className="w-16 h-16 rounded-2xl bg-slate-50 flex items-center justify-center mb-5" aria-hidden="true">
@@ -637,20 +753,23 @@ function EmptyState({ onClear }: { onClear: () => void }) {
       </div>
       <h3 className="text-xl font-bold text-[#0D1B8E] mb-2">No Matches Found</h3>
       <p className="text-slate-500 text-sm leading-relaxed mb-6 max-w-xs">
-        No properties match your current filters. Try broadening your search or let our concierge team find one for you.
+        No properties match your current filters. Try broadening your search or let our
+        concierge team find the right unit for you.
       </p>
       <div className="flex flex-col sm:flex-row gap-3 justify-center">
         <button
           onClick={onClear}
-          className="px-6 py-2.5 rounded-full border-2 border-[#0D1B8E] text-[#0D1B8E] font-semibold text-sm hover:bg-[#0D1B8E] hover:text-white transition-colors"
+          className="px-6 py-2.5 rounded-full border-2 border-[#0D1B8E] text-[#0D1B8E]
+                     font-semibold text-sm hover:bg-[#0D1B8E] hover:text-white transition-colors"
         >
           Reset Filters
         </button>
         <a
-          href="https://wa.me/254720854389?text=Hello%2C+I+am+looking+for+a+property+and+cannot+find+a+match+on+your+website."
+          href={whatsapp}
           target="_blank"
           rel="noopener noreferrer"
-          className="px-6 py-2.5 rounded-full bg-green-500 text-white font-semibold text-sm hover:bg-green-600 transition-colors text-center"
+          className="px-6 py-2.5 rounded-full bg-green-500 text-white font-semibold text-sm
+                     hover:bg-green-600 transition-colors text-center"
         >
           WhatsApp Concierge
         </a>
@@ -662,42 +781,73 @@ function EmptyState({ onClear }: { onClear: () => void }) {
 // ── Main SearchInterface ──────────────────────────────────────────────────────
 
 export default function SearchInterface() {
-  const [region,   setRegion]   = useState("");
-  const [type,     setType]     = useState("");
-  const [beds,     setBeds]     = useState("");
-  const [maxPrice, setMaxPrice] = useState("");
-  const [activeId, setActiveId] = useState<string | null>(null);
-  const [mobileMap, setMobileMap] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [type,        setType]        = useState("");
+  const [beds,        setBeds]        = useState("");
+  const [maxPrice,    setMaxPrice]    = useState("");
+  const [sortBy,      setSortBy]      = useState("newest");
+  const [activeId,    setActiveId]    = useState<string | null>(null);
+  const [mobileMap,   setMobileMap]   = useState(false);
+  const [isLoading,   setIsLoading]   = useState(true);
 
-  // Simulate initial load skeleton (removes on next tick after mount)
+  // Simulate initial load skeleton
   useEffect(() => {
     const t = setTimeout(() => setIsLoading(false), 400);
     return () => clearTimeout(t);
   }, []);
 
+  // Listen for events from PropertiesHero (search box + type pills)
+  useEffect(() => {
+    const onHeroSearch = (e: Event) => {
+      const { q } = (e as CustomEvent<{ q: string }>).detail;
+      setSearchQuery(q);
+    };
+    const onHeroType = (e: Event) => {
+      const { type: t } = (e as CustomEvent<{ type: string }>).detail;
+      setType(t);
+      setSearchQuery(""); // clear text search when a type pill is clicked
+    };
+    window.addEventListener("chabrin:search", onHeroSearch);
+    window.addEventListener("chabrin:type",   onHeroType);
+    return () => {
+      window.removeEventListener("chabrin:search", onHeroSearch);
+      window.removeEventListener("chabrin:type",   onHeroType);
+    };
+  }, []);
+
   const handleFilter = useCallback(
-    (key: "region" | "type" | "beds" | "maxPrice", val: string) => {
-      if (key === "region")   setRegion(val);
+    (key: "type" | "beds" | "maxPrice" | "sortBy", val: string) => {
       if (key === "type")     setType(val);
       if (key === "beds")     setBeds(val);
       if (key === "maxPrice") setMaxPrice(val);
+      if (key === "sortBy")   setSortBy(val);
     },
     []
   );
 
   const clearFilters = useCallback(() => {
-    setRegion("");
+    setSearchQuery("");
     setType("");
     setBeds("");
     setMaxPrice("");
+    setSortBy("newest");
   }, []);
 
-  // Apply filters
+  const hasFilters = !!(searchQuery || type || beds || maxPrice || sortBy !== "newest");
+
+  // Apply filters + sort
   const filtered = useMemo(() => {
-    return ALL_LISTINGS.filter((l) => {
-      if (region   && l.strategic_region !== region) return false;
-      if (type     && l.property_type !== type)      return false;
+    const results = ALL_LISTINGS.filter((l) => {
+      // Text search: matches title, area, strategic_region
+      if (searchQuery) {
+        const q = searchQuery.toLowerCase();
+        if (
+          !l.title.toLowerCase().includes(q) &&
+          !l.area.toLowerCase().includes(q) &&
+          !l.strategic_region.toLowerCase().includes(q)
+        ) return false;
+      }
+      if (type     && l.property_type !== type)  return false;
       if (beds) {
         const n = parseInt(beds, 10);
         if (beds === "4") {
@@ -709,17 +859,28 @@ export default function SearchInterface() {
       if (maxPrice && l.rent_kes > parseInt(maxPrice, 10)) return false;
       return true;
     });
-  }, [region, type, beds, maxPrice]);
+
+    // Sort
+    return results.sort((a, b) => {
+      if (sortBy === "price-asc")  return a.rent_kes - b.rent_kes;
+      if (sortBy === "price-desc") return b.rent_kes - a.rent_kes;
+      // newest (default): most recently published first
+      return new Date(b.published_at).getTime() - new Date(a.published_at).getTime();
+    });
+  }, [searchQuery, type, beds, maxPrice, sortBy]);
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div id="search-listings" className="min-h-screen bg-slate-50">
       {/* ── Sticky filter bar ── */}
       <FilterBar
-        region={region}
+        searchQuery={searchQuery}
         type={type}
         beds={beds}
         maxPrice={maxPrice}
+        sortBy={sortBy}
         total={filtered.length}
+        hasFilters={hasFilters}
+        onSearch={setSearchQuery}
         onChange={handleFilter}
         onClear={clearFilters}
       />
@@ -735,9 +896,8 @@ export default function SearchInterface() {
           aria-label="Property listings"
           aria-busy={isLoading}
         >
-          <div className="p-4 sm:p-6">
+          <div className="p-4 sm:p-5">
             {isLoading ? (
-              /* Loading skeletons */
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {Array.from({ length: 6 }).map((_, i) => (
                   <PropertyCardSkeleton key={i} />
@@ -783,7 +943,9 @@ export default function SearchInterface() {
           {mobileMap && (
             <button
               onClick={() => setMobileMap(false)}
-              className="lg:hidden absolute top-4 right-4 z-50 w-9 h-9 rounded-full bg-white shadow-lg flex items-center justify-center text-slate-700 hover:bg-slate-50"
+              className="lg:hidden absolute top-4 right-4 z-50 w-9 h-9 rounded-full
+                         bg-white shadow-lg flex items-center justify-center text-slate-700
+                         hover:bg-slate-50 focus:outline-none"
               aria-label="Close map"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
