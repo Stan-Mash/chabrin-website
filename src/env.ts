@@ -64,6 +64,18 @@ export const env = createEnv({
       .min(1)
       .describe("Cloudflare Turnstile secret key — used in Server Actions only"),
 
+    // ── Admin panel auth ─────────────────────────────────────────────────────
+    ADMIN_PASSWORD: z
+      .string()
+      .min(12)
+      .optional()
+      .describe("Staff admin panel password"),
+    ADMIN_SESSION_SECRET: z
+      .string()
+      .min(32)
+      .optional()
+      .describe("HMAC signing secret for admin session cookie (32+ char random string)"),
+
     // ── Email (SMTP) ──────────────────────────────────────────────────────
     SMTP_HOST: z
       .string()
