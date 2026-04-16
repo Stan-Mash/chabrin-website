@@ -1,18 +1,30 @@
 import { redirect } from "next/navigation";
+import { headers } from "next/headers";
 import { isAdminAuthenticated } from "@/lib/admin-auth";
 
 /**
- * Admin layout — server component that guards every /admin/* route.
- * Any request without a valid session cookie is sent to /admin/login.
- * Login page is excluded from this layout (it has its own root layout).
+ * Admin layout — guards every /admin/* route except /admin/login.
+ * The login page is inside this layout but excluded from the auth check
+ * by inspecting the request pathname via next/headers.
  */
 export default async function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const authenticated = await isAdminAuthenticated();
-  if (!authenticated) redirect("/admin/login");
+  const hdrs = await headers();
+  const pathname = hdrs.get("x-pathname") ?? hdrs.get("x-invoke-path") ?? "";
+  const isLoginPage = pathname === "/admin/login" || pathname.endsWith("/admin/login");
+
+  if (!isLoginPage) {
+    const authenticated = await isAdminAuthenticated();
+    if (!authenticated) redirect("/admin/login");
+  }
+
+  // Login page: render children directly with no chrome
+  if (isLoginPage) {
+    return <>{children}</>;
+  }
 
   return (
     <div className="min-h-screen bg-slate-100 font-sans">
