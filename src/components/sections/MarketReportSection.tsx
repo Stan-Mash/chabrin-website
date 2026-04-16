@@ -22,7 +22,7 @@ const REPORT_CONTENTS = {
     "Tenant demand drivers: employment, infrastructure, migration",
     "2026 outlook: interest rates, supply pipeline, and policy shifts",
     "Investor opportunity matrix — top 5 sub-markets by ROI",
-    "Chabrin proprietary data: 1,200+ managed units",
+    "Chabrin proprietary data: portfolio-level rental benchmarks",
   ],
   sw: [
     "Vigezo vya bei ya kodi kwa kila ukanda",
@@ -30,7 +30,7 @@ const REPORT_CONTENTS = {
     "Vichocheo vya mahitaji ya wapangaji: ajira, miundombinu",
     "Matarajio ya 2026: viwango vya riba, usambazaji wa mali",
     "Matrix ya fursa za wawekezaji — masoko 5 bora kwa ROI",
-    "Data ya Chabrin: vitengo 1,200+ vinavyosimamiwa",
+    "Data ya Chabrin: vigezo vya kodi kutoka portfolio yetu",
   ],
 };
 

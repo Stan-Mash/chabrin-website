@@ -41,8 +41,8 @@ export default function ReachSection() {
             Our Metropolitan Footprint
           </h2>
           <p className="text-slate-500 text-base max-w-2xl mx-auto leading-relaxed">
-            1,200+ properties managed across 7 strategic corridors spanning Nairobi and its
-            expanding commuter counties. Click a corridor to view localized yields and covered neighborhoods.
+            Properties managed across 7 coverage corridors spanning Nairobi and its
+            expanding commuter counties. Click a corridor to view localized yields and covered neighbourhoods.
           </p>
         </div>
 

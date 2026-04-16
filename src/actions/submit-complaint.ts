@@ -64,7 +64,7 @@ const CATEGORY_LABELS: Record<string, string> = {
 
 const SUBMITTER_LABELS: Record<string, string> = {
   tenant:      "Tenant",
-  landlord:    "Landlord / Property Owner",
+  landlord:    "Property Owner",
   prospective: "Prospective Tenant",
   public:      "General Public",
 };

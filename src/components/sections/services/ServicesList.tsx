@@ -41,15 +41,15 @@ export default function ServicesList() {
       ],
     },
     {
-      id: "facilities",
-      icon: "🔧",
-      title: t("facilities_title"),
-      desc:  t("facilities_desc"),
+      id: "digital",
+      icon: "✍️",
+      title: t("digital_title"),
+      desc:  t("digital_desc"),
       features: [
-        t("facilities_f1"),
-        t("facilities_f2"),
-        t("facilities_f3"),
-        t("facilities_f4"),
+        t("digital_f1"),
+        t("digital_f2"),
+        t("digital_f3"),
+        t("digital_f4"),
       ],
     },
   ];

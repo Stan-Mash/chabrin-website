@@ -28,11 +28,11 @@ export default function Services() {
       href:  "/services#valuation",
     },
     {
-      id:   "facilities",
-      icon: "🔧",
-      title: t("facilities_title"),
-      desc:  t("facilities_desc"),
-      href:  "/services#facilities",
+      id:   "digital",
+      icon: "✍️",
+      title: t("digital_title"),
+      desc:  t("digital_desc"),
+      href:  "/services#digital",
     },
   ];
 

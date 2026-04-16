@@ -139,7 +139,6 @@ export default function PropertiesHero() {
       >
         <div className="max-w-2xl mx-auto px-4 py-4 flex items-center justify-center gap-6 sm:gap-10 flex-wrap">
           {[
-            { stat: "1,200+", label: "Managed Units" },
             { stat: "7",      label: "Metro Corridors" },
             { stat: "30+",    label: "Years Experience" },
             { stat: "100%",   label: "Professional Mgmt" },

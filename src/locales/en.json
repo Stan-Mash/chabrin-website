@@ -22,10 +22,8 @@
     "trust_nairobi": "Kenya Specialists"
   },
   "stats": {
-    "properties_value": "1,200+",
-    "properties_label": "Properties Managed",
     "zones_value": "7",
-    "zones_label": "Zones (A–G)",
+    "zones_label": "Coverage Corridors",
     "years_value": "30+",
     "years_label": "Years of Experience",
     "retention_value": "98%",
@@ -38,13 +36,13 @@
     "learn_more": "Learn more",
     "view_all": "View all services",
     "management_title": "Property Management",
-    "management_desc": "End-to-end management of residential and commercial properties. Rent collection, maintenance coordination, tenant relations, and monthly reporting.",
+    "management_desc": "End-to-end management of residential and commercial properties. Rent collection, tenant relations, and monthly reporting — all handled by your dedicated property manager.",
     "leasing_title": "Leasing & Letting",
     "leasing_desc": "Professional tenant sourcing, vetting, and placement. We handle lease preparation, digital signing, and handover documentation.",
     "valuation_title": "Property Valuation",
     "valuation_desc": "Accurate market valuations for residential, commercial, and industrial properties across our coverage area — backed by current data and deep local expertise.",
-    "facilities_title": "Facilities Management",
-    "facilities_desc": "Planned and reactive maintenance, contractor management, and compliance oversight to protect the long-term value of your property."
+    "digital_title": "Digital Lease Management",
+    "digital_desc": "End-to-end digital lease signing and document management. Every lease is prepared, reviewed, and signed digitally — no paper, no delays, full audit trail."
   },
   "why_chabrin": {
     "eyebrow": "Why Choose Us",
@@ -70,7 +68,7 @@
   "cta_banner": {
     "eyebrow": "Property Owners",
     "title": "Let Us Manage Your Property",
-    "subtitle": "Join hundreds of landlords who trust Chabrin to maximise their rental income, minimise vacancy, and handle everything in between.",
+    "subtitle": "Join landlords who trust Chabrin to maximise their rental income, minimise vacancy, and handle everything in between.",
     "cta_contact": "Get in Touch",
     "cta_contact_sub": "We respond within 24h",
     "cta_whatsapp": "WhatsApp Us",
@@ -100,18 +98,18 @@
     "milestone_1990s_title": "Founded",
     "milestone_1990s_desc": "Chabrin Agencies Limited was established in Nairobi, Kenya — beginning with residential property management across the city's key neighbourhoods.",
     "milestone_2000s_title": "Growing the Portfolio",
-    "milestone_2000s_desc": "Steadily expanded the managed portfolio, deepening roots across Nairobi's zones while extending coverage to Kiambu County towns along Thika Road and towards Kenol in Murang'a County.",
+    "milestone_2000s_desc": "Steadily expanded the managed portfolio, deepening roots across Nairobi's corridors while extending coverage to Kiambu County towns along Thika Road and towards Kenol in Murang'a County.",
     "milestone_2010_title": "EARB Registration",
     "milestone_2010_desc": "Attained full registration with the Estate Agents Registration Board of Kenya, cementing our professional standing and regulatory compliance.",
     "milestone_2015_title": "Commercial & Valuation Services",
-    "milestone_2015_desc": "Expanded into commercial property management and professional valuation services, growing to over 400 managed properties across 7 zones (A–G).",
+    "milestone_2015_desc": "Expanded into commercial property management and professional valuation services, broadening our coverage across Nairobi and surrounding counties.",
     "milestone_2020_title": "Technology Upgrade",
     "milestone_2020_desc": "Launched our proprietary property management platform to digitise workflows, streamline rent collection, enhance tenant communication, and provide real-time landlord reporting.",
     "milestone_2024_title": "Digital Transformation",
-    "milestone_2024_desc": "Introduced digital lease signing, online rent payment tracking, and this public-facing web portal serving landlords and tenants across all our zones — Nairobi, Kiambu, Murang'a, Kajiado, Machakos, and beyond.",
+    "milestone_2024_desc": "Introduced fully digital end-to-end lease signing, online rent payment tracking, and this public-facing web portal serving landlords and tenants across all our coverage corridors — Nairobi, Kiambu, Murang'a, Kajiado, Machakos, and beyond.",
     "leadership_eyebrow": "Our Team",
     "leadership_title": "The People Behind Chabrin",
-    "leadership_subtitle": "Experienced professionals committed to delivering exceptional property management across all our zones.",
+    "leadership_subtitle": "Experienced professionals committed to delivering exceptional property management across all our coverage corridors.",
     "accreditations_eyebrow": "Trust & Compliance",
     "accreditations_title": "Recognised. Regulated. Trusted.",
     "accreditations_subtitle": "Our credentials and compliance frameworks give landlords and tenants complete confidence.",
@@ -134,11 +132,11 @@
     "hero_subtitle": "From single units to large portfolios — Chabrin provides the full range of professional property services that landlords and tenants across Nairobi, Kiambu, Murang'a, Kajiado, Machakos, and beyond rely on.",
     "management_eyebrow": "Property Management",
     "management_title": "End-to-End Property Management",
-    "management_desc": "We take full responsibility for your property — so you can focus on what matters most to you. Our dedicated managers handle every aspect of the day-to-day, from rent collection to maintenance.",
+    "management_desc": "We take full responsibility for your property — so you can focus on what matters most to you. Our dedicated managers handle every aspect of the day-to-day, from rent collection to tenant relations.",
     "management_f1": "Monthly rent collection and financial reporting",
     "management_f2": "Tenant screening, vetting and onboarding",
-    "management_f3": "Maintenance coordination and contractor management",
-    "management_f4": "Compliance with landlord-tenant law in Kenya",
+    "management_f3": "Compliance with landlord-tenant law in Kenya",
+    "management_f4": "Landlord reporting via our digital management platform",
     "leasing_eyebrow": "Leasing & Tenant Placement",
     "leasing_title": "Find the Right Tenant, Fast",
     "leasing_desc": "We market your property across multiple channels, vet every applicant rigorously, and handle all documentation from lease drafting through to digital signing and handover.",
@@ -153,13 +151,13 @@
     "valuation_f2": "Market rental and capital value assessments",
     "valuation_f3": "Mortgage and insurance valuations",
     "valuation_f4": "Valuation reports meeting bank and legal standards",
-    "facilities_eyebrow": "Facilities Management",
-    "facilities_title": "Protect Your Asset's Long-Term Value",
-    "facilities_desc": "Proper maintenance isn't just about fixing problems — it's about preventing them. Our facilities team ensures your property is always in optimal condition.",
-    "facilities_f1": "Planned and preventive maintenance schedules",
-    "facilities_f2": "Emergency reactive maintenance — 24/7 response",
-    "facilities_f3": "Vetted contractor and supplier network",
-    "facilities_f4": "Compliance inspections and statutory checks",
+    "digital_eyebrow": "Digital Lease Management",
+    "digital_title": "Fully Digital, End-to-End Lease Signing",
+    "digital_desc": "Every lease at Chabrin is handled digitally from start to finish — no paper, no delays. Our platform enables all staff to manage, review, and sign lease documents in real time, giving landlords and tenants full visibility at every stage.",
+    "digital_f1": "Digital lease preparation and e-signing for all parties",
+    "digital_f2": "Automated document workflows across the full Chabrin team",
+    "digital_f3": "Secure document storage with full audit trail",
+    "digital_f4": "Real-time status tracking for landlords and tenants",
     "process_eyebrow": "How It Works",
     "process_title": "Simple. Transparent. Effective.",
     "process_subtitle": "Getting started with Chabrin is straightforward. Here is our onboarding process for new landlords.",
@@ -179,22 +177,22 @@
     "landlord_cta": "Get Free Consultation",
     "tenant_eyebrow": "For Tenants",
     "tenant_title": "Looking for a Property?",
-    "tenant_desc": "Browse our available residential and commercial properties across all our zones — Nairobi, Kiambu, Murang'a, Kajiado, Machakos, and surrounding areas.",
+    "tenant_desc": "Browse our available residential and commercial properties across all our coverage corridors — Nairobi, Kiambu, Murang'a, Kajiado, Machakos, and surrounding areas.",
     "tenant_cta": "Browse Properties"
   },
   "properties": {
     "title": "Available Properties",
     "hero_title": "Find Your Next Home or Office",
     "hero_subtitle": "Browse our current portfolio of managed residential and commercial properties across Nairobi, Kiambu, Murang'a, Kajiado, Machakos, and surrounding areas.",
-    "filter_zone": "Filter by Zone",
+    "filter_zone": "Filter by Corridor",
     "filter_type": "Property Type",
-    "all_zones": "All Zones",
+    "all_zones": "All Corridors",
     "all_types": "All Types",
     "clear_filters": "Clear Filters",
     "bedrooms": "Bedrooms",
     "bathrooms": "Bathrooms",
     "rent": "Monthly Rent",
-    "zone": "Zone",
+    "zone": "Corridor",
     "area": "Area",
     "enquire": "Enquire",
     "whatsapp": "WhatsApp",
@@ -211,7 +209,7 @@
     "reset_filters": "Reset Filters",
     "concierge_badge": "Concierge Search",
     "concierge_title": "We'll Find It For You",
-    "concierge_desc": "We don't have listings in this zone today, but our valuation team can find one for you. Tell us what you're looking for and we'll search our off-market network.",
+    "concierge_desc": "We don't have listings in this corridor today, but our valuation team can find one for you. Tell us what you're looking for and we'll search our off-market network.",
     "concierge_cta": "Request a Property",
     "concierge_modal_title": "Concierge Property Request",
     "concierge_modal_subtitle": "Tell us your requirements and our team will call you back",
@@ -293,7 +291,7 @@
     "value_team_title": "Collaborative Team",
     "value_team_desc": "A close-knit team where your contributions are recognised and your voice matters.",
     "value_impact_title": "Industry Impact",
-    "value_impact_desc": "We manage 1,200+ properties across multiple counties — your work directly shapes the housing landscape for thousands of Kenyans.",
+    "value_impact_desc": "Your work directly shapes the housing and commercial landscape for landlords and tenants across Nairobi and surrounding counties.",
     "openings_title": "Open Positions",
     "openings_subtitle": "All roles are based at our Nairobi office — Nacico Plaza, Landhies Road.",
     "apply_btn": "Apply Now",
@@ -348,7 +346,7 @@
       },
       {
         "q": "What documents do I need to rent a property?",
-        "a": "You will typically need: a copy of your National ID or passport, your three most recent payslips or proof of income (for self-employed applicants, six months of bank statements), a copy of your KRA PIN certificate, an employment letter or business registration certificate, and one passport-size photograph. Our team will confirm the exact requirements for your chosen property."
+        "a": "You will typically need: a copy of your National ID or passport, a copy of your KRA PIN certificate, and an employment letter or business registration certificate. Our team will confirm the exact requirements for your chosen property."
       },
       {
         "q": "How are tenants screened and vetted?",
@@ -356,7 +354,7 @@
       },
       {
         "q": "How much deposit will I pay, and when do I get it back?",
-        "a": "The standard security deposit is equivalent to two months' rent. It is held in a designated account throughout your tenancy. At the end of the lease, the deposit is refunded after a final property inspection, subject to deductions for any damage beyond normal wear and tear, or any outstanding rent or charges. Refunds are processed within 30 days of vacating, in line with Kenyan tenancy law."
+        "a": "The standard security deposit is equivalent to one month's rent. It is held in a designated account throughout your tenancy. At the end of the lease, the deposit is refunded after a final property inspection, subject to deductions for any damage beyond normal wear and tear, or any outstanding rent or charges. Refunds are processed within 30 days of vacating, in line with Kenyan tenancy law."
       },
       {
         "q": "How do I pay rent, and when is it due?",
@@ -395,16 +393,8 @@
         "a": "Rent increases are governed by your tenancy agreement and Kenyan law. Typically, a landlord may review rent at the end of each lease term. Any increase must be communicated in writing with adequate notice. Chabrin manages this process professionally and in compliance with the Rent Restriction Act where applicable."
       },
       {
-        "q": "What should I do if I have a dispute with my landlord?",
-        "a": "We encourage tenants to raise any concerns with us directly first — as the managing agent, we act as the professional intermediary between you and the property owner. We aim to resolve disputes fairly and quickly. Should a dispute escalate, we will advise both parties on their rights under Kenyan landlord-tenant law, and guide you towards the appropriate legal channels if necessary."
-      },
-      {
         "q": "How do I contact Chabrin in an emergency?",
         "a": "For property emergencies outside office hours, call our main line or send a WhatsApp message marked as urgent. Our office number is +254 720 854 389. Office hours are Monday to Friday, 8:00 AM to 5:30 PM, and Saturday, 9:00 AM to 1:00 PM. Emergency maintenance issues are escalated to on-call contractors regardless of the time."
-      },
-      {
-        "q": "Is Chabrin regulated? How do I know I am protected?",
-        "a": "Yes. Chabrin Agencies Limited is fully registered with the Estate Agents Registration Board (EARB) — Kenya's official real estate regulator. We are also compliant with the Kenya Data Protection Act 2019 and registered with the Registrar of Companies, Kenya. This means your tenancy, your personal data, and your deposit are managed under a regulated and accountable framework."
       }
     ],
     "owners": [
@@ -418,11 +408,11 @@
       },
       {
         "q": "Which areas do you cover?",
-        "a": "We manage properties across the entire Nairobi Metropolitan Area, organised into seven corridors: the Northern Commuter Corridor (Murang'a to Githurai 45), the Kasarani-Ruaraka Belt, the Inner East Urban Core, the Classic Eastlands Hub, the Premium CBD and Inner Ring corridor, Greater Eastlands, and the Southern Metro and Airport Corridor. We also cover Kiambu, Murang'a, Kajiado, and Machakos counties."
+        "a": "We manage properties across the entire Nairobi Metropolitan Area, organised into seven coverage corridors: the Northern Commuter Corridor (Murang'a to Githurai 45), the Kasarani-Ruaraka Belt, the Inner East Urban Core, the Classic Eastlands Hub, the Premium CBD and Inner Ring corridor, Greater Eastlands, and the Southern Metro and Airport Corridor. We also cover Kiambu, Murang'a, Kajiado, and Machakos counties."
       },
       {
         "q": "What services are included in property management?",
-        "a": "Our full management service covers: multi-channel property marketing, thorough tenant screening and placement, digital lease preparation and signing, monthly rent collection and disbursement, 24/7 maintenance coordination through our vetted contractor network, monthly financial statements, landlord reporting via our management platform, annual property inspections, and compliance with Kenyan landlord-tenant law throughout the tenancy."
+        "a": "Our full management service covers: multi-channel property marketing, thorough tenant screening and placement, digital lease preparation and signing, monthly rent collection and disbursement, monthly financial statements, landlord reporting via our management platform, annual property inspections, and compliance with Kenyan landlord-tenant law throughout the tenancy."
       },
       {
         "q": "How do you find and screen tenants?",
@@ -434,39 +424,23 @@
       },
       {
         "q": "When and how will I receive my rental income?",
-        "a": "Net rental income is disbursed to landlords by the 10th of each month, after deducting management fees and any approved maintenance costs. Payment is made via bank transfer to your registered account. A detailed financial statement is issued alongside each disbursement."
+        "a": "Net rental income is disbursed to landlords on the date agreed in your SLA, after deducting management fees and any approved costs. Payment is made by cheque. A detailed financial statement is issued alongside each disbursement."
       },
       {
         "q": "How will I know what is happening with my property?",
-        "a": "We provide monthly financial statements issued by the 5th of each month, covering rent collected, management fees, maintenance costs with contractor receipts, and net disbursement. Landlords also have access to our digital reporting platform for real-time visibility into occupancy status, maintenance logs, and financial summaries."
+        "a": "We provide monthly financial statements covering rent collected, management fees, and net disbursement. Landlords also have access to our digital reporting platform for real-time visibility into occupancy status, maintenance logs, and financial summaries."
       },
       {
         "q": "What happens when a tenant leaves?",
         "a": "When a tenancy ends, we manage the entire exit process: conducting a move-out inspection to document the property's condition, reconciling the deposit against any damage or outstanding charges, and initiating the search for a new tenant to minimise vacancy. You will be informed at every stage."
       },
       {
-        "q": "How do you handle maintenance and repairs?",
-        "a": "Maintenance requests from tenants are logged, assessed, and assigned to our vetted contractor network. For routine repairs, we manage the process end to end and report costs in your monthly statement. For larger or unbudgeted works, we will always consult you first and obtain your approval before proceeding. Emergency repairs are handled immediately to protect the property and the tenant."
-      },
-      {
         "q": "Can I still access my property while it is being managed?",
         "a": "Yes, as the owner you retain the right to access your property, subject to providing adequate notice in compliance with your tenancy agreement and Kenyan law. We recommend coordinating access through our team so that the tenant is properly notified and the visit is documented."
       },
       {
-        "q": "How do you handle non-paying tenants?",
-        "a": "We take a proactive approach to rent collection and follow up with tenants immediately if payment is late. If a tenant fails to pay after our follow-up process, we escalate using the mechanisms available under Kenyan tenancy law, including formal notices and, where necessary, coordinating with legal counsel. We keep you informed throughout and aim to resolve the matter as quickly as possible."
-      },
-      {
         "q": "How do you determine the right rental price for my property?",
         "a": "Our team conducts a market analysis based on comparable properties in your corridor, current demand, the property's condition and features, and recent letting data from our portfolio. We provide a recommended rental range and explain the rationale. Pricing your property correctly from the outset is key to minimising vacancy."
-      },
-      {
-        "q": "Are you licensed to manage property in Kenya?",
-        "a": "Yes. Chabrin Agencies Limited is fully registered with the Estate Agents Registration Board (EARB) — the statutory body that regulates estate agents and property managers in Kenya. We have operated in the Nairobi market for over 30 years and maintain full compliance with all applicable laws and professional standards."
-      },
-      {
-        "q": "Can I end the management agreement if I am unhappy?",
-        "a": "Yes. Our management agreements include a termination clause that allows either party to end the agreement with the appropriate notice period as specified in the contract. We pride ourselves on the quality of our service and will always seek to resolve any concerns before a landlord considers terminating — but we understand that circumstances change."
       }
     ],
     "investors": [
@@ -488,7 +462,7 @@
       },
       {
         "q": "What reporting do investors receive?",
-        "a": "Investors receive detailed monthly financial statements covering rent collected, management fees, maintenance costs with supporting receipts, net disbursements, and occupancy status per unit. For portfolio clients, we provide consolidated reporting across all managed properties. Digital access to your landlord dashboard gives you real-time visibility at any time."
+        "a": "Investors receive detailed monthly financial statements covering rent collected, management fees, net disbursements, and occupancy status per unit. For portfolio clients, we provide consolidated reporting across all managed properties. Digital access to your landlord dashboard gives you real-time visibility at any time."
       },
       {
         "q": "How does Chabrin protect the long-term value of my asset?",
@@ -504,11 +478,11 @@
       },
       {
         "q": "Is Chabrin equipped to handle commercial investment properties?",
-        "a": "Yes. We manage commercial properties including office units, retail spaces, and warehouses. Commercial leases typically run for longer terms and involve more complex negotiations. Our team has experience with commercial lease structuring, tenant due diligence for business tenants, and facilities management requirements specific to commercial assets."
+        "a": "Yes. We manage commercial properties including office units, retail spaces, and warehouses. Commercial leases typically run for longer terms and involve more complex negotiations. Our team has experience with commercial lease structuring and tenant due diligence for business tenants."
       },
       {
         "q": "Where can I get a market overview of Nairobi's rental corridors?",
-        "a": "We publish insights and market commentary through our website and occasional reports. For a detailed, corridor-specific briefing based on our current portfolio data, contact our team directly. We can arrange a meeting with our senior property professionals to walk you through demand trends, average yields, and vacancy rates across our seven corridors."
+        "a": "We publish insights and market commentary through our website and occasional reports. For a detailed, corridor-specific briefing based on our current portfolio data, contact our team directly. We can arrange a meeting with our senior property professionals to walk you through demand trends, average yields, and vacancy rates across our coverage corridors."
       }
     ]
   },
@@ -516,7 +490,7 @@
     "eyebrow": "Free Intelligence Report",
     "title_line1": "The 2026 Nairobi",
     "title_line2": "Rental Market Report",
-    "subtitle": "Data-driven analysis of Nairobi's rental market across all 7 zones — built for serious property investors, developers, and landlords making decisions in 2026.",
+    "subtitle": "Data-driven analysis of Nairobi's rental market across our coverage corridors — built for serious property investors, developers, and landlords making decisions in 2026.",
     "contents_label": "What's Inside",
     "form_eyebrow": "Free Download",
     "form_title": "Get the Full Report",
@@ -530,6 +504,6 @@
     "success_desc": "Your download should start automatically. We've also sent a copy to your email. Welcome to the Chabrin investor community.",
     "download_again": "Download Again",
     "error_msg": "Something went wrong. Please try again.",
-    "social_proof": "Downloaded by 240+ Nairobi property investors this quarter"
+    "social_proof": "Downloaded by Nairobi property investors this quarter"
   }
 }
