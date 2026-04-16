@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Turnstile } from "@marsidev/react-turnstile";
+import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import { submitComplaint } from "@/actions/submit-complaint";
 
 // ── Zod schema (mirrors server action) ───────────────────────────────────────
@@ -175,7 +175,7 @@ export default function ComplaintForm() {
   const [status,            setStatus]            = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [reference,         setReference]         = useState("");
   const [turnstileVerified, setTurnstileVerified] = useState(false);
-  const turnstileRef = useRef<{ getResponse: () => string | null }>(null);
+  const turnstileRef = useRef<TurnstileInstance>(null);
 
   const {
     register,
@@ -394,7 +394,7 @@ export default function ComplaintForm() {
         <div className="space-y-3">
           <div className="flex justify-center">
             <Turnstile
-              ref={turnstileRef as React.RefObject<{ getResponse: () => string | null }>}
+              ref={turnstileRef}
               siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ""}
               onSuccess={() => setTurnstileVerified(true)}
               onError={() => { setTurnstileVerified(false); }}
