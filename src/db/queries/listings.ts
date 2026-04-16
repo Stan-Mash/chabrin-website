@@ -1,5 +1,4 @@
 import { sql } from "@/lib/db";
-import type { ParameterOrJSON } from "postgres";
 
 /**
  * Database queries for property listings.
@@ -30,10 +29,6 @@ export interface ListingRow {
   updated_at: string;
 }
 
-// postgres `sql.unsafe` accepts this param type
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type SqlParam = ParameterOrJSON<any>;
-
 /**
  * Fetch all published listings with optional filtering.
  * Supports filtering by zone and property type.
@@ -51,31 +46,19 @@ export async function getPublishedListings(
   limit = 50,
   offset = 0
 ): Promise<ListingRow[]> {
-  let query = `
+  return sql<ListingRow[]>`
     SELECT
       id, reference, title, property_type, status, zone, area,
       bedrooms, bathrooms, size_m2, rent_kes, deposit_kes,
       features, images, published_at, updated_at
     FROM public_listings
-    WHERE status = 'available' AND published_at IS NOT NULL
+    WHERE status = 'available'
+      AND published_at IS NOT NULL
+      ${zone ? sql`AND zone = ${zone}` : sql``}
+      ${propertyType ? sql`AND property_type = ${propertyType}` : sql``}
+    ORDER BY published_at DESC
+    LIMIT ${limit} OFFSET ${offset}
   `;
-
-  const params: SqlParam[] = [];
-
-  if (zone) {
-    params.push(zone);
-    query += ` AND zone = $${params.length}`;
-  }
-
-  if (propertyType) {
-    params.push(propertyType);
-    query += ` AND property_type = $${params.length}`;
-  }
-
-  query += ` ORDER BY published_at DESC LIMIT $${params.length + 1} OFFSET $${params.length + 2}`;
-  params.push(limit, offset);
-
-  return sql.unsafe<ListingRow[]>(query, params);
 }
 
 /**
@@ -147,24 +130,13 @@ export async function countAvailableListings(
   zone?: string,
   propertyType?: string
 ): Promise<number> {
-  let query = `
+  const results = await sql<{ count: number }[]>`
     SELECT COUNT(*) as count
     FROM public_listings
-    WHERE status = 'available' AND published_at IS NOT NULL
+    WHERE status = 'available'
+      AND published_at IS NOT NULL
+      ${zone ? sql`AND zone = ${zone}` : sql``}
+      ${propertyType ? sql`AND property_type = ${propertyType}` : sql``}
   `;
-
-  const params: SqlParam[] = [];
-
-  if (zone) {
-    params.push(zone);
-    query += ` AND zone = $${params.length}`;
-  }
-
-  if (propertyType) {
-    params.push(propertyType);
-    query += ` AND property_type = $${params.length}`;
-  }
-
-  const results = await sql.unsafe<{ count: number }[]>(query, params);
   return results[0]?.count ?? 0;
 }
