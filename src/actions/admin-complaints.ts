@@ -13,7 +13,11 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import nodemailer from "nodemailer";
-import { isAdminAuthenticated, computeToken, ADMIN_COOKIE } from "@/lib/admin-auth";
+import {
+  isAdminAuthenticated, computeToken, ADMIN_COOKIE,
+  isLockedOut, recordFailedAttempt, clearFailedAttempts, remainingAttempts,
+} from "@/lib/admin-auth";
+import { headers } from "next/headers";
 import { updateComplaintStatus, getAdminComplaint } from "@/db/queries/admin-complaints";
 
 // ── Auth guard (used inside every action) ────────────────────────────────────
@@ -29,16 +33,32 @@ export async function adminLogin(
   _prev: unknown,
   formData: FormData
 ): Promise<{ error?: string }> {
-  const password = formData.get("password") as string;
+  // Get real client IP (Nginx forwards it via X-Forwarded-For)
+  const hdrs = await headers();
+  const ip   = hdrs.get("x-forwarded-for")?.split(",")[0].trim() ?? "unknown";
 
+  // Lockout check — before touching the password
+  if (isLockedOut(ip)) {
+    await new Promise((r) => setTimeout(r, 400));
+    return { error: "Too many failed attempts. Try again in 15 minutes." };
+  }
+
+  const password = formData.get("password") as string;
   const expected = process.env.ADMIN_PASSWORD;
   if (!expected) return { error: "Admin not configured on this server." };
 
   if (password !== expected) {
-    // Constant-time-ish pause to slow brute-force
     await new Promise((r) => setTimeout(r, 400));
-    return { error: "Incorrect password." };
+    const locked = recordFailedAttempt(ip);
+    if (locked) {
+      return { error: "Too many failed attempts. Try again in 15 minutes." };
+    }
+    const left = remainingAttempts(ip);
+    return { error: `Incorrect password. ${left} attempt${left === 1 ? "" : "s"} remaining.` };
   }
+
+  // Successful login — clear any prior failed attempts
+  clearFailedAttempts(ip);
 
   const token = computeToken();
   const jar   = await cookies();
