@@ -10,6 +10,7 @@ const NAV_LINKS = [
   { key: "properties", href: "/properties" },
   { key: "services",   href: "/services"   },
   { key: "about",      href: "/about"      },
+  { key: "faq",        href: "/faq"        },
   { key: "blog",       href: "/blog"       },
   { key: "careers",    href: "/careers"    },
   { key: "complaints", href: "/complaints" },

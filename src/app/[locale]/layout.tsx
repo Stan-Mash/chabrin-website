@@ -4,7 +4,6 @@ import { getMessages, setRequestLocale } from "next-intl/server";
 import { locales } from "@/i18n/request";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import ChatbotWidget from "@/components/ChatbotWidget";
 import type { Locale } from "@/types";
 
 interface LocaleLayoutProps {
@@ -38,7 +37,6 @@ export default async function LocaleLayout({
           {children}
         </main>
         <Footer />
-        <ChatbotWidget />
       </div>
     </NextIntlClientProvider>
   );

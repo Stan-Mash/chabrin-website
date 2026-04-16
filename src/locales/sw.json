@@ -6,6 +6,7 @@
     "about": "Kuhusu Sisi",
     "blog": "Blogu",
     "careers": "Kazi",
+    "faq": "Maswali",
     "complaints": "Malalamiko",
     "contact": "Wasiliana Nasi"
   },
@@ -348,5 +349,187 @@
     "download_again": "Pakua Tena",
     "error_msg": "Kuna tatizo. Tafadhali jaribu tena.",
     "social_proof": "Iligawiwa na wawekezaji 240+ wa mali wa Nairobi robo hii"
+  },
+  "faq": {
+    "eyebrow": "Una Maswali?",
+    "hero_title": "Maswali Yanayoulizwa Mara kwa Mara",
+    "hero_subtitle": "Kila kitu wapangaji, wamiliki wa mali, na wawekezaji wanahitaji kujua kuhusu kufanya kazi na Chabrin Agencies. Hukupata jibu lako? Wasiliana nasi moja kwa moja — tunajibu ndani ya siku moja ya biashara.",
+    "tab_tenants": "Wapangaji",
+    "tab_owners": "Wamiliki wa Mali",
+    "tab_investors": "Wawekezaji",
+    "cta_title": "Bado Una Maswali?",
+    "cta_subtitle": "Timu yetu iko tayari kusaidia — iwe wewe ni mpangaji anayetaka kukodi, mmiliki wa mali, au mwekezaji anayechunguza njia zetu.",
+    "cta_contact": "Wasiliana Nasi",
+    "cta_whatsapp": "WhatsApp Nasi",
+    "tenants": [
+      {
+        "q": "Ninawezaje kuomba nyumba inayosimamiwa na Chabrin?",
+        "a": "Anza kwa kutazama orodha zetu zinazopatikana kwenye ukurasa wa Nyumba. Ukipata mali unayopenda, tuma ombi kwa kutumia fomu kwenye orodha au wasiliana nasi moja kwa moja kwa simu, barua pepe, au WhatsApp. Timu yetu itakuongoza kupitia mchakato wa maombi na kukujulisha hati zinazohitajika."
+      },
+      {
+        "q": "Ninahitaji hati gani kukodi nyumba?",
+        "a": "Kawaida utahitaji: nakala ya Kitambulisho cha Taifa au pasipoti, stakabadhi tatu za mshahara za karibuni au uthibitisho wa mapato (kwa wanaojiajiri, taarifa za benki za miezi sita), nakala ya cheti cha KRA PIN, barua ya ajira au cheti cha usajili wa biashara, na picha moja ya pasipoti. Timu yetu itathibitisha mahitaji halisi kwa mali uliyochagua."
+      },
+      {
+        "q": "Wapangaji wanachunguzwa vipi?",
+        "a": "Tunafanya mchakato wa kina lakini wa haki wa uchunguzi ili kulinda mmiliki wa nyumba na ubora wa jamii. Hii inajumuisha uthibitisho wa Kitambulisho cha Taifa au pasipoti, uthibitisho wa mapato na ajira, ukaguzi wa marejeo ya mmiliki wa awali, na mapitio ya jumla ya historia. Lengo letu ni kuweka wapangaji ambao wanafaa vyema kwa nyumba kwa muda mrefu."
+      },
+      {
+        "q": "Nitalipa amana ngapi, na nitaipata lini?",
+        "a": "Amana ya kawaida ya usalama ni sawa na kodi ya miezi miwili. Huhifadhiwa katika akaunti maalum wakati wote wa upangaji wako. Mwishoni mwa mkataba, amana inarejeshwa baada ya ukaguzi wa mwisho wa mali, kulingana na makato kwa uharibifu wowote zaidi ya uchakavu wa kawaida, au kodi au malipo yoyote yanayodaiwa. Marejesho yanafanywa ndani ya siku 30 baada ya kuacha, kulingana na sheria ya upangaji ya Kenya."
+      },
+      {
+        "q": "Ninalipaje kodi, na lini inastahili kulipwa?",
+        "a": "Kodi inalipwa mapema tarehe 1 ya kila mwezi au kabla yake. Tunakubali M-Pesa, uhamisho wa benki, na hundi. Utapokea maelezo ya malipo na maagizo unaposign mkataba wako. Timu yetu hufuatilia kwa ukumbusho, kwa hivyo daima unajulishwa kabla ya tarehe ya malipo."
+      },
+      {
+        "q": "Kinatokea nini nikiwa kodi chafu?",
+        "a": "Malipo ya kodi ya kuchelewa yanaweza kuvutia adhabu kama ilivyoainishwa katika mkataba wako wa upangaji, kulingana na mfumo wa upangaji wa Kenya. Tunahimiza wapangaji kuwasiliana nasi mapema ikiwa wanatarajia ugumu — timu yetu inaweza kujadili hali hiyo na, inapowezekana, kupanga suluhisho la muda mfupi kabla hatua za kisheria hazijahitajika."
+      },
+      {
+        "q": "Ninaripoti vipi tatizo la matengenezo au ukarabati?",
+        "a": "Unaweza kuripoti tatizo lolote la matengenezo kwa kupiga simu ofisini kwetu, kutuma ujumbe wa WhatsApp, au kutuma barua pepe moja kwa moja. Tutarekodi ombi, kumteua mkandarasi aliyekaguliwa kutoka kwa mtandao wetu, na kukuambia maendeleo. Kwa dharura za kweli — kama bomba lililopasuka, hitilafu ya umeme, au uvujaji wa gesi — laini yetu ya dharura inapatikana nje ya saa za ofisi."
+      },
+      {
+        "q": "Ukarabati unafanywa haraka kiasi gani?",
+        "a": "Ukarabati wa dharura unashughulikiwa haraka iwezekanavyo na kila wakati ndani ya masaa 24 ya kuripotiwa. Maombi ya matengenezo ya kawaida kwa kawaida yanakamilika ndani ya siku tatu hadi tano za biashara, kulingana na asili ya kazi na upatikanaji wa mkandarasi. Utapokea masasisho wakati wote wa mchakato."
+      },
+      {
+        "q": "Je, ninaweza kuwa na kipenzi nyumbani kwenye nyumba inayosimamiwa na Chabrin?",
+        "a": "Sera za vipenzi zinatofautiana kwa mali moja moja na zinaamuliwa na mmiliki wa mali. Baadhi ya mali zinaruhusu vipenzi, nyingine haziruhusu. Tafadhali thibitisha na timu yetu unapouliza kuhusu orodha maalum. Vipenzi vinaporuhusiwa, masharti ya amana ya ziada yanaweza kutumika."
+      },
+      {
+        "q": "Je, ninaweza kusublet au kupokea mkazi?",
+        "a": "Kusubleti au kupokea wakazi bila idhini ya maandishi ya awali kutoka Chabrin na mmiliki wa mali hairuhusiwi chini ya mikataba ya kawaida ya upangaji. Ikiwa hali yako inabadilika na unataka kuchunguza hili, wasiliana nasi kwanza — tutashauriana na mmiliki wa nyumba na kukushauri kuhusu kinachowezekana."
+      },
+      {
+        "q": "Ninahitaji kutoa notisi ngapi kabla ya kuhamia?",
+        "a": "Chini ya mikataba ya kawaida ya upangaji wa makazi nchini Kenya, wapangaji wanahitajika kutoa angalau notisi ya maandishi ya mwezi mmoja wa kalenda kabla ya kuacha. Mkataba wako maalum unaweza kuhitaji kipindi kirefu zaidi cha notisi — daima rejelea mkataba wako uliosign. Kutoa notisi ya kutosha kunaweza kusababisha kupoteza sehemu au yote ya amana yako."
+      },
+      {
+        "q": "Kinatokea nini mwishoni mwa mkataba wangu?",
+        "a": "Utawasiliana na timu yetu kabla ya tarehe ya kumalizika kwa mkataba wako ili kujadili upya au kuondoka. Ukichagua kuhuisha, tutashughulikia mkataba mpya wa upangaji. Ukichagua kuondoka, tutapanga ukaguzi wa kutoka, kurekodi hali ya mali, na kushughulikia kurejesha amana yako kulingana na ratiba yetu ya kawaida."
+      },
+      {
+        "q": "Je, mmiliki wangu anaweza kuongeza kodi yangu, na kwa kiasi gani?",
+        "a": "Ongezeko la kodi linafuatwa na mkataba wako wa upangaji na sheria ya Kenya. Kwa kawaida, mmiliki wa nyumba anaweza kupitia kodi mwishoni mwa kila kipindi cha mkataba. Ongezeko lolote lazima liwasilishwe kwa maandishi na notisi ya kutosha. Chabrin inasimamia mchakato huu kwa kitaalamu na kwa kufuata Sheria ya Kuzuia Kodi inapotumika."
+      },
+      {
+        "q": "Nifanye nini kama nina ugomvi na mmiliki wangu?",
+        "a": "Tunahimiza wapangaji kuwasiliana nasitatizo lolote moja kwa moja kwanza — kama wakala wa usimamizi, tunafanya kazi kama msuluhishi wa kitaalamu kati yako na mmiliki wa mali. Tunalenga kutatua migogoro kwa haki na haraka. Ikiwa ugomvi unaendelea, tutawashauri pande zote mbili kuhusu haki zao chini ya sheria ya upangaji ya Kenya, na kukuongoza kuelekea njia sahihi za kisheria ikiwa itahitajika."
+      },
+      {
+        "q": "Ninwasiliana vipi na Chabrin katika dharura?",
+        "a": "Kwa dharura za mali nje ya saa za ofisi, piga simu laini yetu kuu au tuma ujumbe wa WhatsApp ukiandika dharura. Nambari ya ofisi yetu ni +254 720 854 389. Saa za ofisi ni Jumatatu hadi Ijumaa, 8:00 AM hadi 5:30 PM, na Jumamosi, 9:00 AM hadi 1:00 PM. Masuala ya matengenezo ya dharura yanasimamishwa kwa wakandarasi wanaohudumu bila kujali wakati."
+      },
+      {
+        "q": "Je, Chabrin inasimamishwa? Ninajuaje ninalindwa?",
+        "a": "Ndiyo. Chabrin Agencies Limited imesajiliwa kikamilifu na Bodi ya Usajili wa Mawakala wa Mali (EARB) — chombo rasmi cha serikali kinachosimamia mawakala wa mali na wasimamizi wa mali nchini Kenya. Pia tunafuata Sheria ya Ulinzi wa Data ya Kenya 2019 na tumesajiliwa na Msajili wa Makampuni, Kenya. Hii inamaanisha upangaji wako, data yako ya kibinafsi, na amana yako vinasimamishwa chini ya mfumo uliodhibitiwa na uwajibikaji."
+      }
+    ],
+    "owners": [
+      {
+        "q": "Ninaorodhesha mali yangu na Chabrin vipi?",
+        "a": "Kuanza ni rahisi. Wasiliana nasi kwa simu, barua pepe, au WhatsApp, na tutapanga mashauriano ya bure, bila sharti kwa wakati unaofaa kwako. Timu yetu itatathmini mali yako, kujadili malengo yako, na kukuonyesha mkataba wa usimamizi kabla kitu chochote hakijasainiwa."
+      },
+      {
+        "q": "Mnasimamia aina gani za mali?",
+        "a": "Tunasimamia anuwai ya mali za makazi na biashara, ikiwemo vyumba, maisonette, nyumba za miji, villa, vitengo vya ofisi, nafasi za rejareja, na ghala. Tunafanya kazi na wamiliki wa nyumba wanaomiliki kitengo kimoja pamoja na wamiliki wa portfolio wanaosimamia mali nyingi."
+      },
+      {
+        "q": "Mnafunika maeneo gani?",
+        "a": "Tunasimamia mali katika Eneo lote la Jiji la Nairobi, iliyopangwa katika njia saba: Njia ya Kaskazini (Murang'a hadi Githurai 45), Ukanda wa Kasarani-Ruaraka, Mji wa Mashariki wa Ndani, Kitovu cha Eastlands ya Kawaida, njia ya CBD ya Premium na Pete ya Ndani, Eastlands Kubwa, na Njia ya Kusini ya Metro na Uwanja wa Ndege. Tunafunika pia kaunti za Kiambu, Murang'a, Kajiado, na Machakos."
+      },
+      {
+        "q": "Huduma gani zimejumuishwa katika usimamizi wa mali?",
+        "a": "Huduma yetu kamili ya usimamizi inajumuisha: uuzaji wa mali kupitia njia nyingi, uchunguzi wa kina wa wapangaji na uwekaji, uandishi wa dijiti wa mkataba na kusaini, ukusanyaji wa kodi wa kila mwezi na usambazaji, uratibu wa matengenezo 24/7 kupitia mtandao wetu wa wakandarasi waliovettishwa, taarifa za fedha za kila mwezi, uripoti wa wamiliki kupitia jukwaa letu la usimamizi, ukaguzi wa kila mwaka wa mali, na kufuata sheria ya upangaji ya Kenya wakati wote wa upangaji."
+      },
+      {
+        "q": "Mnatafutaje na kuchunguza wapangaji?",
+        "a": "Tunauza mali kupitia njia nyingi ikiwemo tovuti yetu, mabango ya mali, mitandao ya kijamii, na mtandao wetu uliopo wa waomba waliokaguliwa. Kila mwombaji hupitia uthibitisho wa utambulisho, ukaguzi wa mapato na ajira, marejeo ya wamiliki wa awali, na mapitio ya jumla ya historia. Tunawasilisha wamiliki wa nyumba waomba wanaokidhi viwango vyetu vya uchunguzi pekee."
+      },
+      {
+        "q": "Inachukua muda gani kupata mpangaji?",
+        "a": "Kwa mali zilizopangwa bei vizuri katika njia zetu amilifu, kwa kawaida tunapata mpangaji aliyehitimu ndani ya wiki mbili hadi nne za kujiunga. Portfolio yetu ya sasa inadumisha kiwango cha juu cha ukaliaji. Mali zilizopangwa bei ya soko au karibu nayo zinapangwa haraka zaidi — timu yetu itakushauri kuhusu bei bora wakati wa tathmini."
+      },
+      {
+        "q": "Nitapokea mapato ya kodi yangu lini na vipi?",
+        "a": "Mapato ya kodi halisi yanasambazwa kwa wamiliki ifikapo tarehe 10 ya kila mwezi, baada ya kukata ada za usimamizi na gharama zozote za matengenezo zilizoidhinishwa. Malipo yanafanywa kwa uhamisho wa benki kwenye akaunti yako iliyosajiliwa. Taarifa ya kina ya fedha hutolewa pamoja na kila usambazaji."
+      },
+      {
+        "q": "Nitajuaje kinachoendelea na mali yangu?",
+        "a": "Tunatoa taarifa za fedha za kila mwezi zilizotolewa ifikapo tarehe 5 ya kila mwezi, zikishughulikia kodi iliyokusanywa, ada za usimamizi, gharama za matengenezo na risiti za mkandarasi, na usambazaji halisi. Wamiliki pia wana ufikiaji wa jukwaa letu la uripoti wa dijiti kwa mwonekano wa wakati halisi wa hali ya ukaliaji, kumbukumbu za matengenezo, na muhtasari wa fedha."
+      },
+      {
+        "q": "Kinatokea nini mpangaji atakapoondoka?",
+        "a": "Upangaji unapoisha, tunasimamia mchakato mzima wa kutoka: kufanya ukaguzi wa kutoka kurekodi hali ya mali, kupatanisha amana dhidi ya uharibifu wowote au malipo yanayodaiwa, na kuanzisha utafutaji wa mpangaji mpya ili kupunguza nafasi. Utaarifiwa katika kila hatua."
+      },
+      {
+        "q": "Mnashughulikia matengenezo na ukarabati vipi?",
+        "a": "Maombi ya matengenezo kutoka kwa wapangaji yanarekodiwa, kutathminiwa, na kuteuliwa kwa mtandao wetu wa wakandarasi waliovettishwa. Kwa ukarabati wa kawaida, tunasimamia mchakato hadi mwisho na kuripoti gharama katika taarifa yako ya kila mwezi. Kwa kazi kubwa au zisizopangwa, daima tutashauriana nawe kwanza na kupata idhini yako kabla ya kuendelea. Ukarabati wa dharura unashughulikiwa mara moja ili kulinda mali na mpangaji."
+      },
+      {
+        "q": "Je, ninaweza kufikia mali yangu wakati inasimamishwa?",
+        "a": "Ndiyo, kama mmiliki una haki ya kufikia mali yako, kulingana na kutoa notisi ya kutosha kwa kufuata mkataba wako wa upangaji na sheria ya Kenya. Tunapendekeza kuratibu ufikiaji kupitia timu yetu ili mpangaji aarifu ipasavyo na ziara irekodishwe."
+      },
+      {
+        "q": "Mnashughulikia wapangaji wasioplipa vipi?",
+        "a": "Tunachukua mkabala wa makini kwa ukusanyaji wa kodi na kufuatilia na wapangaji mara moja kama malipo yamechelewa. Mpangaji akishindwa kulipa baada ya mchakato wetu wa ufuatiliaji, tunaongeza kwa kutumia mbinu zinazopatikana chini ya sheria ya upangaji ya Kenya, ikiwemo notisi rasmi na, inapohitajika, kuratibu na washauri wa kisheria. Tunakujulisha wakati wote na tunalenga kutatua suala haraka iwezekanavyo."
+      },
+      {
+        "q": "Mnaamua vipi bei sahihi ya kodi kwa mali yangu?",
+        "a": "Timu yetu hufanya uchambuzi wa soko kulingana na mali zinazofanana katika njia yako, mahitaji ya sasa, hali ya mali na vipengele vyake, na data ya karibuni ya upangaji kutoka kwa portfolio yetu. Tunatoa mwongozo wa bei unaopendekezwa na kueleza sababu. Bei ya mali yako kwa usahihi kutoka mwanzo ni muhimu kwa kupunguza nafasi."
+      },
+      {
+        "q": "Je, mmesajiliwa kusimamia mali Kenya?",
+        "a": "Ndiyo. Chabrin Agencies Limited imesajiliwa kikamilifu na Bodi ya Usajili wa Mawakala wa Mali (EARB) — chombo cha kisheria kinachosimamia mawakala wa mali na wasimamizi wa mali nchini Kenya. Tumefanya kazi katika soko la Nairobi kwa zaidi ya miaka 30 na kudumisha kufuata sheria zote zinazotumika na viwango vya kitaalamu."
+      },
+      {
+        "q": "Je, ninaweza kumalisha mkataba wa usimamizi nikiwa sikuridhika?",
+        "a": "Ndiyo. Mikataba yetu ya usimamizi inajumuisha kifungu cha kusimamisha kinachomruhusu mtu yeyote kumalisha mkataba na kipindi cha notisi kinachofaa kama kilivyoainishwa katika mkataba. Tunajivunia ubora wa huduma yetu na daima tutatafuta kutatua wasiwasi wowote kabla mmiliki wa nyumba hajafikiri kusimamisha — lakini tunaelewa kwamba hali zinabadilika."
+      }
+    ],
+    "investors": [
+      {
+        "q": "Njia zipi zinatoa mapato ya kodi yenye nguvu zaidi katika portfolio yako?",
+        "a": "Utendaji wa mapato unatofautiana kwa njia. Mji wetu wa Mashariki wa Ndani na Ukanda wa Kasarani-Ruaraka kwa kihistoria umeonyesha uwiano mzuri wa mahitaji na usambazaji. Njia yetu ya Kusini ya Metro na Uwanja wa Ndege ni eneo la ukuaji linalosukumwa na ukaribu na uwanja wa ndege na nodi za viwanda. Njia ya Kaskazini inatoa kiasi kinachosukumwa na uwezo wa bei. Wasiliana na timu yetu kwa muhtasari wa utendaji wa njia moja moja uliopataniwa na mwongozo wako wa uwekezaji."
+      },
+      {
+        "q": "Chabrin inasimamia aina gani za mali za uwekezaji?",
+        "a": "Tunasimamia mali za makazi za uwekezaji ikiwemo vyumba, nyumba za miji, maisonette, na villa, pamoja na mali za biashara za uwekezaji kama vile majengo ya ofisi, vitengo vya rejareja, na ghala. Tunafanya kazi na wawekezaji binafsi na wamiliki wa portfolio za kitaasisi."
+      },
+      {
+        "q": "Je, Chabrin inaweza kusimamia jengo zima la vyumba au portfolio?",
+        "a": "Ndiyo. Tuna uzoefu mkubwa wa kusimamia vizuizi vya vitengo vingi na portfolio kubwa za makazi. Tunamteua meneja wa mali aliyejitolea kwa kila portfolio na kutoa uripoti uliounganishwa wa kila mwezi katika vitengo vyote. Usimamizi wa portfolio unafaidika na uchumi wa kiwango katika bei za mkandarasi, ratiba ya matengenezo, na muda wa kuponya nafasi."
+      },
+      {
+        "q": "Mnaongezaje ukaliaji na kupunguza nafasi?",
+        "a": "Mkabala wetu wa uuzaji wa njia nyingi, mfuko wa wapangaji waliokaguliwa, na mchakato wa haraka wa kujiunga umepangwa kupunguza wakati kati ya upangaji. Tunasimamia upya wa mikataba kwa makini, kuwapa wamiliki onyo la mapema la nafasi zinazokuja, na kuanzisha utafutaji wa wapangaji kabla kitengo hakijatupu. Tunashauri kuhusu bei ili kuhakikisha mali ni ya ushindani bila kutoa mshangao."
+      },
+      {
+        "q": "Wawekezaji wanapokea uripoti gani?",
+        "a": "Wawekezaji hupokea taarifa za fedha za kina za kila mwezi zikishughulikia kodi iliyokusanywa, ada za usimamizi, gharama za matengenezo na risiti zinazounga mkono, usambazaji halisi, na hali ya ukaliaji kwa kila kitengo. Kwa wateja wa portfolio, tunatoa uripoti uliounganishwa katika mali zote zinazosimamiwa. Ufikiaji wa dijiti wa dashibodi yako ya mmiliki unakupa mwonekano wa wakati halisi wakati wowote."
+      },
+      {
+        "q": "Chabrin inalindaje thamani ya muda mrefu ya mali yangu?",
+        "a": "Tunachukua mkabala wa makini kwa uhifadhi wa mali: ukaguzi wa kila mwaka wa mali, ratiba ya matengenezo ya kuzuia, majibu ya haraka kwa masuala yanayoripotiwa na wapangaji, na usimamizi wa ubora wa mkandarasi. Mali katika hali nzuri huvutia na kuhifadhi wapangaji bora, ambayo moja kwa moja inalinda thamani ya mtaji. Tunaripoti masuala yoyote ya kimuundo au matengenezo makubwa mara moja ili uweze kufanya maamuzi kwa wakati."
+      },
+      {
+        "q": "Je, ninaweza kupata mali kupitia mtandao wa Chabrin?",
+        "a": "Uwepo wetu wa kina katika Eneo lote la Jiji la Nairobi na kaunti jirani unatupa ufikiaji wa fursa za nje ya soko na rufaa za wamiliki. Ingawa huduma yetu ya msingi ni usimamizi wa mali, timu yetu inaweza kujadili vigezo vyako vya upatikanaji na kutoa utambulisho ambapo tuna ujuzi husika wa mali zinazopatikana. Wasiliana nasi kujadili malengo yako ya uwekezaji."
+      },
+      {
+        "q": "Kinatokea nini mali ikibaki bila kukaliwa kwa muda mrefu?",
+        "a": "Tunatendea nafasi kama suala la kipaumbele. Ikiwa mali haikodishwa ndani ya muda wetu unaotarajiwa, tunapitia bei, mkakati wa uuzaji, na uwasilishaji. Tutakushauri kwa uwazi ikiwa mali inahitaji uwekaji upya, maboresho madogo, au marekebisho ya bei ili kuwa ya ushindani. Hautaachwa kamwe bila mpango wazi wa utekelezaji."
+      },
+      {
+        "q": "Je, Chabrin ina uwezo wa kushughulikia mali za biashara za uwekezaji?",
+        "a": "Ndiyo. Tunasimamia mali za biashara ikiwemo vitengo vya ofisi, nafasi za rejareja, na ghala. Mikataba ya biashara kwa kawaida hukimbia kwa muda mrefu zaidi na inahusisha mazungumzo magumu zaidi. Timu yetu ina uzoefu wa muundo wa mkataba wa biashara, ukaguzi wa kina wa wapangaji wa biashara, na mahitaji ya usimamizi wa miundombinu maalum kwa mali za biashara."
+      },
+      {
+        "q": "Ninaweza kupata muhtasari wa soko wa njia za kodi za Nairobi wapi?",
+        "a": "Tunachapisha maarifa na maoni ya soko kupitia tovuti yetu na ripoti za mara kwa mara. Kwa maelezo ya kina, maalum ya njia kulingana na data yetu ya sasa ya portfolio, wasiliana na timu yetu moja kwa moja. Tunaweza kupanga mkutano na wataalamu wetu wakuu wa mali kukuonyesha mwelekeo wa mahitaji, wastani wa mavuno, na viwango vya nafasi katika njia zetu saba."
+      }
+    ]
   }
 }

@@ -6,6 +6,7 @@
     "about": "About Us",
     "blog": "Blog",
     "careers": "Careers",
+    "faq": "FAQ",
     "complaints": "Complaints",
     "contact": "Contact Us"
   },
@@ -328,6 +329,188 @@
     "view_all": "View All",
     "per_month": "/ month",
     "kes": "KES"
+  },
+  "faq": {
+    "eyebrow": "Have Questions?",
+    "hero_title": "Frequently Asked Questions",
+    "hero_subtitle": "Everything tenants, landlords, and investors need to know about working with Chabrin Agencies. Can't find your answer? Contact us directly — we respond within one business day.",
+    "tab_tenants": "Tenants",
+    "tab_owners": "Property Owners",
+    "tab_investors": "Investors",
+    "cta_title": "Still Have Questions?",
+    "cta_subtitle": "Our team is ready to help — whether you're a prospective tenant, a landlord, or an investor exploring our corridors.",
+    "cta_contact": "Contact Us",
+    "cta_whatsapp": "WhatsApp Us",
+    "tenants": [
+      {
+        "q": "How do I apply for a property managed by Chabrin?",
+        "a": "Start by browsing our available listings on the Properties page. Once you identify a property you are interested in, submit an enquiry using the form on the listing or contact us directly via phone, email, or WhatsApp. Our team will guide you through the application process and let you know the documentation required."
+      },
+      {
+        "q": "What documents do I need to rent a property?",
+        "a": "You will typically need: a copy of your National ID or passport, your three most recent payslips or proof of income (for self-employed applicants, six months of bank statements), a copy of your KRA PIN certificate, an employment letter or business registration certificate, and one passport-size photograph. Our team will confirm the exact requirements for your chosen property."
+      },
+      {
+        "q": "How are tenants screened and vetted?",
+        "a": "We conduct a thorough but fair vetting process to protect both the landlord and the quality of the community. This includes verification of your National ID or passport, income and employment confirmation, previous landlord reference checks, and a general background review. Our aim is to place tenants who are a good long-term fit for the property."
+      },
+      {
+        "q": "How much deposit will I pay, and when do I get it back?",
+        "a": "The standard security deposit is equivalent to two months' rent. It is held in a designated account throughout your tenancy. At the end of the lease, the deposit is refunded after a final property inspection, subject to deductions for any damage beyond normal wear and tear, or any outstanding rent or charges. Refunds are processed within 30 days of vacating, in line with Kenyan tenancy law."
+      },
+      {
+        "q": "How do I pay rent, and when is it due?",
+        "a": "Rent is payable in advance on or before the 1st of each month. We accept M-Pesa, bank transfer, and cheque. You will receive payment details and instructions upon signing your lease. Our team proactively follows up with reminders, so you are always informed ahead of the due date."
+      },
+      {
+        "q": "What happens if I pay rent late?",
+        "a": "Late payment of rent may attract penalty charges as stipulated in your lease agreement, in accordance with the Kenyan tenancy framework. We encourage tenants to communicate with us in advance if they anticipate difficulty — our team can discuss the situation and, where possible, arrange a short-term solution before legal action becomes necessary."
+      },
+      {
+        "q": "How do I report a maintenance or repair issue?",
+        "a": "You can report any maintenance issue by calling our office, sending us a WhatsApp message, or emailing us directly. We will log the request, assign it to a vetted contractor from our network, and keep you informed of progress. For genuine emergencies — such as a burst pipe, electrical fault, or gas leak — our emergency line is available outside office hours."
+      },
+      {
+        "q": "How quickly are repairs attended to?",
+        "a": "Emergency repairs are attended to as soon as possible and always within 24 hours of being reported. Routine maintenance requests are typically completed within three to five business days, depending on the nature of the work and contractor availability. You will receive updates throughout the process."
+      },
+      {
+        "q": "Can I have a pet in a Chabrin-managed property?",
+        "a": "Pet policies vary by individual property and are determined by the property owner. Some properties permit pets, others do not. Please confirm with our team when enquiring about a specific listing. Where pets are allowed, additional deposit conditions may apply."
+      },
+      {
+        "q": "Can I sublet or take in a lodger?",
+        "a": "Subletting or taking in lodgers without prior written consent from Chabrin and the property owner is not permitted under standard tenancy agreements. If your circumstances change and you wish to explore this, please contact us first — we will consult with the landlord and advise you on what is possible."
+      },
+      {
+        "q": "How much notice do I need to give before moving out?",
+        "a": "Under standard residential tenancy agreements in Kenya, tenants are required to give at least one calendar month's written notice before vacating. Your specific lease may require a longer notice period — always refer to your signed agreement. Failing to give adequate notice may result in forfeiture of part or all of your deposit."
+      },
+      {
+        "q": "What happens at the end of my lease?",
+        "a": "You will be contacted by our team before your lease expiry date to discuss renewal or vacation. If you choose to renew, we will process an updated tenancy agreement. If you choose to vacate, we will arrange a move-out inspection, document the property's condition, and process your deposit refund in line with our standard timeline."
+      },
+      {
+        "q": "Can my landlord increase my rent, and by how much?",
+        "a": "Rent increases are governed by your tenancy agreement and Kenyan law. Typically, a landlord may review rent at the end of each lease term. Any increase must be communicated in writing with adequate notice. Chabrin manages this process professionally and in compliance with the Rent Restriction Act where applicable."
+      },
+      {
+        "q": "What should I do if I have a dispute with my landlord?",
+        "a": "We encourage tenants to raise any concerns with us directly first — as the managing agent, we act as the professional intermediary between you and the property owner. We aim to resolve disputes fairly and quickly. Should a dispute escalate, we will advise both parties on their rights under Kenyan landlord-tenant law, and guide you towards the appropriate legal channels if necessary."
+      },
+      {
+        "q": "How do I contact Chabrin in an emergency?",
+        "a": "For property emergencies outside office hours, call our main line or send a WhatsApp message marked as urgent. Our office number is +254 720 854 389. Office hours are Monday to Friday, 8:00 AM to 5:30 PM, and Saturday, 9:00 AM to 1:00 PM. Emergency maintenance issues are escalated to on-call contractors regardless of the time."
+      },
+      {
+        "q": "Is Chabrin regulated? How do I know I am protected?",
+        "a": "Yes. Chabrin Agencies Limited is fully registered with the Estate Agents Registration Board (EARB) — Kenya's official real estate regulator. We are also compliant with the Kenya Data Protection Act 2019 and registered with the Registrar of Companies, Kenya. This means your tenancy, your personal data, and your deposit are managed under a regulated and accountable framework."
+      }
+    ],
+    "owners": [
+      {
+        "q": "How do I list my property with Chabrin?",
+        "a": "Getting started is straightforward. Contact us via phone, email, or WhatsApp, and we will arrange a free, no-obligation consultation at a time convenient to you. Our team will assess your property, discuss your goals, and walk you through the management agreement before anything is signed."
+      },
+      {
+        "q": "What types of properties do you manage?",
+        "a": "We manage a wide range of residential and commercial properties, including apartments, maisonettes, townhouses, villas, office units, retail spaces, and warehouses. We work with individual landlords who own a single unit as well as portfolio owners managing dozens of properties."
+      },
+      {
+        "q": "Which areas do you cover?",
+        "a": "We manage properties across the entire Nairobi Metropolitan Area, organised into seven corridors: the Northern Commuter Corridor (Murang'a to Githurai 45), the Kasarani-Ruaraka Belt, the Inner East Urban Core, the Classic Eastlands Hub, the Premium CBD and Inner Ring corridor, Greater Eastlands, and the Southern Metro and Airport Corridor. We also cover Kiambu, Murang'a, Kajiado, and Machakos counties."
+      },
+      {
+        "q": "What services are included in property management?",
+        "a": "Our full management service covers: multi-channel property marketing, thorough tenant screening and placement, digital lease preparation and signing, monthly rent collection and disbursement, 24/7 maintenance coordination through our vetted contractor network, monthly financial statements, landlord reporting via our management platform, annual property inspections, and compliance with Kenyan landlord-tenant law throughout the tenancy."
+      },
+      {
+        "q": "How do you find and screen tenants?",
+        "a": "We market properties across multiple channels including our website, property portals, social media, and our existing network of pre-qualified applicants. Every applicant undergoes identity verification, income and employment checks, previous landlord references, and a general background review. We only present landlords with applicants who meet our vetting standards."
+      },
+      {
+        "q": "How long does it take to find a tenant?",
+        "a": "For well-priced properties in our active corridors, we typically secure a qualified tenant within two to four weeks of onboarding. Our current portfolio maintains a high occupancy rate. Properties priced at or near the market rate let fastest — our team will advise you on optimal pricing during the assessment."
+      },
+      {
+        "q": "When and how will I receive my rental income?",
+        "a": "Net rental income is disbursed to landlords by the 10th of each month, after deducting management fees and any approved maintenance costs. Payment is made via bank transfer to your registered account. A detailed financial statement is issued alongside each disbursement."
+      },
+      {
+        "q": "How will I know what is happening with my property?",
+        "a": "We provide monthly financial statements issued by the 5th of each month, covering rent collected, management fees, maintenance costs with contractor receipts, and net disbursement. Landlords also have access to our digital reporting platform for real-time visibility into occupancy status, maintenance logs, and financial summaries."
+      },
+      {
+        "q": "What happens when a tenant leaves?",
+        "a": "When a tenancy ends, we manage the entire exit process: conducting a move-out inspection to document the property's condition, reconciling the deposit against any damage or outstanding charges, and initiating the search for a new tenant to minimise vacancy. You will be informed at every stage."
+      },
+      {
+        "q": "How do you handle maintenance and repairs?",
+        "a": "Maintenance requests from tenants are logged, assessed, and assigned to our vetted contractor network. For routine repairs, we manage the process end to end and report costs in your monthly statement. For larger or unbudgeted works, we will always consult you first and obtain your approval before proceeding. Emergency repairs are handled immediately to protect the property and the tenant."
+      },
+      {
+        "q": "Can I still access my property while it is being managed?",
+        "a": "Yes, as the owner you retain the right to access your property, subject to providing adequate notice in compliance with your tenancy agreement and Kenyan law. We recommend coordinating access through our team so that the tenant is properly notified and the visit is documented."
+      },
+      {
+        "q": "How do you handle non-paying tenants?",
+        "a": "We take a proactive approach to rent collection and follow up with tenants immediately if payment is late. If a tenant fails to pay after our follow-up process, we escalate using the mechanisms available under Kenyan tenancy law, including formal notices and, where necessary, coordinating with legal counsel. We keep you informed throughout and aim to resolve the matter as quickly as possible."
+      },
+      {
+        "q": "How do you determine the right rental price for my property?",
+        "a": "Our team conducts a market analysis based on comparable properties in your corridor, current demand, the property's condition and features, and recent letting data from our portfolio. We provide a recommended rental range and explain the rationale. Pricing your property correctly from the outset is key to minimising vacancy."
+      },
+      {
+        "q": "Are you licensed to manage property in Kenya?",
+        "a": "Yes. Chabrin Agencies Limited is fully registered with the Estate Agents Registration Board (EARB) — the statutory body that regulates estate agents and property managers in Kenya. We have operated in the Nairobi market for over 30 years and maintain full compliance with all applicable laws and professional standards."
+      },
+      {
+        "q": "Can I end the management agreement if I am unhappy?",
+        "a": "Yes. Our management agreements include a termination clause that allows either party to end the agreement with the appropriate notice period as specified in the contract. We pride ourselves on the quality of our service and will always seek to resolve any concerns before a landlord considers terminating — but we understand that circumstances change."
+      }
+    ],
+    "investors": [
+      {
+        "q": "Which corridors offer the strongest rental yields in your portfolio?",
+        "a": "Yield performance varies by corridor. Our Inner East Urban Core and Kasarani-Ruaraka Belt have historically shown strong demand-to-supply ratios. Our Southern Metro and Airport Corridor is a growth area driven by proximity to the airport and industrial nodes. The Northern Commuter Corridor offers affordability-driven volume. Contact our team for a current corridor-by-corridor performance briefing tailored to your investment profile."
+      },
+      {
+        "q": "What types of investment properties does Chabrin manage?",
+        "a": "We manage residential investment properties including apartments, townhouses, maisonettes, and villas, as well as commercial investment assets such as office blocks, retail units, and warehouses. We work with both individual investors and institutional portfolio holders."
+      },
+      {
+        "q": "Can Chabrin manage an entire apartment block or portfolio?",
+        "a": "Yes. We have extensive experience managing multi-unit blocks and large residential portfolios. We assign a dedicated property manager to each portfolio and provide consolidated monthly reporting across all units. Portfolio management benefits from economies of scale in contractor pricing, maintenance scheduling, and vacancy turnaround."
+      },
+      {
+        "q": "How do you maximise occupancy and minimise vacancy?",
+        "a": "Our multi-channel marketing approach, pre-qualified tenant pool, and rapid onboarding process are designed to minimise the time between tenancies. We proactively manage lease renewals, give landlords early warning of upcoming vacancies, and initiate tenant sourcing before a unit becomes empty. We advise on pricing to ensure properties are competitive without sacrificing yield."
+      },
+      {
+        "q": "What reporting do investors receive?",
+        "a": "Investors receive detailed monthly financial statements covering rent collected, management fees, maintenance costs with supporting receipts, net disbursements, and occupancy status per unit. For portfolio clients, we provide consolidated reporting across all managed properties. Digital access to your landlord dashboard gives you real-time visibility at any time."
+      },
+      {
+        "q": "How does Chabrin protect the long-term value of my asset?",
+        "a": "We take a proactive approach to asset preservation: annual property inspections, preventive maintenance scheduling, rapid response to tenant-reported issues, and contractor quality oversight. Properties in good condition attract and retain better tenants, which directly protects capital value. We flag any structural or significant maintenance issues immediately so you can make timely decisions."
+      },
+      {
+        "q": "Can I acquire properties through Chabrin's network?",
+        "a": "Our deep presence across the Nairobi Metropolitan Area and surrounding counties gives us access to off-market opportunities and owner referrals. While our primary service is property management, our team can discuss your acquisition criteria and make introductions where we have relevant knowledge of available assets. Contact us to discuss your investment goals."
+      },
+      {
+        "q": "What happens if a property is vacant for an extended period?",
+        "a": "We treat vacancy as a priority issue. If a property is not letting within our expected timeframe, we review the pricing, marketing strategy, and presentation. We will advise you honestly if the property needs repositioning, minor improvements, or a pricing adjustment to become competitive. You will never be left without a clear plan of action."
+      },
+      {
+        "q": "Is Chabrin equipped to handle commercial investment properties?",
+        "a": "Yes. We manage commercial properties including office units, retail spaces, and warehouses. Commercial leases typically run for longer terms and involve more complex negotiations. Our team has experience with commercial lease structuring, tenant due diligence for business tenants, and facilities management requirements specific to commercial assets."
+      },
+      {
+        "q": "Where can I get a market overview of Nairobi's rental corridors?",
+        "a": "We publish insights and market commentary through our website and occasional reports. For a detailed, corridor-specific briefing based on our current portfolio data, contact our team directly. We can arrange a meeting with our senior property professionals to walk you through demand trends, average yields, and vacancy rates across our seven corridors."
+      }
+    ]
   },
   "market_report": {
     "eyebrow": "Free Intelligence Report",
