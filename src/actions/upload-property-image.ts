@@ -28,6 +28,10 @@ export async function uploadPropertyImage(
     if (!propertyId) {
       return { success: false, error: "Property ID is required" };
     }
+    // Whitelist: alphanumeric, hyphens, underscores only — prevents path traversal
+    if (!/^[a-zA-Z0-9_-]{1,64}$/.test(propertyId)) {
+      return { success: false, error: "Invalid property ID format" };
+    }
     if (!file) {
       return { success: false, error: "No file provided" };
     }
@@ -35,8 +39,9 @@ export async function uploadPropertyImage(
       // 5MB limit
       return { success: false, error: "File size must be less than 5MB" };
     }
-    if (!file.type.startsWith("image/")) {
-      return { success: false, error: "File must be an image" };
+    // Explicit MIME type whitelist — rejects gif, bmp, svg, etc.
+    if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
+      return { success: false, error: "File must be a JPEG, PNG, or WebP image" };
     }
 
     // Convert file to buffer

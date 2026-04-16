@@ -7,15 +7,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useLocale } from "next-intl";
 import { z } from "zod";
 import { Turnstile } from "@marsidev/react-turnstile";
-import { sendContactEmail } from "@/actions/send-email";
 
+// Schema kept in sync with src/app/api/contact/route.ts — max lengths must match
 const schema = z.object({
-  name:    z.string().min(2, "Please enter your full name"),
-  email:   z.string().email("Please enter a valid email address"),
-  phone:   z.string().min(9, "Please enter a valid phone number"),
+  name:    z.string().min(2, "Please enter your full name").max(100),
+  email:   z.string().email("Please enter a valid email address").max(200),
+  phone:   z.string().min(9, "Please enter a valid phone number").max(20),
   subject: z.enum(["general", "management", "tenant", "valuation", "other"]),
-  message: z.string().min(20, "Message must be at least 20 characters"),
-  consent: z.literal(true, "You must agree to the Privacy Policy to proceed"),
+  message: z.string().min(20, "Message must be at least 20 characters").max(3000),
+  consent: z.literal(true, { message: "You must agree to the Privacy Policy to proceed" }),
   token:   z.string().optional(),
 });
 
@@ -72,15 +72,7 @@ export default function ContactForm() {
         throw new Error(errorData.error || "Request failed");
       }
 
-      // Also trigger email send via server action
-      await sendContactEmail({
-        name: data.name,
-        email: data.email,
-        phone: data.phone,
-        subject: data.subject,
-        message: data.message,
-      });
-
+      // Email is sent server-side inside /api/contact — nothing more needed here
       setStatus("success");
       reset();
       // Reset Turnstile widget

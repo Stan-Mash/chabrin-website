@@ -38,7 +38,7 @@ export async function adminLogin(
   const ip   = hdrs.get("x-forwarded-for")?.split(",")[0].trim() ?? "unknown";
 
   // Lockout check — before touching the password
-  if (isLockedOut(ip)) {
+  if (await isLockedOut(ip)) {
     await new Promise((r) => setTimeout(r, 400));
     return { error: "Too many failed attempts. Try again in 15 minutes." };
   }
@@ -49,16 +49,16 @@ export async function adminLogin(
 
   if (password !== expected) {
     await new Promise((r) => setTimeout(r, 400));
-    const locked = recordFailedAttempt(ip);
+    const locked = await recordFailedAttempt(ip);
     if (locked) {
       return { error: "Too many failed attempts. Try again in 15 minutes." };
     }
-    const left = remainingAttempts(ip);
+    const left = await remainingAttempts(ip);
     return { error: `Incorrect password. ${left} attempt${left === 1 ? "" : "s"} remaining.` };
   }
 
   // Successful login — clear any prior failed attempts
-  clearFailedAttempts(ip);
+  await clearFailedAttempts(ip);
 
   const token = computeToken();
   const jar   = await cookies();

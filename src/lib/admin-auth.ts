@@ -7,78 +7,117 @@
  *     and store it as an httpOnly, Secure, SameSite=Strict cookie.
  *   - Every admin layout server component calls isAdminAuthenticated() — if the
  *     cookie is absent or wrong, it redirects to /admin-login.
- *   - No database reads. No third-party service. Zero CHIPS contact.
+ *   - No third-party service. Zero CHIPS contact.
  *
  * Brute-force protection:
  *   - Max 5 failed attempts per IP within a 15-minute window.
+ *   - State stored in PostgreSQL (admin_login_attempts table) so protection
+ *     survives PM2 restarts and is shared across all cluster instances.
  *   - On lockout, all attempts return a generic error with no timing difference.
  *   - Lockout resets automatically after 15 minutes.
  *
  * Rotation: change ADMIN_SESSION_SECRET in .env.production + restart PM2
  *           to instantly invalidate all existing sessions.
+ *
+ * Migration: run src/db/migrations/002_login_attempts.sql before deploying.
  */
 
 import { createHmac, timingSafeEqual } from "crypto";
 import { cookies } from "next/headers";
+import { sql } from "@/lib/db";
 
 export const ADMIN_COOKIE = "chabrin_admin_v1";
 
-// ── Brute-force lockout store ─────────────────────────────────────────────────
-// In-memory per-process. With 2 PM2 instances an attacker gets at most 10
-// attempts before both instances lock them out. Good enough given the Nginx
-// IP allowlist is the primary defence.
+const MAX_ATTEMPTS = 5;
+const WINDOW_SECS  = 15 * 60; // 15 minutes, used in SQL interval
 
-const MAX_ATTEMPTS  = 5;
-const WINDOW_MS     = 15 * 60 * 1000; // 15 minutes
-
-interface AttemptRecord {
-  count:     number;
-  lockedAt:  number | null; // timestamp when lockout started
-  firstFail: number;        // timestamp of first failed attempt in window
-}
-
-const failStore = new Map<string, AttemptRecord>();
+// ── Brute-force lockout (PostgreSQL-backed) ────────────────────────────────
 
 /** Returns true if the IP is currently locked out. */
-export function isLockedOut(ip: string): boolean {
-  const rec = failStore.get(ip);
-  if (!rec || rec.lockedAt === null) return false;
-  if (Date.now() - rec.lockedAt > WINDOW_MS) {
-    failStore.delete(ip);
+export async function isLockedOut(ip: string): Promise<boolean> {
+  try {
+    const rows = await sql<{ locked_at: Date | null; first_fail_at: Date }[]>`
+      SELECT locked_at, first_fail_at
+      FROM admin_login_attempts
+      WHERE ip = ${ip}
+    `;
+    if (!rows.length) return false;
+
+    const { locked_at, first_fail_at } = rows[0];
+    const windowExpiredMs = Date.now() - new Date(first_fail_at).getTime();
+    if (windowExpiredMs > WINDOW_SECS * 1000) {
+      await sql`DELETE FROM admin_login_attempts WHERE ip = ${ip}`;
+      return false;
+    }
+    return locked_at !== null;
+  } catch {
+    // If DB is unavailable, fail open rather than locking everyone out
     return false;
   }
-  return true;
 }
 
 /** Record a failed login attempt. Returns true if the IP is now locked out. */
-export function recordFailedAttempt(ip: string): boolean {
-  const now = Date.now();
-  const rec = failStore.get(ip);
-
-  if (!rec || now - rec.firstFail > WINDOW_MS) {
-    // Fresh window
-    failStore.set(ip, { count: 1, lockedAt: null, firstFail: now });
+export async function recordFailedAttempt(ip: string): Promise<boolean> {
+  try {
+    const rows = await sql<{ count: number; locked_at: Date | null }[]>`
+      INSERT INTO admin_login_attempts (ip, count, first_fail_at, locked_at)
+      VALUES (${ip}, 1, NOW(), NULL)
+      ON CONFLICT (ip) DO UPDATE
+        SET
+          count         = CASE
+                            WHEN NOW() - admin_login_attempts.first_fail_at
+                                 > (${WINDOW_SECS} || ' seconds')::INTERVAL
+                            THEN 1
+                            ELSE admin_login_attempts.count + 1
+                          END,
+          first_fail_at = CASE
+                            WHEN NOW() - admin_login_attempts.first_fail_at
+                                 > (${WINDOW_SECS} || ' seconds')::INTERVAL
+                            THEN NOW()
+                            ELSE admin_login_attempts.first_fail_at
+                          END,
+          locked_at     = CASE
+                            WHEN NOW() - admin_login_attempts.first_fail_at
+                                 > (${WINDOW_SECS} || ' seconds')::INTERVAL
+                            THEN NULL
+                            WHEN admin_login_attempts.count + 1 >= ${MAX_ATTEMPTS}
+                            THEN NOW()
+                            ELSE NULL
+                          END
+      RETURNING count, locked_at
+    `;
+    if (!rows.length) return false;
+    return rows[0].locked_at !== null;
+  } catch {
     return false;
   }
-
-  rec.count += 1;
-  if (rec.count >= MAX_ATTEMPTS) {
-    rec.lockedAt = now;
-    return true;
-  }
-  return false;
 }
 
 /** Clear the failed attempt record on successful login. */
-export function clearFailedAttempts(ip: string): void {
-  failStore.delete(ip);
+export async function clearFailedAttempts(ip: string): Promise<void> {
+  try {
+    await sql`DELETE FROM admin_login_attempts WHERE ip = ${ip}`;
+  } catch {
+    // Non-fatal
+  }
 }
 
 /** Returns remaining attempts before lockout (for error messages). */
-export function remainingAttempts(ip: string): number {
-  const rec = failStore.get(ip);
-  if (!rec) return MAX_ATTEMPTS;
-  return Math.max(0, MAX_ATTEMPTS - rec.count);
+export async function remainingAttempts(ip: string): Promise<number> {
+  try {
+    const rows = await sql<{ count: number; first_fail_at: Date }[]>`
+      SELECT count, first_fail_at
+      FROM admin_login_attempts
+      WHERE ip = ${ip}
+    `;
+    if (!rows.length) return MAX_ATTEMPTS;
+    const windowExpired =
+      Date.now() - new Date(rows[0].first_fail_at).getTime() > WINDOW_SECS * 1000;
+    if (windowExpired) return MAX_ATTEMPTS;
+    return Math.max(0, MAX_ATTEMPTS - rows[0].count);
+  } catch {
+    return MAX_ATTEMPTS;
+  }
 }
 
 // ── Token helpers ─────────────────────────────────────────────────────────────
