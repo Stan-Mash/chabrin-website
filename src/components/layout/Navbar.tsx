@@ -12,6 +12,7 @@ const NAV_LINKS = [
   { key: "about",      href: "/about"      },
   { key: "blog",       href: "/blog"       },
   { key: "careers",    href: "/careers"    },
+  { key: "complaints", href: "/complaints" },
 ] as const;
 
 export default function Navbar() {
