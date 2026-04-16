@@ -19,7 +19,7 @@ const schema = z.object({
   category:       z.enum(["maintenance", "billing", "noise_neighbour", "safety", "management", "general"]),
   subcategory:    z.string().optional(),
   description:    z.string().min(20, "Please describe your issue in at least 20 characters").max(3000),
-  consent:        z.literal(true, { errorMap: () => ({ message: "You must agree to the Privacy Policy" }) }),
+  consent:        z.literal(true, "You must agree to the Privacy Policy"),
   token:          z.string().optional(),
 });
 
