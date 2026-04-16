@@ -57,7 +57,7 @@ export async function adminLogin(
 export async function adminLogout(): Promise<void> {
   const jar = await cookies();
   jar.delete(ADMIN_COOKIE);
-  redirect("/admin/login");
+  redirect("/admin-login");
 }
 
 // ── Update complaint ──────────────────────────────────────────────────────────

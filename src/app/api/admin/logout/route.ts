@@ -5,5 +5,5 @@ import { ADMIN_COOKIE } from "@/lib/admin-auth";
 export async function POST() {
   const jar = await cookies();
   jar.delete(ADMIN_COOKIE);
-  return NextResponse.redirect(new URL("/admin/login", "https://chabrinagencies.com"), 303);
+  return NextResponse.redirect(new URL("/admin-login", "https://chabrinagencies.com"), 303);
 }
