@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import { headers } from "next/headers";
 import "./globals.css";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
@@ -69,18 +70,22 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Call headers() to opt into dynamic rendering so Next.js reads x-nonce
+  // from the response headers and stamps its inline hydration scripts.
+  const nonce = (await headers()).get("x-nonce") ?? "";
+
   return (
     <html
       suppressHydrationWarning
       className={cn("h-full antialiased", plusJakartaSans.variable)}
     >
       <head>
-        <OrganizationSchema />
+        <OrganizationSchema nonce={nonce} />
       </head>
       <body className="min-h-full flex flex-col font-sans bg-surface text-brand-navy">
         {children}

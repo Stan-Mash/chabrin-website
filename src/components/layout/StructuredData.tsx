@@ -14,7 +14,7 @@ import { siteConfig } from "@/config/site";
  * Organization schema for homepage and global metadata.
  * Identifies Chabrin Agencies to search engines.
  */
-export function OrganizationSchema() {
+export function OrganizationSchema({ nonce }: { nonce?: string }) {
   const schema = {
     "@context": "https://schema.org",
     "@type": "RealEstateAgent",
@@ -80,6 +80,7 @@ export function OrganizationSchema() {
     <script
       type="application/ld+json"
       suppressHydrationWarning
+      nonce={nonce}
       dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
     />
   );
