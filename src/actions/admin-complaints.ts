@@ -47,7 +47,7 @@ export async function adminLogin(
     httpOnly: true,
     secure:   process.env.NODE_ENV === "production",
     sameSite: "strict",
-    path:     "/admin",
+    path:     "/",
     maxAge:   60 * 60 * 12, // 12-hour session
   });
 
