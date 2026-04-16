@@ -83,7 +83,7 @@ const CATEGORY_OPTIONS = [
 
 const SUBMITTER_OPTIONS = [
   { value: "tenant",      label: "Tenant" },
-  { value: "landlord",    label: "Landlord / Property Owner" },
+  { value: "landlord",    label: "Property Owner" },
   { value: "prospective", label: "Prospective Tenant" },
   { value: "public",      label: "General Public" },
 ];

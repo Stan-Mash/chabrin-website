@@ -24,7 +24,7 @@ export async function generateMetadata({
       : "Premier Property Management Kenya | Chabrin Agencies Limited",
     description: isSwahili
       ? "Huduma za usimamizi wa mali, upangaji na tathmini katika Nairobi, Kiambu, Murang'a, Kajiado na zaidi. Chabrin Agencies."
-      : "Professional property management, leasing and valuation services across Nairobi, Kiambu, Murang'a, Kajiado and beyond. Trusted by 1,200+ landlords.",
+      : "Professional property management, leasing and valuation services across Nairobi, Kiambu, Murang'a, Kajiado and beyond. EARB registered. Kenya specialists.",
   };
 }
 

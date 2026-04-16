@@ -22,10 +22,8 @@
     "trust_nairobi": "Wataalamu wa Kenya"
   },
   "stats": {
-    "properties_value": "1,200+",
-    "properties_label": "Mali Zinazosimamiwa",
     "zones_value": "7",
-    "zones_label": "Maeneo (A–G)",
+    "zones_label": "Njia za Ufikajiwa",
     "years_value": "30+",
     "years_label": "Miaka ya Uzoefu",
     "retention_value": "98%",
@@ -38,13 +36,13 @@
     "learn_more": "Soma zaidi",
     "view_all": "Tazama huduma zote",
     "management_title": "Usimamizi wa Mali",
-    "management_desc": "Usimamizi kamili wa mali za makazi na biashara. Ukusanyaji wa kodi, uratibu wa matengenezo, mahusiano na wapangaji, na ripoti za kila mwezi.",
+    "management_desc": "Usimamizi kamili wa mali za makazi na biashara. Ukusanyaji wa kodi, mahusiano na wapangaji, na ripoti za kila mwezi — zote zinashughulikiwa na msimamizi wako maalum.",
     "leasing_title": "Upangaji wa Nyumba",
     "leasing_desc": "Utafutaji, uchunguzi, na uwekaji wa wapangaji wa kitaalamu. Tunashughulikia uandishi wa mkataba, kusaini kwa dijiti, na nyaraka za ukabidhi.",
     "valuation_title": "Tathmini ya Mali",
     "valuation_desc": "Tathmini sahihi za soko kwa mali za makazi, biashara, na viwanda — zinazotegemea data ya sasa na ujuzi wa eneo.",
-    "facilities_title": "Usimamizi wa Miundombinu",
-    "facilities_desc": "Matengenezo ya kawaida na ya dharura, usimamizi wa makandarasi, na usimamizi wa uzingatifu ili kulinda thamani ya mali yako kwa muda mrefu."
+    "digital_title": "Usimamizi wa Mkataba wa Dijiti",
+    "digital_desc": "Kusaini na kusimamia mikataba kwa njia ya dijiti kutoka mwanzo hadi mwisho. Kila mkataba unaandaliwa, kukaguliwa, na kusainiwa kwa dijiti — bila karatasi, bila kuchelewa, na kumbukumbu kamili."
   },
   "why_chabrin": {
     "eyebrow": "Kwa Nini Sisi",
@@ -70,7 +68,7 @@
   "cta_banner": {
     "eyebrow": "Wamiliki wa Mali",
     "title": "Tuache Tusimamie Mali Yako",
-    "subtitle": "Jiunge na maelfu ya wamiliki wanaomwamini Chabrin kuongeza mapato ya kodi, kupunguza upweke, na kushughulikia kila kitu.",
+    "subtitle": "Jiunge na wamiliki wanaomwamini Chabrin kuongeza mapato ya kodi, kupunguza upweke, na kushughulikia kila kitu.",
     "cta_contact": "Wasiliana Nasi",
     "cta_contact_sub": "Tunajibu ndani ya saa 24",
     "cta_whatsapp": "Tutumie WhatsApp",
@@ -100,18 +98,18 @@
     "milestone_1990s_title": "Kuanzishwa",
     "milestone_1990s_desc": "Chabrin Agencies Limited ilianzishwa Nairobi, Kenya — ikianza na usimamizi wa mali za makazi katika mitaa maarufu ya mji.",
     "milestone_2000s_title": "Kukuza Portfolio",
-    "milestone_2000s_desc": "Tulipanua kwa kasi portfolio ya mali zinazosimamiwa, tukizidisha uwepo wetu katika maeneo ya Nairobi huku tukienea hadi miji ya Kaunti ya Kiambu kando ya Barabara ya Thika na kuelekea Kenol katika Kaunti ya Murang'a.",
+    "milestone_2000s_desc": "Tulipanua kwa kasi portfolio ya mali zinazosimamiwa, tukizidisha uwepo wetu katika njia za Nairobi huku tukienea hadi miji ya Kaunti ya Kiambu kando ya Barabara ya Thika na kuelekea Kenol katika Kaunti ya Murang'a.",
     "milestone_2010_title": "Usajili wa EARB",
     "milestone_2010_desc": "Tulipata usajili kamili na Bodi ya Usajili wa Mawakala wa Mali ya Kenya, ukiwa ushahidi wa hadhi yetu ya kitaalamu na uzingatifu wa kanuni.",
     "milestone_2015_title": "Huduma za Biashara na Tathmini",
-    "milestone_2015_desc": "Tulipanua katika usimamizi wa mali za biashara na huduma za tathmini za kitaalamu, tukikua hadi zaidi ya mali 400 zinazosimamiwa katika maeneo 7 (A–G).",
+    "milestone_2015_desc": "Tulipanua katika usimamizi wa mali za biashara na huduma za tathmini za kitaalamu, tukipanua ufikajiwa wetu katika Nairobi na kaunti jirani.",
     "milestone_2020_title": "Uboreshaji wa Teknolojia",
     "milestone_2020_desc": "Tulizindua jukwaa letu la ndani la usimamizi wa mali ili kidijitisha mtiririko wa kazi, kuimarisha ukusanyaji wa kodi na mawasiliano na wapangaji, na kutoa ripoti za wakati halisi kwa wamiliki.",
     "milestone_2024_title": "Mabadiliko ya Kidijitali",
-    "milestone_2024_desc": "Tulianzisha kusaini mikataba kwa dijiti, ufuatiliaji wa malipo ya kodi mtandaoni, na tovuti hii kwa wamiliki na wapangaji katika maeneo yetu yote — Nairobi, Kiambu, Murang'a, Kajiado, Machakos, na zaidi.",
+    "milestone_2024_desc": "Tulianzisha kusaini mikataba kwa dijiti kamili kutoka mwanzo hadi mwisho, ufuatiliaji wa malipo ya kodi mtandaoni, na tovuti hii kwa wamiliki na wapangaji katika njia zetu zote za ufikajiwa — Nairobi, Kiambu, Murang'a, Kajiado, Machakos, na zaidi.",
     "leadership_eyebrow": "Timu Yetu",
     "leadership_title": "Watu Nyuma ya Chabrin",
-    "leadership_subtitle": "Wataalamu wenye uzoefu wanaojitoa kutoa usimamizi bora wa mali katika Nairobi, Kiambu, Murang'a, Kajiado, Machakos, na zaidi.",
+    "leadership_subtitle": "Wataalamu wenye uzoefu wanaojitoa kutoa usimamizi bora wa mali katika njia zetu zote za ufikajiwa.",
     "accreditations_eyebrow": "Imani & Uzingatifu",
     "accreditations_title": "Inatambuliwa. Imesimamiwa. Inaaminiwa.",
     "accreditations_subtitle": "Vyeti vyetu na mifumo ya uzingatifu inatoa imani kamili kwa wamiliki na wapangaji.",
@@ -134,11 +132,11 @@
     "hero_subtitle": "Kuanzia vitengo vya moja hadi portfolio kubwa — Chabrin hutoa huduma kamili za kitaalamu za mali ambazo wamiliki na wapangaji katika Nairobi, Kiambu, Murang'a, Kajiado, Machakos, na kaunti jirani wanategemea.",
     "management_eyebrow": "Usimamizi wa Mali",
     "management_title": "Usimamizi Kamili wa Mali",
-    "management_desc": "Tunachukua jukumu kamili la mali yako — ili uweze kuzingatia mambo muhimu zaidi kwako. Wasimamizi wetu wanaoshughulikia kila kipengele cha kila siku, kuanzia ukusanyaji wa kodi hadi matengenezo.",
+    "management_desc": "Tunachukua jukumu kamili la mali yako — ili uweze kuzingatia mambo muhimu zaidi kwako. Wasimamizi wetu wanaoshughulikia kila kipengele cha kila siku, kuanzia ukusanyaji wa kodi hadi mahusiano na wapangaji.",
     "management_f1": "Ukusanyaji wa kodi wa kila mwezi na ripoti za fedha",
     "management_f2": "Uchunguzi, uhakiki, na uingizaji wa wapangaji",
-    "management_f3": "Uratibu wa matengenezo na usimamizi wa makandarasi",
-    "management_f4": "Kufuata sheria ya mmiliki na mpangaji nchini Kenya",
+    "management_f3": "Kufuata sheria ya mmiliki na mpangaji nchini Kenya",
+    "management_f4": "Uripoti wa wamiliki kupitia jukwaa letu la usimamizi wa dijiti",
     "leasing_eyebrow": "Upangaji & Uwekaji wa Wapangaji",
     "leasing_title": "Pata Mpangaji Sahihi, Haraka",
     "leasing_desc": "Tunatangaza mali yako kupitia njia nyingi, tunachunguza kila mwombaji kwa kina, na tunashughulikia nyaraka zote kuanzia uandishi wa mkataba hadi kusaini kwa dijiti na ukabidhi.",
@@ -153,13 +151,13 @@
     "valuation_f2": "Tathmini za thamani ya kodi ya soko na mtaji",
     "valuation_f3": "Tathmini za mikopo na bima",
     "valuation_f4": "Ripoti za tathmini zinazokidhi viwango vya benki na kisheria",
-    "facilities_eyebrow": "Usimamizi wa Miundombinu",
-    "facilities_title": "Linda Thamani ya Mali Yako kwa Muda Mrefu",
-    "facilities_desc": "Matengenezo mazuri si tu kuhusu kurekebisha matatizo — ni kuhusu kuyazuia. Timu yetu ya miundombinu inahakikisha mali yako iko katika hali bora kila wakati.",
-    "facilities_f1": "Ratiba za matengenezo ya kawaida na ya kuzuia",
-    "facilities_f2": "Matengenezo ya dharura — majibu masaa 24/7",
-    "facilities_f3": "Mtandao wa makandarasi na wasambazaji waliochaguliwa",
-    "facilities_f4": "Ukaguzi wa uzingatifu na ukaguzi wa kisheria",
+    "digital_eyebrow": "Usimamizi wa Mkataba wa Dijiti",
+    "digital_title": "Kusaini Mikataba kwa Dijiti Kamili",
+    "digital_desc": "Kila mkataba katika Chabrin unashughulikiwa kwa njia ya dijiti kutoka mwanzo hadi mwisho — bila karatasi, bila kuchelewa. Jukwaa letu linawezesha wafanyakazi wote kusimamia, kukagua, na kusaini nyaraka za mkataba kwa wakati halisi, huku wamiliki na wapangaji wakiwa na mwonekano kamili katika kila hatua.",
+    "digital_f1": "Uandishi wa mkataba wa dijiti na kusaini kwa njia ya elektroniki kwa pande zote",
+    "digital_f2": "Mtiririko wa nyaraka wa kiotomatiki kupitia timu yote ya Chabrin",
+    "digital_f3": "Uhifadhi salama wa nyaraka na kumbukumbu kamili ya ukaguzi",
+    "digital_f4": "Ufuatiliaji wa hali kwa wakati halisi kwa wamiliki na wapangaji",
     "process_eyebrow": "Jinsi Inavyofanya Kazi",
     "process_title": "Rahisi. Wazi. Yenye Ufanisi.",
     "process_subtitle": "Kuanza na Chabrin ni rahisi. Hii ndiyo mchakato wetu wa kuingiza wamiliki wapya.",
@@ -179,22 +177,22 @@
     "landlord_cta": "Pata Mashauriano Bila Malipo",
     "tenant_eyebrow": "Kwa Wapangaji",
     "tenant_title": "Unatafuta Mali?",
-    "tenant_desc": "Tazama mali zetu zinazopatikana za makazi na biashara katika maeneo yetu yote.",
+    "tenant_desc": "Tazama mali zetu zinazopatikana za makazi na biashara katika njia zetu zote za ufikajiwa.",
     "tenant_cta": "Tazama Nyumba"
   },
   "properties": {
     "title": "Mali Zinazopatikana",
     "hero_title": "Pata Nyumba au Ofisi Yako",
     "hero_subtitle": "Tazama portfolio yetu ya sasa ya mali zinazosimamiwa za makazi na biashara katika Nairobi, Kiambu, Murang'a, Kajiado, Machakos, na maeneo jirani.",
-    "filter_zone": "Chuja kwa Eneo",
+    "filter_zone": "Chuja kwa Njia",
     "filter_type": "Aina ya Mali",
-    "all_zones": "Maeneo Yote",
+    "all_zones": "Njia Zote",
     "all_types": "Aina Zote",
     "clear_filters": "Futa Vichujio",
     "bedrooms": "Vyumba vya Kulala",
     "bathrooms": "Bafuni",
     "rent": "Kodi ya Kila Mwezi",
-    "zone": "Eneo",
+    "zone": "Njia",
     "area": "Mtaa",
     "enquire": "Uliza",
     "whatsapp": "WhatsApp",
@@ -211,7 +209,7 @@
     "reset_filters": "Weka upya Vichujio",
     "concierge_badge": "Utafutaji wa Concierge",
     "concierge_title": "Tutakutafutia",
-    "concierge_desc": "Hatuna orodha katika eneo hili leo, lakini timu yetu ya tathmini inaweza kukupata moja. Tuambie unachotafuta na tutaonekana katika mtandao wetu wa nje ya soko.",
+    "concierge_desc": "Hatuna orodha katika njia hii leo, lakini timu yetu ya tathmini inaweza kukupata moja. Tuambie unachotafuta na tutaonekana katika mtandao wetu wa nje ya soko.",
     "concierge_cta": "Omba Mali",
     "concierge_modal_title": "Ombi la Mali la Concierge",
     "concierge_modal_subtitle": "Tuambie mahitaji yako na timu yetu itakupigia simu",
@@ -293,7 +291,7 @@
     "value_team_title": "Timu ya Ushirikiano",
     "value_team_desc": "Timu iliyounganika ambapo michango yako inatambuliwa na sauti yako inasikika.",
     "value_impact_title": "Athari ya Tasnia",
-    "value_impact_desc": "Tunasimamia mali 1,200+ katika kaunti nyingi — kazi yako inaathiri moja kwa moja maisha ya maelfu ya Wakenya.",
+    "value_impact_desc": "Kazi yako inaathiri moja kwa moja mazingira ya makazi na biashara kwa wamiliki na wapangaji katika Nairobi na kaunti jirani.",
     "openings_title": "Nafasi Zilizowazi",
     "openings_subtitle": "Nafasi zote zinafanya kazi kutoka ofisi kuu yetu — Nacico Plaza, Landhies Road, Nairobi.",
     "apply_btn": "Omba Sasa",
@@ -334,7 +332,7 @@
     "eyebrow": "Ripoti ya Akili ya Bure",
     "title_line1": "Ripoti ya Soko la Kodi",
     "title_line2": "Nairobi 2026",
-    "subtitle": "Uchambuzi unaotegemea data wa soko la kodi la Nairobi katika maeneo yote 7 — ulioundwa kwa wawekezaji wa mali wazito, wasanidi wa mali, na wamiliki wanaofanya maamuzi mwaka 2026.",
+    "subtitle": "Uchambuzi unaotegemea data wa soko la kodi la Nairobi katika njia zetu za ufikajiwa — ulioundwa kwa wawekezaji wa mali wazito, wasanidi wa mali, na wamiliki wanaofanya maamuzi mwaka 2026.",
     "contents_label": "Yaliyomo",
     "form_eyebrow": "Pakua Bure",
     "form_title": "Pata Ripoti Kamili",
@@ -348,7 +346,7 @@
     "success_desc": "Upakuaji wako unapaswa kuanza moja kwa moja. Pia tumekutumia nakala kwa barua pepe yako. Karibu katika jumuiya ya wawekezaji wa Chabrin.",
     "download_again": "Pakua Tena",
     "error_msg": "Kuna tatizo. Tafadhali jaribu tena.",
-    "social_proof": "Iligawiwa na wawekezaji 240+ wa mali wa Nairobi robo hii"
+    "social_proof": "Iligawiwa na wawekezaji wa mali wa Nairobi robo hii"
   },
   "faq": {
     "eyebrow": "Una Maswali?",
@@ -368,7 +366,7 @@
       },
       {
         "q": "Ninahitaji hati gani kukodi nyumba?",
-        "a": "Kawaida utahitaji: nakala ya Kitambulisho cha Taifa au pasipoti, stakabadhi tatu za mshahara za karibuni au uthibitisho wa mapato (kwa wanaojiajiri, taarifa za benki za miezi sita), nakala ya cheti cha KRA PIN, barua ya ajira au cheti cha usajili wa biashara, na picha moja ya pasipoti. Timu yetu itathibitisha mahitaji halisi kwa mali uliyochagua."
+        "a": "Kawaida utahitaji: nakala ya Kitambulisho cha Taifa au pasipoti, nakala ya cheti cha KRA PIN, na barua ya ajira au cheti cha usajili wa biashara. Timu yetu itathibitisha mahitaji halisi kwa mali uliyochagua."
       },
       {
         "q": "Wapangaji wanachunguzwa vipi?",
@@ -376,7 +374,7 @@
       },
       {
         "q": "Nitalipa amana ngapi, na nitaipata lini?",
-        "a": "Amana ya kawaida ya usalama ni sawa na kodi ya miezi miwili. Huhifadhiwa katika akaunti maalum wakati wote wa upangaji wako. Mwishoni mwa mkataba, amana inarejeshwa baada ya ukaguzi wa mwisho wa mali, kulingana na makato kwa uharibifu wowote zaidi ya uchakavu wa kawaida, au kodi au malipo yoyote yanayodaiwa. Marejesho yanafanywa ndani ya siku 30 baada ya kuacha, kulingana na sheria ya upangaji ya Kenya."
+        "a": "Amana ya kawaida ya usalama ni sawa na kodi ya mwezi mmoja. Huhifadhiwa katika akaunti maalum wakati wote wa upangaji wako. Mwishoni mwa mkataba, amana inarejeshwa baada ya ukaguzi wa mwisho wa mali, kulingana na makato kwa uharibifu wowote zaidi ya uchakavu wa kawaida, au kodi au malipo yoyote yanayodaiwa. Marejesho yanafanywa ndani ya siku 30 baada ya kuacha, kulingana na sheria ya upangaji ya Kenya."
       },
       {
         "q": "Ninalipaje kodi, na lini inastahili kulipwa?",
@@ -415,16 +413,8 @@
         "a": "Ongezeko la kodi linafuatwa na mkataba wako wa upangaji na sheria ya Kenya. Kwa kawaida, mmiliki wa nyumba anaweza kupitia kodi mwishoni mwa kila kipindi cha mkataba. Ongezeko lolote lazima liwasilishwe kwa maandishi na notisi ya kutosha. Chabrin inasimamia mchakato huu kwa kitaalamu na kwa kufuata Sheria ya Kuzuia Kodi inapotumika."
       },
       {
-        "q": "Nifanye nini kama nina ugomvi na mmiliki wangu?",
-        "a": "Tunahimiza wapangaji kuwasiliana nasitatizo lolote moja kwa moja kwanza — kama wakala wa usimamizi, tunafanya kazi kama msuluhishi wa kitaalamu kati yako na mmiliki wa mali. Tunalenga kutatua migogoro kwa haki na haraka. Ikiwa ugomvi unaendelea, tutawashauri pande zote mbili kuhusu haki zao chini ya sheria ya upangaji ya Kenya, na kukuongoza kuelekea njia sahihi za kisheria ikiwa itahitajika."
-      },
-      {
         "q": "Ninwasiliana vipi na Chabrin katika dharura?",
         "a": "Kwa dharura za mali nje ya saa za ofisi, piga simu laini yetu kuu au tuma ujumbe wa WhatsApp ukiandika dharura. Nambari ya ofisi yetu ni +254 720 854 389. Saa za ofisi ni Jumatatu hadi Ijumaa, 8:00 AM hadi 5:30 PM, na Jumamosi, 9:00 AM hadi 1:00 PM. Masuala ya matengenezo ya dharura yanasimamishwa kwa wakandarasi wanaohudumu bila kujali wakati."
-      },
-      {
-        "q": "Je, Chabrin inasimamishwa? Ninajuaje ninalindwa?",
-        "a": "Ndiyo. Chabrin Agencies Limited imesajiliwa kikamilifu na Bodi ya Usajili wa Mawakala wa Mali (EARB) — chombo rasmi cha serikali kinachosimamia mawakala wa mali na wasimamizi wa mali nchini Kenya. Pia tunafuata Sheria ya Ulinzi wa Data ya Kenya 2019 na tumesajiliwa na Msajili wa Makampuni, Kenya. Hii inamaanisha upangaji wako, data yako ya kibinafsi, na amana yako vinasimamishwa chini ya mfumo uliodhibitiwa na uwajibikaji."
       }
     ],
     "owners": [
@@ -438,11 +428,11 @@
       },
       {
         "q": "Mnafunika maeneo gani?",
-        "a": "Tunasimamia mali katika Eneo lote la Jiji la Nairobi, iliyopangwa katika njia saba: Njia ya Kaskazini (Murang'a hadi Githurai 45), Ukanda wa Kasarani-Ruaraka, Mji wa Mashariki wa Ndani, Kitovu cha Eastlands ya Kawaida, njia ya CBD ya Premium na Pete ya Ndani, Eastlands Kubwa, na Njia ya Kusini ya Metro na Uwanja wa Ndege. Tunafunika pia kaunti za Kiambu, Murang'a, Kajiado, na Machakos."
+        "a": "Tunasimamia mali katika Eneo lote la Jiji la Nairobi, iliyopangwa katika njia saba za ufikajiwa: Njia ya Kaskazini ya Abiria (Murang'a hadi Githurai 45), Ukanda wa Kasarani-Ruaraka, Mji wa Mashariki wa Ndani, Kitovu cha Eastlands ya Kawaida, njia ya CBD ya Premium na Pete ya Ndani, Eastlands Kubwa, na Njia ya Kusini ya Metro na Uwanja wa Ndege. Tunafunika pia kaunti za Kiambu, Murang'a, Kajiado, na Machakos."
       },
       {
         "q": "Huduma gani zimejumuishwa katika usimamizi wa mali?",
-        "a": "Huduma yetu kamili ya usimamizi inajumuisha: uuzaji wa mali kupitia njia nyingi, uchunguzi wa kina wa wapangaji na uwekaji, uandishi wa dijiti wa mkataba na kusaini, ukusanyaji wa kodi wa kila mwezi na usambazaji, uratibu wa matengenezo 24/7 kupitia mtandao wetu wa wakandarasi waliovettishwa, taarifa za fedha za kila mwezi, uripoti wa wamiliki kupitia jukwaa letu la usimamizi, ukaguzi wa kila mwaka wa mali, na kufuata sheria ya upangaji ya Kenya wakati wote wa upangaji."
+        "a": "Huduma yetu kamili ya usimamizi inajumuisha: uuzaji wa mali kupitia njia nyingi, uchunguzi wa kina wa wapangaji na uwekaji, uandishi wa dijiti wa mkataba na kusaini, ukusanyaji wa kodi wa kila mwezi na usambazaji, taarifa za fedha za kila mwezi, uripoti wa wamiliki kupitia jukwaa letu la usimamizi, ukaguzi wa kila mwaka wa mali, na kufuata sheria ya upangaji ya Kenya wakati wote wa upangaji."
       },
       {
         "q": "Mnatafutaje na kuchunguza wapangaji?",
@@ -454,39 +444,23 @@
       },
       {
         "q": "Nitapokea mapato ya kodi yangu lini na vipi?",
-        "a": "Mapato ya kodi halisi yanasambazwa kwa wamiliki ifikapo tarehe 10 ya kila mwezi, baada ya kukata ada za usimamizi na gharama zozote za matengenezo zilizoidhinishwa. Malipo yanafanywa kwa uhamisho wa benki kwenye akaunti yako iliyosajiliwa. Taarifa ya kina ya fedha hutolewa pamoja na kila usambazaji."
+        "a": "Mapato ya kodi halisi yanasambazwa kwa wamiliki siku iliyokubaliwa katika SLA yako, baada ya kukata ada za usimamizi na gharama zozote zilizoidhinishwa. Malipo yanafanywa kwa hundi. Taarifa ya kina ya fedha hutolewa pamoja na kila usambazaji."
       },
       {
         "q": "Nitajuaje kinachoendelea na mali yangu?",
-        "a": "Tunatoa taarifa za fedha za kila mwezi zilizotolewa ifikapo tarehe 5 ya kila mwezi, zikishughulikia kodi iliyokusanywa, ada za usimamizi, gharama za matengenezo na risiti za mkandarasi, na usambazaji halisi. Wamiliki pia wana ufikiaji wa jukwaa letu la uripoti wa dijiti kwa mwonekano wa wakati halisi wa hali ya ukaliaji, kumbukumbu za matengenezo, na muhtasari wa fedha."
+        "a": "Tunatoa taarifa za fedha za kila mwezi zikishughulikia kodi iliyokusanywa, ada za usimamizi, na usambazaji halisi. Wamiliki pia wana ufikiaji wa jukwaa letu la uripoti wa dijiti kwa mwonekano wa wakati halisi wa hali ya ukaliaji, kumbukumbu za matengenezo, na muhtasari wa fedha."
       },
       {
         "q": "Kinatokea nini mpangaji atakapoondoka?",
         "a": "Upangaji unapoisha, tunasimamia mchakato mzima wa kutoka: kufanya ukaguzi wa kutoka kurekodi hali ya mali, kupatanisha amana dhidi ya uharibifu wowote au malipo yanayodaiwa, na kuanzisha utafutaji wa mpangaji mpya ili kupunguza nafasi. Utaarifiwa katika kila hatua."
       },
       {
-        "q": "Mnashughulikia matengenezo na ukarabati vipi?",
-        "a": "Maombi ya matengenezo kutoka kwa wapangaji yanarekodiwa, kutathminiwa, na kuteuliwa kwa mtandao wetu wa wakandarasi waliovettishwa. Kwa ukarabati wa kawaida, tunasimamia mchakato hadi mwisho na kuripoti gharama katika taarifa yako ya kila mwezi. Kwa kazi kubwa au zisizopangwa, daima tutashauriana nawe kwanza na kupata idhini yako kabla ya kuendelea. Ukarabati wa dharura unashughulikiwa mara moja ili kulinda mali na mpangaji."
-      },
-      {
         "q": "Je, ninaweza kufikia mali yangu wakati inasimamishwa?",
         "a": "Ndiyo, kama mmiliki una haki ya kufikia mali yako, kulingana na kutoa notisi ya kutosha kwa kufuata mkataba wako wa upangaji na sheria ya Kenya. Tunapendekeza kuratibu ufikiaji kupitia timu yetu ili mpangaji aarifu ipasavyo na ziara irekodishwe."
       },
       {
-        "q": "Mnashughulikia wapangaji wasioplipa vipi?",
-        "a": "Tunachukua mkabala wa makini kwa ukusanyaji wa kodi na kufuatilia na wapangaji mara moja kama malipo yamechelewa. Mpangaji akishindwa kulipa baada ya mchakato wetu wa ufuatiliaji, tunaongeza kwa kutumia mbinu zinazopatikana chini ya sheria ya upangaji ya Kenya, ikiwemo notisi rasmi na, inapohitajika, kuratibu na washauri wa kisheria. Tunakujulisha wakati wote na tunalenga kutatua suala haraka iwezekanavyo."
-      },
-      {
         "q": "Mnaamua vipi bei sahihi ya kodi kwa mali yangu?",
         "a": "Timu yetu hufanya uchambuzi wa soko kulingana na mali zinazofanana katika njia yako, mahitaji ya sasa, hali ya mali na vipengele vyake, na data ya karibuni ya upangaji kutoka kwa portfolio yetu. Tunatoa mwongozo wa bei unaopendekezwa na kueleza sababu. Bei ya mali yako kwa usahihi kutoka mwanzo ni muhimu kwa kupunguza nafasi."
-      },
-      {
-        "q": "Je, mmesajiliwa kusimamia mali Kenya?",
-        "a": "Ndiyo. Chabrin Agencies Limited imesajiliwa kikamilifu na Bodi ya Usajili wa Mawakala wa Mali (EARB) — chombo cha kisheria kinachosimamia mawakala wa mali na wasimamizi wa mali nchini Kenya. Tumefanya kazi katika soko la Nairobi kwa zaidi ya miaka 30 na kudumisha kufuata sheria zote zinazotumika na viwango vya kitaalamu."
-      },
-      {
-        "q": "Je, ninaweza kumalisha mkataba wa usimamizi nikiwa sikuridhika?",
-        "a": "Ndiyo. Mikataba yetu ya usimamizi inajumuisha kifungu cha kusimamisha kinachomruhusu mtu yeyote kumalisha mkataba na kipindi cha notisi kinachofaa kama kilivyoainishwa katika mkataba. Tunajivunia ubora wa huduma yetu na daima tutatafuta kutatua wasiwasi wowote kabla mmiliki wa nyumba hajafikiri kusimamisha — lakini tunaelewa kwamba hali zinabadilika."
       }
     ],
     "investors": [
@@ -508,7 +482,7 @@
       },
       {
         "q": "Wawekezaji wanapokea uripoti gani?",
-        "a": "Wawekezaji hupokea taarifa za fedha za kina za kila mwezi zikishughulikia kodi iliyokusanywa, ada za usimamizi, gharama za matengenezo na risiti zinazounga mkono, usambazaji halisi, na hali ya ukaliaji kwa kila kitengo. Kwa wateja wa portfolio, tunatoa uripoti uliounganishwa katika mali zote zinazosimamiwa. Ufikiaji wa dijiti wa dashibodi yako ya mmiliki unakupa mwonekano wa wakati halisi wakati wowote."
+        "a": "Wawekezaji hupokea taarifa za fedha za kina za kila mwezi zikishughulikia kodi iliyokusanywa, ada za usimamizi, usambazaji halisi, na hali ya ukaliaji kwa kila kitengo. Kwa wateja wa portfolio, tunatoa uripoti uliounganishwa katika mali zote zinazosimamiwa. Ufikiaji wa dijiti wa dashibodi yako ya mmiliki unakupa mwonekano wa wakati halisi wakati wowote."
       },
       {
         "q": "Chabrin inalindaje thamani ya muda mrefu ya mali yangu?",
@@ -524,11 +498,11 @@
       },
       {
         "q": "Je, Chabrin ina uwezo wa kushughulikia mali za biashara za uwekezaji?",
-        "a": "Ndiyo. Tunasimamia mali za biashara ikiwemo vitengo vya ofisi, nafasi za rejareja, na ghala. Mikataba ya biashara kwa kawaida hukimbia kwa muda mrefu zaidi na inahusisha mazungumzo magumu zaidi. Timu yetu ina uzoefu wa muundo wa mkataba wa biashara, ukaguzi wa kina wa wapangaji wa biashara, na mahitaji ya usimamizi wa miundombinu maalum kwa mali za biashara."
+        "a": "Ndiyo. Tunasimamia mali za biashara ikiwemo vitengo vya ofisi, nafasi za rejareja, na ghala. Mikataba ya biashara kwa kawaida hukimbia kwa muda mrefu zaidi na inahusisha mazungumzo magumu zaidi. Timu yetu ina uzoefu wa muundo wa mkataba wa biashara na ukaguzi wa kina wa wapangaji wa biashara."
       },
       {
         "q": "Ninaweza kupata muhtasari wa soko wa njia za kodi za Nairobi wapi?",
-        "a": "Tunachapisha maarifa na maoni ya soko kupitia tovuti yetu na ripoti za mara kwa mara. Kwa maelezo ya kina, maalum ya njia kulingana na data yetu ya sasa ya portfolio, wasiliana na timu yetu moja kwa moja. Tunaweza kupanga mkutano na wataalamu wetu wakuu wa mali kukuonyesha mwelekeo wa mahitaji, wastani wa mavuno, na viwango vya nafasi katika njia zetu saba."
+        "a": "Tunachapisha maarifa na maoni ya soko kupitia tovuti yetu na ripoti za mara kwa mara. Kwa maelezo ya kina, maalum ya njia kulingana na data yetu ya sasa ya portfolio, wasiliana na timu yetu moja kwa moja. Tunaweza kupanga mkutano na wataalamu wetu wakuu wa mali kukuonyesha mwelekeo wa mahitaji, wastani wa mavuno, na viwango vya nafasi katika njia zetu za ufikajiwa."
       }
     ]
   }

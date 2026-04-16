@@ -140,7 +140,7 @@ export default function Hero() {
                               backdrop-blur-sm border border-white/15 rounded-full px-3 py-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-brand-cyan animate-pulse" />
                 <span className="text-white text-[10px] font-semibold tracking-wide uppercase">
-                  1,200+ Properties Managed
+                  EARB Registered Agency
                 </span>
               </div>
             </div>
