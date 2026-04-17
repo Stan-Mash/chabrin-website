@@ -47,6 +47,9 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  outputFileTracingIncludes: {
+    "/**": ["./src/**/*"],
+  },
   images: {
     remotePatterns: [
       {
