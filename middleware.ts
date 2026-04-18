@@ -1,22 +1,26 @@
-import createMiddleware from "next-intl/middleware";
 import { NextRequest, NextResponse } from "next/server";
-import { locales, defaultLocale } from "@/i18n/request";
 
-const intlMiddleware = createMiddleware({
-  locales,
-  defaultLocale,
-  localePrefix: "always",
-});
+const locales = ["en", "sw"];
+const defaultLocale = "en";
 
-/**
- * Unified middleware:
- * 1. Passes x-pathname header to all requests (used by admin layout to detect login page)
- * 2. Skips locale routing for /admin/*, /api/*, and static assets
- */
+function getLocale(request: NextRequest): string {
+  const pathname = request.nextUrl.pathname;
+  const pathnameLocale = locales.find(
+    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
+  );
+  if (pathnameLocale) return pathnameLocale;
+
+  const acceptLanguage = request.headers.get("accept-language") ?? "";
+  const preferred = acceptLanguage.split(",")[0]?.split("-")[0]?.trim();
+  if (preferred && locales.includes(preferred)) return preferred;
+
+  return defaultLocale;
+}
+
 export default function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // For admin and API routes — just forward with pathname header injected
+  // Skip admin, API routes, and static assets
   if (
     pathname.startsWith("/admin") ||
     pathname.startsWith("/api") ||
@@ -28,17 +32,24 @@ export default function middleware(request: NextRequest) {
     return response;
   }
 
-  // For all other routes — apply next-intl locale middleware
-  const response = intlMiddleware(request);
-  // Also inject pathname for completeness
-  if (response) {
+  // Check if pathname already has a locale
+  const pathnameHasLocale = locales.some(
+    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
+  );
+
+  if (pathnameHasLocale) {
+    const response = NextResponse.next();
     response.headers.set("x-pathname", pathname);
+    return response;
   }
-  return response;
+
+  // Redirect to locale-prefixed path
+  const locale = getLocale(request);
+  const newUrl = new URL(`/${locale}${pathname}`, request.url);
+  newUrl.search = request.nextUrl.search;
+  return NextResponse.redirect(newUrl);
 }
 
 export const config = {
-  matcher: [
-    "/((?!_next/static|_next/image|favicon\\.ico).*)",
-  ],
+  matcher: ["/((?!_next/static|_next/image|favicon\\.ico).*)"],
 };
