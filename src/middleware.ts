@@ -9,7 +9,7 @@ export default createMiddleware({
 
 export const config = {
   matcher: [
-    // Match all paths except Next.js internals and static files
-    "/((?!_next/static|_next/image|favicon\\.ico|icon\\.svg|icon\\.png|apple-touch-icon\\.png|robots\\.txt|sitemap\\.xml|.*\\.(?:png|jpg|jpeg|gif|webp|svg|ico|css|js)).*)",
+    // Exclude: Next.js internals, static files, API routes, Sanity Studio, admin panel
+    "/((?!_next/static|_next/image|favicon\\.ico|icon\\.svg|icon\\.png|apple-touch-icon\\.png|robots\\.txt|sitemap\\.xml|api/|studio|admin|.*\\.(?:png|jpg|jpeg|gif|webp|svg|ico|css|js)).*)",
   ],
 };
