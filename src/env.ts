@@ -107,12 +107,6 @@ export const env = createEnv({
       .enum(["production", "staging"])
       .default("production")
       .describe("Sanity dataset name"),
-    // Optional — Mapbox replaced by Leaflet/OSM, token not currently used
-    NEXT_PUBLIC_MAPBOX_TOKEN: z
-      .string()
-      .min(1)
-      .optional()
-      .describe("Mapbox GL JS public token"),
     NEXT_PUBLIC_TURNSTILE_SITE_KEY: z
       .string()
       .min(1)
@@ -129,7 +123,6 @@ export const env = createEnv({
   experimental__runtimeEnv: {
     NEXT_PUBLIC_SANITY_PROJECT_ID: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
     NEXT_PUBLIC_SANITY_DATASET: process.env.NEXT_PUBLIC_SANITY_DATASET,
-    NEXT_PUBLIC_MAPBOX_TOKEN: process.env.NEXT_PUBLIC_MAPBOX_TOKEN,
     NEXT_PUBLIC_TURNSTILE_SITE_KEY: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
     NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
   },
