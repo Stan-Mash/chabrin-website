@@ -4,6 +4,8 @@ import "./globals.css";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 import { OrganizationSchema } from "@/components/layout/StructuredData";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -84,6 +86,8 @@ export default function RootLayout({
       </head>
       <body className="min-h-full flex flex-col font-sans bg-surface text-brand-navy">
         {children}
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
