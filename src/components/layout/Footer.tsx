@@ -7,7 +7,7 @@ const SERVICES_LINKS = [
   { label: "Property Management", href: "/services#management" },
   { label: "Leasing & Letting",   href: "/services#leasing"    },
   { label: "Valuation",           href: "/services#valuation"  },
-  { label: "Facilities Mgmt",     href: "/services#facilities" },
+  { label: "Digital Lease Mgmt",  href: "/services#digital"    },
 ];
 
 const COMPANY_LINKS = [
