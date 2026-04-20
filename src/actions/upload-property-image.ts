@@ -2,11 +2,11 @@
 
 import { revalidatePath } from "next/cache";
 import sharp from "sharp";
-import { uploadToSpaces } from "@/lib/spaces";
+import { uploadToBlob, deleteFromBlob } from "@/lib/spaces";
 
 /**
  * Server action to upload property images.
- * Strips EXIF/GPS metadata and converts to WebP before uploading to DO Spaces.
+ * Strips EXIF/GPS metadata and converts to WebP before uploading to Vercel Blob.
  *
  * ⚠️  SECURITY RULES:
  *  1. This is a Server Action — runs server-side only.
@@ -49,23 +49,22 @@ export async function uploadPropertyImage(
       .toFormat("webp", { quality: 85 })
       .toBuffer();
 
-    // Generate unique filename
+    // Generate unique pathname
     const timestamp = Date.now();
     const random = Math.random().toString(36).substring(7);
-    const key = `properties/${propertyId}/${timestamp}-${random}.webp`;
+    const pathname = `properties/${propertyId}/${timestamp}-${random}.webp`;
 
-    // Upload to DO Spaces
-    const url = await uploadToSpaces(processedBuffer, key, "image/webp");
+    // Upload to Vercel Blob
+    const url = await uploadToBlob(processedBuffer, pathname, "image/webp");
 
     // Log upload (non-PII)
     console.info("[image-upload] property image uploaded", {
       propertyId,
-      key,
-      url,
+      pathname,
       time: new Date().toISOString(),
     });
 
-    // Revalidate property detail page cache (optional)
+    // Revalidate property detail page cache
     revalidatePath("/properties/[ref]", "page");
 
     return { success: true, url };
@@ -79,29 +78,25 @@ export async function uploadPropertyImage(
 }
 
 /**
- * Delete a property image from DO Spaces.
+ * Delete a property image from Vercel Blob storage.
  * Used when staff removes an image upload.
  *
- * @param imageUrl - Full CDN URL of the image to delete
+ * @param imageUrl - Full Vercel Blob URL of the image to delete
  * @returns - Success or error
  */
 export async function deletePropertyImage(
   imageUrl: string
 ): Promise<{ success: boolean; error?: string }> {
   try {
-    // Extract key from CDN URL
-    // Format: https://[bucket].cdn.digitaloceanspaces.com/[key]
     const url = new URL(imageUrl);
-    const key = url.pathname.substring(1); // Remove leading /
 
-    if (!key.startsWith("properties/")) {
+    if (!url.pathname.includes("/properties/")) {
       return { success: false, error: "Invalid image URL" };
     }
 
-    // Note: Actual deletion requires spacesClient.send(new DeleteObjectCommand(...))
-    // This is a placeholder for future implementation
-    console.info("[image-delete] image deletion requested", {
-      key,
+    await deleteFromBlob(imageUrl);
+
+    console.info("[image-delete] image deleted", {
       time: new Date().toISOString(),
     });
 

@@ -34,21 +34,13 @@ export const env = createEnv({
       .url()
       .describe("PostgreSQL connection string for the public listings DB"),
 
-    // ── DigitalOcean Spaces (S3-compatible object storage) ─────────────────
-    // Optional until bucket is provisioned — image upload feature not yet live
-    SPACES_KEY: z.string().min(1).optional().describe("DO Spaces access key ID"),
-    SPACES_SECRET: z.string().min(1).optional().describe("DO Spaces secret access key"),
-    SPACES_BUCKET: z.string().min(1).optional().describe("DO Spaces bucket name"),
-    SPACES_ENDPOINT: z
+    // ── Vercel Blob (object storage for property images) ───────────────────
+    // Optional until Blob store is connected — image upload feature not yet live
+    BLOB_READ_WRITE_TOKEN: z
       .string()
-      .url()
+      .min(1)
       .optional()
-      .describe("DO Spaces endpoint URL e.g. https://nyc3.digitaloceanspaces.com"),
-    SPACES_CDN_URL: z
-      .string()
-      .url()
-      .optional()
-      .describe("DO Spaces CDN URL e.g. https://chabrin.nyc3.cdn.digitaloceanspaces.com"),
+      .describe("Vercel Blob read/write token — auto-injected by Vercel when store is connected"),
 
     // ── Sanity CMS ────────────────────────────────────────────────────────
     // Optional until Sanity project is provisioned — blog/careers not yet live

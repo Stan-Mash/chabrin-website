@@ -1,38 +1,16 @@
-import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
+import { put, del } from "@vercel/blob";
 import sharp from "sharp";
-import { env } from "@/env";
 
 /**
- * DigitalOcean Spaces client — S3-compatible object storage.
+ * Vercel Blob storage — replaces DigitalOcean Spaces.
  *
  * ⚠️  SECURITY RULES:
- *  1. ALWAYS call uploadToSpaces() — never PutObjectCommand directly.
- *     uploadToSpaces() strips EXIF/GPS metadata before upload (KDPA compliance).
+ *  1. ALWAYS call uploadToBlob() — never put() directly.
+ *     uploadToBlob() strips EXIF/GPS metadata before upload (KDPA compliance).
  *  2. Never upload user-provided content without type validation first.
  *  3. Never import this in client components — server-side only.
  *  4. Never log the buffer, key, or credentials to console.
  */
-
-// Lazily initialised — only constructed when Spaces vars are present
-function getSpacesClient(): S3Client {
-  if (!env.SPACES_ENDPOINT || !env.SPACES_KEY || !env.SPACES_SECRET) {
-    throw new Error("DigitalOcean Spaces is not configured. Set SPACES_* env vars.");
-  }
-  return new S3Client({
-    endpoint: env.SPACES_ENDPOINT,
-    region: "us-east-1", // DO Spaces requires this value regardless of region
-    credentials: {
-      accessKeyId: env.SPACES_KEY,
-      secretAccessKey: env.SPACES_SECRET,
-    },
-    forcePathStyle: false,
-  });
-}
-
-/** @deprecated Use uploadToSpaces() instead of accessing the client directly */
-const spacesClient = new Proxy({} as S3Client, {
-  get: (_t, prop) => getSpacesClient()[prop as keyof S3Client],
-});
 
 const ALLOWED_IMAGE_TYPES = [
   "image/jpeg",
@@ -44,16 +22,16 @@ type AllowedImageType = (typeof ALLOWED_IMAGE_TYPES)[number];
 
 /**
  * Strips EXIF/GPS metadata from an image buffer using sharp,
- * then uploads to DigitalOcean Spaces.
+ * then uploads to Vercel Blob storage.
  *
  * @param buffer   - Raw image buffer from file upload
- * @param key      - Storage path e.g. "properties/listing-uuid/photo-1.webp"
+ * @param pathname - Storage path e.g. "properties/listing-uuid/photo-1.webp"
  * @param mimeType - Must be jpeg, png, or webp
  * @returns        - Public CDN URL of uploaded file
  */
-export async function uploadToSpaces(
+export async function uploadToBlob(
   buffer: Buffer,
-  key: string,
+  pathname: string,
   mimeType: AllowedImageType
 ): Promise<string> {
   if (!ALLOWED_IMAGE_TYPES.includes(mimeType)) {
@@ -69,18 +47,23 @@ export async function uploadToSpaces(
     })
     .toBuffer();
 
-  await getSpacesClient().send(
-    new PutObjectCommand({
-      Bucket: env.SPACES_BUCKET ?? "",
-      Key: key,
-      Body: strippedBuffer,
-      ContentType: mimeType,
-      ACL: "public-read",
-      CacheControl: "public, max-age=31536000, immutable",
-    })
-  );
+  const blob = await put(pathname, strippedBuffer, {
+    access: "public",
+    contentType: mimeType,
+    cacheControlMaxAge: 31536000, // 1 year
+  });
 
-  return `${env.SPACES_CDN_URL ?? ""}/${key}`;
+  return blob.url;
 }
 
-export { spacesClient };
+/**
+ * Deletes a file from Vercel Blob storage by its URL.
+ *
+ * @param url - Full Vercel Blob URL of the file to delete
+ */
+export async function deleteFromBlob(url: string): Promise<void> {
+  await del(url);
+}
+
+/** @deprecated Use uploadToBlob() instead */
+export const uploadToSpaces = uploadToBlob;
