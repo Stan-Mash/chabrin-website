@@ -62,7 +62,7 @@ export default function Navbar() {
               alt="Chabrin Agencies Limited"
               width={498}
               height={175}
-              className="h-16 md:h-20 w-auto"
+              className="h-24 md:h-32 w-auto"
               priority
             />
           </Link>
