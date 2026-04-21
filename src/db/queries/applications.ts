@@ -134,9 +134,8 @@ export async function listAdminApplications(
   const where = conditions.length > 0 ? `WHERE ${conditions.join(" AND ")}` : "";
 
   const rows = await sql.unsafe<ApplicationWithJob[]>(
-    `SELECT a.*, j.title AS job_title, j.department AS job_department, j.slug AS job_slug
+    `SELECT a.*, a.job_id AS job_title, a.job_id AS job_department, a.job_id AS job_slug
      FROM applications a
-     JOIN jobs j ON j.id = a.job_id
      ${where}
      ORDER BY a.submitted_at DESC
      LIMIT ${PAGE_SIZE} OFFSET ${offset}`,
@@ -144,7 +143,7 @@ export async function listAdminApplications(
   );
 
   const countRows = await sql.unsafe<{ count: string }[]>(
-    `SELECT COUNT(*)::text AS count FROM applications a JOIN jobs j ON j.id = a.job_id ${where}`,
+    `SELECT COUNT(*)::text AS count FROM applications a ${where}`,
     params as import("postgres").ParameterOrJSON<never>[]
   );
 
@@ -158,9 +157,8 @@ export async function getAdminApplication(
   reference: string
 ): Promise<ApplicationWithJob | null> {
   const rows = await sql<ApplicationWithJob[]>`
-    SELECT a.*, j.title AS job_title, j.department AS job_department, j.slug AS job_slug
+    SELECT a.*, a.job_id AS job_title, a.job_id AS job_department, a.job_id AS job_slug
     FROM applications a
-    JOIN jobs j ON j.id = a.job_id
     WHERE a.reference = ${reference.toUpperCase().trim()}
     LIMIT 1
   `;
@@ -201,22 +199,41 @@ export async function getApplicationSummary(): Promise<{
   total:       number;
   new_today:   number;
   shortlisted: number;
-  open_jobs:   number;
 }> {
   const rows = await sql<{
-    total: string; new_today: string; shortlisted: string; open_jobs: string;
+    total: string; new_today: string; shortlisted: string;
   }[]>`
     SELECT
       (SELECT COUNT(*)::text FROM applications) AS total,
       (SELECT COUNT(*)::text FROM applications WHERE submitted_at >= CURRENT_DATE) AS new_today,
-      (SELECT COUNT(*)::text FROM applications WHERE stage IN ('shortlisted','interview_scheduled','interviewed','offer_extended')) AS shortlisted,
-      (SELECT COUNT(*)::text FROM jobs WHERE status = 'open') AS open_jobs
+      (SELECT COUNT(*)::text FROM applications WHERE stage IN ('shortlisted','interview_scheduled','interviewed','offer_extended')) AS shortlisted
   `;
   const r = rows[0];
   return {
     total:       parseInt(r?.total       ?? "0", 10),
     new_today:   parseInt(r?.new_today   ?? "0", 10),
     shortlisted: parseInt(r?.shortlisted ?? "0", 10),
-    open_jobs:   parseInt(r?.open_jobs   ?? "0", 10),
+  };
+}
+
+/** Stats for admin dashboard home page */
+export async function getAdminStats(): Promise<{
+  total:              number;
+  new_today:          number;
+  pending_complaints: number;
+}> {
+  const rows = await sql<{
+    total: string; new_today: string; pending_complaints: string;
+  }[]>`
+    SELECT
+      (SELECT COUNT(*)::text FROM applications) AS total,
+      (SELECT COUNT(*)::text FROM applications WHERE submitted_at >= CURRENT_DATE) AS new_today,
+      (SELECT COUNT(*)::text FROM complaints WHERE status NOT IN ('resolved','closed')) AS pending_complaints
+  `;
+  const r = rows[0];
+  return {
+    total:              parseInt(r?.total              ?? "0", 10),
+    new_today:          parseInt(r?.new_today          ?? "0", 10),
+    pending_complaints: parseInt(r?.pending_complaints ?? "0", 10),
   };
 }

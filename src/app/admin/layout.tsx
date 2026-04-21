@@ -3,9 +3,11 @@ import { isAdminAuthenticated } from "@/lib/admin-auth";
 import Link from "next/link";
 
 const NAV = [
-  { href: "/admin/complaints",   label: "Complaints" },
+  { href: "/admin",              label: "Dashboard"    },
+  { href: "/admin/complaints",   label: "Complaints"   },
   { href: "/admin/applications", label: "Applications" },
   { href: "/admin/jobs",         label: "Job Postings" },
+  { href: "/admin/blog",         label: "Blog"         },
 ];
 
 export default async function AdminLayout({
