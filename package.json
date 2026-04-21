@@ -16,7 +16,6 @@
     "@marsidev/react-turnstile": "^1.5.0",
     "@sanity/client": "^7.20.0",
     "@sanity/image-url": "^2.1.1",
-    "@sanity/vision": "^3.73.1",
     "@t3-oss/env-nextjs": "^0.13.11",
     "@types/leaflet": "^1.9.21",
     "@types/nodemailer": "^8.0.0",

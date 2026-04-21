@@ -47,12 +47,11 @@ export default async function AdminApplicationsPage({ searchParams }: PageProps)
     <div className="max-w-6xl mx-auto px-4 py-8">
 
       {/* Summary cards */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
         {[
           { label: "Total Applications", value: summary.total,       colour: "text-brand-navy" },
           { label: "New Today",          value: summary.new_today,   colour: "text-brand-cyan" },
           { label: "Active Pipeline",    value: summary.shortlisted, colour: "text-indigo-600" },
-          { label: "Open Jobs",          value: summary.open_jobs,   colour: "text-green-600"  },
         ].map((s) => (
           <div key={s.label} className="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm">
             <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">{s.label}</p>
