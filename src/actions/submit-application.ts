@@ -16,14 +16,14 @@
 import { z } from "zod";
 import nodemailer from "nodemailer";
 import { insertApplication, logAppEvent } from "@/db/queries/applications";
-import { getJobBySlug } from "@/db/queries/jobs";
+import { getJobBySlug } from "@/sanity/queries/jobs";
 import { siteConfig } from "@/config/site";
 
 // ── Validation schema ─────────────────────────────────────────────────────────
 
 const schema = z.object({
   job_slug:     z.string().min(1),
-  job_id:       z.string().uuid(),
+  job_id:       z.string().optional(), // legacy field — jobs now managed in Sanity
   full_name:    z.string().min(2).max(120).trim(),
   email:        z.string().email().max(255).trim(),
   phone:        z.string().min(9).max(25).trim(),
@@ -281,7 +281,7 @@ export async function submitApplication(
   const ok = await verifyTurnstile(data.token);
   if (!ok) return { success: false, error: "Bot verification failed. Please refresh and try again." };
 
-  // Get job for department + title
+  // Get job from Sanity for department + title (used for reference generation and email)
   const job = await getJobBySlug(data.job_slug);
   if (!job) return { success: false, error: "This position is no longer accepting applications." };
 
@@ -290,7 +290,7 @@ export async function submitApplication(
   try {
     await insertApplication({
       reference,
-      job_id:       data.job_id,
+      job_id:       data.job_slug, // store slug as identifier (jobs now in Sanity)
       full_name:    data.full_name,
       email:        data.email,
       phone:        data.phone,

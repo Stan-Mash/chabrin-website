@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
 import { siteConfig } from "@/config/site";
-import { listOpenJobs } from "@/db/queries/jobs";
+import { getAllOpenJobs, type SanityJob } from "@/sanity/queries/jobs";
+
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Careers",
@@ -23,7 +24,12 @@ function deptColour(dept: string) {
 }
 
 export default async function CareersPage() {
-  const jobs = await listOpenJobs().catch(() => []);
+  let jobs: SanityJob[] = [];
+  try {
+    jobs = await getAllOpenJobs();
+  } catch {
+    jobs = [];
+  }
 
   return (
     <main className="min-h-screen bg-white">
@@ -111,7 +117,7 @@ export default async function CareersPage() {
             <div className="space-y-4">
               {jobs.map((job) => (
                 <article
-                  key={job.id}
+                  key={job.slug}
                   className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6
                              hover:shadow-md hover:border-brand-cyan/30 transition-all group"
                 >
@@ -122,14 +128,14 @@ export default async function CareersPage() {
                           {job.department}
                         </span>
                         <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-brand-cyan/10 text-brand-cyan">
-                          {job.job_type}
+                          {job.jobType}
                         </span>
                         <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-slate-100 text-slate-600">
                           📍 {job.location}
                         </span>
-                        {job.closes_at && (
+                        {job.closesAt && (
                           <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-rose-50 text-rose-600">
-                            Closes {new Date(job.closes_at).toLocaleDateString("en-KE", { month: "short", day: "numeric" })}
+                            Closes {new Date(job.closesAt).toLocaleDateString("en-KE", { month: "short", day: "numeric" })}
                           </span>
                         )}
                       </div>

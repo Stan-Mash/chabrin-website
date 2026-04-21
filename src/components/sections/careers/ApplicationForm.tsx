@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import { submitApplication } from "@/actions/submit-application";
-import type { ScreeningQuestion } from "@/db/queries/jobs";
+type ScreeningQuestion = { question: string; required: boolean };
 
 // ── Schema (mirrors server action, client-side validation) ───────────────────
 
@@ -23,12 +23,11 @@ type FormValues = z.infer<typeof schema>;
 
 interface Props {
   jobSlug:            string;
-  jobId:              string;
   jobTitle:           string;
   screeningQuestions: ScreeningQuestion[];
 }
 
-export default function ApplicationForm({ jobSlug, jobId, jobTitle, screeningQuestions }: Props) {
+export default function ApplicationForm({ jobSlug, jobTitle, screeningQuestions }: Props) {
   const [token, setToken]               = useState<string | null>(null);
   const [answers, setAnswers]           = useState<Record<string, string>>({});
   const [result, setResult]             = useState<{ success: true; reference: string } | { success: false; error: string } | null>(null);
@@ -45,7 +44,6 @@ export default function ApplicationForm({ jobSlug, jobId, jobTitle, screeningQue
 
     const payload = {
       job_slug:     jobSlug,
-      job_id:       jobId,
       full_name:    values.full_name,
       email:        values.email,
       phone:        values.phone,

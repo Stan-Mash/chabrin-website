@@ -72,10 +72,9 @@ export async function getApplicationStatus(
   reference: string
 ): Promise<PublicAppStatus | null> {
   const rows = await sql<PublicAppStatus[]>`
-    SELECT a.reference, a.stage, j.title AS job_title,
+    SELECT a.reference, a.stage, a.job_id AS job_title,
            a.submitted_at, a.updated_at
     FROM applications a
-    JOIN jobs j ON j.id = a.job_id
     WHERE a.reference = ${reference.toUpperCase().trim()}
     LIMIT 1
   `;

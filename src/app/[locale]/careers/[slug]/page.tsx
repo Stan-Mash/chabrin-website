@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { getJobBySlug, listOpenJobs } from "@/db/queries/jobs";
+import { getJobBySlug, getAllOpenJobSlugs } from "@/sanity/queries/jobs";
 import ApplicationForm from "@/components/sections/careers/ApplicationForm";
 import { siteConfig } from "@/config/site";
 
@@ -10,8 +10,8 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-  const jobs = await listOpenJobs().catch(() => []);
-  return jobs.map((j) => ({ slug: j.slug }));
+  const slugs = await getAllOpenJobSlugs().catch(() => []);
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -44,9 +44,9 @@ export default async function JobPage({ params }: Props) {
       "@type": "PropertyValue",
       name:    siteConfig.name,
     },
-    datePosted:       job.created_at.toISOString().split("T")[0],
-    validThrough:     job.closes_at ? job.closes_at.toISOString() : undefined,
-    employmentType:   job.job_type.toUpperCase().replace("-", "_"),
+    datePosted:       job.publishedAt.split("T")[0],
+    validThrough:     job.closesAt ?? undefined,
+    employmentType:   job.jobType.toUpperCase().replace("-", "_"),
     hiringOrganization: {
       "@type": "Organization",
       name:    siteConfig.name,
@@ -61,12 +61,12 @@ export default async function JobPage({ params }: Props) {
         addressCountry:    "KE",
       },
     },
-    baseSalary: job.salary_range ? {
+    baseSalary: job.salaryRange ? {
       "@type":   "MonetaryAmount",
       currency:  "KES",
       value: {
         "@type":     "QuantitativeValue",
-        description: job.salary_range,
+        description: job.salaryRange,
       },
     } : undefined,
   };
@@ -94,14 +94,14 @@ export default async function JobPage({ params }: Props) {
                   {job.department}
                 </span>
                 <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-brand-cyan/20 text-brand-cyan">
-                  {job.job_type}
+                  {job.jobType}
                 </span>
                 <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-white/10 text-white">
                   📍 {job.location}
                 </span>
-                {job.salary_range && (
+                {job.salaryRange && (
                   <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-green-500/20 text-green-300">
-                    {job.salary_range}
+                    {job.salaryRange}
                   </span>
                 )}
               </div>
@@ -124,26 +124,24 @@ export default async function JobPage({ params }: Props) {
 
         {/* Left — Job details */}
         <div>
-          {/* Description (markdown-like paragraphs) */}
+          {/* Description — Portable Text rendered as simple blocks */}
           <div className="prose prose-slate prose-headings:text-brand-navy prose-headings:font-bold
                           prose-h2:text-xl prose-h2:mt-8 prose-h2:mb-3
                           prose-p:text-slate-600 prose-p:leading-relaxed
                           prose-li:text-slate-600 prose-li:leading-relaxed
                           prose-strong:text-brand-navy max-w-none mb-10">
-            {job.description.split("\n").map((para, i) => {
-              if (para.startsWith("## ")) {
-                return <h2 key={i}>{para.slice(3)}</h2>;
-              }
-              if (para.startsWith("- ")) {
-                return <li key={i}>{para.slice(2)}</li>;
-              }
-              if (para.trim() === "") return null;
-              return <p key={i}>{para}</p>;
+            {(job.description as Array<{ _type: string; _key: string; style?: string; children?: Array<{ text: string; marks?: string[] }> }>).map((block) => {
+              if (block._type !== "block") return null;
+              const text = block.children?.map((c) => c.text).join("") ?? "";
+              if (block.style === "h2") return <h2 key={block._key}>{text}</h2>;
+              if (block.style === "h3") return <h3 key={block._key}>{text}</h3>;
+              if (!text.trim()) return null;
+              return <p key={block._key}>{text}</p>;
             })}
           </div>
 
           {/* Requirements */}
-          {job.requirements.length > 0 && (
+          {job.requirements && job.requirements.length > 0 && (
             <div className="mb-8">
               <h2 className="text-lg font-bold text-brand-navy mb-4">Requirements</h2>
               <ul className="space-y-2">
@@ -161,11 +159,11 @@ export default async function JobPage({ params }: Props) {
           )}
 
           {/* Nice to have */}
-          {job.nice_to_have.length > 0 && (
+          {job.niceToHave && job.niceToHave.length > 0 && (
             <div className="mb-8">
               <h2 className="text-lg font-bold text-brand-navy mb-4">Nice to Have</h2>
               <ul className="space-y-2">
-                {job.nice_to_have.map((item, i) => (
+                {job.niceToHave.map((item, i) => (
                   <li key={i} className="flex items-start gap-3 text-sm text-slate-600">
                     <svg className="w-4 h-4 text-slate-400 mt-0.5 flex-shrink-0" fill="none"
                          viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -205,30 +203,30 @@ export default async function JobPage({ params }: Props) {
               </div>
               <div className="flex justify-between gap-2">
                 <dt className="text-slate-500">Type</dt>
-                <dd className="font-semibold text-brand-navy text-right">{job.job_type}</dd>
+                <dd className="font-semibold text-brand-navy text-right">{job.jobType}</dd>
               </div>
               <div className="flex justify-between gap-2">
                 <dt className="text-slate-500">Location</dt>
                 <dd className="font-semibold text-brand-navy text-right">{job.location}</dd>
               </div>
-              {job.salary_range && (
+              {job.salaryRange && (
                 <div className="flex justify-between gap-2">
                   <dt className="text-slate-500">Salary</dt>
-                  <dd className="font-semibold text-green-600 text-right">{job.salary_range}</dd>
+                  <dd className="font-semibold text-green-600 text-right">{job.salaryRange}</dd>
                 </div>
               )}
-              {job.closes_at && (
+              {job.closesAt && (
                 <div className="flex justify-between gap-2">
                   <dt className="text-slate-500">Closes</dt>
                   <dd className="font-semibold text-rose-600 text-right">
-                    {new Date(job.closes_at).toLocaleDateString("en-KE", { day: "numeric", month: "long", year: "numeric" })}
+                    {new Date(job.closesAt).toLocaleDateString("en-KE", { day: "numeric", month: "long", year: "numeric" })}
                   </dd>
                 </div>
               )}
               <div className="flex justify-between gap-2">
                 <dt className="text-slate-500">Posted</dt>
                 <dd className="font-semibold text-brand-navy text-right">
-                  {new Date(job.created_at).toLocaleDateString("en-KE", { day: "numeric", month: "long", year: "numeric" })}
+                  {new Date(job.publishedAt).toLocaleDateString("en-KE", { day: "numeric", month: "long", year: "numeric" })}
                 </dd>
               </div>
             </dl>
@@ -252,9 +250,8 @@ export default async function JobPage({ params }: Props) {
           </p>
           <ApplicationForm
             jobSlug={job.slug}
-            jobId={job.id}
             jobTitle={job.title}
-            screeningQuestions={job.screening_questions}
+            screeningQuestions={job.screeningQuestions ?? []}
           />
         </div>
       </div>
