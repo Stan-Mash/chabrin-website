@@ -9,12 +9,28 @@
  */
 
 import { useSearchParams } from "next/navigation";
-import { useState, useRef } from "react";
+import { useState, useRef, Suspense } from "react";
 
 const MAX_MB = 5;
 const ALLOWED_EXTS = [".pdf", ".doc", ".docx"];
 
+// ── Outer page — required Suspense wrapper for useSearchParams() ──────────────
+
 export default function CvUploadPage() {
+  return (
+    <Suspense fallback={
+      <PageShell>
+        <div className="text-center text-slate-400 text-sm">Loading…</div>
+      </PageShell>
+    }>
+      <CvUploadInner />
+    </Suspense>
+  );
+}
+
+// ── Inner component — uses useSearchParams() ──────────────────────────────────
+
+function CvUploadInner() {
   const params    = useSearchParams();
   const ref       = params.get("ref") ?? "";
   const tok       = params.get("tok") ?? "";
