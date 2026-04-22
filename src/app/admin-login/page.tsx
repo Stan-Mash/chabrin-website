@@ -1,10 +1,18 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { adminLogin } from "@/actions/admin-users";
 
 export default function AdminLoginPage() {
+  const router = useRouter();
   const [state, action, pending] = useActionState(adminLogin, {});
+
+  useEffect(() => {
+    if (state?.redirect) {
+      router.push(state.redirect);
+    }
+  }, [state, router]);
 
   return (
     <div className="min-h-screen bg-[#0D1B8E] flex items-center justify-center px-4">

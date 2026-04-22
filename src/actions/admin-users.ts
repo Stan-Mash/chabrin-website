@@ -36,7 +36,7 @@ const SESSION_HOURS = 12;
 export async function adminLogin(
   _prev: unknown,
   formData: FormData
-): Promise<{ error?: string }> {
+): Promise<{ error?: string; redirect?: string }> {
   const hdrs = await headers();
   const ip   = hdrs.get("x-forwarded-for")?.split(",")[0].trim() ?? "unknown";
 
@@ -87,7 +87,7 @@ export async function adminLogin(
     maxAge:   SESSION_HOURS * 60 * 60,
   });
 
-  redirect("/admin");
+  return { redirect: "/admin" };
 }
 
 // ── Logout ────────────────────────────────────────────────────────────────────
