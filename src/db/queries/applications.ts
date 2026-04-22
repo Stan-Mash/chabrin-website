@@ -137,8 +137,12 @@ export async function listAdminApplications(
   const where = conditions.length > 0 ? `WHERE ${conditions.join(" AND ")}` : "";
 
   const rows = await sql.unsafe<ApplicationWithJob[]>(
-    `SELECT a.*, a.job_id AS job_title, a.job_id AS job_department, a.job_id AS job_slug
+    `SELECT a.*,
+            COALESCE(j.title,      a.job_id::text) AS job_title,
+            COALESCE(j.department, a.job_id::text) AS job_department,
+            COALESCE(j.slug,       a.job_id::text) AS job_slug
      FROM applications a
+     LEFT JOIN jobs j ON j.id = a.job_id
      ${where}
      ORDER BY a.submitted_at DESC
      LIMIT ${PAGE_SIZE} OFFSET ${offset}`,
@@ -160,8 +164,12 @@ export async function getAdminApplication(
   reference: string
 ): Promise<ApplicationWithJob | null> {
   const rows = await sql<ApplicationWithJob[]>`
-    SELECT a.*, a.job_id AS job_title, a.job_id AS job_department, a.job_id AS job_slug
+    SELECT a.*,
+           COALESCE(j.title,      a.job_id::text) AS job_title,
+           COALESCE(j.department, a.job_id::text) AS job_department,
+           COALESCE(j.slug,       a.job_id::text) AS job_slug
     FROM applications a
+    LEFT JOIN jobs j ON j.id = a.job_id
     WHERE a.reference = ${reference.toUpperCase().trim()}
     LIMIT 1
   `;
