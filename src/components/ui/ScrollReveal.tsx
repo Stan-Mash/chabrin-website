@@ -17,7 +17,7 @@ export default function ScrollReveal({
   direction = "up",
 }: Props) {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, amount: 0.12 });
+  const inView = useInView(ref, { once: false, amount: 0.12 });
 
   const initial = {
     opacity: 0,

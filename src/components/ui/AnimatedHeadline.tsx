@@ -19,7 +19,7 @@ export default function AnimatedHeadline({
   delay = 0,
 }: Props) {
   const ref = useRef<HTMLElement>(null);
-  const inView = useInView(ref as React.RefObject<Element>, { once: true, amount: 0.3 });
+  const inView = useInView(ref as React.RefObject<Element>, { once: false, amount: 0.3 });
   const words = text.split(" ");
 
   return (
