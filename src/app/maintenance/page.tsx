@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Coming Soon | Chabrin Agencies Limited",
@@ -40,14 +39,28 @@ export default function MaintenancePage() {
           >
             {/* Logo */}
             <div style={{ marginBottom: "32px" }}>
-              <Image
-                src="/logo-wordmark.png"
-                alt="Chabrin Agencies Limited"
-                width={200}
-                height={48}
-                style={{ objectFit: "contain", filter: "brightness(0) invert(1)" }}
-                priority
-              />
+              <div style={{ display: "inline-flex", alignItems: "center", gap: "10px" }}>
+                {/* Icon mark */}
+                <div style={{
+                  width: "40px", height: "40px", borderRadius: "10px",
+                  background: "#00C9C9", display: "flex", alignItems: "center",
+                  justifyContent: "center", flexShrink: 0,
+                }}>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0D1B8E" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                  </svg>
+                </div>
+                {/* Wordmark */}
+                <div style={{ textAlign: "left" }}>
+                  <p style={{ color: "#ffffff", fontSize: "18px", fontWeight: 800, margin: 0, letterSpacing: "-0.3px", lineHeight: 1.1 }}>
+                    CHABRIN
+                  </p>
+                  <p style={{ color: "#00C9C9", fontSize: "9px", fontWeight: 700, margin: 0, letterSpacing: "2px", textTransform: "uppercase" }}>
+                    AGENCIES LIMITED
+                  </p>
+                </div>
+              </div>
             </div>
 
             {/* Cyan accent line */}

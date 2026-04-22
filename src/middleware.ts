@@ -14,7 +14,12 @@ export default function middleware(request: NextRequest) {
   // ── Maintenance mode ───────────────────────────────────────────────────────
   // Enable by setting MAINTENANCE_MODE=true in Vercel env vars (production only).
   // Admin panel, API routes, and static assets remain accessible at all times.
-  if (process.env.MAINTENANCE_MODE === "true") {
+  // Only activate on production domain (chabrinagencies.com / www.chabrinagencies.com)
+  const host = request.headers.get("host") ?? "";
+  const isProductionHost =
+    host === "chabrinagencies.com" || host === "www.chabrinagencies.com";
+
+  if (process.env.MAINTENANCE_MODE === "true" && isProductionHost) {
     const isExempt =
       pathname.startsWith("/maintenance") ||
       pathname.startsWith("/admin") ||
