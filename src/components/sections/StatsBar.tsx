@@ -1,4 +1,5 @@
 import { useTranslations } from "next-intl";
+import AnimatedCounter from "@/components/ui/AnimatedCounter";
 
 export default function StatsBar() {
   const t = useTranslations("stats");
@@ -19,10 +20,11 @@ export default function StatsBar() {
               className="flex flex-col items-center justify-center py-8 px-6 text-center
                          group hover:bg-surface transition-colors duration-200"
             >
-              <span className="text-3xl md:text-4xl font-bold text-brand-navy
-                               group-hover:text-brand-cyan transition-colors duration-200 leading-none mb-2">
-                {value}
-              </span>
+              <AnimatedCounter
+                value={value}
+                className="text-3xl md:text-4xl font-bold text-brand-navy
+                           group-hover:text-brand-cyan transition-colors duration-200 leading-none mb-2"
+              />
               <span className="text-sm text-slate-500 font-medium leading-snug">
                 {label}
               </span>

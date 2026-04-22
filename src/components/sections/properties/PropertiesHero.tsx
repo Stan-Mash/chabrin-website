@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import AnimatedHeadline from "@/components/ui/AnimatedHeadline";
 
 // Quick-filter pills dispatch window events picked up by SearchInterface
 const TYPE_PILLS = [
@@ -75,8 +76,13 @@ export default function PropertiesHero() {
 
         {/* Headline */}
         <h1 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-extrabold text-white leading-tight mb-3">
-          Find Your Perfect Space<br />
-          <span style={{ color: "#00C9C9" }}>Nairobi, Kiambu, Murang&apos;a &amp; Kajiado</span>
+          <AnimatedHeadline text="Find Your Perfect Space" as="span" className="block" />
+          <AnimatedHeadline
+            text="Nairobi, Kiambu, Murang'a & Kajiado"
+            as="span"
+            className="block text-brand-cyan"
+            delay={0.25}
+          />
         </h1>
         <p className="text-white/65 text-sm sm:text-base max-w-xl mx-auto mb-7 leading-relaxed">
           Professionally managed properties across 7 corridors — from Murang&apos;a and

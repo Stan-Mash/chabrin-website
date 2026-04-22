@@ -1,6 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useTranslations, useLocale } from "next-intl";
+import AnimatedHeadline from "@/components/ui/AnimatedHeadline";
+import CursorSpotlight from "@/components/ui/CursorSpotlight";
+import HeroParallaxBlobs from "@/components/sections/HeroParallaxBlobs";
 
 export default function Hero() {
   const t      = useTranslations("hero");
@@ -10,13 +13,12 @@ export default function Hero() {
   return (
     <section className="relative overflow-hidden bg-brand-navy min-h-[92vh] flex items-center">
 
-      {/* ── Background elements ───────────────────────────────────────── */}
-      <div aria-hidden="true"
-        className="absolute -top-40 -right-40 w-[700px] h-[700px] rounded-full
-                   bg-brand-cyan/10 blur-3xl pointer-events-none" />
-      <div aria-hidden="true"
-        className="absolute -bottom-32 -left-20 w-[500px] h-[500px] rounded-full
-                   bg-brand-navy-light/30 blur-2xl pointer-events-none" />
+      {/* ── Parallax background blobs (client) ──────────────────────────── */}
+      <HeroParallaxBlobs />
+
+      {/* ── Cursor spotlight (client) ───────────────────────────────────── */}
+      <CursorSpotlight />
+
       {/* Subtle dot-grid overlay */}
       <div aria-hidden="true"
         className="absolute inset-0 opacity-[0.035] pointer-events-none"
@@ -44,10 +46,17 @@ export default function Hero() {
             {/* Headline */}
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] xl:text-[4.5rem]
                            font-bold text-white leading-[1.05] tracking-tight mb-6">
-              {t("headline")}
-              <span className="block text-brand-cyan mt-1">
-                {t("headline_accent")}
-              </span>
+              <AnimatedHeadline
+                text={t("headline")}
+                as="span"
+                className="block"
+              />
+              <AnimatedHeadline
+                text={t("headline_accent")}
+                as="span"
+                className="block text-brand-cyan mt-1"
+                delay={0.2}
+              />
             </h1>
 
             {/* Subheadline */}
@@ -111,10 +120,8 @@ export default function Hero() {
                 sizes="(max-width: 1280px) 50vw, 500px"
                 priority
               />
-              {/* Dark gradient overlay — bottom */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
 
-              {/* Bottom overlay text */}
               <div className="absolute bottom-0 left-0 right-0 px-5 pb-5">
                 <div className="flex items-end justify-between">
                   <div>
@@ -135,7 +142,6 @@ export default function Hero() {
                 </div>
               </div>
 
-              {/* Top-left badge */}
               <div className="absolute top-4 left-4 flex items-center gap-1.5 bg-black/40
                               backdrop-blur-sm border border-white/15 rounded-full px-3 py-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-brand-cyan animate-pulse" />

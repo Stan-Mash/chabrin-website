@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { useTranslations, useLocale } from "next-intl";
 import { siteConfig } from "@/config/site";
+import AnimatedHeadline from "@/components/ui/AnimatedHeadline";
+import ScrollReveal from "@/components/ui/ScrollReveal";
 
 export default function CTABanner() {
   const t      = useTranslations("cta_banner");
@@ -25,13 +27,15 @@ export default function CTABanner() {
         <div className="flex flex-col lg:flex-row items-center justify-between gap-10">
 
           {/* ── Left — text ────────────────────────────────────────── */}
-          <div className="max-w-xl text-center lg:text-left">
+          <ScrollReveal className="max-w-xl text-center lg:text-left">
             <p className="text-brand-cyan text-sm font-bold tracking-widest uppercase mb-4">
               {t("eyebrow")}
             </p>
-            <h2 className="text-3xl md:text-4xl font-bold text-white leading-tight mb-4">
-              {t("title")}
-            </h2>
+            <AnimatedHeadline
+              text={t("title")}
+              as="h2"
+              className="text-3xl md:text-4xl font-bold text-white leading-tight mb-4"
+            />
             <p className="text-white/65 text-lg leading-relaxed">
               {t("subtitle")}
             </p>
@@ -52,10 +56,10 @@ export default function CTABanner() {
                 <span>Saturday <strong className="text-white/80 font-semibold">8:30 AM – 12:00 PM</strong></span>
               </span>
             </div>
-          </div>
+          </ScrollReveal>
 
           {/* ── Right — action cards ───────────────────────────────── */}
-          <div className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
+          <ScrollReveal delay={0.15} className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
 
             {/* Primary — get in touch */}
             <Link
@@ -85,7 +89,7 @@ export default function CTABanner() {
               <span className="text-base font-bold">{t("cta_whatsapp")}</span>
               <span className="text-xs font-normal opacity-50">{t("cta_whatsapp_sub")}</span>
             </a>
-          </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>

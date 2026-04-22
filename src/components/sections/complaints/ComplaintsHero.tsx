@@ -1,16 +1,16 @@
 import Link from "next/link";
+import AnimatedHeadline from "@/components/ui/AnimatedHeadline";
 
 const SLA_ITEMS = [
-  { priority: "Emergency", colour: "#dc2626", bg: "rgba(220,38,38,0.12)", response: "1 hour", resolution: "24 hours", example: "Safety breach, no water/power" },
-  { priority: "Urgent",    colour: "#ea580c", bg: "rgba(234,88,12,0.12)", response: "8 hours", resolution: "7 days",   example: "Plumbing, electrical, locks" },
-  { priority: "Routine",   colour: "#2563eb", bg: "rgba(37,99,235,0.12)", response: "72 hours", resolution: "14 days", example: "Repairs, noise, management" },
-  { priority: "Enquiry",   colour: "#7c3aed", bg: "rgba(124,58,237,0.12)", response: "1 business day", resolution: "5 business days", example: "Billing, general feedback" },
+  { priority: "Emergency", colour: "#dc2626", bg: "rgba(220,38,38,0.12)", response: "1 hour",          resolution: "24 hours",         example: "Safety breach, no water/power" },
+  { priority: "Urgent",    colour: "#ea580c", bg: "rgba(234,88,12,0.12)", response: "8 hours",          resolution: "7 days",           example: "Plumbing, electrical, locks" },
+  { priority: "Routine",   colour: "#2563eb", bg: "rgba(37,99,235,0.12)", response: "72 hours",         resolution: "14 days",          example: "Repairs, noise, management" },
+  { priority: "Enquiry",   colour: "#7c3aed", bg: "rgba(124,58,237,0.12)", response: "1 business day", resolution: "5 business days",  example: "Billing, general feedback" },
 ];
 
 export default function ComplaintsHero() {
   return (
     <section className="relative bg-[#0D1B8E] overflow-hidden" aria-labelledby="complaints-hero-heading">
-      {/* Subtle background accent */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-[#00C9C9]/8 rounded-full blur-3xl translate-x-1/3 -translate-y-1/4" aria-hidden="true" />
       <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#00C9C9]/5 rounded-full blur-3xl -translate-x-1/3 translate-y-1/4" aria-hidden="true" />
 
@@ -29,8 +29,9 @@ export default function ComplaintsHero() {
           id="complaints-hero-heading"
           className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight mb-4 max-w-2xl"
         >
-          We Take Every Concern{" "}
-          <span className="text-[#00C9C9]">Seriously.</span>
+          <AnimatedHeadline text="We Take Every Concern" as="span" />
+          {" "}
+          <AnimatedHeadline text="Seriously." as="span" className="text-[#00C9C9]" delay={0.5} />
         </h1>
         <p className="text-white/65 text-base sm:text-lg max-w-xl mb-8 leading-relaxed">
           Submit your complaint, maintenance request, or feedback — and track its

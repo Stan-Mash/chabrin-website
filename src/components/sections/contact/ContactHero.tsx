@@ -1,4 +1,5 @@
 import { useTranslations } from "next-intl";
+import AnimatedHeadline from "@/components/ui/AnimatedHeadline";
 
 export default function ContactHero() {
   const t = useTranslations("contact");
@@ -13,9 +14,11 @@ export default function ContactHero() {
             {t("hero_title")}
           </span>
         </span>
-        <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white leading-tight mb-4">
-          {t("hero_subtitle")}
-        </h1>
+        <AnimatedHeadline
+          text={t("hero_subtitle")}
+          as="h1"
+          className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white leading-tight mb-4"
+        />
       </div>
     </section>
   );

@@ -1,4 +1,6 @@
 import { useTranslations } from "next-intl";
+import AnimatedHeadline from "@/components/ui/AnimatedHeadline";
+import ScrollReveal from "@/components/ui/ScrollReveal";
 
 export default function WhyChabrin() {
   const t = useTranslations("why_chabrin");
@@ -39,49 +41,52 @@ export default function WhyChabrin() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* ── Section header ─────────────────────────────────────────── */}
-        <div className="max-w-2xl mb-14">
+        <ScrollReveal className="max-w-2xl mb-14">
           <p className="text-brand-cyan text-sm font-bold tracking-widest uppercase mb-3">
             {t("eyebrow")}
           </p>
-          <h2 className="text-3xl md:text-4xl font-bold text-brand-navy leading-tight mb-4">
-            {t("title")}
-          </h2>
+          <AnimatedHeadline
+            text={t("title")}
+            as="h2"
+            className="text-3xl md:text-4xl font-bold text-brand-navy leading-tight mb-4"
+          />
           <p className="text-slate-500 text-lg leading-relaxed">
             {t("subtitle")}
           </p>
-        </div>
+        </ScrollReveal>
 
         {/* ── Pillars grid ───────────────────────────────────────────── */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {PILLARS.map(({ id, title, desc, stat, statLabel }) => (
-            <div
-              key={id}
-              className="flex gap-6 p-6 rounded-2xl border border-slate-100
-                         hover:border-brand-cyan/30 hover:bg-surface/50
-                         transition-all duration-300 group"
-            >
-              {/* Stat badge */}
-              <div className="flex-shrink-0 flex flex-col items-center justify-center
-                              w-20 h-20 rounded-2xl bg-brand-navy group-hover:bg-brand-navy-dark
-                              transition-colors text-center">
-                <span className="text-brand-cyan font-bold text-xl leading-none">
-                  {stat}
-                </span>
-                <span className="text-white/50 text-[10px] font-medium leading-tight mt-1 px-1">
-                  {statLabel}
-                </span>
-              </div>
+          {PILLARS.map(({ id, title, desc, stat, statLabel }, i) => (
+            <ScrollReveal key={id} delay={i * 0.1}>
+              <div
+                className="flex gap-6 p-6 rounded-2xl border border-slate-100
+                           hover:border-brand-cyan/30 hover:bg-surface/50
+                           transition-all duration-300 group h-full"
+              >
+                {/* Stat badge */}
+                <div className="flex-shrink-0 flex flex-col items-center justify-center
+                                w-20 h-20 rounded-2xl bg-brand-navy group-hover:bg-brand-navy-dark
+                                transition-colors text-center">
+                  <span className="text-brand-cyan font-bold text-xl leading-none">
+                    {stat}
+                  </span>
+                  <span className="text-white/50 text-[10px] font-medium leading-tight mt-1 px-1">
+                    {statLabel}
+                  </span>
+                </div>
 
-              {/* Content */}
-              <div className="flex-1 min-w-0">
-                <h3 className="text-brand-navy font-bold text-lg mb-2 leading-snug">
-                  {title}
-                </h3>
-                <p className="text-slate-500 text-sm leading-relaxed">
-                  {desc}
-                </p>
+                {/* Content */}
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-brand-navy font-bold text-lg mb-2 leading-snug">
+                    {title}
+                  </h3>
+                  <p className="text-slate-500 text-sm leading-relaxed">
+                    {desc}
+                  </p>
+                </div>
               </div>
-            </div>
+            </ScrollReveal>
           ))}
         </div>
       </div>

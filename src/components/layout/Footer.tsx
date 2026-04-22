@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useTranslations, useLocale } from "next-intl";
 import { siteConfig } from "@/config/site";
+import TrustTicker from "@/components/ui/TrustTicker";
 
 const SERVICES_LINKS = [
   { label: "Property Management", href: "/services#management" },
@@ -27,6 +28,8 @@ export default function Footer() {
 
   return (
     <footer className="bg-brand-navy text-white">
+      {/* ── Trust ticker ──────────────────────────────────────────────── */}
+      <TrustTicker />
       {/* ── Main footer grid ──────────────────────────────────────────── */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-10">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">

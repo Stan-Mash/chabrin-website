@@ -1,4 +1,9 @@
+"use client";
+
+import { useRef } from "react";
 import { useTranslations } from "next-intl";
+import { motion, useInView } from "framer-motion";
+import AnimatedHeadline from "@/components/ui/AnimatedHeadline";
 
 export default function Timeline() {
   const t = useTranslations("about");
@@ -6,10 +11,10 @@ export default function Timeline() {
   const MILESTONES = [
     { year: "1990s", title: t("milestone_1990s_title"), desc: t("milestone_1990s_desc") },
     { year: "2000s", title: t("milestone_2000s_title"), desc: t("milestone_2000s_desc") },
-    { year: "2010", title: t("milestone_2010_title"), desc: t("milestone_2010_desc") },
-    { year: "2015", title: t("milestone_2015_title"), desc: t("milestone_2015_desc") },
-    { year: "2020", title: t("milestone_2020_title"), desc: t("milestone_2020_desc") },
-    { year: "2024", title: t("milestone_2024_title"), desc: t("milestone_2024_desc") },
+    { year: "2010",  title: t("milestone_2010_title"),  desc: t("milestone_2010_desc") },
+    { year: "2015",  title: t("milestone_2015_title"),  desc: t("milestone_2015_desc") },
+    { year: "2020",  title: t("milestone_2020_title"),  desc: t("milestone_2020_desc") },
+    { year: "2024",  title: t("milestone_2024_title"),  desc: t("milestone_2024_desc") },
   ];
 
   return (
@@ -21,7 +26,11 @@ export default function Timeline() {
             <span className="text-brand-cyan text-sm font-semibold tracking-widest uppercase">{t("timeline_eyebrow")}</span>
             <span className="w-6 h-0.5 bg-brand-cyan" />
           </span>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-brand-navy">{t("timeline_title")}</h2>
+          <AnimatedHeadline
+            text={t("timeline_title")}
+            as="h2"
+            className="text-3xl md:text-4xl font-extrabold text-brand-navy"
+          />
         </div>
 
         <div className="relative">
@@ -30,26 +39,58 @@ export default function Timeline() {
 
           <div className="space-y-10">
             {MILESTONES.map(({ year, title, desc }, i) => (
-              <div key={year} className={`relative flex gap-6 md:gap-0 ${i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"}`}>
-                {/* Content */}
-                <div className={`flex-1 pb-2 ${i % 2 === 0 ? "md:pr-12 md:text-right" : "md:pl-12"} pl-16 md:pl-0`}>
-                  <div className="bg-surface rounded-2xl p-6 shadow-card inline-block w-full">
-                    <span className="text-brand-cyan text-xs font-bold tracking-widest uppercase">{year}</span>
-                    <h3 className="font-bold text-brand-navy text-lg mt-1 mb-2">{title}</h3>
-                    <p className="text-slate-500 text-sm leading-relaxed">{desc}</p>
-                  </div>
-                </div>
-
-                {/* Dot */}
-                <div className="absolute left-8 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-brand-cyan border-4 border-white shadow-cyan top-6" />
-
-                {/* Spacer for opposite side */}
-                <div className="hidden md:block flex-1" />
-              </div>
+              <TimelineMilestone
+                key={year}
+                year={year}
+                title={title}
+                desc={desc}
+                index={i}
+              />
             ))}
           </div>
         </div>
       </div>
     </section>
+  );
+}
+
+function TimelineMilestone({
+  year,
+  title,
+  desc,
+  index,
+}: {
+  year: string;
+  title: string;
+  desc: string;
+  index: number;
+}) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, amount: 0.4 });
+  const isEven = index % 2 === 0;
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, x: isEven ? -40 : 40 }}
+      animate={inView ? { opacity: 1, x: 0 } : {}}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.05 }}
+      className={`relative flex gap-6 md:gap-0 ${isEven ? "md:flex-row" : "md:flex-row-reverse"}`}
+    >
+      {/* Content */}
+      <div className={`flex-1 pb-2 ${isEven ? "md:pr-12 md:text-right" : "md:pl-12"} pl-16 md:pl-0`}>
+        <div className="bg-surface rounded-2xl p-6 shadow-card inline-block w-full">
+          <span className="text-brand-cyan text-xs font-bold tracking-widest uppercase">{year}</span>
+          <h3 className="font-bold text-brand-navy text-lg mt-1 mb-2">{title}</h3>
+          <p className="text-slate-500 text-sm leading-relaxed">{desc}</p>
+        </div>
+      </div>
+
+      {/* Dot */}
+      <div className="absolute left-8 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-brand-cyan border-4 border-white shadow-cyan top-6" />
+
+      {/* Spacer */}
+      <div className="hidden md:block flex-1" />
+    </motion.div>
   );
 }

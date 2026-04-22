@@ -4,6 +4,11 @@ import { getMessages, setRequestLocale } from "next-intl/server";
 import { locales } from "@/i18n/request";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import PageTransition from "@/components/ui/PageTransition";
+import WhatsAppButton from "@/components/ui/WhatsAppButton";
+import ScrollProgressBar from "@/components/ui/ScrollProgressBar";
+import BackToTop from "@/components/ui/BackToTop";
+import CookieBanner from "@/components/ui/CookieBanner";
 import type { Locale } from "@/types";
 
 interface LocaleLayoutProps {
@@ -31,13 +36,17 @@ export default async function LocaleLayout({
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
+      <ScrollProgressBar />
       <div className="flex flex-col min-h-screen">
         <Navbar />
         <main className="flex-1">
-          {children}
+          <PageTransition>{children}</PageTransition>
         </main>
         <Footer />
       </div>
+      <WhatsAppButton />
+      <BackToTop />
+      <CookieBanner />
     </NextIntlClientProvider>
   );
 }
