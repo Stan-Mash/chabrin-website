@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
-import { isAdminAuthenticated } from "@/lib/admin-auth";
+import { getAdminSession } from "@/lib/admin-auth";
+import { adminLogout } from "@/actions/admin-users";
 import Link from "next/link";
 
 const NAV = [
@@ -15,8 +16,8 @@ export default async function AdminLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const authenticated = await isAdminAuthenticated();
-  if (!authenticated) redirect("/admin-login");
+  const user = await getAdminSession();
+  if (!user) redirect("/admin-login");
 
   return (
     <div className="min-h-screen bg-slate-100 font-sans">
@@ -38,17 +39,37 @@ export default async function AdminLayout({
                   {n.label}
                 </Link>
               ))}
+              {user.role === "superadmin" && (
+                <Link
+                  href="/admin/users"
+                  className="text-white/60 hover:text-white text-xs font-medium px-3 py-1.5
+                             rounded hover:bg-white/10 transition-colors"
+                >
+                  Users
+                </Link>
+              )}
             </nav>
           </div>
-          <form action="/api/admin/logout" method="POST">
-            <button
-              type="submit"
-              className="text-white/50 hover:text-white text-xs font-medium transition-colors
-                         px-3 py-1 rounded border border-white/10 hover:border-white/30"
+          <div className="flex items-center gap-3">
+            <Link
+              href="/admin/settings"
+              className="hidden sm:flex items-center gap-2 text-white/60 hover:text-white transition-colors"
             >
-              Sign out
-            </button>
-          </form>
+              <span className="w-7 h-7 rounded-full bg-white/10 flex items-center justify-center text-xs font-bold text-white">
+                {user.name.charAt(0).toUpperCase()}
+              </span>
+              <span className="text-xs font-medium">{user.name}</span>
+            </Link>
+            <form action={adminLogout}>
+              <button
+                type="submit"
+                className="text-white/50 hover:text-white text-xs font-medium transition-colors
+                           px-3 py-1 rounded border border-white/10 hover:border-white/30"
+              >
+                Sign out
+              </button>
+            </form>
+          </div>
         </div>
       </header>
       <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8">

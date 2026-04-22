@@ -56,6 +56,18 @@ export const env = createEnv({
       .min(1)
       .describe("Cloudflare Turnstile secret key — used in Server Actions only"),
 
+    // ── CV upload + AI parsing ────────────────────────────────────────────────
+    CV_UPLOAD_SECRET: z
+      .string()
+      .min(32)
+      .optional()
+      .describe("HMAC secret for signed CV upload links (32+ char random string)"),
+    GEMINI_API_KEY: z
+      .string()
+      .min(1)
+      .optional()
+      .describe("Google Gemini API key for AI CV parsing"),
+
     // ── Admin panel auth ─────────────────────────────────────────────────────
     ADMIN_PASSWORD: z
       .string()

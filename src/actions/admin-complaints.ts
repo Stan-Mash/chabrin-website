@@ -10,14 +10,8 @@
  * status moves to: acknowledged, assigned, in_progress, resolved, closed.
  */
 
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 import nodemailer from "nodemailer";
-import {
-  isAdminAuthenticated, computeToken, ADMIN_COOKIE,
-  isLockedOut, recordFailedAttempt, clearFailedAttempts, remainingAttempts,
-} from "@/lib/admin-auth";
-import { headers } from "next/headers";
+import { isAdminAuthenticated } from "@/lib/admin-auth";
 import { updateComplaintStatus, getAdminComplaint } from "@/db/queries/admin-complaints";
 
 // ── Auth guard (used inside every action) ────────────────────────────────────
@@ -25,59 +19,6 @@ import { updateComplaintStatus, getAdminComplaint } from "@/db/queries/admin-com
 async function requireAdmin() {
   const ok = await isAdminAuthenticated();
   if (!ok) throw new Error("Unauthorised");
-}
-
-// ── Login / logout ────────────────────────────────────────────────────────────
-
-export async function adminLogin(
-  _prev: unknown,
-  formData: FormData
-): Promise<{ error?: string }> {
-  // Get real client IP (Nginx forwards it via X-Forwarded-For)
-  const hdrs = await headers();
-  const ip   = hdrs.get("x-forwarded-for")?.split(",")[0].trim() ?? "unknown";
-
-  // Lockout check — before touching the password
-  if (isLockedOut(ip)) {
-    await new Promise((r) => setTimeout(r, 400));
-    return { error: "Too many failed attempts. Try again in 15 minutes." };
-  }
-
-  const password = formData.get("password") as string;
-  const expected = process.env.ADMIN_PASSWORD;
-  if (!expected) return { error: "Admin not configured on this server." };
-
-  if (password !== expected) {
-    await new Promise((r) => setTimeout(r, 400));
-    const locked = recordFailedAttempt(ip);
-    if (locked) {
-      return { error: "Too many failed attempts. Try again in 15 minutes." };
-    }
-    const left = remainingAttempts(ip);
-    return { error: `Incorrect password. ${left} attempt${left === 1 ? "" : "s"} remaining.` };
-  }
-
-  // Successful login — clear any prior failed attempts
-  clearFailedAttempts(ip);
-
-  const token = computeToken();
-  const jar   = await cookies();
-
-  jar.set(ADMIN_COOKIE, token, {
-    httpOnly: true,
-    secure:   process.env.NODE_ENV === "production",
-    sameSite: "strict",
-    path:     "/",
-    maxAge:   60 * 60 * 12, // 12-hour session
-  });
-
-  redirect("/admin/complaints");
-}
-
-export async function adminLogout(): Promise<void> {
-  const jar = await cookies();
-  jar.delete(ADMIN_COOKIE);
-  redirect("/admin-login");
 }
 
 // ── Update complaint ──────────────────────────────────────────────────────────

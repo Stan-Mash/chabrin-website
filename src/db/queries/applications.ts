@@ -18,23 +18,26 @@ export type AppStage =
   | "rejected";
 
 export interface Application {
-  id:               string;
-  reference:        string;
-  job_id:           string;
-  full_name:        string;
-  email:            string;
-  phone:            string;
-  linkedin_url:     string | null;
-  cv_url:           string | null;
-  cover_letter:     string | null;
-  answers:          Record<string, string>;
-  stage:            AppStage;
-  rejection_reason: string | null;
-  internal_notes:   string | null;
-  consent_given:    boolean;
-  source:           string | null;
-  submitted_at:     Date;
-  updated_at:       Date;
+  id:                   string;
+  reference:            string;
+  job_id:               string;
+  full_name:            string;
+  email:                string;
+  phone:                string;
+  linkedin_url:         string | null;
+  cv_url:               string | null;
+  cover_letter:         string | null;
+  answers:              Record<string, string>;
+  stage:                AppStage;
+  rejection_reason:     string | null;
+  internal_notes:       string | null;
+  consent_given:        boolean;
+  source:               string | null;
+  submitted_at:         Date;
+  updated_at:           Date;
+  cv_upload_token:      string | null;
+  cv_upload_expires_at: Date | null;
+  ai_summary:           Record<string, unknown> | null;
 }
 
 export interface ApplicationWithJob extends Application {
@@ -191,6 +194,64 @@ export async function logAppEvent(
   await sql`
     INSERT INTO app_events (application_id, stage_from, stage_to, actor, note)
     VALUES (${application_id}, ${stage_from}, ${stage_to}, ${actor}, ${note ?? null})
+  `;
+}
+
+// ── CV upload token ───────────────────────────────────────────────────────────
+
+/** Fetch application by signed upload token (validates token + expiry). */
+export async function getApplicationByUploadToken(
+  token: string
+): Promise<Application | null> {
+  const rows = await sql<Application[]>`
+    SELECT * FROM applications
+    WHERE cv_upload_token = ${token}
+      AND cv_upload_expires_at > NOW()
+    LIMIT 1
+  `;
+  return rows[0] ?? null;
+}
+
+/** Store the upload token on an application (called when shortlisting). */
+export async function setUploadToken(
+  reference: string,
+  token:     string,
+  expiresAt: Date
+): Promise<void> {
+  await sql`
+    UPDATE applications
+    SET cv_upload_token    = ${token},
+        cv_upload_expires_at = ${expiresAt},
+        updated_at           = NOW()
+    WHERE reference = ${reference.toUpperCase().trim()}
+  `;
+}
+
+/** Save the uploaded CV URL and clear the upload token (single-use). */
+export async function saveUploadedCv(
+  reference: string,
+  cvUrl:     string
+): Promise<void> {
+  await sql`
+    UPDATE applications
+    SET cv_url             = ${cvUrl},
+        cv_upload_token    = NULL,
+        cv_upload_expires_at = NULL,
+        updated_at           = NOW()
+    WHERE reference = ${reference.toUpperCase().trim()}
+  `;
+}
+
+/** Save Gemini AI summary JSON. */
+export async function saveAiSummary(
+  reference: string,
+  summary:   Record<string, unknown>
+): Promise<void> {
+  await sql`
+    UPDATE applications
+    SET ai_summary = ${JSON.stringify(summary)},
+        updated_at = NOW()
+    WHERE reference = ${reference.toUpperCase().trim()}
   `;
 }
 

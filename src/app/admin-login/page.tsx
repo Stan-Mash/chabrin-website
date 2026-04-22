@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
-import { adminLogin } from "@/actions/admin-complaints";
+import { adminLogin } from "@/actions/admin-users";
 
 export default function AdminLoginPage() {
   const [state, action, pending] = useActionState(adminLogin, {});
@@ -18,19 +18,34 @@ export default function AdminLoginPage() {
             </svg>
           </div>
           <h1 className="text-white text-xl font-extrabold">Chabrin Admin</h1>
-          <p className="text-white/40 text-sm mt-1">Complaint Management Portal</p>
+          <p className="text-white/40 text-sm mt-1">Staff Portal</p>
         </div>
 
         {/* Login card */}
         <div className="bg-white rounded-2xl p-8 shadow-2xl">
-          <h2 className="text-[#0D1B8E] font-bold text-lg mb-6">Staff Sign In</h2>
+          <h2 className="text-[#0D1B8E] font-bold text-lg mb-6">Sign In</h2>
 
           <form action={action} className="space-y-4">
             <div>
-              <label
-                htmlFor="password"
-                className="block text-sm font-semibold text-slate-600 mb-1.5"
-              >
+              <label htmlFor="email" className="block text-sm font-semibold text-slate-600 mb-1.5">
+                Email Address
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                required
+                autoComplete="email"
+                autoFocus
+                className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm
+                           focus:outline-none focus:border-[#00C9C9] focus:ring-2
+                           focus:ring-[#00C9C9]/20 text-slate-800"
+                placeholder="you@chabrinagencies.co.ke"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="password" className="block text-sm font-semibold text-slate-600 mb-1.5">
                 Password
               </label>
               <input
@@ -39,11 +54,10 @@ export default function AdminLoginPage() {
                 type="password"
                 required
                 autoComplete="current-password"
-                autoFocus
                 className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm
                            focus:outline-none focus:border-[#00C9C9] focus:ring-2
                            focus:ring-[#00C9C9]/20 text-slate-800"
-                placeholder="Enter staff password"
+                placeholder="Your password"
               />
             </div>
 

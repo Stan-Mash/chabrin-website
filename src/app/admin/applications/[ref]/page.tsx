@@ -151,6 +151,19 @@ export default function ApplicationDetailPage() {
             </div>
           )}
 
+          {/* AI summary */}
+          {app.ai_summary && (
+            <AiSummaryPanel summary={app.ai_summary as AiSummary} />
+          )}
+
+          {/* CV upload pending notice */}
+          {!app.cv_url && app.cv_upload_token && (
+            <div className="bg-blue-50 border border-blue-200 rounded-2xl p-5">
+              <p className="text-xs font-semibold text-blue-700 uppercase tracking-wider mb-1">CV Upload Pending</p>
+              <p className="text-sm text-blue-700">A signed upload link was sent to the candidate. Waiting for their CV submission.</p>
+            </div>
+          )}
+
           {/* Internal notes */}
           {app.internal_notes && (
             <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5">
@@ -227,6 +240,124 @@ export default function ApplicationDetailPage() {
 
         </div>
       </div>
+    </div>
+  );
+}
+
+// ── AI Summary panel ──────────────────────────────────────────────────────────
+
+interface AiSummary {
+  summary?:             string;
+  years_experience?:    number | null;
+  education?:           string[];
+  key_skills?:          string[];
+  previous_employers?:  string[];
+  kenya_experience?:    boolean;
+  property_experience?: boolean;
+  driving_licence?:     boolean | null;
+  languages?:           string[];
+  red_flags?:           string[];
+  hire_recommendation?: "strong_yes" | "yes" | "maybe" | "no";
+  hire_notes?:          string;
+}
+
+const RECOMMEND_STYLES: Record<string, string> = {
+  strong_yes: "bg-emerald-100 text-emerald-800",
+  yes:        "bg-green-100 text-green-700",
+  maybe:      "bg-amber-100 text-amber-700",
+  no:         "bg-rose-100 text-rose-700",
+};
+const RECOMMEND_LABELS: Record<string, string> = {
+  strong_yes: "Strong Yes",
+  yes:        "Yes",
+  maybe:      "Maybe",
+  no:         "No",
+};
+
+function AiSummaryPanel({ summary: s }: { summary: AiSummary }) {
+  const rec = s.hire_recommendation ?? "maybe";
+  return (
+    <div className="bg-white rounded-2xl border border-slate-200 p-6">
+      <div className="flex items-center justify-between mb-4">
+        <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
+          ✨ AI CV Analysis
+        </p>
+        {s.hire_recommendation && (
+          <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${RECOMMEND_STYLES[rec] ?? "bg-slate-100 text-slate-600"}`}>
+            Hire: {RECOMMEND_LABELS[rec] ?? rec}
+          </span>
+        )}
+      </div>
+
+      {s.summary && (
+        <p className="text-sm text-slate-700 leading-relaxed mb-4">{s.summary}</p>
+      )}
+
+      <div className="grid sm:grid-cols-2 gap-3 text-xs mb-4">
+        {s.years_experience !== undefined && s.years_experience !== null && (
+          <Chip label="Experience" value={`${s.years_experience} yr${s.years_experience !== 1 ? "s" : ""}`} />
+        )}
+        {s.kenya_experience !== undefined && (
+          <Chip label="Kenya exp." value={s.kenya_experience ? "Yes" : "No"} ok={s.kenya_experience} />
+        )}
+        {s.property_experience !== undefined && (
+          <Chip label="Property exp." value={s.property_experience ? "Yes" : "No"} ok={s.property_experience} />
+        )}
+        {s.driving_licence !== undefined && s.driving_licence !== null && (
+          <Chip label="Driving licence" value={s.driving_licence ? "Yes" : "No"} ok={s.driving_licence} />
+        )}
+      </div>
+
+      {s.key_skills && s.key_skills.length > 0 && (
+        <div className="mb-3">
+          <p className="text-xs font-semibold text-slate-500 mb-1.5">Key Skills</p>
+          <div className="flex flex-wrap gap-1.5">
+            {s.key_skills.map((sk) => (
+              <span key={sk} className="text-xs bg-brand-navy/10 text-brand-navy px-2 py-0.5 rounded-full">{sk}</span>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {s.education && s.education.length > 0 && (
+        <div className="mb-3">
+          <p className="text-xs font-semibold text-slate-500 mb-1">Education</p>
+          {s.education.map((e) => <p key={e} className="text-xs text-slate-700">{e}</p>)}
+        </div>
+      )}
+
+      {s.previous_employers && s.previous_employers.length > 0 && (
+        <div className="mb-3">
+          <p className="text-xs font-semibold text-slate-500 mb-1">Previous Employers</p>
+          {s.previous_employers.map((e) => <p key={e} className="text-xs text-slate-700">{e}</p>)}
+        </div>
+      )}
+
+      {s.red_flags && s.red_flags.length > 0 && (
+        <div className="bg-rose-50 border border-rose-100 rounded-xl p-3 mb-3">
+          <p className="text-xs font-semibold text-rose-700 mb-1">Red Flags</p>
+          {s.red_flags.map((f) => (
+            <p key={f} className="text-xs text-rose-700">• {f}</p>
+          ))}
+        </div>
+      )}
+
+      {s.hire_notes && (
+        <p className="text-xs text-slate-500 italic border-t border-slate-100 pt-3">{s.hire_notes}</p>
+      )}
+    </div>
+  );
+}
+
+function Chip({ label, value, ok }: { label: string; value: string; ok?: boolean }) {
+  return (
+    <div className={`flex items-center justify-between px-3 py-1.5 rounded-lg border ${
+      ok === true ? "bg-green-50 border-green-200" :
+      ok === false ? "bg-rose-50 border-rose-200" :
+      "bg-slate-50 border-slate-100"
+    }`}>
+      <span className="text-slate-500">{label}</span>
+      <span className={`font-semibold ${ok === true ? "text-green-700" : ok === false ? "text-rose-600" : "text-slate-700"}`}>{value}</span>
     </div>
   );
 }

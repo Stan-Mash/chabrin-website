@@ -1,15 +1,19 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { isAdminAuthenticated } from "@/lib/admin-auth";
+import { getAdminSession } from "@/lib/admin-auth";
 import {
   updateApplicationStage,
   logAppEvent,
   getAdminApplication,
+  setUploadToken,
   type AppStage,
 } from "@/db/queries/applications";
 import { insertJob, updateJob, type NewJob } from "@/db/queries/jobs";
 import { sendStageChangeEmail } from "@/actions/submit-application";
+import { generateUploadToken } from "@/lib/cv-upload-token";
+import { siteConfig } from "@/config/site";
+import nodemailer from "nodemailer";
 
 // ── Update application stage ──────────────────────────────────────────────────
 
@@ -17,7 +21,8 @@ export async function adminUpdateApplication(
   _prev: Record<string, unknown>,
   formData: FormData
 ): Promise<Record<string, unknown>> {
-  if (!(await isAdminAuthenticated())) redirect("/admin/login");
+  const me = await getAdminSession();
+  if (!me) redirect("/admin-login");
 
   const reference       = (formData.get("reference")       as string | null)?.trim() ?? "";
   const stage           = (formData.get("stage")           as string | null)?.trim() ?? "";
@@ -33,13 +38,29 @@ export async function adminUpdateApplication(
 
   try {
     await updateApplicationStage(reference, stage as AppStage, null, internal_notes);
-    await logAppEvent(app.id, prevStage, stage, "admin", stage_note);
+    await logAppEvent(app.id, prevStage, stage, me.name, stage_note);
 
     // Send email to candidate if stage changed
     if (prevStage !== stage) {
       await sendStageChangeEmail(
         app.email, app.full_name, reference, app.job_title, stage, stage_note
       );
+
+      // When shortlisted: generate a signed upload link and email it
+      if (stage === "shortlisted" && process.env.CV_UPLOAD_SECRET) {
+        try {
+          const { token, expiresAt } = generateUploadToken(reference);
+          await setUploadToken(reference, token, expiresAt);
+          const exp = Math.floor(expiresAt.getTime() / 1000);
+          const uploadUrl = `${siteConfig.url}/en/careers/upload?ref=${encodeURIComponent(reference)}&tok=${encodeURIComponent(token)}&exp=${exp}`;
+          await sendCvUploadEmail(app.email, app.full_name, reference, app.job_title, uploadUrl, expiresAt);
+        } catch (err) {
+          console.error("[admin-ats] upload-link-email-failed", {
+            reference,
+            error: err instanceof Error ? err.message : "unknown",
+          });
+        }
+      }
     }
 
     return { success: true };
@@ -48,13 +69,94 @@ export async function adminUpdateApplication(
   }
 }
 
+// ── CV upload link email ──────────────────────────────────────────────────────
+
+function h(s: string): string {
+  return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+          .replace(/"/g,"&quot;").replace(/'/g,"&#039;");
+}
+
+async function sendCvUploadEmail(
+  email:     string,
+  name:      string,
+  reference: string,
+  jobTitle:  string,
+  uploadUrl: string,
+  expiresAt: Date
+): Promise<void> {
+  const host = process.env.SMTP_HOST;
+  const port = parseInt(process.env.SMTP_PORT || "587", 10);
+  const user = process.env.SMTP_USER;
+  const pass = process.env.SMTP_PASS;
+  if (!host || !user || !pass) return;
+
+  const expiry = expiresAt.toLocaleDateString("en-KE", { day: "numeric", month: "long", year: "numeric" });
+
+  const html = `
+<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;color:#333;">
+  <div style="background:#0D1B8E;padding:24px 20px;border-radius:8px 8px 0 0;text-align:center;">
+    <h1 style="color:#00C9C9;margin:0;font-size:20px;">You&apos;ve Been Shortlisted!</h1>
+    <p style="color:rgba(255,255,255,0.7);margin:6px 0 0;font-size:13px;">Chabrin Agencies Limited — ${h(jobTitle)}</p>
+  </div>
+  <div style="background:#fff;border:1px solid #e2e8f0;border-top:none;padding:28px 24px;border-radius:0 0 8px 8px;">
+    <p style="margin:0 0 16px;font-size:15px;">Dear <strong>${h(name)}</strong>,</p>
+    <p style="margin:0 0 20px;font-size:14px;line-height:1.6;color:#475569;">
+      Congratulations! After reviewing your application for <strong>${h(jobTitle)}</strong> (ref: <strong>${h(reference)}</strong>),
+      you have been shortlisted for the next stage of our selection process.
+    </p>
+    <p style="margin:0 0 20px;font-size:14px;line-height:1.6;color:#475569;">
+      Please upload your CV using the secure link below. Our HR team will review it ahead of the next interview stage.
+    </p>
+
+    <div style="text-align:center;margin-bottom:24px;">
+      <a href="${uploadUrl}"
+         style="display:inline-block;background:#0D1B8E;color:#fff;text-decoration:none;
+                padding:14px 32px;border-radius:50px;font-weight:700;font-size:14px;">
+        Upload My CV →
+      </a>
+    </div>
+
+    <div style="background:#fefce8;border:1px solid #fde68a;border-radius:8px;padding:14px 16px;margin-bottom:20px;">
+      <p style="margin:0;font-size:13px;color:#92400e;">
+        ⏰ <strong>This link expires on ${expiry}</strong>. Please upload your CV before then.
+      </p>
+    </div>
+
+    <p style="margin:0 0 4px;font-size:13px;color:#475569;">
+      Accepted formats: PDF, DOC, DOCX (max 5MB).
+    </p>
+    <p style="margin:0;font-size:13px;color:#475569;">
+      Questions? Contact us at
+      <a href="mailto:${siteConfig.contact.careersEmail}" style="color:#0D1B8E;">${siteConfig.contact.careersEmail}</a>.
+    </p>
+
+    <p style="margin:20px 0 0;font-size:11px;color:#94a3b8;border-top:1px solid #f1f5f9;padding-top:14px;">
+      Chabrin Agencies Limited · Nacico Plaza, 5th Floor, Room 517, Landhies Road, Nairobi · EARB Registered<br>
+      Your personal data is handled in accordance with the Kenya Data Protection Act 2019.
+    </p>
+  </div>
+</div>`;
+
+  const transporter = nodemailer.createTransport({
+    host, port, secure: port === 465, auth: { user, pass },
+  });
+
+  await transporter.sendMail({
+    from:    process.env.SMTP_FROM || user,
+    to:      email,
+    subject: `Shortlisted — Upload Your CV for ${jobTitle} (${reference})`,
+    html,
+  });
+}
+
 // ── Create job ────────────────────────────────────────────────────────────────
 
 export async function adminCreateJob(
   _prev: Record<string, unknown>,
   formData: FormData
 ): Promise<Record<string, unknown>> {
-  if (!(await isAdminAuthenticated())) redirect("/admin/login");
+  const me = await getAdminSession();
+  if (!me) redirect("/admin-login");
 
   const title       = (formData.get("title")       as string)?.trim();
   const department  = (formData.get("department")  as string)?.trim();
@@ -104,7 +206,8 @@ export async function adminUpdateJob(
   _prev: Record<string, unknown>,
   formData: FormData
 ): Promise<Record<string, unknown>> {
-  if (!(await isAdminAuthenticated())) redirect("/admin/login");
+  const me = await getAdminSession();
+  if (!me) redirect("/admin-login");
 
   const id          = (formData.get("id")          as string)?.trim();
   const title       = (formData.get("title")       as string)?.trim();
