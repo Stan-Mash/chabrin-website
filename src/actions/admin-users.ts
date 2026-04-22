@@ -55,11 +55,12 @@ export async function adminLogin(
   const user = await findAdminUserByEmail(email);
 
   // Always run bcrypt even if user not found (prevent timing oracle)
-  const dummyHash = "$2a$12$dummyhashfortimingatk0eXampleHashString123456789abcdef";
+  // Valid bcrypt hash of "dummy" — only used when user is not found
+  const dummyHash = "$2a$12$LN9a2V5jbOVDMHHMgq6MG.pCVPNJIJqPNqZ2sI7Gn5LRhHLEsfIhK";
   const passwordMatch = await compare(
     password,
     user?.password_hash ?? dummyHash
-  );
+  ).catch(() => false);
 
   if (!user || !passwordMatch || !user.is_active) {
     await new Promise((r) => setTimeout(r, 400));
