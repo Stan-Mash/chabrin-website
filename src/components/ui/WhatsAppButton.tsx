@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { siteConfig } from "@/config/site";
 
-const WA_NUMBER = "254722165735";
+const WA_NUMBER = siteConfig.contact.whatsapp;
 const WA_MESSAGE =
   "Hello%2C%20I%20would%20like%20to%20enquire%20about%20your%20property%20management%20services.";
 
