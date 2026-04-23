@@ -19,7 +19,15 @@ export default function AnimatedHeadline({
   delay = 0,
 }: Props) {
   const ref = useRef<HTMLElement>(null);
-  const inView = useInView(ref as React.RefObject<Element>, { once: false, amount: 0.3 });
+
+  // margin: "-80px 0px" means the observer fires 80px before the element
+  // leaves/enters the viewport edge — reliable replay on scroll up without
+  // needing a high `amount` threshold that large headings rarely cross.
+  const inView = useInView(ref as React.RefObject<Element>, {
+    once: false,
+    margin: "-80px 0px",
+  });
+
   const words = text.split(" ");
 
   return (
@@ -28,12 +36,12 @@ export default function AnimatedHeadline({
       {words.map((word, i) => (
         <motion.span
           key={i}
-          initial={{ y: 20, opacity: 0 }}
-          animate={inView ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }}
+          initial={{ y: 24, opacity: 0 }}
+          animate={inView ? { y: 0, opacity: 1 } : { y: 24, opacity: 0 }}
           transition={{
-            duration: 0.5,
+            duration: 0.55,
             ease: [0.22, 1, 0.36, 1],
-            delay: delay + i * 0.08,
+            delay: delay + i * 0.07,
           }}
           className="inline-block"
           style={{ marginRight: i < words.length - 1 ? "0.25em" : 0 }}

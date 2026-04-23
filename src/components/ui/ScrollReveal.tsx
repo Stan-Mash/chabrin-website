@@ -17,12 +17,15 @@ export default function ScrollReveal({
   direction = "up",
 }: Props) {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: false, amount: 0.12 });
+
+  // margin: "-60px 0px" triggers 60px before element leaves/enters viewport —
+  // smaller offset than AnimatedHeadline so panels replay cleanly on scroll up.
+  const inView = useInView(ref, { once: false, margin: "-60px 0px" });
 
   const initial = {
     opacity: 0,
-    y: direction === "up" ? 30 : 0,
-    x: direction === "left" ? -30 : direction === "right" ? 30 : 0,
+    y: direction === "up" ? 32 : 0,
+    x: direction === "left" ? -32 : direction === "right" ? 32 : 0,
   };
 
   return (
