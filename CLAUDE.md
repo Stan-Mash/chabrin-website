@@ -5,7 +5,8 @@ Public-facing marketing and lead-generation website for Chabrin Agencies Limited
 a premier property management company in Nairobi, Kenya.
 
 **Production URL:** https://chabrinagencies.com
-**Hosting:** Dedicated DigitalOcean droplet (separate from CHIPS ERP droplet)
+**Hosting:** Vercel (auto-deploy from `main` branch)
+**Database:** Neon serverless PostgreSQL
 **GitHub:** https://github.com/Stan-Mash/chabrin-website
 
 ---
@@ -17,8 +18,8 @@ a premier property management company in Nairobi, Kenya.
 - Never write API calls to CHIPS or to `161.35.74.238`
 - Never expose CHIPS database credentials or internal IDs
 - Never add write-back logic to CHIPS from this website
-- The website reads ONLY from `chabrin_public` PostgreSQL on its own droplet
-- CHIPS pushes sanitized listing data outbound to `chabrin_public` on a schedule
+- The website reads ONLY from the Neon database (`chabrin_public` schema)
+- CHIPS pushes sanitized listing data outbound to Neon on a schedule
 - The sync is one-way: CHIPS → website DB. Never the reverse.
 
 ---
@@ -33,15 +34,14 @@ a premier property management company in Nairobi, Kenya.
 | UI | shadcn/ui |
 | i18n | next-intl — locales: `en` (English), `sw` (Swahili) |
 | CMS | Sanity.io — blog, careers, team, page content |
-| Database | PostgreSQL 16 via `postgres` (sql tagged template) |
+| Database | Neon serverless PostgreSQL via `postgres` (sql tagged template) |
 | Forms | React Hook Form + Zod |
 | Env validation | @t3-oss/env-nextjs — build fails if var missing |
-| Image processing | sharp — EXIF/GPS strip before DO Spaces upload |
-| Object storage | DigitalOcean Spaces (@aws-sdk/client-s3) |
+| Image processing | sharp — EXIF/GPS strip before Vercel Blob upload |
+| Object storage | Vercel Blob (`@vercel/blob`) |
 | Bot protection | Cloudflare Turnstile (NOT reCAPTCHA) |
-| Process manager | PM2 |
-| Reverse proxy | Nginx + Let's Encrypt (Certbot) |
-| CI/CD | GitHub Actions → SSH deploy to droplet |
+| Hosting | Vercel (auto-deploy on push to `main`) |
+| CI/CD | Git push to `main` → Vercel auto-build & deploy |
 
 ---
 
@@ -62,8 +62,8 @@ Logo files live at `/public/logo-icon.png` and `/public/logo-wordmark.png`.
 1. **NO EXACT ADDRESSES** — Never render GPS coordinates, LR numbers, or landlord names.
    Render `zone` and `area` only (KRA eRITS protection).
 
-2. **EXIF STRIPPING** — All image uploads MUST go through `src/lib/spaces.ts → uploadToSpaces()`.
-   This strips GPS/EXIF via sharp before writing to DO Spaces.
+2. **EXIF STRIPPING** — All image uploads MUST go through `src/lib/spaces.ts → uploadToBlob()`.
+   This strips GPS/EXIF via sharp before writing to Vercel Blob.
 
 3. **CLOUDFLARE TURNSTILE ONLY** — All forms use Turnstile. Never add Google reCAPTCHA
    (KDPA cross-border data transfer violation risk).
@@ -90,8 +90,8 @@ src/
 │   ├── sections/           # Hero, PropertyGrid, ServicesGrid, etc.
 │   └── forms/              # ContactForm, EnquiryForm (Turnstile)
 ├── lib/
-│   ├── db.ts               # PostgreSQL singleton — server only
-│   ├── spaces.ts           # DO Spaces upload with EXIF strip — server only
+│   ├── db.ts               # Neon PostgreSQL client — server only
+│   ├── spaces.ts           # Vercel Blob upload with EXIF strip — server only
 │   └── sanity.ts           # Sanity CMS client
 ├── db/
 │   └── queries/            # SQL query functions (typed)
@@ -141,33 +141,35 @@ npm run lint         # ESLint check
 
 ---
 
-## Server & Deployment
+## Hosting & Deployment
 
-**Droplet:** `165.227.138.108` (Ubuntu 22.04, 2 vCPU, 4GB RAM, 78GB disk)
-**SSH:** `ssh deploy@165.227.138.108` or `ssh root@165.227.138.108`
-**App path:** `/var/www/chabrin`
-**Process manager:** PM2 (cluster mode, 2 instances)
-**Web server:** Nginx → proxies `localhost:3000`
-**SSL:** Let's Encrypt via Certbot (auto-renew, valid to Jul 2026)
-**Database:** PostgreSQL 14, db: `chabrin_public`, user: `chabrin_web`
+**Platform:** Vercel
+**Deploy trigger:** Push to `main` → Vercel auto-builds and deploys
+**No SSH, no PM2, no Nginx required.**
 
-### Deploy command (after every push to main):
+To deploy any change:
 ```bash
-ssh deploy@165.227.138.108 "cd /var/www/chabrin && git pull origin main && npm ci && npm run build && pm2 reload chabrin-web"
+git push origin main   # Vercel picks it up automatically
 ```
 
-### PM2 commands:
-```bash
-pm2 list                  # Show running processes
-pm2 logs chabrin-web      # Tail app logs
-pm2 reload chabrin-web    # Zero-downtime reload
-pm2 restart chabrin-web   # Full restart
-```
+To check build logs: Vercel Dashboard → chabrin-website → Deployments
 
-### First deploy checklist (pending — fill in as services are provisioned):
-- [ ] DigitalOcean Spaces bucket created → update SPACES_* in .env.production
-- [ ] Sanity.io project created → update SANITY_* in .env.production
-- [ ] Cloudflare Turnstile site created → update TURNSTILE_* in .env.production
-- [ ] Mapbox token obtained → update NEXT_PUBLIC_MAPBOX_TOKEN in .env.production
-- [ ] Remove `SKIP_ENV_VALIDATION=1` from .env.production once all above are done
-- [ ] Re-run `npm run build && pm2 reload chabrin-web` after each update
+### Database — Neon
+- **Project:** Neon Dashboard → chabrin-website project
+- **Connection:** Use the **Pooled** connection string (host ends in `-pooler.<region>.aws.neon.tech`)
+- **Env var:** `DATABASE_URL` — set in Vercel Dashboard → Settings → Environment Variables
+- SSL is always required by Neon (`sslmode=require` in connection string)
+- `prepare: false` is set in `db.ts` for PgBouncer compatibility
+
+### Environment variables (set in Vercel Dashboard, NOT in files)
+| Variable | Where to get it |
+|---|---|
+| `DATABASE_URL` | Neon Dashboard → Connection Details → Pooled |
+| `BLOB_READ_WRITE_TOKEN` | Vercel Dashboard → Storage → Blob |
+| `SANITY_API_TOKEN` | Sanity Dashboard → API → Tokens |
+| `NEXT_PUBLIC_SANITY_PROJECT_ID` | Sanity Dashboard → Project settings |
+| `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | Cloudflare → Turnstile |
+| `TURNSTILE_SECRET_KEY` | Cloudflare → Turnstile |
+| `SMTP_HOST / SMTP_USER / SMTP_PASS` | Your email provider |
+| `ADMIN_PASSWORD` | Generate: `openssl rand -base64 24` |
+| `ADMIN_SESSION_SECRET` | Generate: `openssl rand -base64 32` |
