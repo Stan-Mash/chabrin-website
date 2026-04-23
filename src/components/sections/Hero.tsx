@@ -73,7 +73,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.66, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-              className="flex flex-col sm:flex-row gap-4 mb-12"
+              className="flex flex-col sm:flex-row gap-4 mb-6 lg:mb-12"
             >
               <Link
                 href={`/${locale}/properties`}
@@ -97,11 +97,71 @@ export default function Hero() {
               </Link>
             </motion.div>
 
+            {/* ── Mobile-only photo mosaic (lg: hidden — desktop uses the right column) ── */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.72, duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+              className="lg:hidden grid grid-cols-2 gap-3 mb-8"
+            >
+              {/* Main photo card */}
+              <div className="relative col-span-1 h-44 rounded-2xl overflow-hidden shadow-2xl border border-white/10">
+                <Image
+                  src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=600&q=80"
+                  alt="Premium property managed by Chabrin Agencies"
+                  fill
+                  className="object-cover"
+                  sizes="45vw"
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 px-3 pb-3">
+                  <p className="text-brand-cyan text-[9px] font-bold uppercase tracking-widest mb-0.5">Portfolio</p>
+                  <p className="text-white font-bold text-xs leading-tight">Nairobi Metro</p>
+                  <p className="text-white/50 text-[9px]">Westlands · Karen · Kasarani</p>
+                </div>
+                <div className="absolute top-2.5 left-2.5 flex items-center gap-1 bg-black/50
+                                backdrop-blur-sm border border-white/15 rounded-full px-2 py-1">
+                  <span className="w-1 h-1 rounded-full bg-brand-cyan animate-pulse" />
+                  <span className="text-white text-[9px] font-semibold">EARB</span>
+                </div>
+              </div>
+
+              {/* Right column: stat + credential */}
+              <div className="col-span-1 flex flex-col gap-3">
+                {/* 30+ badge */}
+                <div className="flex-1 bg-white rounded-2xl shadow-lg flex flex-col items-center justify-center text-center p-3">
+                  <span className="text-brand-navy font-extrabold text-2xl leading-none">30+</span>
+                  <span className="text-slate-400 text-[10px] font-medium mt-0.5">Years</span>
+                </div>
+                {/* Second photo */}
+                <div className="relative flex-[1.6] rounded-2xl overflow-hidden border border-brand-cyan/25 shadow-lg">
+                  <Image
+                    src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=400&q=80"
+                    alt="Interior of a Chabrin managed property"
+                    fill
+                    className="object-cover"
+                    sizes="45vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/85 via-transparent to-transparent" />
+                  <div className="absolute bottom-2 left-2.5 right-2.5">
+                    <div className="flex items-center justify-between">
+                      <p className="text-white font-bold text-[10px]">Kilimani</p>
+                      <span className="bg-brand-cyan/20 border border-brand-cyan/40 text-brand-cyan
+                                       text-[9px] font-bold px-2 py-0.5 rounded-full">
+                        Available
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
             {/* Trust indicators */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.82, duration: 0.6 }}
+              transition={{ delay: 0.92, duration: 0.6 }}
               className="flex flex-wrap items-center gap-5 pt-8 border-t border-white/10"
             >
               {[t("trust_earb"), t("trust_odpc"), t("trust_nairobi")].map((label) => (

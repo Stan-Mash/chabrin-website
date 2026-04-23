@@ -937,6 +937,7 @@ export default function SearchInterface() {
             listings={filtered}
             activeId={activeId}
             onPinHover={setActiveId}
+            visible={mobileMap}
           />
 
           {/* Mobile close button */}

@@ -53,18 +53,40 @@ function MapController({ activeId, listings }: { activeId: string | null; listin
   return null;
 }
 
+// ── MapResizer — fixes gray tiles on mobile ───────────────────────────────────
+// Leaflet computes tile dimensions at mount time. When the container is
+// display:none the width/height are zero, so all tiles render gray.
+// This component runs invalidateSize() on every visibility change (including
+// initial mount), which forces Leaflet to recalculate as soon as the map
+// becomes visible.
+
+function MapResizer({ visible }: { visible: boolean }) {
+  const map = useMap();
+  useEffect(() => {
+    const id = requestAnimationFrame(() => {
+      map.invalidateSize({ animate: false });
+    });
+    return () => cancelAnimationFrame(id);
+  }, [visible, map]); // fires on mount AND every time visibility toggles
+  return null;
+}
+
 // ── Main component ────────────────────────────────────────────────────────────
 
 interface InteractiveSearchMapProps {
   listings: SearchListing[];
   activeId: string | null;
   onPinHover: (id: string | null) => void;
+  /** Pass true when the map container is actually visible in the DOM.
+   *  Triggers invalidateSize() so Leaflet re-measures after un-hiding. */
+  visible?: boolean;
 }
 
 export default function InteractiveSearchMap({
   listings,
   activeId,
   onPinHover,
+  visible = true,
 }: InteractiveSearchMapProps) {
   const centre: [number, number] = [-1.286389, 36.817223];
 
@@ -87,6 +109,7 @@ export default function InteractiveSearchMap({
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           maxZoom={19}
         />
+        <MapResizer visible={visible} />
         <MapController activeId={activeId} listings={listings} />
 
         {listings.map((listing) => {
