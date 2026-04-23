@@ -78,15 +78,15 @@ export default function PropertiesHero() {
         <h1 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-extrabold text-white leading-tight mb-3">
           <AnimatedHeadline text="Find Your Perfect Space" as="span" className="block" />
           <AnimatedHeadline
-            text="Nairobi, Kiambu, Murang'a & Kajiado"
+            text="Across Kenya's Growth Markets"
             as="span"
             className="block text-brand-cyan"
             delay={0.25}
           />
         </h1>
         <p className="text-white/65 text-sm sm:text-base max-w-xl mx-auto mb-7 leading-relaxed">
-          Professionally managed properties across 7 corridors — from Murang&apos;a and
-          Thika in the north to Kitengela, Athi River and Ongata Rongai in the south.
+          Professionally managed properties spanning Nairobi, Kiambu, Murang&apos;a,
+          Kajiado, Machakos and beyond — organised into seven strategic corridors.
         </p>
 
         {/* ── Search box ── */}

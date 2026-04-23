@@ -119,9 +119,9 @@ export default function Hero() {
               <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between">
                 <div>
                   <p className="text-brand-cyan text-[10px] font-bold uppercase tracking-widest mb-0.5">
-                    Premium Portfolio
+                    Pan-Kenya Portfolio
                   </p>
-                  <p className="text-white font-bold text-sm">Nairobi Metropolitan</p>
+                  <p className="text-white font-bold text-sm">Where Kenya Grows</p>
                 </div>
                 <span className="bg-brand-cyan text-brand-navy text-[10px] font-extrabold px-3 py-1.5 rounded-full">
                   Available
@@ -188,13 +188,13 @@ export default function Hero() {
               {/* Bottom label */}
               <div className="absolute bottom-0 left-0 right-0 px-5 pb-5">
                 <p className="text-brand-cyan text-[10px] font-bold uppercase tracking-widest mb-1">
-                  Premium Portfolio
+                  Pan-Kenya Portfolio
                 </p>
                 <p className="text-white font-bold text-base leading-tight">
-                  Nairobi Metropolitan
+                  Where Kenya Grows
                 </p>
                 <p className="text-white/55 text-xs mt-0.5">
-                  Westlands · Kilimani · Karen · Kasarani & beyond
+                  Nairobi · Kiambu · Murang'a · Kajiado · Machakos & beyond
                 </p>
               </div>
             </motion.div>

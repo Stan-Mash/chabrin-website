@@ -8,7 +8,7 @@ export const revalidate = 3600;
 export const metadata: Metadata = {
   title: "Careers",
   description:
-    "Join Chabrin Agencies Limited — Kenya's trusted property management company. View open positions in Nairobi, Kiambu, Murang'a & Kajiado.",
+    "Join Chabrin Agencies Limited — Kenya's trusted property management company. View open positions across Nairobi, Kiambu, Murang'a, Kajiado, Machakos and beyond.",
 };
 
 const DEPT_COLOURS: Record<string, string> = {
@@ -48,8 +48,8 @@ export default async function CareersPage() {
             <span className="text-brand-cyan">Property Management</span>
           </h1>
           <p className="text-slate-300 max-w-xl text-lg leading-relaxed mb-8">
-            Join a team that has managed properties across Nairobi, Kiambu, Murang&apos;a &amp; Kajiado
-            for over 30 years. Professional growth, stable employment, and real impact.
+            Join a team managing properties across Nairobi, Kiambu, Murang&apos;a,
+            Kajiado, Machakos and beyond — for over 30 years. Professional growth, stable employment, and real impact.
           </p>
           <div className="flex flex-wrap gap-6 text-sm text-slate-400">
             <span>📍 Nairobi, Kenya</span>
@@ -66,7 +66,7 @@ export default async function CareersPage() {
           <h2 className="text-2xl font-bold text-brand-navy mb-8 text-center">Why Chabrin?</h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {[
-              { icon: "🛡️", title: "Integrity First", desc: "30+ years of trust with landlords and tenants across four counties." },
+              { icon: "🛡️", title: "Integrity First", desc: "30+ years of trust with landlords and tenants across Kenya's key growth markets." },
               { icon: "📈", title: "Career Growth", desc: "Structured training, mentorship, and clear career progression paths." },
               { icon: "🤝", title: "Strong Team", desc: "Collaborative environment where every team member's input matters." },
               { icon: "🏙️", title: "Real Impact", desc: "Your work directly improves the lives of hundreds of tenants and landlords." },

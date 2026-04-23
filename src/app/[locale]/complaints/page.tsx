@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description:
     "Submit a complaint, maintenance request, or feedback to Chabrin Agencies. " +
     "Every submission is acknowledged with a reference number and tracked to resolution. " +
-    "Serving tenants and landlords across Nairobi, Kiambu, Murang'a, and Kajiado.",
+    "Serving tenants and landlords across Nairobi, Kiambu, Murang'a, Kajiado, Machakos, and beyond.",
 };
 
 export default async function ComplaintsPage({ params }: Props) {

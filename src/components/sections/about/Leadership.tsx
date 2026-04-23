@@ -3,7 +3,7 @@ import { useTranslations } from "next-intl";
 const TEAM = [
   { initials: "CC", name: "Charles Chabrin", title: "Managing Director", bio: "A chartered property manager with over 20 years in Kenya's real estate sector. Leads Chabrin's strategic direction and client relationships." },
   { initials: "AM", name: "Amina Mwangi", title: "Head of Operations", bio: "Oversees day-to-day property management across all zones, ensuring service standards and tenant satisfaction." },
-  { initials: "JK", name: "James Kariuki", title: "Chief Valuation Officer", bio: "Registered valuer with expertise in residential and commercial property valuation across Nairobi, Kiambu, Murang'a, and Kajiado counties." },
+  { initials: "JK", name: "James Kariuki", title: "Chief Valuation Officer", bio: "Registered valuer with expertise in residential and commercial property valuation across Nairobi, Kiambu, Murang'a, Kajiado, Machakos, and Kenya's expanding growth corridors." },
 ];
 
 export default function Leadership() {

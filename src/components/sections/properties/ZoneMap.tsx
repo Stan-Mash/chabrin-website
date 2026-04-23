@@ -17,7 +17,7 @@ export default function ZoneMap({ activeZone, setActiveZone }: ZoneMapProps) {
       zoom={10}
       scrollWheelZoom={false}
       style={{ height: "100%", width: "100%" }}
-      aria-label="Chabrin Agencies management corridors across Nairobi Metropolitan"
+      aria-label="Chabrin Agencies management corridors across Kenya's major growth markets"
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> contributors'

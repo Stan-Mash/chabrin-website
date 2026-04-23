@@ -32,7 +32,7 @@ export default function InteractiveMapWrapper() {
       {/* ── Map ── */}
       <div
         className="lg:col-span-2 h-[520px] rounded-2xl overflow-hidden shadow-lg border border-slate-200"
-        aria-label="Interactive map of Chabrin management corridors across Nairobi Metropolitan"
+        aria-label="Interactive map of Chabrin management corridors across Kenya's major growth markets"
       >
         <ZoneMap activeZone={activeZone} setActiveZone={setActiveZone} />
       </div>
