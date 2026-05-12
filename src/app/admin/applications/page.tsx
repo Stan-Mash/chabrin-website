@@ -62,7 +62,7 @@ export default async function AdminApplicationsPage({ searchParams }: PageProps)
 
       {/* Filters */}
       <form method="GET" className="bg-white rounded-2xl border border-slate-200 p-4 mb-6 flex flex-wrap gap-3">
-        <select name="job_id" defaultValue={job_id ?? ""}
+        <select name="job_id" defaultValue={job_slug ?? ""}
           className="px-3 py-2 rounded-xl border border-slate-200 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-brand-navy/20">
           <option value="">All Jobs</option>
           {jobs.map(j => <option key={j.slug} value={j.slug}>{j.title}</option>)}
