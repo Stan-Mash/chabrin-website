@@ -207,8 +207,8 @@ export default function ApplicationDetailPage() {
             </dl>
           </div>
 
-          {/* CV + Cover Letter */}
-          {(app.cv_url || app.cover_letter) && (
+          {/* CV + Documents + Cover Letter */}
+          {(app.cv_url || (app.documents && app.documents.length > 0) || app.cover_letter) && (
             <div className="bg-white rounded-2xl border border-slate-200 p-6 space-y-4">
               {app.cv_url && (
                 <div>
@@ -217,6 +217,37 @@ export default function ApplicationDetailPage() {
                     className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-brand-navy text-white text-sm font-bold hover:bg-brand-cyan hover:text-brand-navy transition-colors">
                     &#128206; Download CV
                   </a>
+                </div>
+              )}
+              {app.documents && app.documents.length > 0 && (
+                <div>
+                  <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
+                    Academic &amp; Supporting Documents
+                  </p>
+                  <ul className="space-y-2">
+                    {app.documents.map((doc, i) => {
+                      const ext = doc.name.split(".").pop()?.toLowerCase() ?? "";
+                      const icon = ext === "pdf" ? "📄" : ["doc", "docx"].includes(ext) ? "📝" : "🖼️";
+                      const sizeKb = Math.round(doc.size / 1024);
+                      return (
+                        <li key={i} className="flex items-center gap-3 px-4 py-2.5 rounded-xl border border-slate-100 bg-slate-50">
+                          <span className="text-lg leading-none">{icon}</span>
+                          <div className="min-w-0 flex-1">
+                            <p className="text-sm font-semibold text-brand-navy truncate">{doc.name}</p>
+                            <p className="text-xs text-slate-400">{sizeKb} KB</p>
+                          </div>
+                          <a
+                            href={doc.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="shrink-0 text-xs font-bold text-brand-navy hover:text-brand-cyan transition-colors px-3 py-1.5 rounded-lg border border-slate-200 hover:border-brand-cyan"
+                          >
+                            Open
+                          </a>
+                        </li>
+                      );
+                    })}
+                  </ul>
                 </div>
               )}
               {app.cover_letter && (

@@ -67,3 +67,42 @@ export async function deleteFromBlob(url: string): Promise<void> {
 
 /** @deprecated Use uploadToBlob() instead */
 export const uploadToSpaces = uploadToBlob;
+
+// ── Document upload (PDF / DOC / DOCX / images) ───────────────────────────────
+
+const ALLOWED_DOC_TYPES: Record<string, string> = {
+  "application/pdf":                                                          "pdf",
+  "application/msword":                                                       "doc",
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document": "docx",
+  "image/jpeg": "jpg",
+  "image/png":  "png",
+};
+
+/**
+ * Upload any CV or academic document to Vercel Blob.
+ * Images have EXIF stripped; PDFs/DOCs are uploaded as-is.
+ */
+export async function uploadDocument(
+  buffer:   Buffer,
+  pathname: string,
+  mimeType: string
+): Promise<string> {
+  const ext = ALLOWED_DOC_TYPES[mimeType];
+  if (!ext) throw new Error(`Unsupported document type: ${mimeType}`);
+
+  let finalBuffer = buffer;
+
+  if (mimeType === "image/jpeg" || mimeType === "image/png") {
+    finalBuffer = await sharp(buffer)
+      .rotate()
+      .toFormat(mimeType === "image/jpeg" ? "jpeg" : "png", { quality: 85 })
+      .toBuffer();
+  }
+
+  const blob = await put(pathname, finalBuffer, {
+    access:      "public",
+    contentType: mimeType,
+  });
+
+  return blob.url;
+}

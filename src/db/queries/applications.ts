@@ -32,6 +32,7 @@ export interface Application {
   cv_url:               string | null;
   cover_letter:         string | null;
   answers:              Record<string, string>;
+  documents:            { name: string; url: string; size: number }[];
   stage:                AppStage;
   rejection_reason:     string | null;
   internal_notes:       string | null;
@@ -80,6 +81,7 @@ export interface NewApplication {
   cv_url?:       string | null;
   cover_letter?: string | null;
   answers:       Record<string, string>;
+  documents?:    { name: string; url: string; size: number }[];
   consent_given: boolean;
   source?:       string | null;
 }
@@ -127,12 +129,14 @@ export async function insertApplication(app: NewApplication): Promise<void> {
   await sql`
     INSERT INTO applications (
       reference, job_id, job_title, full_name, email, phone,
-      linkedin_url, cv_url, cover_letter, answers, consent_given, source
+      linkedin_url, cv_url, cover_letter, answers, documents, consent_given, source
     ) VALUES (
       ${app.reference}, ${app.job_id}, ${app.job_title},
       ${app.full_name}, ${app.email}, ${app.phone},
       ${app.linkedin_url ?? null}, ${app.cv_url ?? null}, ${app.cover_letter ?? null},
-      ${JSON.stringify(app.answers)}, ${app.consent_given}, ${app.source ?? null}
+      ${JSON.stringify(app.answers)},
+      ${JSON.stringify(app.documents ?? [])},
+      ${app.consent_given}, ${app.source ?? null}
     )
   `;
 }

@@ -6,9 +6,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import { submitApplication } from "@/actions/submit-application";
+
 type ScreeningQuestion = { question: string; required: boolean; fieldType?: "text" | "yesno" };
 
-// ── Schema (mirrors server action, client-side validation) ───────────────────
+interface UploadedDoc { name: string; url: string; size: number }
+
+// ── Schema ────────────────────────────────────────────────────────────────────
 
 const schema = z.object({
   full_name:    z.string().min(2, "Full name is required").max(120),
@@ -21,28 +24,173 @@ const schema = z.object({
 
 type FormValues = z.infer<typeof schema>;
 
+const ALLOWED_CV_TYPES   = ".pdf,.doc,.docx";
+const ALLOWED_DOC_TYPES  = ".pdf,.doc,.docx,.jpg,.jpeg,.png";
+const MAX_SIZE_MB         = 5;
+const MAX_SIZE_BYTES      = MAX_SIZE_MB * 1024 * 1024;
+
+// ── File upload helper ────────────────────────────────────────────────────────
+
+async function uploadFile(file: File): Promise<UploadedDoc> {
+  const fd = new FormData();
+  fd.append("file", file);
+  const res = await fetch("/api/careers/upload-doc", { method: "POST", body: fd });
+  const json = await res.json() as { url?: string; name?: string; size?: number; error?: string };
+  if (!res.ok || !json.url) throw new Error(json.error ?? "Upload failed");
+  return { url: json.url, name: json.name ?? file.name, size: json.size ?? file.size };
+}
+
+// ── File row ──────────────────────────────────────────────────────────────────
+
+function FileRow({ file, status, error, onRemove }: {
+  file:    File;
+  status:  "pending" | "uploading" | "done" | "error";
+  error?:  string;
+  onRemove: () => void;
+}) {
+  const kb = (file.size / 1024).toFixed(0);
+  return (
+    <div className={`flex items-center gap-3 px-3 py-2 rounded-xl border text-sm ${
+      status === "done"  ? "bg-green-50 border-green-200" :
+      status === "error" ? "bg-rose-50 border-rose-200"   :
+                           "bg-slate-50 border-slate-200"
+    }`}>
+      <span className="text-lg">
+        {status === "done" ? "✅" : status === "error" ? "❌" : status === "uploading" ? "⏳" : "📄"}
+      </span>
+      <div className="flex-1 min-w-0">
+        <p className="font-medium text-slate-700 truncate">{file.name}</p>
+        {error
+          ? <p className="text-xs text-rose-600">{error}</p>
+          : <p className="text-xs text-slate-400">{kb} KB</p>
+        }
+      </div>
+      <button
+        type="button"
+        onClick={onRemove}
+        className="text-slate-400 hover:text-rose-500 transition-colors text-lg leading-none"
+      >
+        &times;
+      </button>
+    </div>
+  );
+}
+
+// ── Props ─────────────────────────────────────────────────────────────────────
+
 interface Props {
   jobSlug:            string;
   jobTitle:           string;
   screeningQuestions: ScreeningQuestion[];
 }
 
+// ── Main component ────────────────────────────────────────────────────────────
+
 export default function ApplicationForm({ jobSlug, jobTitle, screeningQuestions }: Props) {
-  const [token, setToken]               = useState<string | null>(null);
-  const [answers, setAnswers]           = useState<Record<string, string>>({});
-  const [result, setResult]             = useState<{ success: true; reference: string } | { success: false; error: string } | null>(null);
-  const [submitting, setSubmitting]     = useState(false);
-  const turnstileRef                    = useRef<TurnstileInstance>(null);
+  const [token, setToken]           = useState<string | null>(null);
+  const [answers, setAnswers]       = useState<Record<string, string>>({});
+  const [result, setResult]         = useState<{ success: true; reference: string } | { success: false; error: string } | null>(null);
+  const [submitting, setSubmitting] = useState(false);
+  const turnstileRef                = useRef<TurnstileInstance>(null);
+
+  // CV state
+  const [cvFile,   setCvFile]   = useState<File | null>(null);
+  const [cvStatus, setCvStatus] = useState<"pending" | "uploading" | "done" | "error">("pending");
+  const [cvError,  setCvError]  = useState<string>("");
+  const [cvDoc,    setCvDoc]    = useState<UploadedDoc | null>(null);
+
+  // Supporting docs state
+  const [docFiles,    setDocFiles]    = useState<File[]>([]);
+  const [docStatuses, setDocStatuses] = useState<("pending" | "uploading" | "done" | "error")[]>([]);
+  const [docErrors,   setDocErrors]   = useState<string[]>([]);
+  const [docUploaded, setDocUploaded] = useState<(UploadedDoc | null)[]>([]);
+
+  const cvInputRef  = useRef<HTMLInputElement>(null);
+  const docInputRef = useRef<HTMLInputElement>(null);
 
   const { register, handleSubmit, formState: { errors } } = useForm<FormValues>({
     resolver: zodResolver(schema),
   });
 
+  // ── CV upload ───────────────────────────────────────────────────────────────
+
+  const handleCvChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (file.size > MAX_SIZE_BYTES) {
+      setCvFile(file); setCvStatus("error"); setCvError(`File exceeds ${MAX_SIZE_MB} MB.`); return;
+    }
+    setCvFile(file); setCvStatus("uploading"); setCvError(""); setCvDoc(null);
+    try {
+      const doc = await uploadFile(file);
+      setCvDoc(doc); setCvStatus("done");
+    } catch (err) {
+      setCvStatus("error");
+      setCvError(err instanceof Error ? err.message : "Upload failed");
+    }
+    e.target.value = "";
+  };
+
+  const removeCV = () => { setCvFile(null); setCvStatus("pending"); setCvDoc(null); setCvError(""); };
+
+  // ── Supporting docs upload ──────────────────────────────────────────────────
+
+  const handleDocsChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newFiles = Array.from(e.target.files ?? []);
+    if (!newFiles.length) return;
+
+    const available = 4 - docFiles.length;
+    const toAdd = newFiles.slice(0, available);
+
+    const idx = docFiles.length;
+    setDocFiles(prev => [...prev, ...toAdd]);
+    setDocStatuses(prev => [...prev, ...toAdd.map(() => "pending" as const)]);
+    setDocErrors(prev => [...prev, ...toAdd.map(() => "")]);
+    setDocUploaded(prev => [...prev, ...toAdd.map(() => null)]);
+
+    for (let i = 0; i < toAdd.length; i++) {
+      const file = toAdd[i];
+      const pos  = idx + i;
+      if (file.size > MAX_SIZE_BYTES) {
+        setDocStatuses(prev => { const a = [...prev]; a[pos] = "error"; return a; });
+        setDocErrors(prev => { const a = [...prev]; a[pos] = `Exceeds ${MAX_SIZE_MB} MB`; return a; });
+        continue;
+      }
+      setDocStatuses(prev => { const a = [...prev]; a[pos] = "uploading"; return a; });
+      try {
+        const doc = await uploadFile(file);
+        setDocUploaded(prev => { const a = [...prev]; a[pos] = doc; return a; });
+        setDocStatuses(prev => { const a = [...prev]; a[pos] = "done"; return a; });
+      } catch (err) {
+        setDocStatuses(prev => { const a = [...prev]; a[pos] = "error"; return a; });
+        setDocErrors(prev => { const a = [...prev]; a[pos] = err instanceof Error ? err.message : "Upload failed"; return a; });
+      }
+    }
+    e.target.value = "";
+  };
+
+  const removeDoc = (i: number) => {
+    setDocFiles(prev   => prev.filter((_,   j) => j !== i));
+    setDocStatuses(prev=> prev.filter((_,   j) => j !== i));
+    setDocErrors(prev  => prev.filter((_,   j) => j !== i));
+    setDocUploaded(prev=> prev.filter((_,   j) => j !== i));
+  };
+
+  // ── Submit ──────────────────────────────────────────────────────────────────
+
   const onSubmit = async (values: FormValues) => {
+    if (cvFile && cvStatus !== "done") {
+      return; // CV upload still pending or failed
+    }
+    const allDocsReady = docStatuses.every(s => s === "done" || s === "error");
+    if (!allDocsReady) return;
+
     setSubmitting(true);
     setResult(null);
 
-    const payload = {
+    const documents = docUploaded.filter((d): d is UploadedDoc => d !== null);
+
+    const res = await submitApplication({
       job_slug:     jobSlug,
       full_name:    values.full_name,
       email:        values.email,
@@ -52,9 +200,10 @@ export default function ApplicationForm({ jobSlug, jobTitle, screeningQuestions 
       answers,
       consent:      true as const,
       token:        token ?? undefined,
-    };
+      cv_url:       cvDoc?.url || "",
+      documents,
+    });
 
-    const res = await submitApplication(payload);
     setResult(res);
     setSubmitting(false);
 
@@ -63,6 +212,8 @@ export default function ApplicationForm({ jobSlug, jobTitle, screeningQuestions 
       setToken(null);
     }
   };
+
+  // ── Success screen ──────────────────────────────────────────────────────────
 
   if (result?.success) {
     return (
@@ -90,6 +241,8 @@ export default function ApplicationForm({ jobSlug, jobTitle, screeningQuestions 
       </div>
     );
   }
+
+  // ── Form ────────────────────────────────────────────────────────────────────
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -158,7 +311,87 @@ export default function ApplicationForm({ jobSlug, jobTitle, screeningQuestions 
             />
             {errors.linkedin_url && <p className="mt-1 text-xs text-rose-600">{errors.linkedin_url.message}</p>}
           </div>
+        </div>
+      </div>
 
+      {/* Documents */}
+      <div className="bg-white rounded-2xl border border-slate-200 p-6">
+        <h3 className="font-bold text-brand-navy mb-1 text-sm uppercase tracking-wider">CV &amp; Documents</h3>
+        <p className="text-xs text-slate-500 mb-5">PDF, Word or image — max 5 MB each. Files are uploaded securely to our servers.</p>
+
+        {/* CV */}
+        <div className="mb-5">
+          <label className="block text-sm font-semibold text-slate-700 mb-2">
+            CV / Resume <span className="text-rose-500">*</span>
+          </label>
+          {cvFile ? (
+            <FileRow file={cvFile} status={cvStatus} error={cvError} onRemove={removeCV} />
+          ) : (
+            <button
+              type="button"
+              onClick={() => cvInputRef.current?.click()}
+              className="flex items-center gap-3 w-full px-4 py-3 rounded-xl border-2 border-dashed border-slate-200
+                         text-sm text-slate-500 hover:border-brand-navy/30 hover:bg-slate-50 transition-colors"
+            >
+              <span className="text-xl">📎</span>
+              <span>Click to attach your CV</span>
+              <span className="ml-auto text-xs text-slate-400">PDF · DOC · DOCX</span>
+            </button>
+          )}
+          <input
+            ref={cvInputRef}
+            type="file"
+            accept={ALLOWED_CV_TYPES}
+            onChange={handleCvChange}
+            className="hidden"
+          />
+          {cvFile && cvStatus === "error" && (
+            <p className="mt-1.5 text-xs text-rose-600">Please remove this file and attach a valid CV before submitting.</p>
+          )}
+        </div>
+
+        {/* Academic / supporting documents */}
+        <div>
+          <label className="block text-sm font-semibold text-slate-700 mb-1.5">
+            Academic Certificates &amp; Supporting Documents
+            <span className="font-normal text-slate-400 ml-1">(optional — up to 4 files)</span>
+          </label>
+          <p className="text-xs text-slate-400 mb-3">
+            e.g. degree certificate, diplomas, KCSE certificate, professional licences
+          </p>
+
+          <div className="space-y-2 mb-3">
+            {docFiles.map((f, i) => (
+              <FileRow
+                key={i}
+                file={f}
+                status={docStatuses[i] ?? "pending"}
+                error={docErrors[i]}
+                onRemove={() => removeDoc(i)}
+              />
+            ))}
+          </div>
+
+          {docFiles.length < 4 && (
+            <button
+              type="button"
+              onClick={() => docInputRef.current?.click()}
+              className="flex items-center gap-3 w-full px-4 py-3 rounded-xl border-2 border-dashed border-slate-200
+                         text-sm text-slate-500 hover:border-brand-navy/30 hover:bg-slate-50 transition-colors"
+            >
+              <span className="text-xl">📂</span>
+              <span>Add certificate or document</span>
+              <span className="ml-auto text-xs text-slate-400">PDF · DOC · JPG · PNG</span>
+            </button>
+          )}
+          <input
+            ref={docInputRef}
+            type="file"
+            accept={ALLOWED_DOC_TYPES}
+            multiple
+            onChange={handleDocsChange}
+            className="hidden"
+          />
         </div>
       </div>
 
@@ -216,7 +449,7 @@ export default function ApplicationForm({ jobSlug, jobTitle, screeningQuestions 
         {errors.cover_letter && <p className="mt-1 text-xs text-rose-600">{errors.cover_letter.message}</p>}
       </div>
 
-      {/* Turnstile + Consent */}
+      {/* Consent + Turnstile */}
       <div className="space-y-4">
         <div className="flex items-start gap-3">
           <input
@@ -226,8 +459,8 @@ export default function ApplicationForm({ jobSlug, jobTitle, screeningQuestions 
             className="mt-0.5 w-4 h-4 accent-brand-navy flex-shrink-0"
           />
           <label htmlFor="consent" className="text-sm text-slate-600 leading-relaxed">
-            I consent to Chabrin Agencies Limited collecting and processing my personal data for recruitment purposes,
-            in accordance with the{" "}
+            I consent to Chabrin Agencies Limited collecting and processing my personal data
+            (including uploaded documents) for recruitment purposes, in accordance with the{" "}
             <a href="/privacy-policy" target="_blank" rel="noopener noreferrer"
                className="text-brand-navy font-semibold hover:underline">
               Privacy Policy
@@ -246,6 +479,18 @@ export default function ApplicationForm({ jobSlug, jobTitle, screeningQuestions 
         />
       </div>
 
+      {/* Upload warnings */}
+      {cvFile && cvStatus === "uploading" && (
+        <p className="text-xs text-slate-500 bg-slate-50 border border-slate-200 rounded-lg px-3 py-2">
+          ⏳ Uploading your CV — please wait before submitting…
+        </p>
+      )}
+      {!cvFile && (
+        <p className="text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2">
+          ⚠️ No CV attached. A CV is strongly recommended — please attach one above.
+        </p>
+      )}
+
       {/* Error */}
       {result && !result.success && (
         <div className="bg-rose-50 border border-rose-200 rounded-xl px-4 py-3 text-sm text-rose-700">
@@ -256,17 +501,16 @@ export default function ApplicationForm({ jobSlug, jobTitle, screeningQuestions 
       {/* Submit */}
       <button
         type="submit"
-        disabled={submitting}
+        disabled={submitting || cvStatus === "uploading" || docStatuses.some(s => s === "uploading")}
         className="w-full py-3.5 rounded-full bg-brand-navy text-white font-bold text-sm
                    hover:bg-brand-cyan hover:text-brand-navy transition-colors
                    disabled:opacity-60 disabled:cursor-not-allowed"
       >
-        {submitting ? "Submitting…" : "Submit Application"}
+        {submitting ? "Submitting…" :
+         cvStatus === "uploading" ? "Uploading CV…" :
+         docStatuses.some(s => s === "uploading") ? "Uploading documents…" :
+         "Submit Application"}
       </button>
-
-      <p className="text-xs text-slate-500 text-center">
-        Your CV will be requested by email if you are shortlisted. No file upload required at this stage.
-      </p>
     </form>
   );
 }

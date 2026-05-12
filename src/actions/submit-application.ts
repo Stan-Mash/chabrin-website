@@ -40,6 +40,11 @@ const schema = z.object({
   consent:      z.literal(true),
   token:        z.string().optional(),
   cv_url:       z.string().url().optional().or(z.literal("")),
+  documents:    z.array(z.object({
+    name: z.string().max(200),
+    url:  z.string().url(),
+    size: z.number().int().nonnegative(),
+  })).max(5).optional(),
 });
 
 export type ApplicationInput = z.infer<typeof schema>;
@@ -129,6 +134,9 @@ function hrEmailHtml(
       <tr style="border-top:1px solid #f1f5f9;"><td style="padding:5px 0;color:#666;">Phone</td><td style="padding:5px 0;">${h(data.phone)}</td></tr>
       ${data.linkedin_url ? `<tr style="border-top:1px solid #f1f5f9;"><td style="padding:5px 0;color:#666;">LinkedIn</td><td style="padding:5px 0;"><a href="${h(data.linkedin_url)}" style="color:#0D1B8E;">${h(data.linkedin_url)}</a></td></tr>` : ""}
       ${data.cv_url ? `<tr style="border-top:1px solid #f1f5f9;"><td style="padding:5px 0;color:#666;">CV</td><td style="padding:5px 0;"><a href="${h(data.cv_url)}" style="color:#0D1B8E;">Download CV</a></td></tr>` : ""}
+      ${data.documents && data.documents.length > 0 ? data.documents.map((d, i) =>
+        `<tr style="border-top:1px solid #f1f5f9;"><td style="padding:5px 0;color:#666;">Doc ${i + 1}</td><td style="padding:5px 0;"><a href="${h(d.url)}" style="color:#0D1B8E;">${h(d.name)}</a></td></tr>`
+      ).join("") : ""}
     </table>
 
     ${data.cover_letter ? `
@@ -328,6 +336,7 @@ export async function submitApplication(
         cv_url:        data.cv_url       || null,
         cover_letter:  data.cover_letter || null,
         answers:       data.answers      ?? {},
+        documents:     data.documents    ?? [],
         consent_given: true,
         source:        data.source       || null,
       });

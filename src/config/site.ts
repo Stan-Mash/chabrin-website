@@ -14,8 +14,8 @@ export const siteConfig = {
     supported: ["en", "sw"],
   },
   contact: {
-    email: "info@chabrinagencies.co.ke",
-    careersEmail: "careers@chabrinagencies.co.ke",
+    email: "kimathiw@chabrinagencies.co.ke",
+    careersEmail: "kimathiw@chabrinagencies.co.ke",
     phone: "+254 720 854 389",
     phone2: "+254 745 912 688",
     whatsapp: "254720854389",
