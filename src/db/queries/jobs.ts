@@ -96,7 +96,7 @@ export async function listAllJobs(): Promise<(JobSummary & { application_count: 
            j.summary, j.status, j.closes_at, j.created_at,
            COUNT(a.id)::int AS application_count
     FROM jobs j
-    LEFT JOIN applications a ON a.job_id = j.id
+    LEFT JOIN applications a ON a.job_id = j.slug
     GROUP BY j.id
     ORDER BY j.created_at DESC
   `;

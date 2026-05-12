@@ -123,9 +123,9 @@ export async function isSuperAdmin(): Promise<boolean> {
 /**
  * Timing-safe string comparison — prevents timing attacks on session IDs.
  * Both strings are padded/truncated to 64 chars before comparison.
+ * No early return on length mismatch — avoids leaking length via timing.
  */
 export function safeCompare(a: string, b: string): boolean {
-  if (a.length !== b.length) return false;
   const ab = Buffer.from(a.padEnd(64, "0").slice(0, 64));
   const bb = Buffer.from(b.padEnd(64, "0").slice(0, 64));
   return timingSafeEqual(ab, bb);

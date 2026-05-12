@@ -100,6 +100,19 @@ export const jobSchema = defineType({
           type: "object",
           fields: [
             defineField({ name: "question", title: "Question", type: "string", validation: (r) => r.required() }),
+            defineField({
+              name: "fieldType",
+              title: "Answer Type",
+              type: "string",
+              options: {
+                list: [
+                  { title: "Text (free-form)", value: "text"  },
+                  { title: "Yes / No",         value: "yesno" },
+                ],
+                layout: "radio",
+              },
+              initialValue: "text",
+            }),
             defineField({ name: "required", title: "Required?", type: "boolean", initialValue: true }),
           ],
           preview: {

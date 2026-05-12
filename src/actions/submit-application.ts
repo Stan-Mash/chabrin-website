@@ -6,16 +6,23 @@
  * Flow:
  *  1. Validate input with Zod
  *  2. Verify Cloudflare Turnstile token
- *  3. Upload CV to DO Spaces (if provided)
- *  4. Generate reference APP-DEPT-YYYY-XXXXX
- *  5. Insert into applications table
- *  6. Log app_event
- *  7. Email HR + confirmation to candidate
+ *  3. Fetch job from Sanity (validates job exists + is still open)
+ *  4. Server-side validate required screening answers
+ *  5. Duplicate application check (same email + job)
+ *  6. Generate cryptographically-safe reference (retry on collision)
+ *  7. Insert into applications table (stores job_title at insert time)
+ *  8. Log app_event
+ *  9. Email HR + candidate confirmation
  */
 
 import { z } from "zod";
+import { randomBytes } from "crypto";
 import nodemailer from "nodemailer";
-import { insertApplication, logAppEvent } from "@/db/queries/applications";
+import {
+  insertApplication,
+  logAppEvent,
+  checkDuplicateApplication,
+} from "@/db/queries/applications";
 import { getJobBySlug } from "@/sanity/queries/jobs";
 import { siteConfig } from "@/config/site";
 
@@ -23,9 +30,8 @@ import { siteConfig } from "@/config/site";
 
 const schema = z.object({
   job_slug:     z.string().min(1),
-  job_id:       z.string().optional(), // legacy field — jobs now managed in Sanity
   full_name:    z.string().min(2).max(120).trim(),
-  email:        z.string().email().max(255).trim(),
+  email:        z.string().email().max(255).trim().toLowerCase(),
   phone:        z.string().min(9).max(25).trim(),
   linkedin_url: z.string().url().max(500).optional().or(z.literal("")),
   cover_letter: z.string().max(5000).trim().optional(),
@@ -33,7 +39,6 @@ const schema = z.object({
   source:       z.string().max(100).optional(),
   consent:      z.literal(true),
   token:        z.string().optional(),
-  // cv_url is set after upload, passed as hidden field
   cv_url:       z.string().url().optional().or(z.literal("")),
 });
 
@@ -45,8 +50,9 @@ function generateReference(department: string): string {
   const year  = new Date().getFullYear();
   const dept  = department.toUpperCase().slice(0, 3).replace(/[^A-Z]/g, "X");
   const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  const bytes = randomBytes(5);
   let suffix  = "";
-  for (let i = 0; i < 5; i++) suffix += chars[Math.floor(Math.random() * chars.length)];
+  for (let i = 0; i < 5; i++) suffix += chars[bytes[i] % chars.length];
   return `APP-${dept}-${year}-${suffix}`;
 }
 
@@ -84,6 +90,10 @@ function h(s: string): string {
           .replace(/"/g,"&quot;").replace(/'/g,"&#039;");
 }
 
+// ── Track URL (locale-agnostic — next-intl will redirect to preferred locale) ─
+
+const TRACK_URL = `${siteConfig.url}/en/careers/track`;
+
 // ── Emails ────────────────────────────────────────────────────────────────────
 
 function hrEmailHtml(
@@ -96,7 +106,7 @@ function hrEmailHtml(
   return `
 <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;color:#333;">
   <div style="background:#0D1B8E;padding:24px 20px;border-radius:8px 8px 0 0;text-align:center;">
-    <h1 style="color:#00C9C9;margin:0;font-size:20px;">New Application — Chabrin ATS</h1>
+    <h1 style="color:#00C9C9;margin:0;font-size:20px;">New Application &#8212; Chabrin ATS</h1>
     <p style="color:rgba(255,255,255,0.7);margin:6px 0 0;font-size:13px;">via chabrinagencies.com/careers</p>
   </div>
   <div style="background:#fff;border:1px solid #e2e8f0;border-top:none;padding:24px;border-radius:0 0 8px 8px;">
@@ -140,7 +150,7 @@ function hrEmailHtml(
 
     <div style="text-align:center;margin-top:20px;">
       <a href="${adminUrl}" style="display:inline-block;background:#0D1B8E;color:#fff;text-decoration:none;padding:12px 28px;border-radius:50px;font-weight:700;font-size:13px;">
-        Review in Admin Panel →
+        Review in Admin Panel &#8594;
       </a>
     </div>
   </div>
@@ -148,7 +158,6 @@ function hrEmailHtml(
 }
 
 function candidateConfirmationHtml(name: string, reference: string, jobTitle: string): string {
-  const statusUrl = `${siteConfig.url}/en/careers/track`;
   return `
 <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;color:#333;">
   <div style="background:#0D1B8E;padding:24px 20px;border-radius:8px 8px 0 0;text-align:center;">
@@ -170,13 +179,13 @@ function candidateConfirmationHtml(name: string, reference: string, jobTitle: st
 
     <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:16px;margin-bottom:24px;">
       <p style="margin:0 0 6px;font-size:13px;font-weight:700;color:#15803d;">What happens next?</p>
-      <p style="margin:0 0 4px;font-size:13px;color:#166534;">✓ Our HR team will review your application within 5 business days</p>
-      <p style="margin:0 0 4px;font-size:13px;color:#166534;">✓ Shortlisted candidates will be contacted for a phone/video screen</p>
-      <p style="margin:0;font-size:13px;color:#166534;">✓ You will receive an email update at every stage</p>
+      <p style="margin:0 0 4px;font-size:13px;color:#166534;">&#10003; Our HR team will review your application within 5 business days</p>
+      <p style="margin:0 0 4px;font-size:13px;color:#166534;">&#10003; Shortlisted candidates will be contacted for a phone/video screen</p>
+      <p style="margin:0;font-size:13px;color:#166534;">&#10003; You will receive an email update at every stage</p>
     </div>
 
     <div style="text-align:center;margin-bottom:20px;">
-      <a href="${statusUrl}" style="display:inline-block;background:#0D1B8E;color:#fff;text-decoration:none;padding:12px 28px;border-radius:50px;font-weight:700;font-size:13px;">
+      <a href="${TRACK_URL}" style="display:inline-block;background:#0D1B8E;color:#fff;text-decoration:none;padding:12px 28px;border-radius:50px;font-weight:700;font-size:13px;">
         Track Your Application
       </a>
     </div>
@@ -188,7 +197,7 @@ function candidateConfirmationHtml(name: string, reference: string, jobTitle: st
     </p>
 
     <p style="margin:20px 0 0;font-size:11px;color:#94a3b8;border-top:1px solid #f1f5f9;padding-top:14px;">
-      Chabrin Agencies Limited · Nacico Plaza, 5th Floor, Room 517, Landhies Road, Nairobi · EARB Registered<br>
+      Chabrin Agencies Limited &#183; Nacico Plaza, 5th Floor, Room 517, Landhies Road, Nairobi &#183; EARB Registered<br>
       Your personal data is handled in accordance with the Kenya Data Protection Act 2019.
       <a href="${siteConfig.url}/en/privacy-policy" style="color:#94a3b8;">Privacy Policy</a>
     </p>
@@ -209,7 +218,7 @@ function stageChangeEmailHtml(
     interview_scheduled: "Interview Scheduled",
     interviewed:         "Interview Complete",
     offer_extended:      "Offer Extended",
-    hired:               "Offer Accepted — Welcome to Chabrin!",
+    hired:               "Offer Accepted &#8212; Welcome to Chabrin!",
     rejected:            "Application Outcome",
   };
   const STAGE_COLOURS: Record<string, string> = {
@@ -223,13 +232,12 @@ function stageChangeEmailHtml(
   };
   const label  = STAGE_LABELS[stage]  ?? stage;
   const colour = STAGE_COLOURS[stage] ?? "#0D1B8E";
-  const trackUrl = `${siteConfig.url}/en/careers/track`;
 
   return `
 <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;color:#333;">
   <div style="background:#0D1B8E;padding:24px 20px;border-radius:8px 8px 0 0;text-align:center;">
     <h1 style="color:#00C9C9;margin:0;font-size:20px;">Application Update</h1>
-    <p style="color:rgba(255,255,255,0.7);margin:6px 0 0;font-size:13px;">Chabrin Agencies Limited — ${h(jobTitle)}</p>
+    <p style="color:rgba(255,255,255,0.7);margin:6px 0 0;font-size:13px;">Chabrin Agencies Limited &#8212; ${h(jobTitle)}</p>
   </div>
   <div style="background:#fff;border:1px solid #e2e8f0;border-top:none;padding:28px 24px;border-radius:0 0 8px 8px;">
     <p style="margin:0 0 16px;font-size:15px;">Dear <strong>${h(name)}</strong>,</p>
@@ -239,7 +247,7 @@ function stageChangeEmailHtml(
 
     <div style="border:2px solid ${colour};border-radius:12px;padding:16px 20px;margin-bottom:24px;text-align:center;">
       <p style="margin:0 0 4px;font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:${colour};font-weight:700;">New Status</p>
-      <p style="margin:0;font-size:22px;font-weight:900;color:${colour};">${h(label)}</p>
+      <p style="margin:0;font-size:22px;font-weight:900;color:${colour};">${label}</p>
     </div>
 
     ${note ? `
@@ -251,7 +259,7 @@ function stageChangeEmailHtml(
     <p style="margin:0 0 4px;font-size:13px;color:#475569;">Reference: <strong>${h(reference)}</strong></p>
 
     <div style="text-align:center;margin:20px 0;">
-      <a href="${trackUrl}" style="display:inline-block;background:#0D1B8E;color:#fff;text-decoration:none;padding:12px 28px;border-radius:50px;font-weight:700;font-size:13px;">
+      <a href="${TRACK_URL}" style="display:inline-block;background:#0D1B8E;color:#fff;text-decoration:none;padding:12px 28px;border-radius:50px;font-weight:700;font-size:13px;">
         Track Application
       </a>
     </div>
@@ -260,7 +268,7 @@ function stageChangeEmailHtml(
       Questions? <a href="mailto:${siteConfig.contact.careersEmail}" style="color:#0D1B8E;">${siteConfig.contact.careersEmail}</a>
     </p>
     <p style="margin:18px 0 0;font-size:11px;color:#94a3b8;border-top:1px solid #f1f5f9;padding-top:14px;">
-      Chabrin Agencies Limited · Nacico Plaza, 5th Floor, Room 517, Landhies Road, Nairobi
+      Chabrin Agencies Limited &#183; Nacico Plaza, 5th Floor, Room 517, Landhies Road, Nairobi
     </p>
   </div>
 </div>`;
@@ -281,32 +289,63 @@ export async function submitApplication(
   const ok = await verifyTurnstile(data.token);
   if (!ok) return { success: false, error: "Bot verification failed. Please refresh and try again." };
 
-  // Get job from Sanity for department + title (used for reference generation and email)
   const job = await getJobBySlug(data.job_slug);
   if (!job) return { success: false, error: "This position is no longer accepting applications." };
 
-  const reference = generateReference(job.department);
+  // Server-side validation of required screening answers
+  for (const sq of job.screeningQuestions ?? []) {
+    if (sq.required) {
+      const answer = (data.answers ?? {})[sq.question]?.trim();
+      if (!answer) {
+        return { success: false, error: `Please answer the required question: "${sq.question}"` };
+      }
+    }
+  }
 
-  try {
-    await insertApplication({
-      reference,
-      job_id:       data.job_slug, // store slug as identifier (jobs now in Sanity)
-      full_name:    data.full_name,
-      email:        data.email,
-      phone:        data.phone,
-      linkedin_url: data.linkedin_url || null,
-      cv_url:       data.cv_url       || null,
-      cover_letter: data.cover_letter || null,
-      answers:      data.answers      ?? {},
-      consent_given: true,
-      source:        data.source      || null,
-    });
-  } catch (err) {
-    console.error("[ats] db-insert-failed", {
-      reference,
-      error: err instanceof Error ? err.message : "unknown",
-      time: new Date().toISOString(),
-    });
+  // Prevent duplicate active applications for the same job
+  const isDuplicate = await checkDuplicateApplication(data.job_slug, data.email);
+  if (isDuplicate) {
+    return {
+      success: false,
+      error: "You have already applied for this position. Check your inbox for your reference number.",
+    };
+  }
+
+  // Generate reference — retry up to 3× on the unlikely UUID collision
+  let reference = "";
+  let inserted  = false;
+  for (let attempt = 0; attempt < 3; attempt++) {
+    reference = generateReference(job.department);
+    try {
+      await insertApplication({
+        reference,
+        job_id:        data.job_slug,
+        job_title:     job.title,
+        full_name:     data.full_name,
+        email:         data.email,
+        phone:         data.phone,
+        linkedin_url:  data.linkedin_url || null,
+        cv_url:        data.cv_url       || null,
+        cover_letter:  data.cover_letter || null,
+        answers:       data.answers      ?? {},
+        consent_given: true,
+        source:        data.source       || null,
+      });
+      inserted = true;
+      break;
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : "";
+      if (msg.includes("unique") && msg.toLowerCase().includes("reference")) continue;
+      console.error("[ats] db-insert-failed", {
+        reference,
+        error: msg || "unknown",
+        time:  new Date().toISOString(),
+      });
+      return { success: false, error: "There was a problem submitting your application. Please try again." };
+    }
+  }
+
+  if (!inserted) {
     return { success: false, error: "There was a problem submitting your application. Please try again." };
   }
 
@@ -319,7 +358,7 @@ export async function submitApplication(
     }
   } catch { /* non-critical */ }
 
-  // Emails
+  // Send emails — non-fatal if SMTP is down
   try {
     const transporter = getTransporter();
     await Promise.all([
@@ -341,7 +380,7 @@ export async function submitApplication(
     console.error("[ats] email-failed", {
       reference,
       error: err instanceof Error ? err.message : "unknown",
-      time: new Date().toISOString(),
+      time:  new Date().toISOString(),
     });
   }
 
@@ -354,7 +393,7 @@ export async function submitApplication(
   return { success: true, reference };
 }
 
-// ── Stage change (called from admin action) ───────────────────────────────────
+// ── Stage change email (called from admin action) ─────────────────────────────
 
 export async function sendStageChangeEmail(
   email:     string,

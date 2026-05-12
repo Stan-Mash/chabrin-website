@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import { submitApplication } from "@/actions/submit-application";
-type ScreeningQuestion = { question: string; required: boolean };
+type ScreeningQuestion = { question: string; required: boolean; fieldType?: "text" | "yesno" };
 
 // ── Schema (mirrors server action, client-side validation) ───────────────────
 
@@ -82,7 +82,7 @@ export default function ApplicationForm({ jobSlug, jobTitle, screeningQuestions 
           <p className="text-xs text-slate-500 mt-1">Save this to track your application</p>
         </div>
         <a
-          href="/careers/track"
+          href="/en/careers/track"
           className="inline-block px-6 py-2.5 rounded-full bg-brand-navy text-white text-sm font-bold hover:bg-brand-cyan hover:text-brand-navy transition-colors"
         >
           Track My Application
@@ -173,15 +173,28 @@ export default function ApplicationForm({ jobSlug, jobTitle, screeningQuestions 
                   {sq.question}
                   {sq.required && <span className="text-rose-500 ml-1">*</span>}
                 </label>
-                <input
-                  type="text"
-                  value={answers[sq.question] ?? ""}
-                  onChange={(e) => setAnswers(prev => ({ ...prev, [sq.question]: e.target.value }))}
-                  className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm
-                             focus:outline-none focus:ring-2 focus:ring-brand-navy/20 focus:border-brand-navy
-                             placeholder:text-slate-400"
-                  placeholder="Your answer..."
-                />
+                {sq.fieldType === "yesno" ? (
+                  <select
+                    value={answers[sq.question] ?? ""}
+                    onChange={(e) => setAnswers(prev => ({ ...prev, [sq.question]: e.target.value }))}
+                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm bg-white
+                               focus:outline-none focus:ring-2 focus:ring-brand-navy/20 focus:border-brand-navy"
+                  >
+                    <option value="">Select an answer…</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                  </select>
+                ) : (
+                  <input
+                    type="text"
+                    value={answers[sq.question] ?? ""}
+                    onChange={(e) => setAnswers(prev => ({ ...prev, [sq.question]: e.target.value }))}
+                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm
+                               focus:outline-none focus:ring-2 focus:ring-brand-navy/20 focus:border-brand-navy
+                               placeholder:text-slate-400"
+                    placeholder="Your answer..."
+                  />
+                )}
               </div>
             ))}
           </div>

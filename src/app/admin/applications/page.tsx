@@ -30,13 +30,13 @@ interface PageProps {
 
 export default async function AdminApplicationsPage({ searchParams }: PageProps) {
   const params  = await searchParams;
-  const job_id  = params.job_id  || undefined;
-  const stage   = params.stage   || undefined;
-  const search  = params.search  || undefined;
+  const job_slug = params.job_id  || undefined; // param name kept for URL compat
+  const stage   = params.stage  || undefined;
+  const search  = params.search || undefined;
   const page    = parseInt(params.page ?? "1", 10);
 
   const [{ applications, total }, summary, jobs] = await Promise.all([
-    listAdminApplications({ job_id, stage, search, page }),
+    listAdminApplications({ job_slug, stage, search, page }),
     getApplicationSummary(),
     listAllJobs(),
   ]);
@@ -65,7 +65,7 @@ export default async function AdminApplicationsPage({ searchParams }: PageProps)
         <select name="job_id" defaultValue={job_id ?? ""}
           className="px-3 py-2 rounded-xl border border-slate-200 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-brand-navy/20">
           <option value="">All Jobs</option>
-          {jobs.map(j => <option key={j.id} value={j.id}>{j.title}</option>)}
+          {jobs.map(j => <option key={j.slug} value={j.slug}>{j.title}</option>)}
         </select>
 
         <select name="stage" defaultValue={stage ?? ""}

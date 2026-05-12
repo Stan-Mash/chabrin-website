@@ -17,7 +17,7 @@ export interface SanityJobDetail extends SanityJob {
   description: unknown[]; // Portable Text blocks
   requirements: string[];
   niceToHave: string[];
-  screeningQuestions: { question: string; required: boolean }[];
+  screeningQuestions: { question: string; required: boolean; fieldType?: "text" | "yesno" }[];
 }
 
 /** All open jobs for the public careers listing */
