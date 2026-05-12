@@ -172,7 +172,23 @@ export default function ApplicationDetailPage() {
                     {new Date(app.interview_at).toLocaleString("en-KE", {
                       day: "numeric", month: "long", year: "numeric",
                       hour: "2-digit", minute: "2-digit",
-                    })}
+                      timeZone: "Africa/Nairobi",
+                    })} EAT
+                  </dd>
+                </div>
+              )}
+              {app.meet_link && (
+                <div className="flex justify-between sm:flex-col gap-1 sm:col-span-2">
+                  <dt className="text-slate-500 text-xs">Google Meet</dt>
+                  <dd>
+                    <a
+                      href={app.meet_link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-xs font-bold text-white bg-[#1a73e8] hover:bg-[#1558b0] px-3 py-1.5 rounded-lg transition-colors"
+                    >
+                      &#127909; Join Meeting
+                    </a>
                   </dd>
                 </div>
               )}
@@ -321,22 +337,40 @@ export default function ApplicationDetailPage() {
                 </select>
               </div>
 
-              {/* Interview date — only shown when interview_scheduled is selected */}
+              {/* Interview scheduling fields — only shown when interview_scheduled is selected */}
               {isInterview && (
-                <div>
-                  <label className="block text-xs font-semibold text-slate-600 mb-1.5">
-                    Interview Date &amp; Time
-                    <span className="font-normal text-slate-400 ml-1">(included in candidate email)</span>
-                  </label>
-                  <input
-                    type="datetime-local"
-                    name="interview_at"
-                    defaultValue={app.interview_at
-                      ? new Date(app.interview_at).toISOString().slice(0, 16)
-                      : ""}
-                    className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-navy/20"
-                  />
-                </div>
+                <>
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-600 mb-1.5">
+                      Interview Date &amp; Time
+                      <span className="font-normal text-slate-400 ml-1">(sent to candidate)</span>
+                    </label>
+                    <input
+                      type="datetime-local"
+                      name="interview_at"
+                      defaultValue={app.interview_at
+                        ? new Date(app.interview_at).toISOString().slice(0, 16)
+                        : ""}
+                      className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-navy/20"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-600 mb-1.5">
+                      Google Meet Link
+                      <span className="font-normal text-slate-400 ml-1">(paste from Google Calendar)</span>
+                    </label>
+                    <input
+                      type="url"
+                      name="meet_link"
+                      defaultValue={app.meet_link ?? ""}
+                      placeholder="https://meet.google.com/abc-defg-hij"
+                      className="w-full px-3 py-2 rounded-xl border border-blue-200 bg-blue-50 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300 placeholder:text-slate-400"
+                    />
+                    <p className="text-xs text-slate-400 mt-1">
+                      Create a meeting in Google Calendar, copy the Meet link, paste it here.
+                    </p>
+                  </div>
+                </>
               )}
 
               <div>

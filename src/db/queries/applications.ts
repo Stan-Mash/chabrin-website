@@ -35,6 +35,7 @@ export interface Application {
   consent_given:        boolean;
   source:               string | null;
   interview_at:         Date | null;
+  meet_link:            string | null;
   submitted_at:         Date;
   updated_at:           Date;
   cv_upload_token:      string | null;
@@ -234,13 +235,15 @@ export async function updateApplicationStage(
   `;
 }
 
-export async function setInterviewAt(
+export async function setInterviewDetails(
   reference:    string,
-  interview_at: Date | null
+  interview_at: Date | null,
+  meet_link?:   string | null
 ): Promise<void> {
   await sql`
     UPDATE applications
     SET interview_at = ${interview_at},
+        meet_link    = COALESCE(${meet_link ?? null}, meet_link),
         updated_at   = NOW()
     WHERE reference = ${reference.toUpperCase().trim()}
   `;
