@@ -109,9 +109,12 @@ export async function adminUpdateApplication(
 
     // Email candidate on meaningful stage changes
     if (prevStage !== stage) {
-      await sendStageChangeEmail(
-        app.email, app.full_name, reference, app.job_title, stage, stage_note
-      );
+      // waiting_list and offer_declined have their own dedicated templates
+      if (stage !== "waiting_list" && stage !== "offer_declined") {
+        await sendStageChangeEmail(
+          app.email, app.full_name, reference, app.job_title, stage, stage_note
+        );
+      }
 
       // When shortlisted: generate signed CV upload link and send to candidate
       if (stage === "shortlisted" && process.env.CV_UPLOAD_SECRET) {
@@ -123,6 +126,30 @@ export async function adminUpdateApplication(
           await sendCvUploadEmail(app.email, app.full_name, reference, app.job_title, uploadUrl, expiresAt);
         } catch (err) {
           console.error("[admin-ats] upload-link-email-failed", {
+            reference,
+            error: err instanceof Error ? err.message : "unknown",
+          });
+        }
+      }
+
+      // Waiting list: warm, encouraging email
+      if (stage === "waiting_list") {
+        try {
+          await sendWaitingListEmail(app.email, app.full_name, reference, app.job_title, stage_note);
+        } catch (err) {
+          console.error("[admin-ats] waiting-list-email-failed", {
+            reference,
+            error: err instanceof Error ? err.message : "unknown",
+          });
+        }
+      }
+
+      // Offer declined: graceful acknowledgment
+      if (stage === "offer_declined") {
+        try {
+          await sendOfferDeclinedEmail(app.email, app.full_name, reference, app.job_title);
+        } catch (err) {
+          console.error("[admin-ats] offer-declined-email-failed", {
             reference,
             error: err instanceof Error ? err.message : "unknown",
           });
@@ -242,6 +269,223 @@ async function sendCvUploadEmail(
     from:    process.env.SMTP_FROM || process.env.SMTP_USER,
     to:      email,
     subject: `Shortlisted &#8212; Upload Your CV for ${jobTitle} (${reference})`,
+    html,
+  });
+}
+
+// ── Invite candidate from talent pool ────────────────────────────────────────
+
+export async function adminInviteFromPool(
+  _prev: Record<string, unknown>,
+  formData: FormData
+): Promise<Record<string, unknown>> {
+  const me = await getAdminSession();
+  if (!me) redirect("/admin-login");
+
+  const reference = (formData.get("reference") as string | null)?.trim() ?? "";
+  const new_job   = (formData.get("new_job")   as string | null)?.trim() || null;
+  const message   = (formData.get("message")   as string | null)?.trim() || null;
+
+  if (!reference) return { error: "Reference is required." };
+
+  const app = await getAdminApplication(reference);
+  if (!app) return { error: "Application not found." };
+
+  const careersUrl = `${siteConfig.url}/en/careers`;
+
+  try {
+    await sendNewOpportunityEmail(
+      app.email, app.full_name, reference, new_job || "a new opportunity", careersUrl, message
+    );
+    await logAppEvent(
+      app.id, app.stage, app.stage, me?.name ?? "admin",
+      `New opportunity notification sent${new_job ? `: ${new_job}` : ""}`
+    );
+    return { success: true };
+  } catch (err) {
+    return { error: err instanceof Error ? err.message : "Failed to send notification." };
+  }
+}
+
+// ── Waiting list email ────────────────────────────────────────────────────────
+
+async function sendWaitingListEmail(
+  email:    string,
+  name:     string,
+  reference:string,
+  jobTitle: string,
+  note:     string | null
+): Promise<void> {
+  const transporter = getTransporter();
+  if (!transporter) return;
+
+  const html = `
+<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;color:#333;">
+  <div style="background:#0D1B8E;padding:24px 20px;border-radius:8px 8px 0 0;text-align:center;">
+    <h1 style="color:#00C9C9;margin:0;font-size:20px;">Thank You for Your Time</h1>
+    <p style="color:rgba(255,255,255,0.75);margin:6px 0 0;font-size:13px;">Chabrin Agencies Limited &#8212; ${h(jobTitle)}</p>
+  </div>
+  <div style="background:#fff;border:1px solid #e2e8f0;border-top:none;padding:28px 24px;border-radius:0 0 8px 8px;">
+    <p style="margin:0 0 16px;font-size:15px;">Dear <strong>${h(name)}</strong>,</p>
+    <p style="margin:0 0 16px;font-size:14px;line-height:1.6;color:#475569;">
+      Thank you for going through our selection process for <strong>${h(jobTitle)}</strong>
+      (Ref: <strong>${h(reference)}</strong>).
+    </p>
+    <p style="margin:0 0 16px;font-size:14px;line-height:1.6;color:#475569;">
+      We were genuinely impressed by your background and the quality of your interview.
+      While we are unable to make an offer at this time due to current team capacity,
+      we would very much like to keep your details on file.
+    </p>
+    ${note ? `
+    <div style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:8px;padding:14px 16px;margin-bottom:20px;">
+      <p style="margin:0;font-size:14px;color:#0369a1;line-height:1.6;">${h(note)}</p>
+    </div>` : ""}
+    <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:18px 20px;margin-bottom:24px;">
+      <p style="margin:0 0 8px;font-size:13px;font-weight:700;color:#166534;">&#127775; What this means for you</p>
+      <ul style="margin:0;padding-left:18px;font-size:13px;color:#166534;line-height:1.8;">
+        <li>You are on our priority shortlist for future vacancies.</li>
+        <li>When a suitable opening arises, we will contact you directly before advertising publicly.</li>
+        <li>No further action is required on your part.</li>
+      </ul>
+    </div>
+    <p style="margin:0 0 20px;font-size:14px;line-height:1.6;color:#475569;">
+      We genuinely look forward to working with you and hope to be in touch soon.
+    </p>
+    <p style="margin:0 0 4px;font-size:14px;color:#475569;">
+      Warm regards,<br>
+      <strong style="color:#0D1B8E;">Chabrin Agencies HR Team</strong>
+    </p>
+    <p style="margin:0;font-size:13px;color:#475569;">
+      <a href="mailto:${siteConfig.contact.careersEmail}" style="color:#0D1B8E;">${siteConfig.contact.careersEmail}</a>
+    </p>
+    <p style="margin:20px 0 0;font-size:11px;color:#94a3b8;border-top:1px solid #f1f5f9;padding-top:14px;">
+      Chabrin Agencies Limited &#183; Nacico Plaza, 5th Floor, Room 517, Landhies Road, Nairobi &#183; EARB Registered<br>
+      Your personal data is held securely in accordance with the Kenya Data Protection Act 2019.
+      To request removal, reply to this email.
+    </p>
+  </div>
+</div>`;
+
+  await transporter.sendMail({
+    from:    process.env.SMTP_FROM || process.env.SMTP_USER,
+    to:      email,
+    subject: `We&#039;d Love to Stay in Touch &#8212; ${jobTitle} (${reference})`,
+    html,
+  });
+}
+
+// ── Offer declined acknowledgment email ───────────────────────────────────────
+
+async function sendOfferDeclinedEmail(
+  email:    string,
+  name:     string,
+  reference:string,
+  jobTitle: string
+): Promise<void> {
+  const transporter = getTransporter();
+  if (!transporter) return;
+
+  const html = `
+<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;color:#333;">
+  <div style="background:#0D1B8E;padding:24px 20px;border-radius:8px 8px 0 0;text-align:center;">
+    <h1 style="color:#00C9C9;margin:0;font-size:20px;">Thank You for Letting Us Know</h1>
+    <p style="color:rgba(255,255,255,0.75);margin:6px 0 0;font-size:13px;">Chabrin Agencies Limited &#8212; ${h(jobTitle)}</p>
+  </div>
+  <div style="background:#fff;border:1px solid #e2e8f0;border-top:none;padding:28px 24px;border-radius:0 0 8px 8px;">
+    <p style="margin:0 0 16px;font-size:15px;">Dear <strong>${h(name)}</strong>,</p>
+    <p style="margin:0 0 16px;font-size:14px;line-height:1.6;color:#475569;">
+      Thank you for informing us of your decision regarding the offer for
+      <strong>${h(jobTitle)}</strong> (Ref: <strong>${h(reference)}</strong>).
+    </p>
+    <p style="margin:0 0 16px;font-size:14px;line-height:1.6;color:#475569;">
+      We completely understand, and we appreciate the time and effort you invested throughout
+      our process. You made an excellent impression on our team.
+    </p>
+    <p style="margin:0 0 20px;font-size:14px;line-height:1.6;color:#475569;">
+      Should your circumstances change, or should you be interested in future opportunities
+      with Chabrin Agencies, please do not hesitate to reach out. We would love to hear from you.
+    </p>
+    <p style="margin:0 0 4px;font-size:14px;color:#475569;">
+      All the best in your career,<br>
+      <strong style="color:#0D1B8E;">Chabrin Agencies HR Team</strong>
+    </p>
+    <p style="margin:0;font-size:13px;color:#475569;">
+      <a href="mailto:${siteConfig.contact.careersEmail}" style="color:#0D1B8E;">${siteConfig.contact.careersEmail}</a>
+    </p>
+    <p style="margin:20px 0 0;font-size:11px;color:#94a3b8;border-top:1px solid #f1f5f9;padding-top:14px;">
+      Chabrin Agencies Limited &#183; Nacico Plaza, 5th Floor, Room 517, Landhies Road, Nairobi &#183; EARB Registered
+    </p>
+  </div>
+</div>`;
+
+  await transporter.sendMail({
+    from:    process.env.SMTP_FROM || process.env.SMTP_USER,
+    to:      email,
+    subject: `Regarding Your Application &#8212; ${jobTitle} (${reference})`,
+    html,
+  });
+}
+
+// ── New opportunity notification email (talent pool) ──────────────────────────
+
+async function sendNewOpportunityEmail(
+  email:      string,
+  name:       string,
+  reference:  string,
+  jobTitle:   string,
+  careersUrl: string,
+  message:    string | null
+): Promise<void> {
+  const transporter = getTransporter();
+  if (!transporter) return;
+
+  const html = `
+<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;color:#333;">
+  <div style="background:#0D1B8E;padding:24px 20px;border-radius:8px 8px 0 0;text-align:center;">
+    <h1 style="color:#00C9C9;margin:0;font-size:20px;">A New Opportunity Has Opened</h1>
+    <p style="color:rgba(255,255,255,0.75);margin:6px 0 0;font-size:13px;">Chabrin Agencies Limited</p>
+  </div>
+  <div style="background:#fff;border:1px solid #e2e8f0;border-top:none;padding:28px 24px;border-radius:0 0 8px 8px;">
+    <p style="margin:0 0 16px;font-size:15px;">Dear <strong>${h(name)}</strong>,</p>
+    <p style="margin:0 0 16px;font-size:14px;line-height:1.6;color:#475569;">
+      We are reaching out because <strong>${h(jobTitle)}</strong> has become available
+      and, based on your previous application (Ref: <strong>${h(reference)}</strong>),
+      we believe you would be an excellent fit.
+    </p>
+    ${message ? `
+    <div style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:8px;padding:14px 16px;margin-bottom:20px;">
+      <p style="margin:0;font-size:14px;color:#0369a1;line-height:1.6;font-style:italic;">&ldquo;${h(message)}&rdquo;</p>
+    </div>` : ""}
+    <p style="margin:0 0 24px;font-size:14px;line-height:1.6;color:#475569;">
+      If you are interested, please visit our careers page to submit your application.
+      Mention your previous reference number so our team can fast-track your file.
+    </p>
+    <div style="text-align:center;margin-bottom:28px;">
+      <a href="${careersUrl}"
+         style="display:inline-block;background:#0D1B8E;color:#fff;text-decoration:none;
+                padding:14px 32px;border-radius:50px;font-weight:700;font-size:14px;">
+        View Open Positions &#8594;
+      </a>
+    </div>
+    <p style="margin:0 0 4px;font-size:14px;color:#475569;">
+      Warm regards,<br>
+      <strong style="color:#0D1B8E;">Chabrin Agencies HR Team</strong>
+    </p>
+    <p style="margin:0;font-size:13px;color:#475569;">
+      <a href="mailto:${siteConfig.contact.careersEmail}" style="color:#0D1B8E;">${siteConfig.contact.careersEmail}</a>
+    </p>
+    <p style="margin:20px 0 0;font-size:11px;color:#94a3b8;border-top:1px solid #f1f5f9;padding-top:14px;">
+      Chabrin Agencies Limited &#183; Nacico Plaza, 5th Floor, Room 517, Landhies Road, Nairobi &#183; EARB Registered<br>
+      You are receiving this because you previously applied with us and requested to be kept on file.
+      To be removed, reply to this email.
+    </p>
+  </div>
+</div>`;
+
+  await transporter.sendMail({
+    from:    process.env.SMTP_FROM || process.env.SMTP_USER,
+    to:      email,
+    subject: `New Opportunity at Chabrin Agencies &#8212; ${jobTitle}`,
     html,
   });
 }

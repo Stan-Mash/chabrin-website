@@ -13,8 +13,11 @@ const STAGES = [
   { key: "interview_scheduled", label: "Interview Scheduled" },
   { key: "interviewed",         label: "Interviewed" },
   { key: "offer_extended",      label: "Offer Extended" },
+  { key: "offer_accepted",      label: "Offer Accepted" },
+  { key: "offer_declined",      label: "Offer Declined" },
   { key: "hired",               label: "Hired" },
   { key: "rejected",            label: "Rejected" },
+  { key: "waiting_list",        label: "Waiting List" },
 ] as const;
 
 const STAGE_COLOURS: Record<string, string> = {
@@ -24,8 +27,11 @@ const STAGE_COLOURS: Record<string, string> = {
   interview_scheduled: "bg-indigo-100 text-indigo-700",
   interviewed:         "bg-purple-100 text-purple-700",
   offer_extended:      "bg-amber-100 text-amber-700",
+  offer_accepted:      "bg-teal-100 text-teal-700",
+  offer_declined:      "bg-orange-100 text-orange-700",
   hired:               "bg-emerald-100 text-emerald-700",
   rejected:            "bg-rose-100 text-rose-600",
+  waiting_list:        "bg-violet-100 text-violet-700",
 };
 
 const STAGE_LABELS: Record<string, string> = Object.fromEntries(STAGES.map(s => [s.key, s.label]));

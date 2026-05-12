@@ -4,11 +4,13 @@ import { adminLogout } from "@/actions/admin-users";
 import Link from "next/link";
 
 const NAV = [
-  { href: "/admin",              label: "Dashboard"    },
-  { href: "/admin/complaints",   label: "Complaints"   },
-  { href: "/admin/applications", label: "Applications" },
-  { href: "/admin/jobs",         label: "Job Postings" },
-  { href: "/admin/blog",         label: "Blog"         },
+  { href: "/admin",               label: "Dashboard"    },
+  { href: "/admin/complaints",    label: "Complaints"   },
+  { href: "/admin/applications",  label: "Applications" },
+  { href: "/admin/waiting-list",  label: "Waiting List" },
+  { href: "/admin/talent-pool",   label: "Talent Pool"  },
+  { href: "/admin/jobs",          label: "Job Postings" },
+  { href: "/admin/blog",          label: "Blog"         },
 ];
 
 export default async function AdminLayout({

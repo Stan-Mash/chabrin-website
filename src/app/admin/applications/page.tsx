@@ -9,8 +9,11 @@ const STAGE_COLOURS: Record<string, string> = {
   interview_scheduled:  "bg-indigo-100 text-indigo-700",
   interviewed:          "bg-purple-100 text-purple-700",
   offer_extended:       "bg-amber-100 text-amber-700",
+  offer_accepted:       "bg-teal-100 text-teal-700",
+  offer_declined:       "bg-orange-100 text-orange-700",
   hired:                "bg-emerald-100 text-emerald-700",
   rejected:             "bg-rose-100 text-rose-600",
+  waiting_list:         "bg-violet-100 text-violet-700",
 };
 
 const STAGE_LABELS: Record<string, string> = {
@@ -20,8 +23,11 @@ const STAGE_LABELS: Record<string, string> = {
   interview_scheduled: "Interview Scheduled",
   interviewed:         "Interviewed",
   offer_extended:      "Offer Extended",
+  offer_accepted:      "Offer Accepted",
+  offer_declined:      "Offer Declined",
   hired:               "Hired",
   rejected:            "Rejected",
+  waiting_list:        "Waiting List",
 };
 
 interface PageProps {
@@ -47,11 +53,12 @@ export default async function AdminApplicationsPage({ searchParams }: PageProps)
     <div className="max-w-6xl mx-auto px-4 py-8">
 
       {/* Summary cards */}
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         {[
-          { label: "Total Applications", value: summary.total,       colour: "text-brand-navy" },
-          { label: "New Today",          value: summary.new_today,   colour: "text-brand-cyan" },
-          { label: "Active Pipeline",    value: summary.shortlisted, colour: "text-indigo-600" },
+          { label: "Total Applications", value: summary.total,        colour: "text-brand-navy" },
+          { label: "New Today",          value: summary.new_today,    colour: "text-brand-cyan" },
+          { label: "Active Pipeline",    value: summary.shortlisted,  colour: "text-indigo-600" },
+          { label: "Waiting List",       value: summary.waiting_list, colour: "text-violet-600" },
         ].map((s) => (
           <div key={s.label} className="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm">
             <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">{s.label}</p>

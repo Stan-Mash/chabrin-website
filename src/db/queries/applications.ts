@@ -14,8 +14,11 @@ export type AppStage =
   | "interview_scheduled"
   | "interviewed"
   | "offer_extended"
+  | "offer_accepted"
+  | "offer_declined"
   | "hired"
-  | "rejected";
+  | "rejected"
+  | "waiting_list";
 
 export interface Application {
   id:                   string;
@@ -329,23 +332,102 @@ export async function saveAiSummary(
 // ── Dashboard counts ──────────────────────────────────────────────────────────
 
 export async function getApplicationSummary(): Promise<{
-  total:       number;
-  new_today:   number;
-  shortlisted: number;
+  total:        number;
+  new_today:    number;
+  shortlisted:  number;
+  waiting_list: number;
 }> {
   const rows = await sql<{
-    total: string; new_today: string; shortlisted: string;
+    total: string; new_today: string; shortlisted: string; waiting_list: string;
   }[]>`
     SELECT
-      (SELECT COUNT(*)::text FROM applications)                                                                    AS total,
-      (SELECT COUNT(*)::text FROM applications WHERE submitted_at >= CURRENT_DATE)                                 AS new_today,
-      (SELECT COUNT(*)::text FROM applications WHERE stage IN ('shortlisted','interview_scheduled','interviewed','offer_extended')) AS shortlisted
+      (SELECT COUNT(*)::text FROM applications)                                                                                     AS total,
+      (SELECT COUNT(*)::text FROM applications WHERE submitted_at >= CURRENT_DATE)                                                  AS new_today,
+      (SELECT COUNT(*)::text FROM applications WHERE stage IN ('shortlisted','interview_scheduled','interviewed','offer_extended'))  AS shortlisted,
+      (SELECT COUNT(*)::text FROM applications WHERE stage = 'waiting_list')                                                        AS waiting_list
   `;
   const r = rows[0];
   return {
-    total:       parseInt(r?.total       ?? "0", 10),
-    new_today:   parseInt(r?.new_today   ?? "0", 10),
-    shortlisted: parseInt(r?.shortlisted ?? "0", 10),
+    total:        parseInt(r?.total        ?? "0", 10),
+    new_today:    parseInt(r?.new_today    ?? "0", 10),
+    shortlisted:  parseInt(r?.shortlisted  ?? "0", 10),
+    waiting_list: parseInt(r?.waiting_list ?? "0", 10),
+  };
+}
+
+// ── Talent pool ───────────────────────────────────────────────────────────────
+
+export interface TalentPoolEntry extends ApplicationWithJob {
+  days_in_pool: number;
+}
+
+export interface TalentPoolFilters {
+  search?:     string;
+  stage?:      string;
+  department?: string;
+  page?:       number;
+}
+
+const POOL_PAGE_SIZE = 40;
+
+export async function listTalentPool(
+  filters: TalentPoolFilters = {}
+): Promise<{ entries: TalentPoolEntry[]; total: number }> {
+  const { search, stage, department, page = 1 } = filters;
+  const safePage = Math.max(1, isNaN(page) ? 1 : page);
+  const offset   = (safePage - 1) * POOL_PAGE_SIZE;
+
+  const conditions: string[] = [
+    `a.stage IN ('waiting_list','interviewed','offer_declined','offer_accepted')`
+  ];
+  const params: unknown[] = [];
+  let i = 1;
+
+  if (stage && stage !== "all") {
+    conditions.push(`a.stage = $${i++}`);
+    params.push(stage);
+  }
+  if (department) {
+    conditions.push(`COALESCE(j.department, a.job_id) ILIKE $${i++}`);
+    params.push(`%${department}%`);
+  }
+  if (search) {
+    conditions.push(`(a.reference ILIKE $${i} OR a.full_name ILIKE $${i} OR a.email ILIKE $${i})`);
+    params.push(`%${search}%`);
+    i++;
+  }
+
+  const where = `WHERE ${conditions.join(" AND ")}`;
+
+  const rows = await sql.unsafe<TalentPoolEntry[]>(
+    `SELECT a.*,
+            COALESCE(j.title,      a.job_title, a.job_id) AS job_title,
+            COALESCE(j.department, a.job_id)              AS job_department,
+            COALESCE(j.slug,       a.job_id)              AS job_slug,
+            EXTRACT(DAY FROM NOW() - a.updated_at)::int   AS days_in_pool
+     FROM applications a
+     LEFT JOIN jobs j ON j.slug = a.job_id
+     ${where}
+     ORDER BY
+       CASE a.stage
+         WHEN 'waiting_list'   THEN 1
+         WHEN 'offer_declined' THEN 2
+         WHEN 'interviewed'    THEN 3
+         ELSE 4
+       END,
+       a.updated_at DESC
+     LIMIT ${POOL_PAGE_SIZE} OFFSET ${offset}`,
+    params as import("postgres").ParameterOrJSON<never>[]
+  );
+
+  const countRows = await sql.unsafe<{ count: string }[]>(
+    `SELECT COUNT(*)::text AS count FROM applications a LEFT JOIN jobs j ON j.slug = a.job_id ${where}`,
+    params as import("postgres").ParameterOrJSON<never>[]
+  );
+
+  return {
+    entries: rows,
+    total:   parseInt(countRows[0]?.count ?? "0", 10),
   };
 }
 
@@ -353,19 +435,22 @@ export async function getAdminStats(): Promise<{
   total:              number;
   new_today:          number;
   pending_complaints: number;
+  waiting_list:       number;
 }> {
   const rows = await sql<{
-    total: string; new_today: string; pending_complaints: string;
+    total: string; new_today: string; pending_complaints: string; waiting_list: string;
   }[]>`
     SELECT
-      (SELECT COUNT(*)::text FROM applications)                                                         AS total,
-      (SELECT COUNT(*)::text FROM applications WHERE submitted_at >= CURRENT_DATE)                     AS new_today,
-      (SELECT COUNT(*)::text FROM complaints WHERE status NOT IN ('resolved','closed'))                AS pending_complaints
+      (SELECT COUNT(*)::text FROM applications)                                             AS total,
+      (SELECT COUNT(*)::text FROM applications WHERE submitted_at >= CURRENT_DATE)         AS new_today,
+      (SELECT COUNT(*)::text FROM complaints WHERE status NOT IN ('resolved','closed'))    AS pending_complaints,
+      (SELECT COUNT(*)::text FROM applications WHERE stage = 'waiting_list')               AS waiting_list
   `;
   const r = rows[0];
   return {
     total:              parseInt(r?.total              ?? "0", 10),
     new_today:          parseInt(r?.new_today          ?? "0", 10),
     pending_complaints: parseInt(r?.pending_complaints ?? "0", 10),
+    waiting_list:       parseInt(r?.waiting_list       ?? "0", 10),
   };
 }
