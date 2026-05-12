@@ -1,4 +1,4 @@
-import { sanityClient } from "@/lib/sanity";
+import { sanityServerClient as sanityClient } from "@/lib/sanity";
 
 export interface SanityJob {
   slug: string;
