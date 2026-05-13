@@ -218,7 +218,16 @@ export async function getAdminApplication(
     WHERE a.reference = ${reference.toUpperCase().trim()}
     LIMIT 1
   `;
-  return rows[0] ?? null;
+  const row = rows[0];
+  if (!row) return null;
+  // Neon's PgBouncer pooler (prepare:false / simple-query mode) can return JSONB
+  // columns as raw strings instead of parsed objects. Parse defensively.
+  return {
+    ...row,
+    documents:  typeof row.documents  === "string" ? JSON.parse(row.documents)  as ApplicationWithJob["documents"]  : (row.documents  ?? []),
+    answers:    typeof row.answers    === "string" ? JSON.parse(row.answers)    as ApplicationWithJob["answers"]    : (row.answers    ?? {}),
+    ai_summary: typeof row.ai_summary === "string" ? JSON.parse(row.ai_summary) as ApplicationWithJob["ai_summary"] : row.ai_summary,
+  };
 }
 
 export async function updateApplicationStage(
@@ -290,7 +299,14 @@ export async function getApplicationByUploadToken(
       AND cv_upload_expires_at > NOW()
     LIMIT 1
   `;
-  return rows[0] ?? null;
+  const row = rows[0];
+  if (!row) return null;
+  return {
+    ...row,
+    documents:  typeof row.documents  === "string" ? JSON.parse(row.documents)  as Application["documents"]  : (row.documents  ?? []),
+    answers:    typeof row.answers    === "string" ? JSON.parse(row.answers)    as Application["answers"]    : (row.answers    ?? {}),
+    ai_summary: typeof row.ai_summary === "string" ? JSON.parse(row.ai_summary) as Application["ai_summary"] : row.ai_summary,
+  };
 }
 
 export async function setUploadToken(
