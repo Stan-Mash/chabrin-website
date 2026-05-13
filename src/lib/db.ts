@@ -48,12 +48,16 @@ function createDb(): postgres.Sql {
     // causing JSONB columns to be returned as raw strings instead of objects.
     types: {
       jsonb: {
-        from: [3802],
-        parse: (v: string) => JSON.parse(v),
+        to:        3802,
+        from:      [3802],
+        serialize: (v: unknown) => JSON.stringify(v),
+        parse:     (v: string) => JSON.parse(v) as unknown,
       },
       json: {
-        from: [114],
-        parse: (v: string) => JSON.parse(v),
+        to:        114,
+        from:      [114],
+        serialize: (v: unknown) => JSON.stringify(v),
+        parse:     (v: string) => JSON.parse(v) as unknown,
       },
     },
   });
