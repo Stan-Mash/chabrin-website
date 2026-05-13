@@ -43,6 +43,19 @@ function createDb(): postgres.Sql {
     transform: {
       undefined: null,  // Convert undefined → NULL
     },
+    // Explicit JSONB/JSON parsers — required because prepare:false (simple-query
+    // protocol) can skip automatic OID-based decoding in some postgres driver versions,
+    // causing JSONB columns to be returned as raw strings instead of objects.
+    types: {
+      jsonb: {
+        from: [3802],
+        parse: (v: string) => JSON.parse(v),
+      },
+      json: {
+        from: [114],
+        parse: (v: string) => JSON.parse(v),
+      },
+    },
   });
 }
 
