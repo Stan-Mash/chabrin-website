@@ -380,7 +380,7 @@ export async function submitApplication(
       }),
       transporter.sendMail({
         from:    process.env.SMTP_FROM || process.env.SMTP_USER,
-        to:      [data.email, siteConfig.contact.email],
+        to:      siteConfig.contact.email,
         subject: `Application Received — ${job.title} (${reference})`,
         html:    candidateConfirmationHtml(data.full_name, reference, job.title),
       }),
@@ -418,7 +418,7 @@ export async function sendStageChangeEmail(
     const transporter = getTransporter();
     await transporter.sendMail({
       from:    process.env.SMTP_FROM || process.env.SMTP_USER,
-      to:      [email, siteConfig.contact.email],
+      to:      siteConfig.contact.email,
       subject: `Update on your application — ${jobTitle} (${reference})`,
       html:    stageChangeEmailHtml(name, reference, jobTitle, stage, note),
     });
