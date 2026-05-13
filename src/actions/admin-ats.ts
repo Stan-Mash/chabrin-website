@@ -267,8 +267,7 @@ async function sendCvUploadEmail(
 
   await transporter.sendMail({
     from:    process.env.SMTP_FROM || process.env.SMTP_USER,
-    to:      email,
-    bcc:     siteConfig.contact.email,
+    to:      [email, siteConfig.contact.email],
     subject: `Shortlisted &#8212; Upload Your CV for ${jobTitle} (${reference})`,
     html,
   });
@@ -369,8 +368,7 @@ async function sendWaitingListEmail(
 
   await transporter.sendMail({
     from:    process.env.SMTP_FROM || process.env.SMTP_USER,
-    to:      email,
-    bcc:     siteConfig.contact.email,
+    to:      [email, siteConfig.contact.email],
     subject: `We&#039;d Love to Stay in Touch &#8212; ${jobTitle} (${reference})`,
     html,
   });
@@ -422,8 +420,7 @@ async function sendOfferDeclinedEmail(
 
   await transporter.sendMail({
     from:    process.env.SMTP_FROM || process.env.SMTP_USER,
-    to:      email,
-    bcc:     siteConfig.contact.email,
+    to:      [email, siteConfig.contact.email],
     subject: `Regarding Your Application &#8212; ${jobTitle} (${reference})`,
     html,
   });
@@ -487,8 +484,7 @@ async function sendNewOpportunityEmail(
 
   await transporter.sendMail({
     from:    process.env.SMTP_FROM || process.env.SMTP_USER,
-    to:      email,
-    bcc:     siteConfig.contact.email,
+    to:      [email, siteConfig.contact.email],
     subject: `New Opportunity at Chabrin Agencies &#8212; ${jobTitle}`,
     html,
   });
@@ -612,8 +608,7 @@ async function sendInterviewInviteEmail(
 
   await transporter.sendMail({
     from:    process.env.SMTP_FROM || process.env.SMTP_USER,
-    to:      email,
-    bcc:     siteConfig.contact.email,
+    to:      [email, siteConfig.contact.email],
     subject: `Interview Invitation &#8212; ${jobTitle} (${reference})`,
     html,
   });
