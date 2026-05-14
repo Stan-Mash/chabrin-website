@@ -10,6 +10,16 @@ const ALLOWED_TYPES: Record<string, string> = {
   "image/png":  "png",
 };
 
+// Fallback MIME map for browsers that report empty/octet-stream for known extensions
+const EXT_TO_MIME: Record<string, string> = {
+  pdf:  "application/pdf",
+  doc:  "application/msword",
+  docx: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+  jpg:  "image/jpeg",
+  jpeg: "image/jpeg",
+  png:  "image/png",
+};
+
 const MAX_BYTES = 5 * 1024 * 1024; // 5 MB
 
 export async function POST(req: NextRequest) {
@@ -21,7 +31,13 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "No file provided." }, { status: 400 });
     }
 
-    const mimeType = file.type;
+    // Some browsers (especially mobile) report empty or application/octet-stream
+    // for PDFs and Word docs — fall back to extension-based detection.
+    const fileExt = file.name.split(".").pop()?.toLowerCase() ?? "";
+    const mimeType = (file.type && file.type !== "application/octet-stream")
+      ? file.type
+      : (EXT_TO_MIME[fileExt] ?? file.type);
+
     const ext = ALLOWED_TYPES[mimeType];
     if (!ext) {
       return NextResponse.json(
