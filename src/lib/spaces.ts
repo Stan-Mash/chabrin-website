@@ -50,7 +50,7 @@ export async function uploadToBlob(
   const blob = await put(pathname, strippedBuffer, {
     access: "public",
     contentType: mimeType,
-    cacheControlMaxAge: 31536000, // 1 year
+    cacheControlMaxAge: 31536000,
   });
 
   return blob.url;
