@@ -23,6 +23,15 @@ const EXT_TO_MIME: Record<string, string> = {
 const MAX_BYTES = 5 * 1024 * 1024; // 5 MB
 
 export async function POST(req: NextRequest) {
+  // Fail fast if blob storage is not configured
+  if (!process.env.BLOB_READ_WRITE_TOKEN) {
+    console.error("[upload-doc] BLOB_READ_WRITE_TOKEN is not set in this environment");
+    return NextResponse.json(
+      { error: "Storage not configured. Please contact support." },
+      { status: 503 }
+    );
+  }
+
   try {
     const form = await req.formData();
     const file = form.get("file") as File | null;
@@ -62,7 +71,13 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ url, name: file.name, size: file.size });
   } catch (err) {
-    console.error("[upload-doc] failed", err instanceof Error ? err.message : "unknown");
+    const msg = err instanceof Error ? err.message : String(err);
+    // Log without PII — just the error message to diagnose blob token issues etc.
+    console.error("[upload-doc] failed:", msg);
+    // Surface a more specific message for missing blob token
+    if (msg.includes("BLOB_READ_WRITE_TOKEN") || msg.includes("token") || msg.includes("unauthorized")) {
+      return NextResponse.json({ error: "Storage not configured. Please contact support." }, { status: 503 });
+    }
     return NextResponse.json({ error: "Upload failed. Please try again." }, { status: 500 });
   }
 }
