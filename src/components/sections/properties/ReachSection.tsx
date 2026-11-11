@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import { useTranslations } from "next-intl";
 
 const CORRIDORS = [
   { id: "A", name: "Northern Commuter Corridor", desc: "Murang'a to Githurai 45", areas: ["Murang'a", "Thika Town", "Juja", "Ruiru", "Kahawa Sukari", "Kahawa Wendani", "Githurai 45"] },
@@ -24,6 +25,7 @@ const InteractiveMapWrapper = dynamic(() => import("./InteractiveMapWrapper"), {
 });
 
 export default function ReachSection() {
+  const t = useTranslations("reach");
   return (
     <section
       className="py-20 lg:py-28 bg-white"
@@ -39,7 +41,7 @@ export default function ReachSection() {
           >
             <span className="w-1.5 h-1.5 rounded-full" style={{ background: "#00e5cc" }} aria-hidden="true" />
             <span className="text-xs font-bold tracking-widest uppercase" style={{ color: "#00e5cc" }}>
-              Management Coverage
+              {t("eyebrow")}
             </span>
           </div>
 
@@ -48,11 +50,10 @@ export default function ReachSection() {
             className="text-3xl sm:text-4xl font-extrabold leading-tight mb-3"
             style={{ color: "#001a70" }}
           >
-            Our Metropolitan Footprint
+            {t("title")}
           </h2>
           <p className="text-slate-500 text-base max-w-2xl mx-auto leading-relaxed">
-            Properties managed across 7 coverage corridors spanning Nairobi and its
-            expanding commuter counties. Click a corridor to view localized yields and covered neighbourhoods.
+            {t("subtitle")}
           </p>
         </div>
 

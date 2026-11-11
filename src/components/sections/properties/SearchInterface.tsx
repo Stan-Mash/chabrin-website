@@ -788,13 +788,7 @@ export default function SearchInterface() {
   const [sortBy,      setSortBy]      = useState("newest");
   const [activeId,    setActiveId]    = useState<string | null>(null);
   const [mobileMap,   setMobileMap]   = useState(false);
-  const [isLoading,   setIsLoading]   = useState(true);
-
-  // Simulate initial load skeleton
-  useEffect(() => {
-    const t = setTimeout(() => setIsLoading(false), 400);
-    return () => clearTimeout(t);
-  }, []);
+  const isLoading = false;
 
   // Listen for events from PropertiesHero (search box + type pills)
   useEffect(() => {

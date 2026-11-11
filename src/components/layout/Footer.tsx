@@ -5,10 +5,10 @@ import { siteConfig } from "@/config/site";
 import TrustTicker from "@/components/ui/TrustTicker";
 
 const SERVICES_LINKS = [
-  { label: "Property Management", href: "/services#management" },
-  { label: "Leasing & Letting",   href: "/services#leasing"    },
-  { label: "Valuation",           href: "/services#valuation"  },
-  { label: "Digital Lease Mgmt",  href: "/services#digital"    },
+  { key: "svc_management", href: "/services#management" },
+  { key: "svc_leasing",    href: "/services#leasing"    },
+  { key: "svc_valuation",  href: "/services#valuation"  },
+  { key: "svc_digital",    href: "/services#digital"    },
 ];
 
 const COMPANY_LINKS = [
@@ -55,16 +55,16 @@ export default function Footer() {
           {/* ── Services ──────────────────────────────────────────────── */}
           <div>
             <h3 className="text-xs font-bold tracking-widest text-brand-cyan uppercase mb-5">
-              Services
+              {tFoot("services_title")}
             </h3>
             <ul className="space-y-3">
-              {SERVICES_LINKS.map(({ label, href }) => (
-                <li key={label}>
+              {SERVICES_LINKS.map(({ key, href }) => (
+                <li key={key}>
                   <Link
                     href={lp(href)}
                     className="text-sm text-white/60 hover:text-white transition-colors"
                   >
-                    {label}
+                    {tFoot(key)}
                   </Link>
                 </li>
               ))}
@@ -74,7 +74,7 @@ export default function Footer() {
           {/* ── Company ───────────────────────────────────────────────── */}
           <div>
             <h3 className="text-xs font-bold tracking-widest text-brand-cyan uppercase mb-5">
-              Company
+              {tFoot("company_title")}
             </h3>
             <ul className="space-y-3">
               {COMPANY_LINKS.map(({ key, href }) => (
@@ -93,7 +93,7 @@ export default function Footer() {
           {/* ── Contact ───────────────────────────────────────────────── */}
           <div>
             <h3 className="text-xs font-bold tracking-widest text-brand-cyan uppercase mb-5">
-              Contact
+              {tFoot("contact_title")}
             </h3>
             <ul className="space-y-3 text-sm text-white/60">
               <li>

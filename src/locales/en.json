@@ -19,7 +19,14 @@
     "cta_secondary": "Get in Touch",
     "trust_earb": "EARB Registered",
     "trust_odpc": "ODPC Compliant",
-    "trust_nairobi": "Kenya Specialists"
+    "trust_nairobi": "Kenya Specialists",
+    "badge_portfolio": "Pan-Kenya Portfolio",
+    "badge_tagline": "Where Kenya Grows",
+    "badge_available": "Available",
+    "badge_earb": "EARB Registered Agency",
+    "badge_featured": "Featured",
+    "badge_response": "24 h Response",
+    "badge_sla": "Guaranteed landlord SLA"
   },
   "stats": {
     "zones_value": "7",
@@ -317,7 +324,16 @@
     "services_title": "Services",
     "company_title": "Company",
     "contact_title": "Contact",
-    "whatsapp": "WhatsApp Us"
+    "whatsapp": "WhatsApp Us",
+    "svc_management": "Property Management",
+    "svc_leasing": "Leasing & Letting",
+    "svc_valuation": "Valuation",
+    "svc_digital": "Digital Lease Mgmt"
+  },
+  "reach": {
+    "eyebrow": "Management Coverage",
+    "title": "Our Metropolitan Footprint",
+    "subtitle": "Properties managed across 7 coverage corridors spanning Nairobi and its expanding commuter counties. Click a corridor to view localized yields and covered neighbourhoods."
   },
   "common": {
     "loading": "Loading...",

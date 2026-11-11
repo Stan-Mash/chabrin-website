@@ -19,7 +19,14 @@
     "cta_secondary": "Wasiliana Nasi",
     "trust_earb": "Imesajiliwa EARB",
     "trust_odpc": "Inafuata ODPC",
-    "trust_nairobi": "Wataalamu wa Kenya"
+    "trust_nairobi": "Wataalamu wa Kenya",
+    "badge_portfolio": "Portfolio ya Kenya Yote",
+    "badge_tagline": "Mahali Kenya Inakua",
+    "badge_available": "Inapatikana",
+    "badge_earb": "Wakala Waliosajiliwa EARB",
+    "badge_featured": "Iliyoangaziwa",
+    "badge_response": "Majibu ndani ya Masaa 24",
+    "badge_sla": "SLA iliyohakikishiwa kwa mmiliki"
   },
   "stats": {
     "zones_value": "7",
@@ -317,7 +324,16 @@
     "services_title": "Huduma",
     "company_title": "Kampuni",
     "contact_title": "Mawasiliano",
-    "whatsapp": "Tutumie WhatsApp"
+    "whatsapp": "Tutumie WhatsApp",
+    "svc_management": "Usimamizi wa Mali",
+    "svc_leasing": "Upangaji wa Nyumba",
+    "svc_valuation": "Tathmini ya Mali",
+    "svc_digital": "Usimamizi wa Mkataba wa Dijiti"
+  },
+  "reach": {
+    "eyebrow": "Eneo la Usimamizi",
+    "title": "Alama Yetu ya Jiji",
+    "subtitle": "Mali zinazosimamiwa katika njia 7 za ufikajiwa zinazoenea Nairobi na kaunti zake za kukua. Bonyeza njia ili kuona mapato na maeneo yanayofunikwa."
   },
   "common": {
     "loading": "Inapakia...",

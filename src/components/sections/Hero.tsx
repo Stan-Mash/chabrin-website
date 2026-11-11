@@ -119,18 +119,18 @@ export default function Hero() {
               <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between">
                 <div>
                   <p className="text-brand-cyan text-[10px] font-bold uppercase tracking-widest mb-0.5">
-                    Pan-Kenya Portfolio
+                    {t("badge_portfolio")}
                   </p>
-                  <p className="text-white font-bold text-sm">Where Kenya Grows</p>
+                  <p className="text-white font-bold text-sm">{t("badge_tagline")}</p>
                 </div>
                 <span className="bg-brand-cyan text-brand-navy text-[10px] font-extrabold px-3 py-1.5 rounded-full">
-                  Available
+                  {t("badge_available")}
                 </span>
               </div>
               <div className="absolute top-3 left-3 flex items-center gap-1.5 bg-black/50
                               backdrop-blur-sm border border-white/15 rounded-full px-3 py-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-brand-cyan animate-pulse" />
-                <span className="text-white text-[10px] font-semibold">EARB Registered Agency</span>
+                <span className="text-white text-[10px] font-semibold">{t("badge_earb")}</span>
               </div>
             </motion.div>
 
@@ -183,17 +183,17 @@ export default function Hero() {
                               rounded-full px-3 py-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-brand-cyan animate-pulse" />
                 <span className="text-white text-[10px] font-bold tracking-wide uppercase">
-                  EARB Registered Agency
+                  {t("badge_earb")}
                 </span>
               </div>
 
               {/* Bottom label */}
               <div className="absolute bottom-0 left-0 right-0 px-5 pb-5">
                 <p className="text-brand-cyan text-[10px] font-bold uppercase tracking-widest mb-1">
-                  Pan-Kenya Portfolio
+                  {t("badge_portfolio")}
                 </p>
                 <p className="text-white font-bold text-base leading-tight">
-                  Where Kenya Grows
+                  {t("badge_tagline")}
                 </p>
                 <p className="text-white/55 text-xs mt-0.5">
                   Nairobi · Kiambu · Murang&apos;a · Kajiado · Machakos & beyond
@@ -222,11 +222,11 @@ export default function Hero() {
                 <div className="absolute top-3 right-3">
                   <span className="bg-brand-cyan text-brand-navy text-[10px] font-extrabold
                                    px-2.5 py-1 rounded-full">
-                    Available
+                    {t("badge_available")}
                   </span>
                 </div>
                 <div className="absolute bottom-3 left-3">
-                  <p className="text-white/55 text-[9px] uppercase tracking-wide font-bold">Featured</p>
+                  <p className="text-white/55 text-[9px] uppercase tracking-wide font-bold">{t("badge_featured")}</p>
                   <p className="text-white font-bold text-xs">Kilimani · Nairobi</p>
                 </div>
               </motion.div>
@@ -269,7 +269,7 @@ export default function Hero() {
                       d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                   <div className="min-w-0">
-                    <p className="text-brand-cyan font-bold text-xs leading-none">EARB Licensed</p>
+                    <p className="text-brand-cyan font-bold text-xs leading-none">{t("trust_earb")}</p>
                     <p className="text-white/45 text-[10px] mt-0.5">Kenya Estate Agents Board</p>
                   </div>
                 </div>
@@ -281,8 +281,8 @@ export default function Hero() {
                       d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                   <div className="min-w-0">
-                    <p className="text-white font-bold text-xs leading-none">24 h Response</p>
-                    <p className="text-white/45 text-[10px] mt-0.5">Guaranteed landlord SLA</p>
+                    <p className="text-white font-bold text-xs leading-none">{t("badge_response")}</p>
+                    <p className="text-white/45 text-[10px] mt-0.5">{t("badge_sla")}</p>
                   </div>
                 </div>
               </motion.div>

@@ -96,8 +96,9 @@ export default async function JobPage({ params }: Props) {
                 <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-brand-cyan/20 text-brand-cyan">
                   {job.jobType}
                 </span>
-                <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-white/10 text-white">
-                  📍 {job.location}
+                <span className="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full bg-white/10 text-white">
+                  <svg className="w-3 h-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
+                  {job.location}
                 </span>
                 {job.salaryRange && (
                   <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-green-500/20 text-green-300">
