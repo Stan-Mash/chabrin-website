@@ -70,6 +70,9 @@ export const metadata: Metadata = {
     follow: true,
     googleBot: { index: true, follow: true, "max-image-preview": "large" },
   },
+  verification: {
+    google: "Qo33dazQzY74jp2hSexid0KYdgO8micPX7mIznX-tXQ",
+  },
 };
 
 export const viewport: Viewport = {
