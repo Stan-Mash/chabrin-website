@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Core type definitions for the Chabrin website.
  *
  * SECURITY NOTE:
@@ -22,11 +22,11 @@ export type PropertyStatus = "available" | "let" | "under_offer";
 
 /**
  * Safe public representation of a property listing.
- * This is what the website renders — no sensitive fields.
+ * This is what the website renders - no sensitive fields.
  */
 export interface PublicListing {
-  id: string;              // UUID — not CHIPS internal ID
-  reference: string;       // e.g. "CAL-NBO-2024-001" — safe to display
+  id: string;              // UUID - not CHIPS internal ID
+  reference: string;       // e.g. "CAL-NBO-2024-001" - safe to display
   title: string;
   propertyType: PropertyType;
   status: PropertyStatus;
@@ -53,7 +53,7 @@ export interface LeadSubmission {
   propertyRef?: string;
   turnstileToken: string;
   locale: "en" | "sw";
-  consentGiven: boolean;   // KDPA consent — must be true to submit
+  consentGiven: boolean;   // KDPA consent - must be true to submit
 }
 
 export interface LeadResponse {

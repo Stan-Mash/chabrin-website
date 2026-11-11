@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Coming Soon | Chabrin Agencies Limited",
   description:
-    "Chabrin Agencies Limited — Premier property management in Nairobi, Kenya. Our new website is coming soon.",
+    "Chabrin Agencies Limited - Premier property management in Nairobi, Kenya. Our new website is coming soon.",
   robots: { index: false, follow: false },
 };
 

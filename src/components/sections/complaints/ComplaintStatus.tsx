@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 
@@ -155,13 +155,13 @@ function StatusPanel({ data }: { data: StatusResult }) {
           <div className="p-3 rounded-xl bg-slate-50 border border-slate-100">
             <p className="text-xs text-slate-400 font-semibold uppercase tracking-wide mb-1">Acknowledged</p>
             <p className="text-sm font-semibold text-slate-700">
-              {data.acknowledged_at ? formatDate(data.acknowledged_at) : "—"}
+              {data.acknowledged_at ? formatDate(data.acknowledged_at) : "-"}
             </p>
           </div>
           <div className="p-3 rounded-xl bg-slate-50 border border-slate-100">
             <p className="text-xs text-slate-400 font-semibold uppercase tracking-wide mb-1">Resolved</p>
             <p className="text-sm font-semibold text-slate-700">
-              {data.resolved_at ? formatDate(data.resolved_at) : "—"}
+              {data.resolved_at ? formatDate(data.resolved_at) : "-"}
             </p>
           </div>
         </div>
@@ -244,7 +244,7 @@ export default function ComplaintStatus() {
       <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
         <h2 className="text-xl font-bold text-[#0D1B8E] mb-1">Track Your Complaint</h2>
         <p className="text-slate-500 text-sm mb-5">
-          Enter the reference number from your confirmation email — e.g. <span className="font-mono font-semibold text-[#0D1B8E]">CMP-2026-A7K2M</span>
+          Enter the reference number from your confirmation email - e.g. <span className="font-mono font-semibold text-[#0D1B8E]">CMP-2026-A7K2M</span>
         </p>
         <form onSubmit={handleCheck} className="flex gap-2">
           <input

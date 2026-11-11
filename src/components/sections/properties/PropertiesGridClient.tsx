@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useMemo, useCallback } from "react";
 import Link from "next/link";
@@ -105,7 +105,7 @@ function PropertyCard({ listing, locale }: { listing: ListingRow; locale: string
             href={`/${locale}/contact?ref=${listing.reference}`}
             className="flex-1 text-center py-2.5 rounded-full bg-brand-navy text-white text-sm
                        font-semibold hover:bg-brand-navy-dark transition-colors"
-            aria-label={`${t("enquire")} — ${listing.title}`}
+            aria-label={`${t("enquire")} - ${listing.title}`}
           >
             {t("enquire")}
           </Link>

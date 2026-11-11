@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 /**
  * /en/careers/upload?ref=APP-OPS-2025-XXXXX&tok=<hmac>&exp=<unix>
@@ -15,7 +15,7 @@ import { useState, useRef, Suspense } from "react";
 const MAX_MB = 5;
 const ALLOWED_EXTS = [".pdf", ".doc", ".docx"];
 
-// ── Outer page — required Suspense wrapper for useSearchParams() ──────────────
+// ── Outer page - required Suspense wrapper for useSearchParams() ──────────────
 
 export default function CvUploadPage() {
   return (
@@ -29,7 +29,7 @@ export default function CvUploadPage() {
   );
 }
 
-// ── Inner component — uses useSearchParams() ──────────────────────────────────
+// ── Inner component - uses useSearchParams() ──────────────────────────────────
 
 function CvUploadInner() {
   const params    = useSearchParams();
@@ -187,7 +187,7 @@ function CvUploadInner() {
               <p className="text-3xl mb-3">📎</p>
               <p className="text-sm font-semibold text-brand-navy">Drag & drop your CV here</p>
               <p className="text-xs text-slate-400 mt-1">or click to browse</p>
-              <p className="text-xs text-slate-400 mt-3">PDF, DOC, DOCX — max {MAX_MB}MB</p>
+              <p className="text-xs text-slate-400 mt-3">PDF, DOC, DOCX - max {MAX_MB}MB</p>
             </div>
           )}
         </div>

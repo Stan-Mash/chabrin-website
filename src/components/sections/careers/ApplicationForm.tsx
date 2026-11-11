@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useRef } from "react";
 import Link from "next/link";
@@ -318,7 +318,7 @@ export default function ApplicationForm({ jobSlug, jobTitle, screeningQuestions 
       {/* Documents */}
       <div className="bg-white rounded-2xl border border-slate-200 p-6">
         <h3 className="font-bold text-brand-navy mb-1 text-sm uppercase tracking-wider">CV &amp; Documents</h3>
-        <p className="text-xs text-slate-500 mb-5">PDF, Word or image — max 5 MB each. Files are uploaded securely to our servers.</p>
+        <p className="text-xs text-slate-500 mb-5">PDF, Word or image - max 5 MB each. Files are uploaded securely to our servers.</p>
 
         {/* CV */}
         <div className="mb-5">
@@ -355,7 +355,7 @@ export default function ApplicationForm({ jobSlug, jobTitle, screeningQuestions 
         <div>
           <label className="block text-sm font-semibold text-slate-700 mb-1.5">
             Academic Certificates &amp; Supporting Documents
-            <span className="font-normal text-slate-400 ml-1">(optional — up to 4 files)</span>
+            <span className="font-normal text-slate-400 ml-1">(optional - up to 4 files)</span>
           </label>
           <p className="text-xs text-slate-400 mb-3">
             e.g. degree certificate, diplomas, KCSE certificate, professional licences
@@ -483,12 +483,12 @@ export default function ApplicationForm({ jobSlug, jobTitle, screeningQuestions 
       {/* Upload warnings */}
       {cvFile && cvStatus === "uploading" && (
         <p className="text-xs text-slate-500 bg-slate-50 border border-slate-200 rounded-lg px-3 py-2">
-          ⏳ Uploading your CV — please wait before submitting…
+          ⏳ Uploading your CV - please wait before submitting…
         </p>
       )}
       {!cvFile && (
         <p className="text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2">
-          ⚠️ No CV attached. A CV is strongly recommended — please attach one above.
+          ⚠️ No CV attached. A CV is strongly recommended - please attach one above.
         </p>
       )}
 

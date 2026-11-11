@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
@@ -95,7 +95,7 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* ── Desktop Right — Language + CTA ────────────────────────────── */}
+          {/* ── Desktop Right - Language + CTA ────────────────────────────── */}
           <div className="hidden md:flex items-center gap-3">
             <Link
               href={switchLocalePath}

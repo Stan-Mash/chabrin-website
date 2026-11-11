@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 
 export default function AdminBlogPage() {
   return (
@@ -33,7 +33,7 @@ export default function AdminBlogPage() {
             "Fill in Title, Category, Excerpt, and Body",
             "Upload a Cover Image for best visual impact",
             "Set Featured to pin it at the top of the blog",
-            "Click Publish — it goes live within the hour",
+            "Click Publish - it goes live within the hour",
           ].map((step, i) => (
             <div key={i} className="flex items-start gap-3 text-sm text-slate-600">
               <span className="w-5 h-5 rounded-full bg-brand-cyan/20 text-brand-cyan font-bold text-xs

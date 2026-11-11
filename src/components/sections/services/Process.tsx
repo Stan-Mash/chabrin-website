@@ -1,4 +1,4 @@
-import { useTranslations } from "next-intl";
+﻿import { useTranslations } from "next-intl";
 
 export default function Process() {
   const t = useTranslations("services_page");
@@ -26,7 +26,7 @@ export default function Process() {
 
         {/* Steps */}
         <div className="relative">
-          {/* Connector line — desktop only */}
+          {/* Connector line - desktop only */}
           <div className="hidden lg:block absolute top-10 left-0 right-0 h-0.5 bg-slate-200 mx-24" />
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">

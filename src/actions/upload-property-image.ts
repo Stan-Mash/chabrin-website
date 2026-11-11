@@ -1,4 +1,4 @@
-"use server";
+﻿"use server";
 
 import { revalidatePath } from "next/cache";
 import sharp from "sharp";
@@ -9,7 +9,7 @@ import { uploadToBlob, deleteFromBlob } from "@/lib/spaces";
  * Strips EXIF/GPS metadata and converts to WebP before uploading to Vercel Blob.
  *
  * ⚠️  SECURITY RULES:
- *  1. This is a Server Action — runs server-side only.
+ *  1. This is a Server Action - runs server-side only.
  *  2. Validates file type and size before processing.
  *  3. sharp automatically strips all metadata including GPS/EXIF.
  *  4. Only call from authenticated staff endpoints (add auth check when available).

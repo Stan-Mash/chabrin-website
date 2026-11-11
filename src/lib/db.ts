@@ -1,10 +1,10 @@
-import postgres from "postgres";
+﻿import postgres from "postgres";
 import { env } from "@/env";
 
 /**
- * PostgreSQL client — Neon serverless database via the `postgres` package.
+ * PostgreSQL client - Neon serverless database via the `postgres` package.
  *
- * ⚠️  ARCHITECTURE RULES — READ BEFORE USING:
+ * ⚠️  ARCHITECTURE RULES - READ BEFORE USING:
  *  1. This connects to the website's Neon database ONLY.
  *     It has ZERO connection to CHIPS (internal ERP).
  *  2. Import this file ONLY in Server Components, Server Actions,
@@ -19,7 +19,7 @@ import { env } from "@/env";
  *  - prepare: false is required when using Neon's PgBouncer pooler
  *    (transaction mode does not support prepared statements).
  *  - ssl is always required by Neon.
- *  - max: 3 is appropriate for Vercel serverless — each cold start gets its
+ *  - max: 3 is appropriate for Vercel serverless - each cold start gets its
  *    own process; Neon's pooler handles fan-out on the server side.
  *
  * @example
@@ -39,11 +39,11 @@ function createDb(): postgres.Sql {
     idle_timeout: 20,
     ssl: "require",     // Neon always requires SSL
     prepare: false,     // Required for Neon's PgBouncer pooler (transaction mode)
-    onnotice: () => {}, // Suppress notices — never log DB output to console
+    onnotice: () => {}, // Suppress notices - never log DB output to console
     transform: {
       undefined: null,  // Convert undefined → NULL
     },
-    // Explicit JSONB/JSON parsers — required because prepare:false (simple-query
+    // Explicit JSONB/JSON parsers - required because prepare:false (simple-query
     // protocol) can skip automatic OID-based decoding in some postgres driver versions,
     // causing JSONB columns to be returned as raw strings instead of objects.
     types: {

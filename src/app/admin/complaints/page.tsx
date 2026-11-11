@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { listAdminComplaints, getComplaintSummary } from "@/db/queries/admin-complaints";
 
 // ── Colour helpers ────────────────────────────────────────────────────────────
@@ -211,7 +211,7 @@ export default async function AdminComplaintsPage({ searchParams }: Props) {
                       )}
                     </td>
                     <td className="px-4 py-3 text-slate-500 text-xs whitespace-nowrap">
-                      {c.property_area ?? "—"}
+                      {c.property_area ?? "-"}
                     </td>
                     <td className="px-4 py-3 whitespace-nowrap">
                       <Badge value={c.priority} styles={PRIORITY_STYLES} />

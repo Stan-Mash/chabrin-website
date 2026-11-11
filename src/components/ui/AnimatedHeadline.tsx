@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
@@ -21,7 +21,7 @@ export default function AnimatedHeadline({
   const ref = useRef<HTMLElement>(null);
 
   // margin: "-80px 0px" means the observer fires 80px before the element
-  // leaves/enters the viewport edge — reliable replay on scroll up without
+  // leaves/enters the viewport edge - reliable replay on scroll up without
   // needing a high `amount` threshold that large headings rarely cross.
   const inView = useInView(ref as React.RefObject<Element>, {
     once: false,
@@ -31,7 +31,7 @@ export default function AnimatedHeadline({
   const words = text.split(" ");
 
   return (
-    // @ts-expect-error — dynamic tag with forwarded ref
+    // @ts-expect-error - dynamic tag with forwarded ref
     <Tag ref={ref} className={className} aria-label={text}>
       {words.map((word, i) => (
         <motion.span
@@ -46,7 +46,7 @@ export default function AnimatedHeadline({
           className="inline-block"
           style={{ marginRight: i < words.length - 1 ? "0.25em" : 0 }}
         >
-          {word}
+          {word}{i < words.length - 1 ? " " : ""}
         </motion.span>
       ))}
     </Tag>

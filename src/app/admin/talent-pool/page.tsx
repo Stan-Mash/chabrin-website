@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useActionState, useState } from "react";
 import Link from "next/link";
@@ -73,7 +73,7 @@ function InviteModal({
             <textarea
               name="message"
               rows={3}
-              placeholder="e.g. We thought of you immediately when this role opened — we'd love to hear from you."
+              placeholder="e.g. We thought of you immediately when this role opened - we'd love to hear from you."
               className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-brand-navy/20 placeholder:text-slate-400"
             />
           </div>
@@ -258,7 +258,7 @@ export default function TalentPoolPage() {
                             {AI_REC_LABELS[aiRec] ?? aiRec}
                           </span>
                         ) : (
-                          <span className="text-xs text-slate-400">—</span>
+                          <span className="text-xs text-slate-400">-</span>
                         )}
                       </td>
                       <td className="px-4 py-3 hidden lg:table-cell">
@@ -268,7 +268,7 @@ export default function TalentPoolPage() {
                               {sk}
                             </span>
                           ))}
-                          {skills.length === 0 && <span className="text-xs text-slate-400">—</span>}
+                          {skills.length === 0 && <span className="text-xs text-slate-400">-</span>}
                         </div>
                       </td>
                       <td className="px-4 py-3 text-right">

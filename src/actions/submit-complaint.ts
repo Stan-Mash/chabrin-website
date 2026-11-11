@@ -1,7 +1,7 @@
-"use server";
+﻿"use server";
 
 /**
- * submit-complaint.ts — Server Action for the public complaints form.
+ * submit-complaint.ts - Server Action for the public complaints form.
  *
  * Flow:
  *  1. Validate input with Zod
@@ -144,7 +144,7 @@ function staffEmailHtml(data: ComplaintInput, reference: string, priority: strin
   return `
 <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;color:#333;">
   <div style="background:#0D1B8E;padding:24px 20px;border-radius:8px 8px 0 0;text-align:center;">
-    <h1 style="color:#00C9C9;margin:0;font-size:22px;">New Complaint — Chabrin Agencies</h1>
+    <h1 style="color:#00C9C9;margin:0;font-size:22px;">New Complaint - Chabrin Agencies</h1>
     <p style="color:rgba(255,255,255,0.7);margin:6px 0 0;font-size:13px;">Submitted via chabrinagencies.com</p>
   </div>
 
@@ -192,7 +192,7 @@ function staffEmailHtml(data: ComplaintInput, reference: string, priority: strin
     </div>
 
     <p style="margin:20px 0 0;font-size:11px;color:#94a3b8;text-align:center;">
-      Log into CHIPS to acknowledge and assign this complaint — ref: ${h(reference)}
+      Log into CHIPS to acknowledge and assign this complaint - ref: ${h(reference)}
     </p>
   </div>
 </div>`;
@@ -217,7 +217,7 @@ function confirmationEmailHtml(name: string, reference: string, category: string
     <p style="margin:0 0 20px;font-size:15px;">Dear <strong>${h(name)}</strong>,</p>
     <p style="margin:0 0 20px;font-size:14px;line-height:1.6;color:#475569;">
       Thank you for reaching out. Your complaint has been received and logged in our system.
-      Please keep your reference number safe — you will need it to track the status of your complaint.
+      Please keep your reference number safe - you will need it to track the status of your complaint.
     </p>
 
     <!-- Reference box -->
@@ -229,7 +229,7 @@ function confirmationEmailHtml(name: string, reference: string, category: string
     <!-- Details -->
     <table style="width:100%;border-collapse:collapse;margin-bottom:24px;font-size:13px;">
       <tr style="background:#f8fafc;"><td style="padding:8px 12px;color:#666;width:130px;border-radius:4px 0 0 0;">Category</td><td style="padding:8px 12px;font-weight:600;">${h(categoryLabel)}</td></tr>
-      <tr><td style="padding:8px 12px;color:#666;border-top:1px solid #f1f5f9;">Status</td><td style="padding:8px 12px;font-weight:600;color:#2563eb;">Submitted — Pending Acknowledgement</td></tr>
+      <tr><td style="padding:8px 12px;color:#666;border-top:1px solid #f1f5f9;">Status</td><td style="padding:8px 12px;font-weight:600;color:#2563eb;">Submitted - Pending Acknowledgement</td></tr>
     </table>
 
     <!-- SLA commitment -->
@@ -258,7 +258,7 @@ function confirmationEmailHtml(name: string, reference: string, category: string
     </p>
 
     <p style="margin:24px 0 0;font-size:11px;color:#94a3b8;border-top:1px solid #f1f5f9;padding-top:16px;">
-      This is an automated confirmation. Do not reply to this email — use your reference number when contacting us.
+      This is an automated confirmation. Do not reply to this email - use your reference number when contacting us.
       Chabrin Agencies Limited · Nacico Plaza, 5th Floor, Landhies Road, Nairobi · EARB Registered
     </p>
   </div>
@@ -305,13 +305,13 @@ export async function submitComplaint(
       consent_given:  data.consent,
     });
   } catch (err) {
-    // DB failure — still send email so nothing is lost
+    // DB failure - still send email so nothing is lost
     console.error("[complaints] db-insert-failed", {
       reference,
       error: err instanceof Error ? err.message : "unknown",
       time:  new Date().toISOString(),
     });
-    // Fall through — email is the safety net
+    // Fall through - email is the safety net
   }
 
   // 6. Email staff + submitter
@@ -325,14 +325,14 @@ export async function submitComplaint(
         from:    process.env.SMTP_FROM || process.env.SMTP_USER,
         to:      "info@chabrinagencies.co.ke",
         replyTo: data.email,
-        subject: `[${priority.toUpperCase()}] New Complaint ${reference} — ${categoryLabel}`,
+        subject: `[${priority.toUpperCase()}] New Complaint ${reference} - ${categoryLabel}`,
         html:    staffEmailHtml(data, reference, priority),
       }),
       // Submitter confirmation
       transporter.sendMail({
         from:    process.env.SMTP_FROM || process.env.SMTP_USER,
         to:      data.email,
-        subject: `Complaint Received — Your Reference: ${reference}`,
+        subject: `Complaint Received - Your Reference: ${reference}`,
         html:    confirmationEmailHtml(data.full_name, reference, data.category, priority),
       }),
     ]);
@@ -342,7 +342,7 @@ export async function submitComplaint(
       error: err instanceof Error ? err.message : "unknown",
       time:  new Date().toISOString(),
     });
-    // Don't fail the user — reference was generated and DB insert attempted
+    // Don't fail the user - reference was generated and DB insert attempted
   }
 
   console.info("[complaints] submitted", {

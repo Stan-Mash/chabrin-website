@@ -1,20 +1,20 @@
-/**
- * admin-auth.ts — Multi-user session auth for the staff admin panel.
+﻿/**
+ * admin-auth.ts - Multi-user session auth for the staff admin panel.
  *
  * Strategy:
  *   - Each staff member has their own row in admin_users (email + bcrypt hash).
  *   - On login, bcrypt.compare verifies the password.
  *   - A UUID session ID is stored in admin_sessions (expires in 12h).
  *   - The session ID is stored as an httpOnly Secure SameSite=Strict cookie.
- *   - Every admin layout server component calls getAdminSession() — if absent
+ *   - Every admin layout server component calls getAdminSession() - if absent
  *     or expired, it redirects to /admin-login.
  *
  * Brute-force protection:
  *   - Max 5 failed attempts per IP within a 15-minute window (in-memory).
  *
  * Roles:
- *   - staff      — access to complaints, applications, jobs, blog
- *   - superadmin — everything + user management
+ *   - staff      - access to complaints, applications, jobs, blog
+ *   - superadmin - everything + user management
  */
 
 import { timingSafeEqual } from "crypto";
@@ -121,9 +121,9 @@ export async function isSuperAdmin(): Promise<boolean> {
 }
 
 /**
- * Timing-safe string comparison — prevents timing attacks on session IDs.
+ * Timing-safe string comparison - prevents timing attacks on session IDs.
  * Both strings are padded/truncated to 64 chars before comparison.
- * No early return on length mismatch — avoids leaking length via timing.
+ * No early return on length mismatch - avoids leaking length via timing.
  */
 export function safeCompare(a: string, b: string): boolean {
   const ab = Buffer.from(a.padEnd(64, "0").slice(0, 64));

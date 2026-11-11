@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import { getAllOpenJobs, type SanityJob } from "@/sanity/queries/jobs";
@@ -8,7 +8,7 @@ export const revalidate = 60;
 export const metadata: Metadata = {
   title: "Careers",
   description:
-    "Join Chabrin Agencies Limited — Kenya's trusted property management company. View open positions across Nairobi, Kiambu, Murang'a, Kajiado, Machakos and beyond.",
+    "Join Chabrin Agencies Limited - Kenya's trusted property management company. View open positions across Nairobi, Kiambu, Murang'a, Kajiado, Machakos and beyond.",
 };
 
 const DEPT_COLOURS: Record<string, string> = {
@@ -49,7 +49,7 @@ export default async function CareersPage() {
           </h1>
           <p className="text-slate-300 max-w-xl text-lg leading-relaxed mb-8">
             Join a team managing properties across Nairobi, Kiambu, Murang&apos;a,
-            Kajiado, Machakos and beyond — for over 30 years. Professional growth, stable employment, and real impact.
+            Kajiado, Machakos and beyond - for over 30 years. Professional growth, stable employment, and real impact.
           </p>
           <div className="flex flex-wrap gap-6 text-sm text-slate-400">
             <span>📍 Nairobi, Kenya</span>
@@ -90,7 +90,7 @@ export default async function CareersPage() {
               <p className="text-slate-500 text-sm">
                 {jobs.length > 0
                   ? `${jobs.length} position${jobs.length === 1 ? "" : "s"} currently open`
-                  : "No positions open right now — check back soon"}
+                  : "No positions open right now - check back soon"}
               </p>
             </div>
             <Link

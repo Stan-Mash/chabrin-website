@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+﻿import { NextRequest, NextResponse } from "next/server";
 import { randomBytes } from "crypto";
 import { uploadDocument } from "@/lib/spaces";
 
@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Some browsers (especially mobile) report empty or application/octet-stream
-    // for PDFs and Word docs — fall back to extension-based detection.
+    // for PDFs and Word docs - fall back to extension-based detection.
     const fileExt = file.name.split(".").pop()?.toLowerCase() ?? "";
     const mimeType = (file.type && file.type !== "application/octet-stream")
       ? file.type
@@ -72,7 +72,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ url, name: file.name, size: file.size });
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
-    // Log without PII — just the error message to diagnose blob token issues etc.
+    // Log without PII - just the error message to diagnose blob token issues etc.
     console.error("[upload-doc] failed:", msg);
     // Surface a more specific message for missing blob token
     if (msg.includes("BLOB_READ_WRITE_TOKEN") || msg.includes("token") || msg.includes("unauthorized")) {

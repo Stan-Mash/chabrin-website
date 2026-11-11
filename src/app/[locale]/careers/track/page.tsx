@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import ApplicationTracker from "@/components/sections/careers/ApplicationTracker";
 
 export const metadata: Metadata = {
-  title: "Track Application — Careers",
+  title: "Track Application - Careers",
   description: "Check the status of your job application at Chabrin Agencies using your reference number.",
 };
 

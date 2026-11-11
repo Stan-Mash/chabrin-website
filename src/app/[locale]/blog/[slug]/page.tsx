@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getAllPosts, getPostBySlug } from "@/sanity/queries/blog";
@@ -15,7 +15,7 @@ const ARTICLES: Record<string, { title: string; category: string; publishedAt: s
     publishedAt: "2026-03-01",
     readTime: "6 min read",
     body: `
-A lease agreement is the foundation of every landlord-tenant relationship in Kenya. Yet many landlords treat it as a formality — a document signed once and filed away. This is a costly mistake. A well-drafted lease protects your rental income, defines your rights, and reduces the risk of costly disputes.
+A lease agreement is the foundation of every landlord-tenant relationship in Kenya. Yet many landlords treat it as a formality - a document signed once and filed away. This is a costly mistake. A well-drafted lease protects your rental income, defines your rights, and reduces the risk of costly disputes.
 
 ## What Makes a Lease Agreement Legally Binding in Kenya?
 
@@ -31,17 +31,17 @@ The Landlord and Tenant (Shops, Hotels and Catering Establishments) Act (Cap 301
 
 **3. Term and commencement.** State the start date and whether the tenancy is fixed-term (e.g., one year) or periodic (month-to-month). A fixed-term lease gives the landlord certainty of income; a periodic tenancy is easier to end if the tenant proves troublesome.
 
-**4. Rent amount and payment terms.** State the monthly rent in Kenya Shillings. Avoid foreign-currency denominations unless both parties are domiciled abroad — the Central Bank of Kenya discourages KES-to-USD conversions in domestic leases. Specify the due date (typically the 1st of the month), grace period (usually five days), and late-payment fee.
+**4. Rent amount and payment terms.** State the monthly rent in Kenya Shillings. Avoid foreign-currency denominations unless both parties are domiciled abroad - the Central Bank of Kenya discourages KES-to-USD conversions in domestic leases. Specify the due date (typically the 1st of the month), grace period (usually five days), and late-payment fee.
 
 **5. Security deposit.** The standard market practice in Nairobi is one to three months' rent as a deposit. The lease must state the deposit amount, the conditions under which it may be retained, and the timeline for its return after the tenancy ends (typically 30 days).
 
-**6. Permitted use.** Residential properties should state "residential use only." Allowing commercial activity without updating the lease — and potentially the building's occupancy permit — creates liability.
+**6. Permitted use.** Residential properties should state "residential use only." Allowing commercial activity without updating the lease - and potentially the building's occupancy permit - creates liability.
 
 **7. Maintenance obligations.** Who is responsible for routine maintenance (tenant) versus structural repairs (landlord)? In Kenya, landlords are generally responsible for maintaining the structure and ensuring habitable conditions. Tenants are responsible for minor repairs and cleanliness.
 
 **8. Subletting restrictions.** Most Kenyan leases prohibit subletting without the landlord's written consent. Airbnb-style short-term lets have proliferated in Nairobi; without an express prohibition, enforcement is difficult.
 
-**9. Notice periods.** The minimum notice required to end a periodic tenancy in Kenya is typically one rental period (one month for a monthly tenancy). Fixed-term leases require no notice — they expire automatically.
+**9. Notice periods.** The minimum notice required to end a periodic tenancy in Kenya is typically one rental period (one month for a monthly tenancy). Fixed-term leases require no notice - they expire automatically.
 
 **10. Dispute resolution.** Specify whether disputes go to the Business Premises Rent Tribunal, the Magistrate's Court, or private arbitration. For commercial premises, the Tribunal is mandatory under Cap 301.
 
@@ -68,7 +68,7 @@ If you manage your property independently, we recommend having your lease review
     publishedAt: "2026-02-01",
     readTime: "8 min read",
     body: `
-Nairobi's rental market entered 2026 in a state of selective buoyancy. While the broader economy grappled with elevated interest rates and a weakened shilling, specific micro-markets within the city posted occupancy rates above 92 percent. Understanding where demand is concentrated — and why — is the difference between a fully-let portfolio and one with chronic vacancies.
+Nairobi's rental market entered 2026 in a state of selective buoyancy. While the broader economy grappled with elevated interest rates and a weakened shilling, specific micro-markets within the city posted occupancy rates above 92 percent. Understanding where demand is concentrated - and why - is the difference between a fully-let portfolio and one with chronic vacancies.
 
 ## The Big Picture: Supply Outpacing Demand in Some Zones
 
@@ -78,7 +78,7 @@ By contrast, the affordable segment (below KES 20,000 per month) in peripheral z
 
 ## Five Zones Showing Strong Demand in 2026
 
-**1. Ruaka and Banana Hill.** The northward expansion of Nairobi's tech corridor — anchored by companies relocating from the CBD and Westlands to avoid traffic congestion — has driven demand for two- and three-bedroom apartments. Proximity to Limuru Road and the Northern Bypass makes Ruaka attractive to professionals employed in Westlands and Gigiri. Average two-bedroom rents: KES 35,000 to KES 55,000.
+**1. Ruaka and Banana Hill.** The northward expansion of Nairobi's tech corridor - anchored by companies relocating from the CBD and Westlands to avoid traffic congestion - has driven demand for two- and three-bedroom apartments. Proximity to Limuru Road and the Northern Bypass makes Ruaka attractive to professionals employed in Westlands and Gigiri. Average two-bedroom rents: KES 35,000 to KES 55,000.
 
 **2. Syokimau and Mlolongo.** The SGR commuter rail has fundamentally changed the calculus for tenants willing to live further from the CBD. The 25-minute journey from Syokimau to Nairobi Central Station has made this corridor viable for professionals who previously had to live closer to the city. Supply remains constrained by limited serviced land, keeping vacancy below 5 percent. Average two-bedroom rents: KES 28,000 to KES 45,000.
 
@@ -92,7 +92,7 @@ By contrast, the affordable segment (below KES 20,000 per month) in peripheral z
 
 Our data from enquiries handled through Chabrin Agencies shows three non-negotiables for Nairobi tenants in 2026:
 
-**Reliable water supply.** Power outages are managed through solar backup, but water scarcity — particularly in estates on the outer ring — remains the single biggest deterrent. Landlords with functioning boreholes or large storage capacity command a clear premium.
+**Reliable water supply.** Power outages are managed through solar backup, but water scarcity - particularly in estates on the outer ring - remains the single biggest deterrent. Landlords with functioning boreholes or large storage capacity command a clear premium.
 
 **Security.** Perimeter walls, controlled access, and CCTV are table stakes. Tenants in the KES 30,000 and above segment increasingly expect manned security.
 
@@ -102,7 +102,7 @@ Our data from enquiries handled through Chabrin Agencies shows three non-negotia
 
 Gross rental yields across Nairobi averaged 5.8 percent in 2025, down from 6.4 percent in 2023, reflecting the appreciation in land and construction costs. Net yields (after management fees, maintenance, and voids) averaged 4.2 percent.
 
-The zones showing the strongest yield compression — Kilimani, Westlands, Lavington — are oversupplied at the top of the market. Investors seeking yield over capital appreciation should focus on the affordable mid-market in emerging zones.
+The zones showing the strongest yield compression - Kilimani, Westlands, Lavington - are oversupplied at the top of the market. Investors seeking yield over capital appreciation should focus on the affordable mid-market in emerging zones.
 
 For landlords seeking a detailed yield analysis of their existing portfolio or guidance on acquisition targets, our valuation team is available for consultations.
     `.trim(),
@@ -113,7 +113,7 @@ For landlords seeking a detailed yield analysis of their existing portfolio or g
     publishedAt: "2026-01-01",
     readTime: "5 min read",
     body: `
-Many tenants in Kenya endure illegal practices by landlords simply because they do not know what the law entitles them to. Understanding your rights is the first step to asserting them — and to resolving disputes without escalation.
+Many tenants in Kenya endure illegal practices by landlords simply because they do not know what the law entitles them to. Understanding your rights is the first step to asserting them - and to resolving disputes without escalation.
 
 ## The Legal Framework for Residential Tenancies
 
@@ -131,7 +131,7 @@ For most residential tenants, the practical protection comes from common law imp
 
 **2. Right to quiet enjoyment.** Once you have paid your rent, the landlord cannot enter the property without reasonable notice (generally 24 to 48 hours in writing) except in a genuine emergency. Entering your home unannounced, cutting utilities to force you out, or removing fixtures to make the property uninhabitable are all unlawful.
 
-**3. Right to a receipt.** You are entitled to a written receipt for every rent payment. Keep these — they are your primary evidence in any dispute about payment history.
+**3. Right to a receipt.** You are entitled to a written receipt for every rent payment. Keep these - they are your primary evidence in any dispute about payment history.
 
 **4. Right to notice before eviction.** A landlord cannot evict you without following the legal process. For a periodic tenancy (month-to-month), the landlord must give notice equal to one rental period. For non-payment of rent, the landlord must serve a formal demand before commencing eviction proceedings.
 
@@ -153,18 +153,18 @@ If you are a tenant in a property managed by Chabrin Agencies Limited, our compl
 
 For landlord-tenant disputes beyond our managed portfolio, the resources available include the Business Premises Rent Tribunal (for commercial tenants under Cap 301), the Magistrate's Court, and the Office of the Ombudsman.
 
-Understanding your rights does not mean being adversarial — most disputes are resolved through clear communication. But knowing what you are entitled to ensures the conversation starts from an informed position.
+Understanding your rights does not mean being adversarial - most disputes are resolved through clear communication. But knowing what you are entitled to ensures the conversation starts from an informed position.
     `.trim(),
   },
   "property-valuation-guide": {
-    title: "How Property Valuations Work in Kenya — and Why They Matter",
+    title: "How Property Valuations Work in Kenya - and Why They Matter",
     category: "Valuation",
     publishedAt: "2025-12-01",
     readTime: "7 min read",
     body: `
 A property valuation is an independent, professional assessment of a property's market value at a specific point in time. In Kenya, valuations are required for mortgage applications, estate administration, company accounts, insurance, compulsory acquisition, and rental assessments. Yet many property owners treat them as a bureaucratic hurdle rather than a strategic tool.
 
-Understanding what goes into a valuation — and how to maximise your property's assessed value — can make a material difference to your financial outcomes.
+Understanding what goes into a valuation - and how to maximise your property's assessed value - can make a material difference to your financial outcomes.
 
 ## Who Can Conduct a Valuation in Kenya?
 
@@ -180,7 +180,7 @@ Chabrin Agencies works with VRB-registered valuers for all rental and investment
 
 The most widely used method for residential properties. The valuer identifies recent sales of comparable properties in the same area and adjusts for differences in size, condition, location, and amenities.
 
-The reliability of this method depends on market transparency. In Nairobi, transaction data is not fully public, which means valuers must draw on their own transaction databases, the Kenya Property Developers Association data, and professional networks. This is why local market knowledge is so important — a valuer from outside Nairobi may apply inappropriate comparables.
+The reliability of this method depends on market transparency. In Nairobi, transaction data is not fully public, which means valuers must draw on their own transaction databases, the Kenya Property Developers Association data, and professional networks. This is why local market knowledge is so important - a valuer from outside Nairobi may apply inappropriate comparables.
 
 **2. The Income Approach (Investment Method)**
 
@@ -194,7 +194,7 @@ The capitalisation rate is derived from market evidence of yields on similar pro
 
 **3. The Depreciated Replacement Cost Method**
 
-Used where there is insufficient market or income data — typically for specialist properties such as hospitals, schools, churches, and industrial facilities. The valuer estimates the cost of constructing an equivalent building at current prices, then deducts depreciation for age, condition, and functional obsolescence.
+Used where there is insufficient market or income data - typically for specialist properties such as hospitals, schools, churches, and industrial facilities. The valuer estimates the cost of constructing an equivalent building at current prices, then deducts depreciation for age, condition, and functional obsolescence.
 
 This method tends to produce higher values than the market approach and is not accepted by most banks for mortgage purposes on standard residential properties.
 
@@ -206,7 +206,7 @@ This method tends to produce higher values than the market approach and is not a
 
 **Services and infrastructure.** Proximity to functioning water mains, stable power (or solar backup), paved access roads, and fibre internet connectivity all add measurable value. Properties reliant on water bowsers are discounted.
 
-**Property condition.** Deferred maintenance — peeling paint, cracked tiles, failing plumbing — reduces the assessed value directly (through the depreciation adjustment) and indirectly (by deterring comparable buyers and tenants).
+**Property condition.** Deferred maintenance - peeling paint, cracked tiles, failing plumbing - reduces the assessed value directly (through the depreciation adjustment) and indirectly (by deterring comparable buyers and tenants).
 
 **Building age and standard of construction.** Post-2010 constructions built to the current building code typically achieve higher values than older stock, all else being equal.
 
@@ -228,7 +228,7 @@ For a formal valuation of your property or portfolio, contact our team to discus
     publishedAt: "2025-10-01",
     readTime: "6 min read",
     body: `
-The Kenya Data Protection Act 2019 (KDPA) is not just for technology companies and banks. If you are a landlord or property manager who collects, stores, or processes personal information about tenants, applicants, or employees, you are a data controller under the Act — and you have legal obligations.
+The Kenya Data Protection Act 2019 (KDPA) is not just for technology companies and banks. If you are a landlord or property manager who collects, stores, or processes personal information about tenants, applicants, or employees, you are a data controller under the Act - and you have legal obligations.
 
 Non-compliance carries financial penalties of up to KES 5 million or imprisonment of up to 10 years for the most serious offences. More practically, a data breach or misuse of tenant data can result in complaints to the Office of the Data Protection Commissioner (ODPC), civil claims, and reputational damage.
 
@@ -246,7 +246,7 @@ Under the KDPA, personal data is any information that relates to an identified o
 - WhatsApp conversations and email correspondence
 - CCTV footage in which tenants appear
 
-Sensitive personal data — including health information, biometric data, and financial information — attracts heightened protection.
+Sensitive personal data - including health information, biometric data, and financial information - attracts heightened protection.
 
 ## What Are Your Obligations as a Data Controller?
 
@@ -257,7 +257,7 @@ Sensitive personal data — including health information, biometric data, and fi
 
 Blanket, pre-ticked consent forms do not meet the KDPA standard.
 
-**2. Data minimisation.** You may only collect what you actually need. If you need to verify income, a payslip is sufficient — you do not need a full bank statement going back 12 months. If you need to identify a tenant, a national ID copy is sufficient — you do not need a passport and a driving licence.
+**2. Data minimisation.** You may only collect what you actually need. If you need to verify income, a payslip is sufficient - you do not need a full bank statement going back 12 months. If you need to identify a tenant, a national ID copy is sufficient - you do not need a passport and a driving licence.
 
 **3. Purpose limitation.** Data collected for one purpose (e.g., tenant screening) cannot be used for another purpose (e.g., marketing) without fresh consent.
 
@@ -280,7 +280,7 @@ Blanket, pre-ticked consent forms do not meet the KDPA standard.
 
 **Establish a retention policy.** Kenya's tax and accounting regulations generally require records to be retained for seven years. After that period, tenant personal data should be securely deleted or anonymised.
 
-**Train your staff.** Anyone who handles tenant data — caretakers, office staff, accounts personnel — should understand the basics of data protection.
+**Train your staff.** Anyone who handles tenant data - caretakers, office staff, accounts personnel - should understand the basics of data protection.
 
 ## How Chabrin Agencies Approaches KDPA Compliance
 

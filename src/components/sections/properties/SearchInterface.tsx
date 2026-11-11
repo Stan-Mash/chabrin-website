@@ -1,15 +1,15 @@
-"use client";
+﻿"use client";
 
 /**
- * SearchInterface — Airbnb-style split-screen property browser.
+ * SearchInterface - Airbnb-style split-screen property browser.
  *
  * Layout:
  *   Desktop (lg+): 60% scrollable card grid (left) | 40% sticky Leaflet map (right)
  *   Mobile:        Card grid only, with a floating "Show Map ↔ Show List" toggle
  *
- * Data security — THE MABATI RULE:
+ * Data security - THE MABATI RULE:
  *   Only listings where web_visible === true AND status === "vacant" are rendered.
- *   Filtering is the FIRST operation — this component never receives unsafe data.
+ *   Filtering is the FIRST operation - this component never receives unsafe data.
  */
 
 import { useState, useMemo, useCallback, useEffect } from "react";
@@ -56,10 +56,10 @@ export interface SearchListing {
   published_at:     string;
 }
 
-// ── Area centroid coordinates (KDPA-safe — approximate neighbourhood centres) ─
+// ── Area centroid coordinates (KDPA-safe - approximate neighbourhood centres) ─
 
 const AREA_CENTROIDS: Record<string, [number, number]> = {
-  // Zone A — Northern Commuter Corridor
+  // Zone A - Northern Commuter Corridor
   "Thika Town":       [-1.0332, 37.0694],
   "Ruiru":            [-1.1448, 36.9611],
   "Kahawa Sukari":    [-1.1904, 36.9139],
@@ -67,7 +67,7 @@ const AREA_CENTROIDS: Record<string, [number, number]> = {
   "Githurai 45":      [-1.2144, 36.9202],
   "Membley":          [-1.1675, 36.9742],
   "Juja":             [-1.1029, 37.0146],
-  // Zone B — Kasarani-Ruaraka Belt
+  // Zone B - Kasarani-Ruaraka Belt
   "Githurai 44":      [-1.2244, 36.9100],
   "Zimmerman":        [-1.2306, 36.8990],
   "Roysambu":         [-1.2217, 36.8836],
@@ -75,18 +75,18 @@ const AREA_CENTROIDS: Record<string, [number, number]> = {
   "Mwiki":            [-1.2115, 36.9215],
   "Lucky Summer":     [-1.2479, 36.8829],
   "Ruaraka":          [-1.2465, 36.8904],
-  // Zone C — Inner East Urban Core
+  // Zone C - Inner East Urban Core
   "Eastleigh North":  [-1.2740, 36.8488],
   "Eastleigh South":  [-1.2814, 36.8509],
   "Mathare":          [-1.2566, 36.8575],
   "Huruma":           [-1.2610, 36.8533],
   "Pangani":          [-1.2724, 36.8351],
-  // Zone D — Classic Eastlands Hub
+  // Zone D - Classic Eastlands Hub
   "Buruburu":         [-1.2870, 36.8879],
   "Kariobangi North": [-1.2660, 36.8830],
   "Kariobangi South": [-1.2760, 36.8853],
   "Dandora":          [-1.2563, 36.9030],
-  // Zone E — Premium, CBD & Inner Ring
+  // Zone E - Premium, CBD & Inner Ring
   "CBD":              [-1.2921, 36.8219],
   "Westlands":        [-1.2680, 36.8100],
   "Kilimani":         [-1.2921, 36.7897],
@@ -98,7 +98,7 @@ const AREA_CENTROIDS: Record<string, [number, number]> = {
   "Ngara":            [-1.2721, 36.8369],
   "Makadara":         [-1.2984, 36.8600],
   "Jericho":          [-1.2917, 36.8741],
-  // Zone F — Greater Eastlands
+  // Zone F - Greater Eastlands
   "Umoja":            [-1.3037, 36.8952],
   "Donholm":          [-1.3017, 36.8799],
   "Savannah":         [-1.3093, 36.8936],
@@ -106,7 +106,7 @@ const AREA_CENTROIDS: Record<string, [number, number]> = {
   "Kayole":           [-1.2867, 36.9192],
   "Tassia":           [-1.3159, 36.8943],
   "Imara Daima":      [-1.3302, 36.8877],
-  // Zone G — Southern Metro & Airport Corridor
+  // Zone G - Southern Metro & Airport Corridor
   "Pipeline":         [-1.3369, 36.8895],
   "Embakasi":         [-1.3203, 36.9104],
   "Syokimau":         [-1.3653, 36.9256],
@@ -144,13 +144,13 @@ const STRATEGIC_REGIONS: Record<string, string> = {
 
 // ── Mock dataset ──────────────────────────────────────────────────────────────
 // In production, replace with getPublishedListings() from @/db/queries/listings.
-// Images are representative Unsplash photos — replaced with DO Spaces URLs in prod.
+// Images are representative Unsplash photos - replaced with DO Spaces URLs in prod.
 
 const MOCK_LISTINGS_RAW: (Omit<SearchListing, "lat" | "lng" | "strategic_region"> & { zone: string })[] = [
   {
     id: "a1b2c3d4-0001",
     reference: "CAL-NBO-2026-001",
-    title: "Spacious 3-Bedroom Apartment — Westlands",
+    title: "Spacious 3-Bedroom Apartment - Westlands",
     property_type: "apartment",
     status: "vacant",
     web_visible: true,
@@ -172,7 +172,7 @@ const MOCK_LISTINGS_RAW: (Omit<SearchListing, "lat" | "lng" | "strategic_region"
   {
     id: "a1b2c3d4-0002",
     reference: "CAL-NBO-2026-002",
-    title: "Modern 2-Bedroom in Kasarani — Near TRM",
+    title: "Modern 2-Bedroom in Kasarani - Near TRM",
     property_type: "apartment",
     status: "vacant",
     web_visible: true,
@@ -193,7 +193,7 @@ const MOCK_LISTINGS_RAW: (Omit<SearchListing, "lat" | "lng" | "strategic_region"
   {
     id: "a1b2c3d4-0003",
     reference: "CAL-NBO-2026-003",
-    title: "Executive Office Suite — Upperhill Business District",
+    title: "Executive Office Suite - Upperhill Business District",
     property_type: "office",
     status: "vacant",
     web_visible: true,
@@ -214,7 +214,7 @@ const MOCK_LISTINGS_RAW: (Omit<SearchListing, "lat" | "lng" | "strategic_region"
   {
     id: "a1b2c3d4-0004",
     reference: "CAL-NBO-2026-004",
-    title: "3-Bedroom Townhouse — Kahawa Wendani",
+    title: "3-Bedroom Townhouse - Kahawa Wendani",
     property_type: "townhouse",
     status: "vacant",
     web_visible: true,
@@ -235,7 +235,7 @@ const MOCK_LISTINGS_RAW: (Omit<SearchListing, "lat" | "lng" | "strategic_region"
   {
     id: "a1b2c3d4-0005",
     reference: "CAL-NBO-2026-005",
-    title: "Bedsitter — Buruburu Phase 2",
+    title: "Bedsitter - Buruburu Phase 2",
     property_type: "apartment",
     status: "vacant",
     web_visible: true,
@@ -256,7 +256,7 @@ const MOCK_LISTINGS_RAW: (Omit<SearchListing, "lat" | "lng" | "strategic_region"
   {
     id: "a1b2c3d4-0006",
     reference: "CAL-NBO-2026-006",
-    title: "4-Bedroom Villa — Lavington with Pool",
+    title: "4-Bedroom Villa - Lavington with Pool",
     property_type: "villa",
     status: "vacant",
     web_visible: true,
@@ -278,7 +278,7 @@ const MOCK_LISTINGS_RAW: (Omit<SearchListing, "lat" | "lng" | "strategic_region"
   {
     id: "a1b2c3d4-0007",
     reference: "CAL-NBO-2026-007",
-    title: "1-Bedroom — Roysambu near Thika Road Mall",
+    title: "1-Bedroom - Roysambu near Thika Road Mall",
     property_type: "apartment",
     status: "vacant",
     web_visible: true,
@@ -299,7 +299,7 @@ const MOCK_LISTINGS_RAW: (Omit<SearchListing, "lat" | "lng" | "strategic_region"
   {
     id: "a1b2c3d4-0008",
     reference: "CAL-NBO-2026-008",
-    title: "Retail Shop — Eastleigh North, Ground Floor",
+    title: "Retail Shop - Eastleigh North, Ground Floor",
     property_type: "retail",
     status: "vacant",
     web_visible: true,
@@ -320,7 +320,7 @@ const MOCK_LISTINGS_RAW: (Omit<SearchListing, "lat" | "lng" | "strategic_region"
   {
     id: "a1b2c3d4-0009",
     reference: "CAL-NBO-2026-009",
-    title: "2-Bedroom — Umoja Estate, Phase 1",
+    title: "2-Bedroom - Umoja Estate, Phase 1",
     property_type: "apartment",
     status: "vacant",
     web_visible: true,
@@ -341,7 +341,7 @@ const MOCK_LISTINGS_RAW: (Omit<SearchListing, "lat" | "lng" | "strategic_region"
   {
     id: "a1b2c3d4-0010",
     reference: "CAL-NBO-2026-010",
-    title: "3-Bedroom — Ruiru Town, Near KEMU",
+    title: "3-Bedroom - Ruiru Town, Near KEMU",
     property_type: "apartment",
     status: "vacant",
     web_visible: true,
@@ -363,7 +363,7 @@ const MOCK_LISTINGS_RAW: (Omit<SearchListing, "lat" | "lng" | "strategic_region"
   {
     id: "a1b2c3d4-0011",
     reference: "CAL-NBO-2026-011",
-    title: "HIDDEN — Occupied Unit (should never render)",
+    title: "HIDDEN - Occupied Unit (should never render)",
     property_type: "apartment",
     status: "occupied",
     web_visible: true,
@@ -381,7 +381,7 @@ const MOCK_LISTINGS_RAW: (Omit<SearchListing, "lat" | "lng" | "strategic_region"
   {
     id: "a1b2c3d4-0012",
     reference: "CAL-NBO-2026-012",
-    title: "HIDDEN — web_visible false (should never render)",
+    title: "HIDDEN - web_visible false (should never render)",
     property_type: "apartment",
     status: "vacant",
     web_visible: false,
@@ -399,7 +399,7 @@ const MOCK_LISTINGS_RAW: (Omit<SearchListing, "lat" | "lng" | "strategic_region"
   {
     id: "a1b2c3d4-0013",
     reference: "CAL-NBO-2026-013",
-    title: "2-Bedroom — Zimmerman, Quiet Compound",
+    title: "2-Bedroom - Zimmerman, Quiet Compound",
     property_type: "apartment",
     status: "vacant",
     web_visible: true,
@@ -420,7 +420,7 @@ const MOCK_LISTINGS_RAW: (Omit<SearchListing, "lat" | "lng" | "strategic_region"
   {
     id: "a1b2c3d4-0014",
     reference: "CAL-NBO-2026-014",
-    title: "Industrial Warehouse — Embakasi, 500 m²",
+    title: "Industrial Warehouse - Embakasi, 500 m²",
     property_type: "warehouse",
     status: "vacant",
     web_visible: true,
@@ -441,7 +441,7 @@ const MOCK_LISTINGS_RAW: (Omit<SearchListing, "lat" | "lng" | "strategic_region"
   {
     id: "a1b2c3d4-0015",
     reference: "CAL-NBO-2026-015",
-    title: "Studio — Muthaiga, Serviced Compound",
+    title: "Studio - Muthaiga, Serviced Compound",
     property_type: "apartment",
     status: "vacant",
     web_visible: true,
@@ -888,7 +888,7 @@ export default function SearchInterface() {
       {/* ── Split-screen body ── */}
       <div className="flex max-w-screen-2xl mx-auto" style={{ minHeight: "calc(100vh - 57px)" }}>
 
-        {/* ═══ LEFT — Card grid (60%) ═══ */}
+        {/* ═══ LEFT - Card grid (60%) ═══ */}
         <div
           className={`w-full lg:w-[60%] overflow-y-auto ${mobileMap ? "hidden lg:block" : "block"}`}
           style={{ maxHeight: "calc(100vh - 57px)" }}
@@ -925,7 +925,7 @@ export default function SearchInterface() {
           </div>
         </div>
 
-        {/* ═══ RIGHT — Sticky map (40%) ═══ */}
+        {/* ═══ RIGHT - Sticky map (40%) ═══ */}
         <div
           className={`lg:block lg:w-[40%] lg:sticky lg:top-[57px] ${
             mobileMap ? "fixed inset-0 z-20 w-full h-full" : "hidden"

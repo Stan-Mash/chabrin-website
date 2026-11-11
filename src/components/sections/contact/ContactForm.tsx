@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useRef } from "react";
 import Link from "next/link";
@@ -216,7 +216,7 @@ export default function ContactForm() {
             />
           </div>
 
-          {/* Animated "Secured by Cloudflare" badge — appears once verified */}
+          {/* Animated "Secured by Cloudflare" badge - appears once verified */}
           <div
             aria-live="polite"
             aria-label={turnstileVerified ? "Bot protection verified" : undefined}

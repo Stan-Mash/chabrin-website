@@ -1,7 +1,7 @@
-"use server";
+﻿"use server";
 
 /**
- * submit-application.ts — Server Action for job applications.
+ * submit-application.ts - Server Action for job applications.
  *
  * Flow:
  *  1. Validate input with Zod
@@ -95,7 +95,7 @@ function h(s: string): string {
           .replace(/"/g,"&quot;").replace(/'/g,"&#039;");
 }
 
-// ── Track URL (locale-agnostic — next-intl will redirect to preferred locale) ─
+// ── Track URL (locale-agnostic - next-intl will redirect to preferred locale) ─
 
 const TRACK_URL = `${siteConfig.url}/en/careers/track`;
 
@@ -319,7 +319,7 @@ export async function submitApplication(
     };
   }
 
-  // Generate reference — retry up to 3× on the unlikely UUID collision
+  // Generate reference - retry up to 3× on the unlikely UUID collision
   let reference = "";
   let inserted  = false;
   for (let attempt = 0; attempt < 3; attempt++) {
@@ -367,7 +367,7 @@ export async function submitApplication(
     }
   } catch { /* non-critical */ }
 
-  // Send emails — non-fatal if SMTP is down
+  // Send emails - non-fatal if SMTP is down
   try {
     const transporter = getTransporter();
     await Promise.all([
@@ -375,13 +375,13 @@ export async function submitApplication(
         from:    process.env.SMTP_FROM || process.env.SMTP_USER,
         to:      siteConfig.contact.careersEmail,
         replyTo: data.email,
-        subject: `New Application: ${job.title} — ${reference}`,
+        subject: `New Application: ${job.title} - ${reference}`,
         html:    hrEmailHtml(data, reference, job.title, job.department),
       }),
       transporter.sendMail({
         from:    process.env.SMTP_FROM || process.env.SMTP_USER,
         to:      siteConfig.contact.email,
-        subject: `Application Received — ${job.title} (${reference})`,
+        subject: `Application Received - ${job.title} (${reference})`,
         html:    candidateConfirmationHtml(data.full_name, reference, job.title),
       }),
     ]);
@@ -419,7 +419,7 @@ export async function sendStageChangeEmail(
     await transporter.sendMail({
       from:    process.env.SMTP_FROM || process.env.SMTP_USER,
       to:      siteConfig.contact.email,
-      subject: `Update on your application — ${jobTitle} (${reference})`,
+      subject: `Update on your application - ${jobTitle} (${reference})`,
       html:    stageChangeEmailHtml(name, reference, jobTitle, stage, note),
     });
   } catch (err) {

@@ -1,4 +1,4 @@
-import { MetadataRoute } from "next";
+﻿import { MetadataRoute } from "next";
 import { getPublishedListings } from "@/db/queries/listings";
 import { siteConfig } from "@/config/site";
 
@@ -15,7 +15,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Fetch all published listings for dynamic routes
   const listings = await getPublishedListings(undefined, undefined, 1000, 0).catch(() => []);
 
-  // Static routes — same in both English and Swahili
+  // Static routes - same in both English and Swahili
   const staticRoutes = [
     "",
     "/properties",

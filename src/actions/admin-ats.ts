@@ -1,4 +1,4 @@
-"use server";
+﻿"use server";
 
 import { redirect } from "next/navigation";
 import { getAdminSession } from "@/lib/admin-auth";
@@ -38,7 +38,7 @@ function getTransporter() {
  */
 function appendNote(existing: string | null, newNote: string, actor: string): string {
   const ts    = new Date().toLocaleString("en-KE", { timeZone: "Africa/Nairobi", hour12: false });
-  const entry = `[${ts} — ${actor}]\n${newNote.trim()}`;
+  const entry = `[${ts} - ${actor}]\n${newNote.trim()}`;
   return existing ? `${entry}\n\n${existing}` : entry;
 }
 

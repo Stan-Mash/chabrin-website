@@ -1,14 +1,14 @@
-import { put, del } from "@vercel/blob";
+﻿import { put, del } from "@vercel/blob";
 import sharp from "sharp";
 
 /**
- * Vercel Blob storage — replaces DigitalOcean Spaces.
+ * Vercel Blob storage - replaces DigitalOcean Spaces.
  *
  * ⚠️  SECURITY RULES:
- *  1. ALWAYS call uploadToBlob() — never put() directly.
+ *  1. ALWAYS call uploadToBlob() - never put() directly.
  *     uploadToBlob() strips EXIF/GPS metadata before upload (KDPA compliance).
  *  2. Never upload user-provided content without type validation first.
- *  3. Never import this in client components — server-side only.
+ *  3. Never import this in client components - server-side only.
  *  4. Never log the buffer, key, or credentials to console.
  */
 
@@ -39,7 +39,7 @@ export async function uploadToBlob(
   }
 
   // Strip ALL metadata including EXIF, GPS, ICC profile, XMP
-  // withMetadata() is intentionally NOT called — this is the strip step
+  // withMetadata() is intentionally NOT called - this is the strip step
   const strippedBuffer = await sharp(buffer)
     .rotate() // Auto-rotate based on EXIF orientation, THEN strip
     .toFormat(mimeType === "image/jpeg" ? "jpeg" : mimeType === "image/png" ? "png" : "webp", {

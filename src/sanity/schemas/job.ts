@@ -1,4 +1,4 @@
-import { defineField, defineType } from "sanity";
+﻿import { defineField, defineType } from "sanity";
 
 export const jobSchema = defineType({
   name: "job",
@@ -87,7 +87,7 @@ export const jobSchema = defineType({
     defineField({
       name: "salaryRange",
       title: "Salary Range",
-      description: 'e.g. "KES 80,000 – 120,000/month" — leave blank to omit',
+      description: 'e.g. "KES 80,000 – 120,000/month" - leave blank to omit',
       type: "string",
     }),
     defineField({

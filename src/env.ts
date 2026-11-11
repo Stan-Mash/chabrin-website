@@ -1,8 +1,8 @@
-import { createEnv } from "@t3-oss/env-nextjs";
+﻿import { createEnv } from "@t3-oss/env-nextjs";
 import { z } from "zod";
 
 /**
- * Environment variable schema — validated at build time.
+ * Environment variable schema - validated at build time.
  * If any required variable is missing, the build FAILS loudly.
  * Never add secrets here as default values.
  *
@@ -35,15 +35,15 @@ export const env = createEnv({
       .describe("PostgreSQL connection string for the public listings DB"),
 
     // ── Vercel Blob (object storage for property images) ───────────────────
-    // Optional until Blob store is connected — image upload feature not yet live
+    // Optional until Blob store is connected - image upload feature not yet live
     BLOB_READ_WRITE_TOKEN: z
       .string()
       .min(1)
       .optional()
-      .describe("Vercel Blob read/write token — auto-injected by Vercel when store is connected"),
+      .describe("Vercel Blob read/write token - auto-injected by Vercel when store is connected"),
 
     // ── Sanity CMS ────────────────────────────────────────────────────────
-    // Optional until Sanity project is provisioned — blog/careers not yet live
+    // Optional until Sanity project is provisioned - blog/careers not yet live
     SANITY_API_TOKEN: z
       .string()
       .min(1)
@@ -54,7 +54,7 @@ export const env = createEnv({
     TURNSTILE_SECRET_KEY: z
       .string()
       .min(1)
-      .describe("Cloudflare Turnstile secret key — used in Server Actions only"),
+      .describe("Cloudflare Turnstile secret key - used in Server Actions only"),
 
     // ── CV upload + AI parsing ────────────────────────────────────────────────
     CV_UPLOAD_SECRET: z
@@ -107,7 +107,7 @@ export const env = createEnv({
 
   /**
    * Client-side environment variables.
-   * These ARE exposed to the browser — NEVER put secrets here.
+   * These ARE exposed to the browser - NEVER put secrets here.
    */
   client: {
     NEXT_PUBLIC_SANITY_PROJECT_ID: z
@@ -122,7 +122,7 @@ export const env = createEnv({
     NEXT_PUBLIC_TURNSTILE_SITE_KEY: z
       .string()
       .min(1)
-      .describe("Cloudflare Turnstile site key — safe to expose publicly"),
+      .describe("Cloudflare Turnstile site key - safe to expose publicly"),
     NEXT_PUBLIC_SITE_URL: z
       .string()
       .url()

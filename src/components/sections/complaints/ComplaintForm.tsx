@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useRef } from "react";
 import Link from "next/link";
@@ -146,7 +146,7 @@ function SuccessPanel({ reference, onReset }: { reference: string; onReset: () =
       <div className="bg-[#f0f4ff] border-2 border-[#0D1B8E] rounded-2xl p-6 mb-6">
         <p className="text-xs text-indigo-500 font-bold tracking-widest uppercase mb-2">Your Reference Number</p>
         <p className="text-3xl font-black text-[#0D1B8E] tracking-widest">{reference}</p>
-        <p className="text-xs text-slate-400 mt-2">Keep this safe — you will need it to track your complaint</p>
+        <p className="text-xs text-slate-400 mt-2">Keep this safe - you will need it to track your complaint</p>
       </div>
 
       <div className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -283,7 +283,7 @@ export default function ComplaintForm() {
             ))}
           </div>
 
-          {/* Priority badge — auto-assigned */}
+          {/* Priority badge - auto-assigned */}
           {priorityInfo && (
             <div
               className="mt-3 flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm"
@@ -313,7 +313,7 @@ export default function ComplaintForm() {
                            focus:outline-none focus:border-[#00C9C9] focus:ring-2 focus:ring-[#00C9C9]/20
                            bg-white text-[#0D1B8E] appearance-none cursor-pointer"
               >
-                <option value="">— Select specific issue (optional) —</option>
+                <option value="">- Select specific issue (optional) -</option>
                 {subcategoryOptions.map((o) => (
                   <option key={o.value} value={o.value}>{o.label}</option>
                 ))}
@@ -332,7 +332,7 @@ export default function ComplaintForm() {
           <textarea
             {...register("description")}
             rows={5}
-            placeholder="Please describe your issue in detail — what happened, when it started, and what you would like done about it..."
+            placeholder="Please describe your issue in detail - what happened, when it started, and what you would like done about it..."
             className={`${inp(!!errors.description)} resize-none`}
           />
           <FieldError message={errors.description?.message} />
@@ -347,11 +347,11 @@ export default function ComplaintForm() {
           <input
             {...register("property_area")}
             type="text"
-            placeholder="e.g. Kasarani, Westlands, Kahawa Wendani — no exact address required"
+            placeholder="e.g. Kasarani, Westlands, Kahawa Wendani - no exact address required"
             className={inp(false)}
           />
           <p className="text-xs text-slate-400 mt-1">
-            Approximate area only — we do not require your exact address.
+            Approximate area only - we do not require your exact address.
           </p>
         </div>
 

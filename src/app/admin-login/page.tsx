@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useActionState, useEffect } from "react";
 import { useRouter } from "next/navigation";
@@ -88,7 +88,7 @@ export default function AdminLoginPage() {
         </div>
 
         <p className="text-center text-white/25 text-xs mt-6">
-          Chabrin Agencies Limited — Internal Use Only
+          Chabrin Agencies Limited - Internal Use Only
         </p>
       </div>
     </div>

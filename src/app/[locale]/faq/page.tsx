@@ -1,4 +1,4 @@
-import { setRequestLocale } from "next-intl/server";
+﻿import { setRequestLocale } from "next-intl/server";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -22,7 +22,7 @@ export default async function FaqPage({ params }: Props) {
 
   const t = await getTranslations({ locale, namespace: "faq" });
 
-  // Fetch all FAQ data server-side — the JSON arrays are typed as arrays of objects
+  // Fetch all FAQ data server-side - the JSON arrays are typed as arrays of objects
   // next-intl's raw() helper lets us pull the full array
   const tenants = t.raw("tenants") as { q: string; a: string }[];
   const owners = t.raw("owners") as { q: string; a: string }[];

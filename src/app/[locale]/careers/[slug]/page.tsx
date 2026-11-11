@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getJobBySlug, getAllOpenJobSlugs } from "@/sanity/queries/jobs";
@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const job = await getJobBySlug(slug).catch(() => null);
   if (!job) return { title: "Job Not Found" };
   return {
-    title:       `${job.title} — Careers`,
+    title:       `${job.title} - Careers`,
     description: job.summary,
     openGraph: {
       title:       `${job.title} at Chabrin Agencies`,
@@ -122,9 +122,9 @@ export default async function JobPage({ params }: Props) {
       {/* Two-column layout */}
       <div className="max-w-5xl mx-auto px-4 py-12 lg:grid lg:grid-cols-[1fr_380px] lg:gap-10">
 
-        {/* Left — Job details */}
+        {/* Left - Job details */}
         <div>
-          {/* Description — Portable Text rendered as simple blocks */}
+          {/* Description - Portable Text rendered as simple blocks */}
           <div className="prose prose-slate prose-headings:text-brand-navy prose-headings:font-bold
                           prose-h2:text-xl prose-h2:mt-8 prose-h2:mb-3
                           prose-p:text-slate-600 prose-p:leading-relaxed
@@ -182,7 +182,7 @@ export default async function JobPage({ params }: Props) {
               ← Back to all positions
             </Link>
             <a
-              href={`https://wa.me/?text=${encodeURIComponent(`${job.title} opportunity at Chabrin Agencies — ${siteConfig.url}/careers/${job.slug}`)}`}
+              href={`https://wa.me/?text=${encodeURIComponent(`${job.title} opportunity at Chabrin Agencies - ${siteConfig.url}/careers/${job.slug}`)}`}
               target="_blank" rel="noopener noreferrer"
               className="text-sm text-slate-500 hover:text-green-600 transition-colors flex items-center gap-1"
             >
@@ -191,7 +191,7 @@ export default async function JobPage({ params }: Props) {
           </div>
         </div>
 
-        {/* Right — Sidebar + Apply form */}
+        {/* Right - Sidebar + Apply form */}
         <div>
           {/* Job summary card */}
           <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100 mb-6 sticky top-6">
@@ -244,7 +244,7 @@ export default async function JobPage({ params }: Props) {
       {/* Application form */}
       <div id="apply" className="bg-slate-50 border-t border-slate-100 py-14 px-4 scroll-mt-20">
         <div className="max-w-2xl mx-auto">
-          <h2 className="text-2xl font-bold text-brand-navy mb-2">Apply — {job.title}</h2>
+          <h2 className="text-2xl font-bold text-brand-navy mb-2">Apply - {job.title}</h2>
           <p className="text-slate-500 text-sm mb-8">
             Complete the form below. You&apos;ll receive a reference number and confirmation email immediately.
           </p>

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useActionState, useState } from "react";
 import { useParams } from "next/navigation";
@@ -134,7 +134,7 @@ export default function ApplicationDetailPage() {
 
       <div className="lg:grid lg:grid-cols-[1fr_340px] lg:gap-8">
 
-        {/* Left — details */}
+        {/* Left - details */}
         <div className="space-y-6">
 
           {/* Header */}
@@ -269,7 +269,7 @@ export default function ApplicationDetailPage() {
                 {Object.entries(app.answers).map(([q, a]) => (
                   <div key={q} className="border-b border-slate-50 pb-3 last:border-0 last:pb-0">
                     <dt className="text-sm text-slate-500 mb-1">{q}</dt>
-                    <dd className="text-sm font-semibold text-brand-navy">{String(a) || "—"}</dd>
+                    <dd className="text-sm font-semibold text-brand-navy">{String(a) || "-"}</dd>
                   </div>
                 ))}
               </dl>
@@ -335,7 +335,7 @@ export default function ApplicationDetailPage() {
 
         </div>
 
-        {/* Right — Actions */}
+        {/* Right - Actions */}
         <div className="mt-6 lg:mt-0 space-y-4">
 
           {/* Quick contact */}
@@ -349,7 +349,7 @@ export default function ApplicationDetailPage() {
                 &#128172; WhatsApp
               </a>
               <a
-                href={`mailto:${app.email}?subject=Your application — ${app.job_title} (${app.reference})`}
+                href={`mailto:${app.email}?subject=Your application - ${app.job_title} (${app.reference})`}
                 className="flex items-center gap-2 w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm font-semibold text-brand-navy hover:bg-slate-50 transition-colors">
                 &#9993; Email Candidate
               </a>
@@ -374,7 +374,7 @@ export default function ApplicationDetailPage() {
                 </select>
               </div>
 
-              {/* Interview scheduling fields — only shown when interview_scheduled is selected */}
+              {/* Interview scheduling fields - only shown when interview_scheduled is selected */}
               {isInterview && (
                 <>
                   <div>
@@ -423,12 +423,12 @@ export default function ApplicationDetailPage() {
                 />
               </div>
 
-              {/* Rejection reason — only shown for rejected stage */}
+              {/* Rejection reason - only shown for rejected stage */}
               {isRejected && (
                 <div>
                   <label className="block text-xs font-semibold text-slate-600 mb-1.5">
                     Rejection Reason
-                    <span className="font-normal text-slate-400 ml-1">(internal record only — never sent to candidate)</span>
+                    <span className="font-normal text-slate-400 ml-1">(internal record only - never sent to candidate)</span>
                   </label>
                   <textarea
                     name="rejection_reason"

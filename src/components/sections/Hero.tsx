@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -144,8 +144,10 @@ export default function Hero() {
               {[t("trust_earb"), t("trust_odpc"), t("trust_nairobi")].map((label) => (
                 <div key={label} className="flex items-center gap-2">
                   <span className="w-5 h-5 rounded-full bg-brand-cyan/20 flex items-center
-                                   justify-center text-brand-cyan text-xs font-bold flex-shrink-0">
-                    ✓
+                                   justify-center text-brand-cyan flex-shrink-0">
+                    <svg className="w-3 h-3" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <polyline points="1.5,6 4.5,9 10.5,3" />
+                    </svg>
                   </span>
                   <span className="text-white/60 text-sm font-medium">{label}</span>
                 </div>
@@ -171,11 +173,11 @@ export default function Hero() {
                 sizes="(max-width: 1280px) 30vw, 340px"
                 priority
               />
-              {/* Gradient — darker at top and bottom for badge legibility */}
+              {/* Gradient - darker at top and bottom for badge legibility */}
               <div className="absolute inset-0 bg-gradient-to-t
                               from-black/80 via-transparent to-black/40" />
 
-              {/* EARB badge — top left */}
+              {/* EARB badge - top left */}
               <div className="absolute top-4 left-4 flex items-center gap-1.5
                               bg-black/50 backdrop-blur-md border border-white/20
                               rounded-full px-3 py-1.5">

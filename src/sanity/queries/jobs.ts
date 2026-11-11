@@ -1,4 +1,4 @@
-import { sanityServerClient as sanityClient } from "@/lib/sanity";
+﻿import { sanityServerClient as sanityClient } from "@/lib/sanity";
 
 export interface SanityJob {
   slug: string;
@@ -65,7 +65,7 @@ export async function getJobBySlug(slug: string): Promise<SanityJobDetail | null
   );
 }
 
-/** All open job slugs — for generateStaticParams */
+/** All open job slugs - for generateStaticParams */
 export async function getAllOpenJobSlugs(): Promise<string[]> {
   const jobs = await sanityClient.fetch<{ slug: string }[]>(
     `*[_type == "job" && status == "open"] { "slug": slug.current }`

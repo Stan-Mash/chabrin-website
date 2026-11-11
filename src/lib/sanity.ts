@@ -1,10 +1,10 @@
-import { createClient } from "@sanity/client";
+﻿import { createClient } from "@sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type SanityImageSource = any;
 
 /**
- * Sanity CMS client — manages blog, careers, team, and page content.
+ * Sanity CMS client - manages blog, careers, team, and page content.
  *
  * Content types managed in Sanity:
  *  - Blog posts (English + Swahili)
@@ -21,7 +21,7 @@ const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!;
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET ?? "production";
 const apiVersion = "2024-01-01";
 
-/** Public read client — use in Server Components for published content */
+/** Public read client - use in Server Components for published content */
 export const sanityClient = createClient({
   projectId,
   dataset,
@@ -29,7 +29,7 @@ export const sanityClient = createClient({
   useCdn: true, // CDN for fast reads of published content
 });
 
-/** Authenticated client — use in Server Actions and draft preview */
+/** Authenticated client - use in Server Actions and draft preview */
 export const sanityServerClient = createClient({
   projectId,
   dataset,
@@ -38,7 +38,7 @@ export const sanityServerClient = createClient({
   token: process.env.SANITY_API_TOKEN,
 });
 
-/** Image URL builder — resolves Sanity asset references to CDN URLs */
+/** Image URL builder - resolves Sanity asset references to CDN URLs */
 const builder = imageUrlBuilder(sanityClient);
 
 export function sanityImage(source: SanityImageSource) {

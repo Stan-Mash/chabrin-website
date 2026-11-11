@@ -1,5 +1,5 @@
-/**
- * admin-users.ts — DB query functions for admin user management.
+﻿/**
+ * admin-users.ts - DB query functions for admin user management.
  * Server-side only.
  */
 

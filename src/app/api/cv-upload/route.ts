@@ -1,4 +1,4 @@
-/**
+﻿/**
  * POST /api/cv-upload
  *
  * Handles the signed CV upload from candidates.
@@ -47,14 +47,14 @@ Analyse this CV and return a JSON object (no markdown, no extra text) with these
 {
   "summary": "2–3 sentence professional summary",
   "years_experience": number or null,
-  "education": ["highest qualification — institution"],
+  "education": ["highest qualification - institution"],
   "key_skills": ["up to 8 most relevant skills"],
   "previous_employers": ["Company (Role)"],
   "kenya_experience": true or false,
   "property_experience": true or false,
   "driving_licence": true or false or null,
   "languages": ["English", "Swahili", ...],
-  "red_flags": ["any concerns — gaps, unrelated experience, etc."] or [],
+  "red_flags": ["any concerns - gaps, unrelated experience, etc."] or [],
   "hire_recommendation": "strong_yes" | "yes" | "maybe" | "no",
   "hire_notes": "1–2 sentence reasoning"
 }`;
@@ -171,7 +171,7 @@ export async function POST(req: NextRequest) {
 
   console.info("[cv-upload] uploaded", { reference: ref, size: file.size });
 
-  // Gemini parsing — non-blocking (don't await)
+  // Gemini parsing - non-blocking (don't await)
   void parseWithGemini(blob.url, ref.toUpperCase());
 
   return NextResponse.json({ success: true, cvUrl: blob.url });

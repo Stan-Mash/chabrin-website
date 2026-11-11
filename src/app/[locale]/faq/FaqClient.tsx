@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import FaqAccordion, { type FaqItem } from "@/components/sections/faq/FaqAccordion";
@@ -88,7 +88,7 @@ export default function FaqClient({ tabs }: FaqClientProps) {
             />
             {active.label}
           </span>
-          <span className="text-slate-300 text-xs">—</span>
+          <span className="text-slate-300 text-xs">-</span>
           <span className="text-slate-400 text-xs">{active.items.length} questions</span>
         </div>
 

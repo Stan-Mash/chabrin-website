@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
 import { siteConfig } from "@/config/site";
 
@@ -82,10 +82,10 @@ export default function PrivacyPolicyPage() {
           <h2>4. Legal Basis for Processing</h2>
           <p>We process your personal data on the following lawful bases under the KDPA:</p>
           <ul>
-            <li><strong>Consent</strong> — where you have given explicit consent (e.g. contact form submission).</li>
-            <li><strong>Contract performance</strong> — where processing is necessary to fulfil a lease agreement or service contract.</li>
-            <li><strong>Legal obligation</strong> — where processing is required by Kenyan law (e.g. identity verification, stamp duty records).</li>
-            <li><strong>Legitimate interests</strong> — where processing is necessary for our legitimate business interests, provided these are not overridden by your rights.</li>
+            <li><strong>Consent</strong> - where you have given explicit consent (e.g. contact form submission).</li>
+            <li><strong>Contract performance</strong> - where processing is necessary to fulfil a lease agreement or service contract.</li>
+            <li><strong>Legal obligation</strong> - where processing is required by Kenyan law (e.g. identity verification, stamp duty records).</li>
+            <li><strong>Legitimate interests</strong> - where processing is necessary for our legitimate business interests, provided these are not overridden by your rights.</li>
           </ul>
 
           <h2>5. Data Retention</h2>
@@ -114,23 +114,23 @@ export default function PrivacyPolicyPage() {
           <h2>7. Sharing of Personal Data</h2>
           <p>We may share your personal data with:</p>
           <ul>
-            <li><strong>Landlords and property owners</strong> — where necessary to process a lease application or manage a tenancy on their behalf.</li>
-            <li><strong>Legal professionals</strong> — lawyers engaged in the preparation of lease agreements.</li>
-            <li><strong>Regulatory authorities</strong> — where required by law (e.g. Kenya Revenue Authority, court orders).</li>
-            <li><strong>Service providers</strong> — trusted third-party vendors who assist us in operating our services (e.g. cloud hosting), bound by confidentiality obligations.</li>
+            <li><strong>Landlords and property owners</strong> - where necessary to process a lease application or manage a tenancy on their behalf.</li>
+            <li><strong>Legal professionals</strong> - lawyers engaged in the preparation of lease agreements.</li>
+            <li><strong>Regulatory authorities</strong> - where required by law (e.g. Kenya Revenue Authority, court orders).</li>
+            <li><strong>Service providers</strong> - trusted third-party vendors who assist us in operating our services (e.g. cloud hosting), bound by confidentiality obligations.</li>
           </ul>
           <p>All third parties are required to handle your data in accordance with the KDPA.</p>
 
           <h2>8. Your Rights Under the KDPA</h2>
           <p>Under the Kenya Data Protection Act 2019, you have the right to:</p>
           <ul>
-            <li><strong>Access</strong> — request a copy of the personal data we hold about you.</li>
-            <li><strong>Rectification</strong> — request correction of inaccurate or incomplete data.</li>
-            <li><strong>Erasure</strong> — request deletion of your data where there is no longer a lawful basis for retention.</li>
-            <li><strong>Restriction</strong> — request that we restrict processing of your data in certain circumstances.</li>
-            <li><strong>Objection</strong> — object to processing based on legitimate interests.</li>
-            <li><strong>Withdraw consent</strong> — where processing is based on consent, withdraw it at any time without affecting prior processing.</li>
-            <li><strong>Lodge a complaint</strong> — with the Office of the Data Protection Commissioner (ODPC) at <a href="https://www.odpc.go.ke" target="_blank" rel="noopener noreferrer">odpc.go.ke</a>.</li>
+            <li><strong>Access</strong> - request a copy of the personal data we hold about you.</li>
+            <li><strong>Rectification</strong> - request correction of inaccurate or incomplete data.</li>
+            <li><strong>Erasure</strong> - request deletion of your data where there is no longer a lawful basis for retention.</li>
+            <li><strong>Restriction</strong> - request that we restrict processing of your data in certain circumstances.</li>
+            <li><strong>Objection</strong> - object to processing based on legitimate interests.</li>
+            <li><strong>Withdraw consent</strong> - where processing is based on consent, withdraw it at any time without affecting prior processing.</li>
+            <li><strong>Lodge a complaint</strong> - with the Office of the Data Protection Commissioner (ODPC) at <a href="https://www.odpc.go.ke" target="_blank" rel="noopener noreferrer">odpc.go.ke</a>.</li>
           </ul>
           <p>
             To exercise any of these rights, contact us at{" "}

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useActionState } from "react";
 import { useEffect } from "react";
@@ -49,8 +49,8 @@ export default function NewUserPage() {
             </label>
             <select name="role" required defaultValue="staff"
               className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-brand-navy/20 focus:border-brand-navy">
-              <option value="staff">Staff — Complaints &amp; Applications</option>
-              <option value="superadmin">Super Admin — Full access + User management</option>
+              <option value="staff">Staff - Complaints &amp; Applications</option>
+              <option value="superadmin">Super Admin - Full access + User management</option>
             </select>
           </div>
 
@@ -59,7 +59,7 @@ export default function NewUserPage() {
               Temporary Password <span className="text-rose-500">*</span>
             </label>
             <input name="password" type="text" required minLength={8}
-              placeholder="Min. 8 characters — user should change this after first login"
+              placeholder="Min. 8 characters - user should change this after first login"
               className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-navy/20 focus:border-brand-navy placeholder:text-slate-400" />
             <p className="text-xs text-slate-400 mt-1.5">Share this securely. The user can change it from Settings after logging in.</p>
           </div>

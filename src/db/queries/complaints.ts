@@ -1,5 +1,5 @@
-/**
- * complaints.ts — DB query functions for the complaints table.
+﻿/**
+ * complaints.ts - DB query functions for the complaints table.
  *
  * ARCHITECTURE NOTE:
  *   The website WRITES complaints (it is the source of truth for them).
@@ -31,7 +31,7 @@ export interface NewComplaint {
   consent_given:  boolean;
 }
 
-/** Safe public-facing status — no PII, no internal notes */
+/** Safe public-facing status - no PII, no internal notes */
 export interface ComplaintStatus {
   reference:     string;
   category:      string;

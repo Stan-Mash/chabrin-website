@@ -1,4 +1,4 @@
-import { redirect } from "next/navigation";
+﻿import { redirect } from "next/navigation";
 import { getAdminSession } from "@/lib/admin-auth";
 import { listAdminUsers } from "@/db/queries/admin-users";
 import { adminSetUserActive, adminResetUserPassword } from "@/actions/admin-users";
@@ -104,7 +104,7 @@ export default async function AdminUsersPage() {
   );
 }
 
-// Inline reset password — server action form
+// Inline reset password - server action form
 function ResetPasswordForm({ userId, userName }: { userId: string; userName: string }) {
   return (
     <form action={adminResetUserPassword} className="flex items-center gap-1">

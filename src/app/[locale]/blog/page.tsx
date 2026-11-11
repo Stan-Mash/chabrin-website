@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
@@ -34,7 +34,7 @@ const FALLBACK_POSTS: SanityPost[] = [
     slug: "understanding-lease-agreements-kenya",
     category: "Landlord Guide",
     title: "Understanding Lease Agreements in Kenya: What Every Landlord Needs to Know",
-    excerpt: "A lease agreement is more than a formality — it protects both landlord and tenant. We break down the key clauses every Kenyan landlord should include.",
+    excerpt: "A lease agreement is more than a formality - it protects both landlord and tenant. We break down the key clauses every Kenyan landlord should include.",
     publishedAt: "2026-03-01T00:00:00Z",
     readTime: "6 min read",
     featured: true,
@@ -63,7 +63,7 @@ const FALLBACK_POSTS: SanityPost[] = [
   {
     slug: "property-valuation-guide",
     category: "Valuation",
-    title: "How Property Valuations Work in Kenya — and Why They Matter",
+    title: "How Property Valuations Work in Kenya - and Why They Matter",
     excerpt: "Whether for sale, mortgage, or insurance, a professional valuation is critical. We explain the methodologies our registered valuers use and what to expect.",
     publishedAt: "2025-12-01T00:00:00Z",
     readTime: "7 min read",

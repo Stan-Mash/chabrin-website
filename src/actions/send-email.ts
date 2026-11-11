@@ -1,4 +1,4 @@
-"use server";
+﻿"use server";
 
 import nodemailer from "nodemailer";
 
@@ -7,7 +7,7 @@ import nodemailer from "nodemailer";
  * Sends formatted enquiries to info@chabrinagencies.co.ke
  *
  * ⚠️  SECURITY RULES:
- *  1. This is a Server Action — runs on server only, never client-side.
+ *  1. This is a Server Action - runs on server only, never client-side.
  *  2. NEVER log PII (email, phone, name) to console in production.
  *  3. SMTP credentials come from env vars only, never hardcoded.
  */

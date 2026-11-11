@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+﻿import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
 const schema = z.object({
@@ -8,7 +8,7 @@ const schema = z.object({
   subject: z.enum(["general", "management", "tenant", "valuation", "other"]),
   message: z.string().min(20).max(3000),
   consent: z.literal(true),
-  // Turnstile token — required when real keys are configured
+  // Turnstile token - required when real keys are configured
   token:   z.string().optional(),
 });
 
@@ -28,7 +28,7 @@ const SUBJECT_LABELS: Record<string, string> = {
 async function verifyTurnstile(token: string | undefined): Promise<boolean> {
   const secret = process.env.TURNSTILE_SECRET_KEY ?? "";
 
-  // Dummy test secret — always passes (used during development / before keys are provisioned)
+  // Dummy test secret - always passes (used during development / before keys are provisioned)
   if (!secret || secret.startsWith("1x000000000000000000000")) return true;
   if (!token) return false;
 

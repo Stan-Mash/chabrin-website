@@ -1,7 +1,7 @@
-"use server";
+﻿"use server";
 
 /**
- * admin-users.ts — Server Actions for admin user management.
+ * admin-users.ts - Server Actions for admin user management.
  * All actions require superadmin role except changeOwnPassword.
  */
 
@@ -55,7 +55,7 @@ export async function adminLogin(
   const user = await findAdminUserByEmail(email);
 
   // Always run bcrypt even if user not found (prevent timing oracle)
-  // Valid bcrypt hash of "dummy" — only used when user is not found
+  // Valid bcrypt hash of "dummy" - only used when user is not found
   const dummyHash = "$2a$12$LN9a2V5jbOVDMHHMgq6MG.pCVPNJIJqPNqZ2sI7Gn5LRhHLEsfIhK";
   const passwordMatch = await compare(
     password,
@@ -155,7 +155,7 @@ export async function adminSetUserActive(
 
   try {
     await setAdminUserActive(id, is_active);
-  } catch { /* non-critical — page reloads anyway */ }
+  } catch { /* non-critical - page reloads anyway */ }
 
   redirect("/admin/users");
 }

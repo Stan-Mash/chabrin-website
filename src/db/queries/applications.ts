@@ -1,5 +1,5 @@
-/**
- * applications.ts — DB query functions for ATS applications.
+﻿/**
+ * applications.ts - DB query functions for ATS applications.
  * Server-side only.
  */
 
@@ -88,7 +88,7 @@ export interface NewApplication {
 
 // ── Public queries ────────────────────────────────────────────────────────────
 
-/** Public-safe status check — no PII returned */
+/** Public-safe status check - no PII returned */
 export async function getApplicationStatus(
   reference: string
 ): Promise<PublicAppStatus | null> {
@@ -108,7 +108,7 @@ export async function getApplicationStatus(
 
 /**
  * Returns true if an active (non-rejected) application already exists for
- * this job + email combination — prevents duplicate submissions.
+ * this job + email combination - prevents duplicate submissions.
  */
 export async function checkDuplicateApplication(
   job_id: string,

@@ -1,7 +1,7 @@
-"use client";
+﻿"use client";
 
 /**
- * PropertyCard — Premium property card for the Search Properties page.
+ * PropertyCard - Premium property card for the Search Properties page.
  *
  * Features:
  * - Image carousel with dot indicators + smooth slide animation
@@ -129,7 +129,7 @@ function ImageCarousel({ images, title, propertyType, publishedAt, isActive }: C
             >
               <Image
                 src={images[idx]}
-                alt={`${title} — image ${idx + 1}`}
+                alt={`${title} - image ${idx + 1}`}
                 fill
                 sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 400px"
                 className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
@@ -257,7 +257,7 @@ export default function PropertyCard({ listing, isActive, onHover }: PropertyCar
   const formattedRent    = listing.rent_kes.toLocaleString("en-KE");
   const formattedDeposit = listing.deposit_kes.toLocaleString("en-KE");
   const whatsappMsg = encodeURIComponent(
-    `Hello, I am interested in property ${listing.reference} — ${listing.title} in ${listing.area}. Please send details.`
+    `Hello, I am interested in property ${listing.reference} - ${listing.title} in ${listing.area}. Please send details.`
   );
 
   const visibleFeatures = listing.features.slice(0, 3);
@@ -305,7 +305,7 @@ export default function PropertyCard({ listing, isActive, onHover }: PropertyCar
         onMouseEnter={() => onHover?.(listing.id)}
         onMouseLeave={handleMouseLeave}
         role="article"
-        aria-label={`${listing.title} — KES ${formattedRent} per month`}
+        aria-label={`${listing.title} - KES ${formattedRent} per month`}
       >
         <ImageCarousel
           images={listing.images}

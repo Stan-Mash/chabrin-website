@@ -1,7 +1,7 @@
-"use client";
+﻿"use client";
 
 /**
- * InteractiveSearchMap — Leaflet map with CircleMarker pins for the Search Properties page.
+ * InteractiveSearchMap - Leaflet map with CircleMarker pins for the Search Properties page.
  *
  * Features:
  * - react-leaflet v5 MapContainer + TileLayer (OpenStreetMap)
@@ -35,7 +35,7 @@ if (typeof window !== "undefined") {
   });
 }
 
-// Suppress unused import warning — L is used for type reference in MapController
+// Suppress unused import warning - L is used for type reference in MapController
 void L;
 
 // ── FlyTo controller (inner component that can useMap) ────────────────────────
@@ -53,7 +53,7 @@ function MapController({ activeId, listings }: { activeId: string | null; listin
   return null;
 }
 
-// ── MapResizer — fixes gray tiles on mobile ───────────────────────────────────
+// ── MapResizer - fixes gray tiles on mobile ───────────────────────────────────
 // Leaflet computes tile dimensions at mount time. When the container is
 // display:none the width/height are zero, so all tiles render gray.
 // This component runs invalidateSize() on every visibility change (including
@@ -116,7 +116,7 @@ export default function InteractiveSearchMap({
           const isActive = listing.id === activeId;
           const formattedRent = listing.rent_kes.toLocaleString("en-KE");
           const whatsappMsg = encodeURIComponent(
-            `Hello, I am interested in property ${listing.reference} — ${listing.title}. Please send details.`
+            `Hello, I am interested in property ${listing.reference} - ${listing.title}. Please send details.`
           );
 
           return (
@@ -160,7 +160,7 @@ export default function InteractiveSearchMap({
 
                   {/* Region + area */}
                   <p style={{ color: "#64748b", fontSize: 11, margin: "0 0 6px" }}>
-                    📍 {listing.strategic_region} — {listing.area}
+                    📍 {listing.strategic_region} - {listing.area}
                   </p>
 
                   {/* Price */}

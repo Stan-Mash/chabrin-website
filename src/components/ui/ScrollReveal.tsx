@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
@@ -18,7 +18,7 @@ export default function ScrollReveal({
 }: Props) {
   const ref = useRef(null);
 
-  // margin: "-60px 0px" triggers 60px before element leaves/enters viewport —
+  // margin: "-60px 0px" triggers 60px before element leaves/enters viewport -
   // smaller offset than AnimatedHeadline so panels replay cleanly on scroll up.
   const inView = useInView(ref, { once: false, margin: "-60px 0px" });
 

@@ -1,9 +1,9 @@
-import createMiddleware from "next-intl/middleware";
+﻿import createMiddleware from "next-intl/middleware";
 import { NextRequest, NextResponse } from "next/server";
 import { locales, defaultLocale } from "@/i18n/request";
 
 /**
- * Combined proxy — handles:
+ * Combined proxy - handles:
  *  1. Rate limiting for POST /api/contact (5 req/hr per IP)
  *  2. next-intl locale detection and routing for all other paths
  *

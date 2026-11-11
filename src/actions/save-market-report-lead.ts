@@ -1,4 +1,4 @@
-"use server";
+﻿"use server";
 
 import { z } from "zod";
 import nodemailer from "nodemailer";
@@ -32,7 +32,7 @@ export async function saveMarketReportLead(data: unknown) {
     const smtpPass = process.env.SMTP_PASS;
 
     if (!smtpHost || !smtpUser || !smtpPass) {
-      console.info("[market-report-lead] SMTP not configured — dev mode, skipping email");
+      console.info("[market-report-lead] SMTP not configured - dev mode, skipping email");
       return { success: true };
     }
 
@@ -52,7 +52,7 @@ export async function saveMarketReportLead(data: unknown) {
         </div>
         <div style="padding: 20px; border: 1px solid #e0e0e0; margin-top: 16px; border-radius: 4px;">
           <p><strong>Name:</strong> ${sanitize(name)}</p>
-          <p style="color: #888; font-size: 12px;">Email withheld per KDPA — do not log PII.</p>
+          <p style="color: #888; font-size: 12px;">Email withheld per KDPA - do not log PII.</p>
         </div>
         <div style="padding: 16px; background: #f5f5f5; font-size: 12px; color: #666; margin-top: 12px; border-radius: 4px;">
           This person downloaded the 2026 Nairobi Rental Market Report from the website.

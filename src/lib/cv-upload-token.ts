@@ -1,5 +1,5 @@
-/**
- * cv-upload-token.ts — HMAC-SHA256 signed tokens for secure CV upload links.
+﻿/**
+ * cv-upload-token.ts - HMAC-SHA256 signed tokens for secure CV upload links.
  *
  * A signed link looks like:
  *   /en/careers/upload?ref=APP-OPS-2025-XXXXX&tok=<hex-sig>&exp=<unix-ts>

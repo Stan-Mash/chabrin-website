@@ -1,5 +1,5 @@
-/**
- * jobs.ts — DB query functions for the jobs/ATS tables.
+﻿/**
+ * jobs.ts - DB query functions for the jobs/ATS tables.
  * Server-side only.
  */
 
@@ -75,7 +75,7 @@ export async function listOpenJobs(): Promise<JobSummary[]> {
   `;
 }
 
-/** Single job by slug — public */
+/** Single job by slug - public */
 export async function getJobBySlug(slug: string): Promise<Job | null> {
   const rows = await sql<Job[]>`
     SELECT * FROM jobs
@@ -89,7 +89,7 @@ export async function getJobBySlug(slug: string): Promise<Job | null> {
 
 // ── Admin queries ─────────────────────────────────────────────────────────────
 
-/** All jobs for admin — all statuses */
+/** All jobs for admin - all statuses */
 export async function listAllJobs(): Promise<(JobSummary & { application_count: number })[]> {
   return sql<(JobSummary & { application_count: number })[]>`
     SELECT j.id, j.slug, j.title, j.department, j.job_type, j.location,

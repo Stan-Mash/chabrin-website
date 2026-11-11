@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import AnimatedHeadline from "@/components/ui/AnimatedHeadline";
 
 const SLA_ITEMS = [
@@ -32,7 +32,7 @@ export default function ComplaintsHero() {
           <AnimatedHeadline text="Seriously." as="span" className="text-[#00C9C9]" delay={0.5} />
         </h1>
         <p className="text-white/65 text-base sm:text-lg max-w-xl mb-8 leading-relaxed">
-          Submit your complaint, maintenance request, or feedback — and track its
+          Submit your complaint, maintenance request, or feedback - and track its
           resolution in real time. Every submission receives a reference number and
           a response within our published SLA.
         </p>

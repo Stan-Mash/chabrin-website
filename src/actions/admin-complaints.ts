@@ -1,10 +1,10 @@
-"use server";
+﻿"use server";
 
 /**
- * admin-complaints.ts — Server Actions for the staff admin panel.
+ * admin-complaints.ts - Server Actions for the staff admin panel.
  *
  * All actions verify the admin session cookie before doing anything.
- * If the cookie is invalid, they throw — the client shows an error.
+ * If the cookie is invalid, they throw - the client shows an error.
  *
  * Status-change emails are sent to the submitter automatically when
  * status moves to: acknowledged, assigned, in_progress, resolved, closed.
@@ -156,7 +156,7 @@ export async function adminUpdateComplaint(
       await transporter.sendMail({
         from:    process.env.SMTP_FROM || process.env.SMTP_USER,
         to:      existing.email,
-        subject: `Complaint Update [${reference}] — ${STATUS_LABELS[status] ?? status}`,
+        subject: `Complaint Update [${reference}] - ${STATUS_LABELS[status] ?? status}`,
         html:    statusUpdateEmailHtml(
           existing.full_name,
           reference,
@@ -165,7 +165,7 @@ export async function adminUpdateComplaint(
         ),
       });
     } catch (err) {
-      // Log but don't fail — DB was already updated
+      // Log but don't fail - DB was already updated
       console.error("[admin-complaints] email-failed", {
         reference,
         error: err instanceof Error ? err.message : "unknown",

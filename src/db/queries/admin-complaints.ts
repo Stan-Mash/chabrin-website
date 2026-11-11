@@ -1,5 +1,5 @@
-/**
- * admin-complaints.ts — DB queries for the staff admin panel.
+﻿/**
+ * admin-complaints.ts - DB queries for the staff admin panel.
  * Server-side only. Never import from client components.
  *
  * Returns full complaint rows including PII fields.
@@ -74,7 +74,7 @@ export async function listAdminComplaints(
   const where = conditions.length > 0 ? `WHERE ${conditions.join(" AND ")}` : "";
 
   // Using tagged template (sql) with raw interpolation is tricky for dynamic
-  // queries — use unsafe for the WHERE clause which we construct ourselves
+  // queries - use unsafe for the WHERE clause which we construct ourselves
   // with parameterised values. All user-supplied values go through params[].
   const rows = await sql.unsafe<AdminComplaint[]>(
     `SELECT * FROM complaints ${where}

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Image from "next/image";
 import { useState } from "react";
@@ -70,7 +70,7 @@ export default function PropertiesHero() {
         >
           <span className="w-1.5 h-1.5 rounded-full bg-[#00C9C9] animate-pulse" aria-hidden="true" />
           <span className="text-[#00C9C9] text-xs font-bold tracking-widest uppercase">
-            Vacant Units — Available Now
+            Vacant Units - Available Now
           </span>
         </div>
 
@@ -86,7 +86,7 @@ export default function PropertiesHero() {
         </h1>
         <p className="text-white/65 text-sm sm:text-base max-w-xl mx-auto mb-7 leading-relaxed">
           Professionally managed properties spanning Nairobi, Kiambu, Murang&apos;a,
-          Kajiado, Machakos and beyond — organised into seven strategic corridors.
+          Kajiado, Machakos and beyond - organised into seven strategic corridors.
         </p>
 
         {/* ── Search box ── */}
@@ -105,7 +105,7 @@ export default function PropertiesHero() {
                 type="search"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Area or type — e.g. Kasarani, Kitengela, Thika, Villa..."
+                placeholder="Area or type - e.g. Kasarani, Kitengela, Thika, Villa..."
                 className="w-full py-2 text-sm text-slate-700 placeholder:text-slate-400 bg-transparent outline-none"
                 aria-label="Search area or property type"
               />

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useRef } from "react";
 import { useLocale, useTranslations } from "next-intl";
@@ -7,10 +7,10 @@ import { saveNewsletterSignup } from "@/actions/save-enquiry";
 // ── Stat Pills ────────────────────────────────────────────────────────────────
 
 const REPORT_STATS = [
-  { value: "18%", label: { en: "Avg. yield — Westlands", sw: "Mavuno ya wastani — Westlands" } },
-  { value: "KES 95K", label: { en: "Median 3BR rent — Kasarani Belt", sw: "Kodi ya wastani 3BR — Kasarani" } },
+  { value: "18%", label: { en: "Avg. yield - Westlands", sw: "Mavuno ya wastani - Westlands" } },
+  { value: "KES 95K", label: { en: "Median 3BR rent - Kasarani Belt", sw: "Kodi ya wastani 3BR - Kasarani" } },
   { value: "+12%", label: { en: "Rental growth YoY 2025", sw: "Ukuaji wa kodi mwaka hadi mwaka 2025" } },
-  { value: "7.2wk", label: { en: "Avg. time to let — Nairobi", sw: "Wastani wa wakati wa kupangisha — Nairobi" } },
+  { value: "7.2wk", label: { en: "Avg. time to let - Nairobi", sw: "Wastani wa wakati wa kupangisha - Nairobi" } },
 ];
 
 // ── What's Inside ─────────────────────────────────────────────────────────────
@@ -21,7 +21,7 @@ const REPORT_CONTENTS = {
     "Yield analysis for residential & commercial stock",
     "Tenant demand drivers: employment, infrastructure, migration",
     "2026 outlook: interest rates, supply pipeline, and policy shifts",
-    "Investor opportunity matrix — top 5 sub-markets by ROI",
+    "Investor opportunity matrix - top 5 sub-markets by ROI",
     "Chabrin proprietary data: portfolio-level rental benchmarks",
   ],
   sw: [
@@ -29,7 +29,7 @@ const REPORT_CONTENTS = {
     "Uchambuzi wa mavuno kwa hisa za makazi na biashara",
     "Vichocheo vya mahitaji ya wapangaji: ajira, miundombinu",
     "Matarajio ya 2026: viwango vya riba, usambazaji wa mali",
-    "Matrix ya fursa za wawekezaji — masoko 5 bora kwa ROI",
+    "Matrix ya fursa za wawekezaji - masoko 5 bora kwa ROI",
     "Data ya Chabrin: vigezo vya kodi kutoka portfolio yetu",
   ],
 };
@@ -99,7 +99,7 @@ export default function MarketReportSection() {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
 
-          {/* ── Left — Copy ── */}
+          {/* ── Left - Copy ── */}
           <div>
             {/* Eyebrow */}
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-brand-cyan/30 bg-brand-cyan/10 mb-6">
@@ -164,7 +164,7 @@ export default function MarketReportSection() {
             </div>
           </div>
 
-          {/* ── Right — Form Card ── */}
+          {/* ── Right - Form Card ── */}
           <div>
             <div className="bg-white rounded-2xl p-8 shadow-2xl">
               {status === "success" ? (
@@ -180,7 +180,7 @@ export default function MarketReportSection() {
                   <p className="text-slate-500 text-sm leading-relaxed mb-6">
                     {t("success_desc")}
                   </p>
-                  {/* Hidden real download link — triggered programmatically */}
+                  {/* Hidden real download link - triggered programmatically */}
                   <a
                     ref={downloadRef}
                     href="/reports/2026-nairobi-rental-market-report.pdf"

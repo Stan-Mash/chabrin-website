@@ -1,4 +1,4 @@
-{
+﻿{
   "nav": {
     "home": "Home",
     "properties": "Properties",
@@ -40,7 +40,7 @@
     "leasing_title": "Leasing & Letting",
     "leasing_desc": "Professional tenant sourcing, vetting, and placement. We handle lease preparation, digital signing, and handover documentation.",
     "valuation_title": "Property Valuation",
-    "valuation_desc": "Accurate market valuations for residential, commercial, and industrial properties across our coverage area — backed by current data and deep local expertise.",
+    "valuation_desc": "Accurate market valuations for residential, commercial, and industrial properties across our coverage area, backed by current market data and deep local expertise.",
     "digital_title": "Digital Lease Management",
     "digital_desc": "End-to-end digital lease signing and document management. Every lease is prepared, reviewed, and executed digitally with a complete audit trail and zero paperwork."
   },
@@ -82,7 +82,7 @@
     "mission_label": "Our Mission",
     "mission_text": "To provide property owners and tenants across Kenya with a trustworthy, efficient, and professional management service that protects asset value and enhances the living and working experience.",
     "vision_label": "Our Vision",
-    "vision_text": "To be East Africa's most respected property management firm — recognised for integrity, innovation, and the enduring relationships we build with every client.",
+    "vision_text": "To be East Africa's most respected property management firm, recognised for integrity, innovation, and the enduring relationships we build with every client.",
     "values_title": "Our Core Values",
     "values_subtitle": "The principles that guide everything we do at Chabrin Agencies.",
     "value_integrity_title": "Integrity",
@@ -96,7 +96,7 @@
     "timeline_eyebrow": "Our Journey",
     "timeline_title": "30+ Years of Growth",
     "milestone_1990s_title": "Founded",
-    "milestone_1990s_desc": "Chabrin Agencies Limited was established in Nairobi, Kenya — beginning with residential property management across the city's key neighbourhoods.",
+    "milestone_1990s_desc": "Chabrin Agencies Limited was established in Nairobi, Kenya, beginning with residential property management across the city's key neighbourhoods.",
     "milestone_2000s_title": "Growing the Portfolio",
     "milestone_2000s_desc": "Steadily expanded the managed portfolio, deepening roots across Nairobi's corridors while extending coverage to Kiambu County towns along Thika Road and towards Kenol in Murang'a County.",
     "milestone_2010_title": "EARB Registration",
@@ -106,7 +106,7 @@
     "milestone_2020_title": "Technology Upgrade",
     "milestone_2020_desc": "Launched our proprietary property management platform to digitise workflows, streamline rent collection, enhance tenant communication, and provide real-time landlord reporting.",
     "milestone_2024_title": "Digital Transformation",
-    "milestone_2024_desc": "Introduced fully digital end-to-end lease signing, online rent payment tracking, and this public-facing web portal serving landlords and tenants across all our coverage corridors — Nairobi, Kiambu, Murang'a, Kajiado, Machakos, and beyond.",
+    "milestone_2024_desc": "Introduced fully digital end-to-end lease signing, online rent payment tracking, and this public-facing web portal serving landlords and tenants across all our coverage corridors, Nairobi, Kiambu, Murang'a, Kajiado, Machakos, and beyond.",
     "leadership_eyebrow": "Our Team",
     "leadership_title": "The People Behind Chabrin",
     "leadership_subtitle": "Experienced professionals committed to delivering exceptional property management across all our coverage corridors.",
@@ -122,7 +122,7 @@
     "badge_years_title": "30+ Years",
     "badge_years_desc": "Serving Kenya's property market since the 1990s.",
     "accreditations_cta_title": "Ready to work with Kenya's trusted property managers?",
-    "accreditations_cta_subtitle": "Whether you're a landlord across Nairobi, Kiambu, Murang'a, Kajiado, Machakos, or beyond — or a tenant seeking your next home — we're here to help.",
+    "accreditations_cta_subtitle": "Whether you're a landlord across Nairobi, Kiambu, Murang'a, Kajiado, Machakos, or beyond, or a tenant seeking your next home, we're here to help.",
     "cta_contact": "Get in Touch",
     "cta_properties": "View Properties"
   },
@@ -132,7 +132,7 @@
     "hero_subtitle": "From single units to large portfolios, Chabrin provides the full range of professional property services that landlords and tenants across Nairobi, Kiambu, Murang'a, Kajiado, Machakos, and beyond rely on.",
     "management_eyebrow": "Property Management",
     "management_title": "End-to-End Property Management",
-    "management_desc": "We take full responsibility for your property — so you can focus on what matters most to you. Our dedicated managers handle every aspect of the day-to-day, from rent collection to tenant relations.",
+    "management_desc": "We take full responsibility for your property, so you can focus on what matters most to you. Our dedicated managers handle every aspect of the day-to-day, from rent collection to tenant relations.",
     "management_f1": "Monthly rent collection and financial reporting",
     "management_f2": "Tenant screening, vetting and onboarding",
     "management_f3": "Compliance with landlord-tenant law in Kenya",
@@ -146,14 +146,14 @@
     "leasing_f4": "Move-in/move-out handover documentation",
     "valuation_eyebrow": "Property Valuation",
     "valuation_title": "Accurate, Data-Backed Valuations",
-    "valuation_desc": "Our registered valuers provide independent, reliable market valuations for residential, commercial, and industrial properties — essential for sales, mortgages, insurance, and legal purposes.",
+    "valuation_desc": "Our registered valuers provide independent, reliable market valuations for residential, commercial, and industrial properties, essential for sales, mortgages, insurance, and legal purposes.",
     "valuation_f1": "Residential and commercial property valuations",
     "valuation_f2": "Market rental and capital value assessments",
     "valuation_f3": "Mortgage and insurance valuations",
     "valuation_f4": "Valuation reports meeting bank and legal standards",
     "digital_eyebrow": "Digital Lease Management",
     "digital_title": "Fully Digital, End-to-End Lease Signing",
-    "digital_desc": "Every lease at Chabrin is handled digitally from start to finish — no paper, no delays. Our platform enables all staff to manage, review, and sign lease documents in real time, giving landlords and tenants full visibility at every stage.",
+    "digital_desc": "Every lease at Chabrin is handled digitally from start to finish, no paper, no delays. Our platform enables all staff to manage, review, and sign lease documents in real time, giving landlords and tenants full visibility at every stage.",
     "digital_f1": "Digital lease preparation and e-signing for all parties",
     "digital_f2": "Automated document workflows across the full Chabrin team",
     "digital_f3": "Secure document storage with full audit trail",
@@ -170,14 +170,14 @@
     "step4_title": "Active Management",
     "step4_desc": "We take over day-to-day management, keeping you informed with regular reports.",
     "step5_title": "Ongoing Reporting",
-    "step5_desc": "Monthly financial statements, maintenance logs, and occupancy reports — always on time.",
+    "step5_desc": "Monthly financial statements, maintenance logs, and occupancy reports, always on time.",
     "landlord_eyebrow": "For Landlords",
     "landlord_title": "Ready to Let Us Manage?",
     "landlord_desc": "Get a free consultation and find out how Chabrin can improve your rental income and take the hassle out of property ownership.",
     "landlord_cta": "Get Free Consultation",
     "tenant_eyebrow": "For Tenants",
     "tenant_title": "Looking for a Property?",
-    "tenant_desc": "Browse our available residential and commercial properties across all our coverage corridors — Nairobi, Kiambu, Murang'a, Kajiado, Machakos, and surrounding areas.",
+    "tenant_desc": "Browse our available residential and commercial properties across all our coverage corridors, Nairobi, Kiambu, Murang'a, Kajiado, Machakos, and surrounding areas.",
     "tenant_cta": "Browse Properties"
   },
   "properties": {
@@ -261,7 +261,7 @@
     "info_hours_sunday": "Sunday: Closed",
     "info_whatsapp": "WhatsApp Us",
     "info_directions_title": "How to Find Us",
-    "info_directions_text": "Take any matatu heading to Landhies Road from Kencom or Archives. Alight at Nacico Plaza — the building is on the right-hand side. Take the elevator to the 5th floor.",
+    "info_directions_text": "Take any matatu heading to Landhies Road from Kencom or Archives. Alight at Nacico Plaza, the building is on the right-hand side. Take the elevator to the 5th floor.",
     "info_map_link": "Open in Google Maps",
     "property_ref": "Property Reference (optional)",
     "success": "Thank you! We will get back to you shortly.",
@@ -270,7 +270,7 @@
   "blog": {
     "eyebrow": "Insights & News",
     "hero_title": "Property Market Insights",
-    "hero_subtitle": "Guides, market updates, and expert commentary from Chabrin's property professionals — helping landlords and tenants make informed decisions.",
+    "hero_subtitle": "Guides, market updates, and expert commentary from Chabrin's property professionals, helping landlords and tenants make informed decisions.",
     "featured_label": "Featured",
     "all_label": "All Articles",
     "coming_soon_arrow": "Read Article",
@@ -285,21 +285,21 @@
     "hero_subtitle": "Join a team of dedicated property professionals shaping Kenya's real estate landscape for over 30 years. We invest in our people as much as our properties.",
     "why_title": "Why Work at Chabrin?",
     "value_integrity_title": "Integrity First",
-    "value_integrity_desc": "We do the right thing — for our clients, our colleagues, and our community.",
+    "value_integrity_desc": "We do the right thing, for our clients, our colleagues, and our community.",
     "value_growth_title": "Growth Mindset",
-    "value_growth_desc": "Continuous learning is embedded in everything we do — training, mentorship, and professional development.",
+    "value_growth_desc": "Continuous learning is embedded in everything we do, training, mentorship, and professional development.",
     "value_team_title": "Collaborative Team",
     "value_team_desc": "A close-knit team where your contributions are recognised and your voice matters.",
     "value_impact_title": "Industry Impact",
     "value_impact_desc": "Your work directly shapes the housing and commercial landscape for landlords and tenants across Nairobi and surrounding counties.",
     "openings_title": "Open Positions",
-    "openings_subtitle": "All roles are based at our Nairobi office — Nacico Plaza, Landhies Road.",
+    "openings_subtitle": "All roles are based at our Nairobi office, Nacico Plaza, Landhies Road.",
     "apply_btn": "Apply Now",
     "requirements_label": "Requirements",
     "fulltime": "Full-time",
     "location": "Nairobi (On-site)",
     "spontaneous_title": "Don't See a Suitable Role?",
-    "spontaneous_desc": "We're always interested in meeting talented property professionals. Send us your CV and a brief introduction — we'll keep it on file for future opportunities.",
+    "spontaneous_desc": "We're always interested in meeting talented property professionals. Send us your CV and a brief introduction, we'll keep it on file for future opportunities.",
     "spontaneous_cta": "Send Your CV",
     "spontaneous_contact": "Contact Us"
   },
@@ -331,12 +331,12 @@
   "faq": {
     "eyebrow": "Have Questions?",
     "hero_title": "Frequently Asked Questions",
-    "hero_subtitle": "Everything tenants, landlords, and investors need to know about working with Chabrin Agencies. Can't find your answer? Contact us directly — we respond within one business day.",
+    "hero_subtitle": "Everything tenants, landlords, and investors need to know about working with Chabrin Agencies. Can't find your answer? Contact us directly, we respond within one business day.",
     "tab_tenants": "Tenants",
     "tab_owners": "Property Owners",
     "tab_investors": "Investors",
     "cta_title": "Still Have Questions?",
-    "cta_subtitle": "Our team is ready to help — whether you're a prospective tenant, a landlord, or an investor exploring our corridors.",
+    "cta_subtitle": "Our team is ready to help, whether you're a prospective tenant, a landlord, or an investor exploring our corridors.",
     "cta_contact": "Contact Us",
     "cta_whatsapp": "WhatsApp Us",
     "tenants": [
@@ -362,11 +362,11 @@
       },
       {
         "q": "What happens if I pay rent late?",
-        "a": "Late payment of rent may attract penalty charges as stipulated in your lease agreement, in accordance with the Kenyan tenancy framework. We encourage tenants to communicate with us in advance if they anticipate difficulty — our team can discuss the situation and, where possible, arrange a short-term solution before legal action becomes necessary."
+        "a": "Late payment of rent may attract penalty charges as stipulated in your lease agreement, in accordance with the Kenyan tenancy framework. We encourage tenants to communicate with us in advance if they anticipate difficulty, our team can discuss the situation and, where possible, arrange a short-term solution before legal action becomes necessary."
       },
       {
         "q": "How do I report a maintenance or repair issue?",
-        "a": "You can report any maintenance issue by calling our office, sending us a WhatsApp message, or emailing us directly. We will log the request, assign it to a vetted contractor from our network, and keep you informed of progress. For genuine emergencies — such as a burst pipe, electrical fault, or gas leak — our emergency line is available outside office hours."
+        "a": "You can report any maintenance issue by calling our office, sending us a WhatsApp message, or emailing us directly. We will log the request, assign it to a vetted contractor from our network, and keep you informed of progress. For genuine emergencies, such as a burst pipe, electrical fault, or gas leak, our emergency line is available outside office hours."
       },
       {
         "q": "How quickly are repairs attended to?",
@@ -378,11 +378,11 @@
       },
       {
         "q": "Can I sublet or take in a lodger?",
-        "a": "Subletting or taking in lodgers without prior written consent from Chabrin and the property owner is not permitted under standard tenancy agreements. If your circumstances change and you wish to explore this, please contact us first — we will consult with the landlord and advise you on what is possible."
+        "a": "Subletting or taking in lodgers without prior written consent from Chabrin and the property owner is not permitted under standard tenancy agreements. If your circumstances change and you wish to explore this, please contact us first, we will consult with the landlord and advise you on what is possible."
       },
       {
         "q": "How much notice do I need to give before moving out?",
-        "a": "Under standard residential tenancy agreements in Kenya, tenants are required to give at least one calendar month's written notice before vacating. Your specific lease may require a longer notice period — always refer to your signed agreement. Failing to give adequate notice may result in forfeiture of part or all of your deposit."
+        "a": "Under standard residential tenancy agreements in Kenya, tenants are required to give at least one calendar month's written notice before vacating. Your specific lease may require a longer notice period, always refer to your signed agreement. Failing to give adequate notice may result in forfeiture of part or all of your deposit."
       },
       {
         "q": "What happens at the end of my lease?",
@@ -420,7 +420,7 @@
       },
       {
         "q": "How long does it take to find a tenant?",
-        "a": "For well-priced properties in our active corridors, we typically secure a qualified tenant within two to four weeks of onboarding. Our current portfolio maintains a high occupancy rate. Properties priced at or near the market rate let fastest — our team will advise you on optimal pricing during the assessment."
+        "a": "For well-priced properties in our active corridors, we typically secure a qualified tenant within two to four weeks of onboarding. Our current portfolio maintains a high occupancy rate. Properties priced at or near the market rate let fastest, our team will advise you on optimal pricing during the assessment."
       },
       {
         "q": "When and how will I receive my rental income?",
@@ -490,11 +490,11 @@
     "eyebrow": "Free Intelligence Report",
     "title_line1": "The 2026 Nairobi",
     "title_line2": "Rental Market Report",
-    "subtitle": "Data-driven analysis of Nairobi's rental market across our coverage corridors — built for serious property investors, developers, and landlords making decisions in 2026.",
+    "subtitle": "Data-driven analysis of Nairobi's rental market across our coverage corridors, built for serious property investors, developers, and landlords making decisions in 2026.",
     "contents_label": "What's Inside",
     "form_eyebrow": "Free Download",
     "form_title": "Get the Full Report",
-    "form_subtitle": "Instant access — no spam, professional insights only.",
+    "form_subtitle": "Instant access, no spam, professional insights only.",
     "name_label": "Full Name",
     "email_label": "Professional Email",
     "privacy_note": "Your information is handled in accordance with our Privacy Policy and the Kenya Data Protection Act 2019. We will not share your details with third parties.",
