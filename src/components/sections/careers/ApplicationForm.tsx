@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
+import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -232,12 +233,12 @@ export default function ApplicationForm({ jobSlug, jobTitle, screeningQuestions 
           <p className="text-2xl font-black text-brand-navy tracking-wider">{result.reference}</p>
           <p className="text-xs text-slate-500 mt-1">Save this to track your application</p>
         </div>
-        <a
+        <Link
           href="/en/careers/track"
           className="inline-block px-6 py-2.5 rounded-full bg-brand-navy text-white text-sm font-bold hover:bg-brand-cyan hover:text-brand-navy transition-colors"
         >
           Track My Application
-        </a>
+        </Link>
       </div>
     );
   }

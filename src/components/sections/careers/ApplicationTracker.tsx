@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import type { PublicAppStatus } from "@/db/queries/applications";
 
 const STAGES = [
@@ -114,12 +115,12 @@ export default function ApplicationTracker() {
                   We have reviewed your application and unfortunately will not be proceeding at this time.
                   We appreciate your interest in Chabrin Agencies and encourage you to apply for future positions.
                 </p>
-                <a
+                <Link
                   href="/careers"
                   className="mt-4 inline-block px-5 py-2 rounded-full bg-brand-navy text-white text-sm font-bold hover:bg-brand-cyan hover:text-brand-navy transition-colors"
                 >
                   View Open Positions
-                </a>
+                </Link>
               </div>
             ) : (
               <>
