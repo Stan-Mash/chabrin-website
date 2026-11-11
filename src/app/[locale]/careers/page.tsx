@@ -5,11 +5,14 @@ import { getAllOpenJobs, type SanityJob } from "@/sanity/queries/jobs";
 
 export const revalidate = 60;
 
-export const metadata: Metadata = {
-  title: "Careers",
-  description:
-    "Join Chabrin Agencies Limited - Kenya's trusted property management company. View open positions across Nairobi, Kiambu, Murang'a, Kajiado, Machakos and beyond.",
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return {
+    title: "Careers",
+    description: "Join Chabrin Agencies Limited - Kenya's trusted property management company. View open positions across Nairobi, Kiambu, Murang'a, Kajiado, Machakos and beyond.",
+    alternates: { canonical: `https://www.chabrinagencies.com/${locale}/careers` },
+  };
+}
 
 const DEPT_COLOURS: Record<string, string> = {
   Operations:     "bg-blue-50 text-blue-700",

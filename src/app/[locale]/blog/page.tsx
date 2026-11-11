@@ -4,10 +4,14 @@ import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { getAllPosts, type SanityPost } from "@/sanity/queries/blog";
 
-export const metadata: Metadata = {
-  title: "Blog & Insights",
-  description: "Property market insights, landlord guides, tenant tips, and real estate news from Chabrin Agencies Limited.",
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return {
+    title: "Blog & Insights",
+    description: "Property market insights, landlord guides, tenant tips, and real estate news from Chabrin Agencies Limited.",
+    alternates: { canonical: `https://www.chabrinagencies.com/${locale}/blog` },
+  };
+}
 
 // Revalidate every hour
 export const revalidate = 3600;

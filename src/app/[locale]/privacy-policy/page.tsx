@@ -2,10 +2,14 @@
 import { useTranslations } from "next-intl";
 import { siteConfig } from "@/config/site";
 
-export const metadata: Metadata = {
-  title: "Privacy Policy",
-  description: "How Chabrin Agencies Limited collects, uses, and protects your personal data under the Kenya Data Protection Act 2019.",
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  return {
+    title: "Privacy Policy",
+    description: "How Chabrin Agencies Limited collects, uses, and protects your personal data under the Kenya Data Protection Act 2019.",
+    alternates: { canonical: `https://www.chabrinagencies.com/${locale}/privacy-policy` },
+  };
+}
 
 const LAST_UPDATED = "10 April 2026";
 

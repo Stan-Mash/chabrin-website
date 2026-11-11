@@ -6,11 +6,14 @@ import ContactInfo from "@/components/sections/contact/ContactInfo";
 
 type Props = { params: Promise<{ locale: string }> };
 
-export const metadata: Metadata = {
-  title: "Contact Us | Chabrin Agencies Limited",
-  description:
-    "Get in touch with Chabrin Agencies. Send an enquiry, request a property management consultation, or ask about available properties across Kenya.",
-};
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  return {
+    title: "Contact Us | Chabrin Agencies Limited",
+    description: "Get in touch with Chabrin Agencies. Send an enquiry, request a property management consultation, or ask about available properties across Kenya.",
+    alternates: { canonical: `https://www.chabrinagencies.com/${locale}/contact` },
+  };
+}
 
 export default async function ContactPage({ params }: Props) {
   const { locale } = await params;

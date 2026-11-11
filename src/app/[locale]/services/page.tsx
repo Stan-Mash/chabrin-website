@@ -7,10 +7,14 @@ import ServicesCTA from "@/components/sections/services/ServicesCTA";
 
 type Props = { params: Promise<{ locale: string }> };
 
-export const metadata: Metadata = {
-  title: "Our Services | Chabrin Agencies Limited",
-  description: "Property management, leasing, valuation and facilities management services across Nairobi, Kiambu, Murang'a, Kajiado and surrounding counties by Chabrin Agencies.",
-};
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  return {
+    title: "Our Services | Chabrin Agencies Limited",
+    description: "Property management, leasing, valuation and facilities management services across Nairobi, Kiambu, Murang'a, Kajiado and surrounding counties by Chabrin Agencies.",
+    alternates: { canonical: `https://www.chabrinagencies.com/${locale}/services` },
+  };
+}
 
 export default async function ServicesPage({ params }: Props) {
   const { locale } = await params;
