@@ -50,7 +50,7 @@
 
   /* Font — no circular reference */
   --font-sans:    "Plus Jakarta Sans", ui-sans-serif, system-ui;
-  --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui;
+  --font-display: var(--font-playfair, "Playfair Display"), "Plus Jakarta Sans", ui-serif;
 
   /* shadcn radius tokens */
   --radius-sm:  calc(var(--radius) * 0.6);

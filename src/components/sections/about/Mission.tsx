@@ -6,10 +6,10 @@ export default function Mission() {
   const t = useTranslations("about");
 
   const VALUES = [
-    { icon: "🤝", title: t("value_integrity_title"),       desc: t("value_integrity_desc") },
-    { icon: "🏆", title: t("value_professionalism_title"), desc: t("value_professionalism_desc") },
-    { icon: "⭐", title: t("value_excellence_title"),      desc: t("value_excellence_desc") },
-    { icon: "💡", title: t("value_innovation_title"),      desc: t("value_innovation_desc") },
+    { num: "01", title: t("value_integrity_title"),       desc: t("value_integrity_desc") },
+    { num: "02", title: t("value_professionalism_title"), desc: t("value_professionalism_desc") },
+    { num: "03", title: t("value_excellence_title"),      desc: t("value_excellence_desc") },
+    { num: "04", title: t("value_innovation_title"),      desc: t("value_innovation_desc") },
   ];
 
   const MV = [
@@ -43,10 +43,12 @@ export default function Mission() {
         </ScrollReveal>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {VALUES.map(({ icon, title, desc }, i) => (
+          {VALUES.map(({ num, title, desc }, i) => (
             <ScrollReveal key={title} delay={i * 0.08}>
               <div className="bg-white rounded-2xl p-6 text-center shadow-card hover:shadow-card-hover transition-shadow h-full">
-                <div className="text-4xl mb-4">{icon}</div>
+                <div className="w-12 h-12 rounded-full border-2 border-brand-navy flex items-center justify-center mx-auto mb-4">
+                  <span className="text-sm font-bold text-brand-navy tracking-tight">{num}</span>
+                </div>
                 <h3 className="font-bold text-brand-navy text-lg mb-2">{title}</h3>
                 <p className="text-slate-500 text-sm leading-relaxed">{desc}</p>
               </div>

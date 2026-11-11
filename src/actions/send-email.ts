@@ -1,7 +1,6 @@
 "use server";
 
 import nodemailer from "nodemailer";
-import { env } from "@/env";
 
 /**
  * Email delivery service using nodemailer.

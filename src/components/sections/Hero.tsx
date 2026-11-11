@@ -194,7 +194,7 @@ export default function Hero() {
                   Where Kenya Grows
                 </p>
                 <p className="text-white/55 text-xs mt-0.5">
-                  Nairobi · Kiambu · Murang'a · Kajiado · Machakos & beyond
+                  Nairobi · Kiambu · Murang&apos;a · Kajiado · Machakos & beyond
                 </p>
               </div>
             </motion.div>

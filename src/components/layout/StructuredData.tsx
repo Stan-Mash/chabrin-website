@@ -94,7 +94,6 @@ export function PropertySchema({
   title,
   description,
   price,
-  deposit,
   bedrooms,
   bathrooms,
   sizeM2,

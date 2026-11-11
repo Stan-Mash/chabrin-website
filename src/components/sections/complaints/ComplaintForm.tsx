@@ -29,10 +29,10 @@ type FormData = z.infer<typeof schema>;
 
 const SUBCATEGORIES: Record<string, { value: string; label: string }[]> = {
   maintenance: [
-    { value: "plumbing",    label: "Plumbing — Leak / Burst Pipe / No Water" },
-    { value: "electrical",  label: "Electrical — Power / Wiring / Sockets" },
-    { value: "structural",  label: "Structural — Roof / Walls / Ceiling" },
-    { value: "pest",        label: "Pest Control — Rodents / Insects" },
+    { value: "plumbing",    label: "Plumbing: Leak, Burst Pipe, No Water" },
+    { value: "electrical",  label: "Electrical: Power, Wiring, Sockets" },
+    { value: "structural",  label: "Structural: Roof, Walls, Ceiling" },
+    { value: "pest",        label: "Pest Control: Rodents, Insects" },
     { value: "ac_hvac",     label: "AC / Ventilation" },
     { value: "locks_doors", label: "Locks / Doors / Windows" },
     { value: "general_repair", label: "General Repair" },
@@ -73,12 +73,12 @@ const SUBCATEGORIES: Record<string, { value: string; label: string }[]> = {
 };
 
 const CATEGORY_OPTIONS = [
-  { value: "maintenance",     label: "🔧 Maintenance & Repairs",   description: "Plumbing, electrical, structural, pests" },
-  { value: "billing",         label: "💳 Billing Dispute",         description: "Charges, payments, deposit" },
-  { value: "noise_neighbour", label: "🔊 Noise / Neighbour",       description: "Noise, parking, common areas" },
-  { value: "safety",          label: "🛡 Safety & Security",       description: "Hazards, breach, unauthorized entry" },
-  { value: "management",      label: "👤 Management Quality",      description: "Response, conduct, communication" },
-  { value: "general",         label: "💬 General Feedback",        description: "Suggestions, compliments, other" },
+  { value: "maintenance",     label: "Maintenance & Repairs",   description: "Plumbing, electrical, structural, pests" },
+  { value: "billing",         label: "Billing Dispute",         description: "Charges, payments, deposit" },
+  { value: "noise_neighbour", label: "Noise / Neighbour",       description: "Noise, parking, common areas" },
+  { value: "safety",          label: "Safety & Security",       description: "Hazards, breach, unauthorized entry" },
+  { value: "management",      label: "Management Quality",      description: "Response, conduct, communication" },
+  { value: "general",         label: "General Feedback",        description: "Suggestions, compliments, other" },
 ];
 
 const SUBMITTER_OPTIONS = [
@@ -297,7 +297,7 @@ export default function ComplaintForm() {
               <span style={{ color: priorityInfo.colour }} className="font-bold text-xs uppercase tracking-wide">
                 {priorityInfo.label}
               </span>
-              <span className="text-slate-500 text-xs">— {priorityInfo.description}</span>
+              <span className="text-slate-500 text-xs">{priorityInfo.description}</span>
             </div>
           )}
         </fieldset>

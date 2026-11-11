@@ -18,8 +18,8 @@ function parse(raw: string): { number: number; suffix: string } {
 export default function AnimatedCounter({ value, className, duration = 1800 }: Props) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref as React.RefObject<Element>, { once: true, amount: 0.5 });
-  const [display, setDisplay] = useState("0");
   const { number, suffix } = parse(value);
+  const [display, setDisplay] = useState(number.toString());
 
   useEffect(() => {
     if (!inView) return;

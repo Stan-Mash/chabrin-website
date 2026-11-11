@@ -5,9 +5,7 @@ export default function ServicesHero() {
   const t = useTranslations("services_page");
 
   return (
-    <section className="relative bg-brand-navy overflow-hidden py-24 md:py-32">
-      <div className="absolute top-0 right-0 w-96 h-96 bg-brand-cyan/10 rounded-full blur-3xl translate-x-1/3 -translate-y-1/3" />
-      <div className="absolute bottom-0 left-1/4 w-72 h-72 bg-white/5 rounded-full blur-3xl" />
+    <section className="bg-brand-navy py-24 md:py-32">
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl">

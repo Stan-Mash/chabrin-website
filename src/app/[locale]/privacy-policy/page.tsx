@@ -30,8 +30,8 @@ export default function PrivacyPolicyPage() {
         <div className="max-w-3xl mx-auto prose prose-slate prose-headings:text-brand-navy prose-a:text-brand-cyan prose-a:no-underline hover:prose-a:underline max-w-none">
 
           <p>
-            Chabrin Agencies Limited (<strong>"Chabrin"</strong>, <strong>"we"</strong>,{" "}
-            <strong>"us"</strong>, or <strong>"our"</strong>) is committed to protecting
+            Chabrin Agencies Limited (<strong>&ldquo;Chabrin&rdquo;</strong>, <strong>&ldquo;we&rdquo;</strong>,{" "}
+            <strong>&ldquo;us&rdquo;</strong>, or <strong>&ldquo;our&rdquo;</strong>) is committed to protecting
             your personal data. This Privacy Policy explains how we collect, use, disclose,
             and safeguard your information when you visit{" "}
             <a href={siteConfig.url}>{siteConfig.url}</a> or use our services, in

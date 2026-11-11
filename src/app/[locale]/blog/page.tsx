@@ -82,7 +82,10 @@ const FALLBACK_POSTS: SanityPost[] = [
   },
 ];
 
-export default async function BlogPage() {
+type Props = { params: Promise<{ locale: string }> };
+
+export default async function BlogPage({ params }: Props) {
+  const { locale } = await params;
   const t = await getTranslations("blog");
 
   // Fetch from Sanity; fall back to hardcoded posts if not configured
@@ -125,6 +128,7 @@ export default async function BlogPage() {
               <p className="text-xs font-bold uppercase tracking-widest text-brand-cyan mb-6">
                 {t("featured_label")}
               </p>
+              <Link href={`/${locale}/blog/${featured.slug}`}>
               <article className="group rounded-2xl border border-slate-100 overflow-hidden shadow-sm
                                   hover:shadow-md transition-shadow bg-white">
                 {/* Cover image or gradient strip */}
@@ -168,6 +172,7 @@ export default async function BlogPage() {
                   </div>
                 </div>
               </article>
+              </Link>
             </div>
           )}
 
@@ -179,10 +184,10 @@ export default async function BlogPage() {
               </p>
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {rest.map((post) => (
+                  <Link key={post.slug} href={`/${locale}/blog/${post.slug}`}>
                   <article
-                    key={post.slug}
                     className="group rounded-2xl border border-slate-100 overflow-hidden shadow-sm
-                               hover:shadow-md transition-shadow bg-white flex flex-col"
+                               hover:shadow-md transition-shadow bg-white flex flex-col h-full"
                   >
                     {post.coverImage?.asset?.url ? (
                       <div className="relative h-36 w-full">
@@ -217,6 +222,7 @@ export default async function BlogPage() {
                       </div>
                     </div>
                   </article>
+                  </Link>
                 ))}
               </div>
             </div>

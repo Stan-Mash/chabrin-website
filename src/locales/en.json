@@ -32,28 +32,28 @@
   "services_section": {
     "eyebrow": "What We Do",
     "title": "Full-Spectrum Property Services",
-    "subtitle": "From finding the right tenant to managing your entire portfolio — Chabrin delivers professional property services across Nairobi, Kiambu, Murang'a, Kajiado, Machakos, and surrounding counties.",
+    "subtitle": "From tenant acquisition to full-portfolio administration, Chabrin delivers professional property services across Nairobi, Kiambu, Murang'a, Kajiado, Machakos, and surrounding counties.",
     "learn_more": "Learn more",
     "view_all": "View all services",
     "management_title": "Property Management",
-    "management_desc": "End-to-end management of residential and commercial properties. Rent collection, tenant relations, and monthly reporting — all handled by your dedicated property manager.",
+    "management_desc": "End-to-end management of residential and commercial properties. Rent collection, tenant relations, and monthly financial reporting, managed directly by your dedicated property manager.",
     "leasing_title": "Leasing & Letting",
     "leasing_desc": "Professional tenant sourcing, vetting, and placement. We handle lease preparation, digital signing, and handover documentation.",
     "valuation_title": "Property Valuation",
     "valuation_desc": "Accurate market valuations for residential, commercial, and industrial properties across our coverage area — backed by current data and deep local expertise.",
     "digital_title": "Digital Lease Management",
-    "digital_desc": "End-to-end digital lease signing and document management. Every lease is prepared, reviewed, and signed digitally — no paper, no delays, full audit trail."
+    "digital_desc": "End-to-end digital lease signing and document management. Every lease is prepared, reviewed, and executed digitally with a complete audit trail and zero paperwork."
   },
   "why_chabrin": {
     "eyebrow": "Why Choose Us",
     "title": "The Chabrin Standard",
-    "subtitle": "We measure ourselves against what matters to landlords and tenants — transparency, responsiveness, and results.",
+    "subtitle": "We measure our performance by the standards that matter to landlords and tenants: transparency, responsiveness, and results.",
     "licensed_title": "Fully Licensed & Regulated",
     "licensed_desc": "Registered with the Estate Agents Registration Board (EARB) and compliant with the Kenya Data Protection Act. Your property is in safe, accountable hands.",
     "licensed_stat": "EARB",
     "licensed_stat_label": "Registered",
     "responsive_title": "Dedicated Client Teams",
-    "responsive_desc": "Every property is assigned a dedicated manager — not a call centre. Direct communication, fast response times, and real accountability.",
+    "responsive_desc": "Every property is assigned a dedicated portfolio manager rather than a call centre. Direct communication, fast response times, and real accountability.",
     "responsive_stat": "24h",
     "responsive_stat_label": "Response SLA",
     "tech_title": "Technology-Enabled",
@@ -78,7 +78,7 @@
     "eyebrow": "About Us",
     "hero_title": "Built on Trust.",
     "hero_title_accent": "Driven by Excellence.",
-    "hero_subtitle": "For over 30 years, Chabrin Agencies Limited has been the trusted partner for property management, leasing, and real estate valuation — delivering professional, transparent service across Nairobi, Kiambu, Murang'a, Kajiado, Machakos, and beyond.",
+    "hero_subtitle": "For over 30 years, Chabrin Agencies Limited has been the trusted partner for property management, leasing, and real estate valuation, delivering professional, transparent service across Nairobi, Kiambu, Murang'a, Kajiado, Machakos, and beyond.",
     "mission_label": "Our Mission",
     "mission_text": "To provide property owners and tenants across Kenya with a trustworthy, efficient, and professional management service that protects asset value and enhances the living and working experience.",
     "vision_label": "Our Vision",
@@ -114,7 +114,7 @@
     "accreditations_title": "Recognised. Regulated. Trusted.",
     "accreditations_subtitle": "Our credentials and compliance frameworks give landlords and tenants complete confidence.",
     "badge_earb_title": "EARB Registered",
-    "badge_earb_desc": "Estate Agents Registration Board — Kenya's official real estate regulator.",
+    "badge_earb_desc": "Estate Agents Registration Board, Kenya's official real estate regulator.",
     "badge_odpc_title": "ODPC Compliant",
     "badge_odpc_desc": "Fully compliant with the Kenya Data Protection Act 2019.",
     "badge_company_title": "Registered Company",
@@ -129,7 +129,7 @@
   "services_page": {
     "eyebrow": "Our Services",
     "hero_title": "Comprehensive Property Services",
-    "hero_subtitle": "From single units to large portfolios — Chabrin provides the full range of professional property services that landlords and tenants across Nairobi, Kiambu, Murang'a, Kajiado, Machakos, and beyond rely on.",
+    "hero_subtitle": "From single units to large portfolios, Chabrin provides the full range of professional property services that landlords and tenants across Nairobi, Kiambu, Murang'a, Kajiado, Machakos, and beyond rely on.",
     "management_eyebrow": "Property Management",
     "management_title": "End-to-End Property Management",
     "management_desc": "We take full responsibility for your property — so you can focus on what matters most to you. Our dedicated managers handle every aspect of the day-to-day, from rent collection to tenant relations.",
@@ -223,7 +223,7 @@
   },
   "contact": {
     "hero_title": "We'd Love to Hear from You",
-    "hero_subtitle": "Whether you're a landlord, a tenant, or just exploring — our team is ready to help.",
+    "hero_subtitle": "Whether you are a landlord, a tenant, or simply exploring options, our team is ready to help.",
     "form_title": "Send Us a Message",
     "title": "Get in Touch",
     "subtitle": "Send us an enquiry and our team will respond within one business day.",
@@ -250,7 +250,7 @@
     "success_desc": "Thank you for reaching out. Our team will respond within one business day.",
     "success_again": "Send Another Message",
     "error_msg": "Something went wrong. Please try again or reach us directly on WhatsApp.",
-    "turnstile_notice": "🔐 Bot protection will be enabled once configured.",
+    "turnstile_notice": "Bot protection is active on this form.",
     "info_address_title": "Office Address",
     "info_phone_title": "Phone",
     "info_email_title": "Email",
@@ -273,10 +273,10 @@
     "hero_subtitle": "Guides, market updates, and expert commentary from Chabrin's property professionals — helping landlords and tenants make informed decisions.",
     "featured_label": "Featured",
     "all_label": "All Articles",
-    "coming_soon_arrow": "Coming soon →",
-    "soon_short": "Soon →",
-    "newsletter_title": "Stay Updated",
-    "newsletter_subtitle": "Full articles and a newsletter are coming soon. In the meantime, reach out to our team directly for property advice.",
+    "coming_soon_arrow": "Read Article",
+    "soon_short": "Read",
+    "newsletter_title": "Get Expert Property Advice",
+    "newsletter_subtitle": "Get the latest property market insights from our team. Contact us for personalised advice on your investment or tenancy.",
     "newsletter_cta": "Talk to Our Experts"
   },
   "careers": {
@@ -309,7 +309,7 @@
     "last_updated": "Last updated"
   },
   "footer": {
-    "tagline": "Premier Property Management — Kenya",
+    "tagline": "Premier Property Management in Kenya",
     "rights": "All rights reserved.",
     "privacy": "Privacy Policy",
     "company_number": "Company No.",
@@ -394,7 +394,7 @@
       },
       {
         "q": "How do I contact Chabrin in an emergency?",
-        "a": "For property emergencies outside office hours, call our main line or send a WhatsApp message marked as urgent. Our office number is +254 720 854 389. Office hours are Monday to Friday, 8:00 AM to 5:30 PM, and Saturday, 9:00 AM to 1:00 PM. Emergency maintenance issues are escalated to on-call contractors regardless of the time."
+        "a": "For property emergencies outside office hours, call our main line or send a WhatsApp message marked as urgent. Our office number is +254 720 854 389. Office hours are Monday to Friday, 8:00 AM to 5:00 PM, and Saturday, 8:30 AM to 12:00 PM. Emergency maintenance issues are escalated to on-call contractors regardless of the time."
       }
     ],
     "owners": [

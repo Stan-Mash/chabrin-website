@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useLocale } from "next-intl";
 import { z } from "zod";
-import { Turnstile } from "@marsidev/react-turnstile";
+import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import { sendContactEmail } from "@/actions/send-email";
 
 const schema = z.object({
@@ -18,8 +18,6 @@ const schema = z.object({
   consent: z.literal(true, "You must agree to the Privacy Policy to proceed"),
   token:   z.string().optional(),
 });
-
-type FormData = z.infer<typeof schema>;
 
 const SUBJECTS = [
   { value: "general",    label: "General Enquiry"      },
@@ -40,7 +38,7 @@ export default function ContactForm() {
   const locale = useLocale();
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [turnstileVerified, setTurnstileVerified] = useState(false);
-  const turnstileRef = useRef<{ getResponse: () => string | null }>(null);
+  const turnstileRef = useRef<TurnstileInstance | null>(null);
 
   const {
     register,
@@ -207,7 +205,7 @@ export default function ContactForm() {
         <div className="space-y-3">
           <div className="flex justify-center">
             <Turnstile
-              ref={turnstileRef as any}
+              ref={turnstileRef}
               siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ""}
               onSuccess={() => setTurnstileVerified(true)}
               onError={() => {

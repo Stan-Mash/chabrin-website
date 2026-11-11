@@ -27,26 +27,34 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/privacy-policy",
   ];
 
-  // Generate sitemap entries for both locales
-  const staticSitemapEntries: MetadataRoute.Sitemap = [];
+  // Generate sitemap entries for both locales with hreflang alternates
+  const staticSitemapEntries: MetadataRoute.Sitemap = staticRoutes.map((route) => ({
+    url: `${baseUrl}/en${route}`,
+    lastModified: new Date().toISOString().split("T")[0],
+    changeFrequency: route === "" ? "weekly" : "monthly",
+    priority: route === "" ? 1.0 : 0.8,
+    alternates: {
+      languages: {
+        "en-KE":    `${baseUrl}/en${route}`,
+        "sw-KE":    `${baseUrl}/sw${route}`,
+        "x-default": `${baseUrl}/en${route}`,
+      },
+    },
+  }));
 
-  for (const locale of siteConfig.locale.supported) {
-    for (const route of staticRoutes) {
-      staticSitemapEntries.push({
-        url: `${baseUrl}/${locale}${route}`,
-        lastModified: new Date().toISOString().split("T")[0],
-        changeFrequency: route === "" ? "weekly" : "monthly",
-        priority: route === "" ? 1.0 : 0.8,
-      });
-    }
-  }
-
-  // Dynamic routes: property detail pages (English only for now)
+  // Dynamic routes: property detail pages with hreflang alternates
   const propertyRoutes: MetadataRoute.Sitemap = listings.map((listing) => ({
     url: `${baseUrl}/en/properties/${listing.reference}`,
     lastModified: listing.updated_at,
     changeFrequency: "weekly" as const,
     priority: 0.7,
+    alternates: {
+      languages: {
+        "en-KE":    `${baseUrl}/en/properties/${listing.reference}`,
+        "sw-KE":    `${baseUrl}/sw/properties/${listing.reference}`,
+        "x-default": `${baseUrl}/en/properties/${listing.reference}`,
+      },
+    },
   }));
 
   return [...staticSitemapEntries, ...propertyRoutes];

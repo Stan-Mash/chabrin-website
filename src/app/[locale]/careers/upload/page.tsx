@@ -8,6 +8,7 @@
  * The HMAC token is verified server-side before accepting the file.
  */
 
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useState, useRef, Suspense } from "react";
 
@@ -215,7 +216,7 @@ function CvUploadInner() {
 
         <p className="text-xs text-slate-400 text-center mt-4">
           Your data is handled in accordance with the Kenya Data Protection Act 2019.{" "}
-          <a href="/en/privacy-policy" className="underline">Privacy Policy</a>
+          <Link href="/en/privacy-policy" className="underline">Privacy Policy</Link>
         </p>
       </div>
     </PageShell>
