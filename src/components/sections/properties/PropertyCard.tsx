@@ -200,8 +200,9 @@ function ImageCarousel({ images, title, propertyType, publishedAt, isActive }: C
 
       <div className="absolute top-3 left-3 flex flex-col gap-1.5 z-10">
         {isNew && (
-          <span className="px-2.5 py-0.5 rounded-full bg-[#00C9C9] text-white text-[10px] font-extrabold tracking-widest uppercase shadow-sm">
-            ✦ New Listing
+          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#00C9C9] text-white text-[10px] font-extrabold tracking-widest uppercase shadow-sm">
+            <svg className="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            New Listing
           </span>
         )}
         <span className={`px-2.5 py-0.5 rounded-full text-white text-[10px] font-bold tracking-wide capitalize ${typeColour(propertyType)}`}>
@@ -224,10 +225,22 @@ function ImageCarousel({ images, title, propertyType, publishedAt, isActive }: C
   );
 }
 
-function Spec({ icon, label }: { icon: string; label: string }) {
+function BedIcon() {
+  return <svg className="w-3.5 h-3.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 7.5A2.25 2.25 0 014.5 5.25h15A2.25 2.25 0 0121.75 7.5v9a2.25 2.25 0 01-2.25 2.25H4.5A2.25 2.25 0 012.25 16.5v-9z"/><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12h19.5"/></svg>;
+}
+function ShowerIcon() {
+  return <svg className="w-3.5 h-3.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1.5M12 3a6 6 0 016 6v2.25H6V9A6 6 0 0112 3zM3 12.75h18M5.25 12.75v5.625A2.625 2.625 0 007.875 21h8.25a2.625 2.625 0 002.625-2.625V12.75"/></svg>;
+}
+function AreaIcon() {
+  return <svg className="w-3.5 h-3.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15"/></svg>;
+}
+
+function Spec({ type, label }: { type: "bed" | "bath" | "area"; label: string }) {
   return (
     <span className="inline-flex items-center gap-1 text-slate-500 text-xs">
-      <span aria-hidden="true">{icon}</span>
+      {type === "bed"  && <BedIcon />}
+      {type === "bath" && <ShowerIcon />}
+      {type === "area" && <AreaIcon />}
       {label}
     </span>
   );
@@ -337,13 +350,13 @@ export default function PropertyCard({ listing, isActive, onHover }: PropertyCar
           {(!isCommercial || listing.size_m2) && (
             <div className="flex items-center gap-3 flex-wrap">
               {!isCommercial && listing.bedrooms !== null && listing.bedrooms > 0 && (
-                <Spec icon="🛏" label={`${listing.bedrooms} ${listing.bedrooms === 1 ? "bed" : "beds"}`} />
+                <Spec type="bed" label={`${listing.bedrooms} ${listing.bedrooms === 1 ? "bed" : "beds"}`} />
               )}
               {listing.bathrooms !== null && (
-                <Spec icon="🚿" label={`${listing.bathrooms} ${listing.bathrooms === 1 ? "bath" : "baths"}`} />
+                <Spec type="bath" label={`${listing.bathrooms} ${listing.bathrooms === 1 ? "bath" : "baths"}`} />
               )}
               {listing.size_m2 !== null && (
-                <Spec icon="📐" label={`${listing.size_m2} m²`} />
+                <Spec type="area" label={`${listing.size_m2} m²`} />
               )}
             </div>
           )}

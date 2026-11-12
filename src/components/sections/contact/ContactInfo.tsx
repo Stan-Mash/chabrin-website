@@ -150,7 +150,10 @@ export default function ContactInfo() {
           rel="noopener noreferrer"
           className="mt-3 inline-flex items-center gap-1.5 text-brand-cyan text-sm font-semibold hover:underline"
         >
-          Open in Google Maps →
+          Open in Google Maps
+          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+          </svg>
         </Link>
       </div>
     </div>

@@ -507,8 +507,8 @@ const PRICE_OPTIONS = [
 
 const SORT_OPTIONS = [
   { value: "newest",     label: "Newest First" },
-  { value: "price-asc",  label: "Price: Low → High" },
-  { value: "price-desc", label: "Price: High → Low" },
+  { value: "price-asc",  label: "Price: Low to High" },
+  { value: "price-desc", label: "Price: High to Low" },
 ];
 
 const BED_OPTIONS = [

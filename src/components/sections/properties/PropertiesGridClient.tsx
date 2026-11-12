@@ -74,8 +74,9 @@ function PropertyCard({ listing, locale }: { listing: ListingRow; locale: string
 
         {/* Zone + Area */}
         <div className="flex items-center gap-2 mb-3">
-          <span className="text-xs px-2 py-0.5 rounded-full bg-surface text-brand-navy font-semibold border border-slate-200">
-            📍 {listing.zone}
+          <span className="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full bg-surface text-brand-navy font-semibold border border-slate-200">
+            <svg className="w-3 h-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd"/></svg>
+            {listing.zone}
           </span>
           <span className="text-xs text-slate-400">{listing.area}</span>
         </div>
@@ -83,13 +84,13 @@ function PropertyCard({ listing, locale }: { listing: ListingRow; locale: string
         {/* Stats */}
         <div className="flex items-center gap-4 text-slate-500 text-sm mb-4 border-t border-slate-100 pt-3 flex-wrap">
           {!isCommercial && listing.bedrooms !== null && listing.bedrooms > 0 && (
-            <span>🛏 {listing.bedrooms} {t("bedrooms")}</span>
+            <span className="inline-flex items-center gap-1"><svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 7.5A2.25 2.25 0 014.5 5.25h15A2.25 2.25 0 0121.75 7.5v9a2.25 2.25 0 01-2.25 2.25H4.5A2.25 2.25 0 012.25 16.5v-9z"/><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12h19.5"/></svg>{listing.bedrooms} {t("bedrooms")}</span>
           )}
           {listing.bathrooms !== null && (
-            <span>🚿 {listing.bathrooms} {isCommercial ? "WCs" : t("bathrooms")}</span>
+            <span className="inline-flex items-center gap-1"><svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1.5M12 3a6 6 0 016 6v2.25H6V9A6 6 0 0112 3zM3 12.75h18M5.25 12.75v5.625A2.625 2.625 0 007.875 21h8.25a2.625 2.625 0 002.625-2.625V12.75"/></svg>{listing.bathrooms} {isCommercial ? "WCs" : t("bathrooms")}</span>
           )}
           {listing.size_m2 !== null && (
-            <span>📐 {listing.size_m2} m²</span>
+            <span className="inline-flex items-center gap-1"><svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15"/></svg>{listing.size_m2} m²</span>
           )}
         </div>
 

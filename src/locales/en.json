@@ -26,7 +26,8 @@
     "badge_earb": "EARB Registered Agency",
     "badge_featured": "Featured",
     "badge_response": "24 h Response",
-    "badge_sla": "Guaranteed landlord SLA"
+    "badge_sla": "Guaranteed landlord SLA",
+    "coverage_line": "Nairobi · Kiambu · Murang’a · Kajiado · Machakos & beyond"
   },
   "stats": {
     "zones_value": "7",
@@ -328,7 +329,21 @@
     "svc_management": "Property Management",
     "svc_leasing": "Leasing & Letting",
     "svc_valuation": "Valuation",
-    "svc_digital": "Digital Lease Mgmt"
+    "svc_digital": "Digital Lease Mgmt",
+    "office_hours_label": "Office Hours",
+    "office_hours_weekday": "Mon – Fri: 8:00 AM – 5:00 PM",
+    "office_hours_saturday": "Saturday: 8:30 AM – 12:00 PM",
+    "office_hours_closed": "Sunday & Public Holidays: Closed",
+    "earb_registered": "EARB Registered",
+    "odpc_compliant": "ODPC Compliant",
+    "ticker_earb_label": "EARB Registered",
+    "ticker_earb_detail": "Estate Agents Registration Board",
+    "ticker_odpc_label": "ODPC Compliant",
+    "ticker_odpc_detail": "Office of the Data Protection Commissioner",
+    "ticker_coverage_label": "5-County Coverage",
+    "ticker_coverage_detail": "Nairobi · Kiambu · Murang’a · Kajiado · Machakos",
+    "ticker_years_label": "30+ Years",
+    "ticker_years_detail": "Premier Property Management in Nairobi"
   },
   "reach": {
     "eyebrow": "Management Coverage",

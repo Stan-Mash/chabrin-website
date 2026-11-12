@@ -18,8 +18,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return { title: "Property Not Found" };
   }
 
+  const isCommercialMeta = listing.property_type === "office" || listing.property_type === "retail" || listing.property_type === "warehouse";
   const title = `${listing.title} - ${listing.zone} | Chabrin Agencies`;
-  const description = `${listing.title} in ${listing.area}, ${listing.zone}. ${listing.bedrooms || 0} bed${listing.bathrooms ? `, ${listing.bathrooms}` : ""} bath. KES ${listing.rent_kes.toLocaleString()}/month`;
+  const bedroomPart = !isCommercialMeta && listing.bedrooms && listing.bedrooms > 0 ? `${listing.bedrooms} bed, ` : "";
+  const bathPart = listing.bathrooms ? `${listing.bathrooms} bath. ` : "";
+  const description = `${listing.title} in ${listing.area}, ${listing.zone}. ${bedroomPart}${bathPart}KES ${listing.rent_kes.toLocaleString()}/month`;
   const propertyImage = listing.images?.[0] || siteConfig.ogImage;
 
   return {
@@ -59,7 +62,7 @@ export default async function PropertyDetailPage({ params }: PageProps) {
       <PropertySchema
         reference={listing.reference}
         title={listing.title}
-        description={`${listing.bedrooms || 0} bedroom property in ${listing.area}`}
+        description={`${listing.title} in ${listing.area}, ${listing.zone}`}
         price={listing.rent_kes}
         deposit={listing.deposit_kes}
         bedrooms={listing.bedrooms}
@@ -222,15 +225,31 @@ export default async function PropertyDetailPage({ params }: PageProps) {
             {/* Description placeholder */}
             <div className="bg-white rounded-2xl p-8 shadow-card">
               <h2 className="text-2xl font-bold text-brand-navy mb-4">About This Property</h2>
-              <p className="text-slate-600 leading-relaxed mb-4">
-                This {listing.property_type === "apartment" ? "well-maintained apartment" : "beautiful property"} is located in
-                the heart of {listing.area}, {listing.zone}. It offers excellent value for money and is perfect for families or
-                professionals looking for quality accommodation.
-              </p>
-              <p className="text-slate-600 leading-relaxed">
-                The property is managed by Chabrin Agencies Limited, a trusted property management company with over a decade of
-                experience managing properties across Nairobi and surrounding regions.
-              </p>
+              {isCommercial ? (
+                <>
+                  <p className="text-slate-600 leading-relaxed mb-4">
+                    This {listing.property_type === "warehouse" ? "industrial warehouse unit" : listing.property_type === "retail" ? "ground-floor retail space" : "commercial office space"} is
+                    situated in {listing.area}, {listing.zone} — a key commercial node within Nairobi&apos;s metropolitan corridor.
+                    {listing.size_m2 ? ` The unit spans ${listing.size_m2} m² of usable space,` : ""} making it well-suited for
+                    {listing.property_type === "warehouse" ? " logistics, storage, light manufacturing, or distribution operations." : listing.property_type === "retail" ? " retail trade, service businesses, or showroom use." : " professional offices, co-working, or business operations."}
+                  </p>
+                  <p className="text-slate-600 leading-relaxed">
+                    Professionally managed by Chabrin Agencies Limited, with over 30 years of experience managing commercial and residential properties across Nairobi and surrounding counties.
+                  </p>
+                </>
+              ) : (
+                <>
+                  <p className="text-slate-600 leading-relaxed mb-4">
+                    This {listing.property_type === "apartment" ? "well-maintained apartment" : listing.property_type === "townhouse" ? "spacious townhouse" : listing.property_type === "villa" ? "elegant villa" : "quality property"} is
+                    located in {listing.area}, {listing.zone}, offering excellent value in one of Nairobi&apos;s established residential corridors.
+                    {listing.bedrooms && listing.bedrooms > 0 ? ` With ${listing.bedrooms} bedroom${listing.bedrooms > 1 ? "s" : ""}${listing.bathrooms ? ` and ${listing.bathrooms} bathroom${listing.bathrooms > 1 ? "s" : ""}` : ""},` : ""} it is ideal for
+                    {listing.bedrooms && listing.bedrooms >= 3 ? " families seeking comfort and space." : " professionals or couples looking for quality accommodation."}
+                  </p>
+                  <p className="text-slate-600 leading-relaxed">
+                    The property is managed by Chabrin Agencies Limited, a trusted property management company with over 30 years of experience serving landlords and tenants across Nairobi and surrounding regions.
+                  </p>
+                </>
+              )}
             </div>
           </div>
 

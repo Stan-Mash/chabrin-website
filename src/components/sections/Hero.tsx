@@ -196,7 +196,7 @@ export default function Hero() {
                   {t("badge_tagline")}
                 </p>
                 <p className="text-white/55 text-xs mt-0.5">
-                  Nairobi · Kiambu · Murang&apos;a · Kajiado · Machakos & beyond
+                  {t("coverage_line")}
                 </p>
               </div>
             </motion.div>

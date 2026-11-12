@@ -7,7 +7,7 @@ import ComplaintStatus  from "@/components/sections/complaints/ComplaintStatus";
 type Props = { params: Promise<{ locale: string }> };
 
 export const metadata: Metadata = {
-  title: "Complaints & Issue Tracker | Chabrin Agencies Limited",
+  title: "Complaints & Issue Tracker",
   description:
     "Submit a complaint, maintenance request, or feedback to Chabrin Agencies. " +
     "Every submission is acknowledged with a reference number and tracked to resolution. " +

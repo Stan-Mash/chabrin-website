@@ -159,8 +159,9 @@ export default function InteractiveSearchMap({
                   </p>
 
                   {/* Region + area */}
-                  <p style={{ color: "#64748b", fontSize: 11, margin: "0 0 6px" }}>
-                    📍 {listing.strategic_region} - {listing.area}
+                  <p style={{ color: "#64748b", fontSize: 11, margin: "0 0 6px", display: "flex", alignItems: "center", gap: 4 }}>
+                    <svg width="11" height="11" fill="#00C9C9" viewBox="0 0 20 20" aria-hidden="true"><path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd"/></svg>
+                    {listing.strategic_region} - {listing.area}
                   </p>
 
                   {/* Price */}
@@ -172,13 +173,13 @@ export default function InteractiveSearchMap({
                   {/* Specs */}
                   <div style={{ display: "flex", gap: 8, marginBottom: 10, fontSize: 11, color: "#475569" }}>
                     {listing.bedrooms !== null && listing.bedrooms > 0 && (
-                      <span>🛏 {listing.bedrooms} bd</span>
+                      <span style={{ display: "inline-flex", alignItems: "center", gap: 3 }}><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="#475569" strokeWidth="1.5" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 7.5A2.25 2.25 0 014.5 5.25h15A2.25 2.25 0 0121.75 7.5v9a2.25 2.25 0 01-2.25 2.25H4.5A2.25 2.25 0 012.25 16.5v-9z"/><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12h19.5"/></svg>{listing.bedrooms} bd</span>
                     )}
                     {listing.bathrooms !== null && (
-                      <span>🚿 {listing.bathrooms} ba</span>
+                      <span style={{ display: "inline-flex", alignItems: "center", gap: 3 }}><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="#475569" strokeWidth="1.5" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1.5M12 3a6 6 0 016 6v2.25H6V9A6 6 0 0112 3zM3 12.75h18M5.25 12.75v5.625A2.625 2.625 0 007.875 21h8.25a2.625 2.625 0 002.625-2.625V12.75"/></svg>{listing.bathrooms} ba</span>
                     )}
                     {listing.size_m2 !== null && (
-                      <span>📐 {listing.size_m2} m²</span>
+                      <span style={{ display: "inline-flex", alignItems: "center", gap: 3 }}><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="#475569" strokeWidth="1.5" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15"/></svg>{listing.size_m2} m²</span>
                     )}
                   </div>
 

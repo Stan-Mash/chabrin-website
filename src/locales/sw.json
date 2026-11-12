@@ -26,7 +26,8 @@
     "badge_earb": "Wakala Waliosajiliwa EARB",
     "badge_featured": "Iliyoangaziwa",
     "badge_response": "Majibu ndani ya Masaa 24",
-    "badge_sla": "SLA iliyohakikishiwa kwa mmiliki"
+    "badge_sla": "SLA iliyohakikishiwa kwa mmiliki",
+    "coverage_line": "Nairobi · Kiambu · Murang’a · Kajiado · Machakos na maeneo mengine"
   },
   "stats": {
     "zones_value": "7",
@@ -328,7 +329,21 @@
     "svc_management": "Usimamizi wa Mali",
     "svc_leasing": "Upangaji wa Nyumba",
     "svc_valuation": "Tathmini ya Mali",
-    "svc_digital": "Usimamizi wa Mkataba wa Dijiti"
+    "svc_digital": "Usimamizi wa Mkataba wa Dijiti",
+    "office_hours_label": "Masaa ya Ofisi",
+    "office_hours_weekday": "Jumatatu – Ijumaa: 8:00 AM – 5:00 PM",
+    "office_hours_saturday": "Jumamosi: 8:30 AM – 12:00 PM",
+    "office_hours_closed": "Jumapili & Likizo za Umma: Imefungwa",
+    "earb_registered": "Imesajiliwa EARB",
+    "odpc_compliant": "Inafuata ODPC",
+    "ticker_earb_label": "Imesajiliwa EARB",
+    "ticker_earb_detail": "Bodi ya Usajili wa Mawakala wa Mali",
+    "ticker_odpc_label": "Inafuata ODPC",
+    "ticker_odpc_detail": "Ofisi ya Kamishna wa Ulinzi wa Data",
+    "ticker_coverage_label": "Kaunti 5",
+    "ticker_coverage_detail": "Nairobi · Kiambu · Murang’a · Kajiado · Machakos",
+    "ticker_years_label": "Miaka 30+",
+    "ticker_years_detail": "Usimamizi Bora wa Mali Nairobi"
   },
   "reach": {
     "eyebrow": "Eneo la Usimamizi",

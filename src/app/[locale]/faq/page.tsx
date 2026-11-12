@@ -11,7 +11,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "faq" });
   return {
-    title: `${t("hero_title")} | Chabrin Agencies Limited`,
+    title: t("hero_title"),
     description: t("hero_subtitle"),
   };
 }
