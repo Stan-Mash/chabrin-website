@@ -25,6 +25,19 @@ const CATEGORY_COLORS: Record<string, string> = {
   "Legal":               "bg-red-50 text-red-700",
 };
 
+const CATEGORY_SW: Record<string, string> = {
+  "Landlord Guide":      "Mwongozo wa Mmiliki",
+  "Market Insights":     "Maarifa ya Soko",
+  "Tenant Guide":        "Mwongozo wa Mpangaji",
+  "Valuation":           "Tathmini ya Mali",
+  "Property Management": "Usimamizi wa Mali",
+  "Legal":               "Kisheria",
+};
+
+function catLabel(category: string, locale: string): string {
+  return locale === "sw" ? (CATEGORY_SW[category] ?? category) : category;
+}
+
 function formatDate(iso: string): string {
   return new Date(iso).toLocaleDateString("en-KE", {
     month: "long",
@@ -147,7 +160,7 @@ export default async function BlogPage({ params }: Props) {
                     <div className="absolute bottom-4 left-6">
                       <span className={`text-xs font-bold px-3 py-1 rounded-full
                         ${CATEGORY_COLORS[featured.category] ?? "bg-slate-100 text-slate-600"}`}>
-                        {featured.category}
+                        {catLabel(featured.category, locale)}
                       </span>
                     </div>
                   </div>
@@ -155,7 +168,7 @@ export default async function BlogPage({ params }: Props) {
                   <div className="h-48 bg-gradient-to-r from-brand-navy to-brand-cyan/80 flex items-end p-6">
                     <span className={`text-xs font-bold px-3 py-1 rounded-full
                       ${CATEGORY_COLORS[featured.category] ?? "bg-slate-100 text-slate-600"}`}>
-                      {featured.category}
+                      {catLabel(featured.category, locale)}
                     </span>
                   </div>
                 )}
@@ -206,7 +219,7 @@ export default async function BlogPage({ params }: Props) {
                     <div className="p-6 flex flex-col flex-1">
                       <span className={`self-start text-xs font-bold px-3 py-1 rounded-full mb-3
                         ${CATEGORY_COLORS[post.category] ?? "bg-slate-100 text-slate-600"}`}>
-                        {post.category}
+                        {catLabel(post.category, locale)}
                       </span>
                       <h3 className="font-bold text-brand-navy mb-2 leading-snug
                                      group-hover:text-brand-cyan transition-colors">

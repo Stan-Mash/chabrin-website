@@ -312,7 +312,13 @@
     "soon_short": "Read",
     "newsletter_title": "Get Expert Property Advice",
     "newsletter_subtitle": "Get the latest property market insights from our team. Contact us for personalised advice on your investment or tenancy.",
-    "newsletter_cta": "Talk to Our Experts"
+    "newsletter_cta": "Talk to Our Experts",
+    "category_landlord_guide": "Landlord Guide",
+    "category_market_insights": "Market Insights",
+    "category_tenant_guide": "Tenant Guide",
+    "category_valuation": "Valuation",
+    "category_property_management": "Property Management",
+    "category_legal": "Legal"
   },
   "careers": {
     "eyebrow": "Careers",

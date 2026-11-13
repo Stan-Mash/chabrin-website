@@ -312,7 +312,13 @@
     "soon_short": "Soma",
     "newsletter_title": "Kaa Mjulishwa",
     "newsletter_subtitle": "Pata maarifa ya hivi karibuni ya soko la mali kutoka kwa timu yetu. Wasiliana nasi kwa ushauri wa kibinafsi kuhusu uwekezaji wako au upangaji.",
-    "newsletter_cta": "Zungumza na Wataalamu Wetu"
+    "newsletter_cta": "Zungumza na Wataalamu Wetu",
+    "category_landlord_guide": "Mwongozo wa Mmiliki",
+    "category_market_insights": "Maarifa ya Soko",
+    "category_tenant_guide": "Mwongozo wa Mpangaji",
+    "category_valuation": "Tathmini ya Mali",
+    "category_property_management": "Usimamizi wa Mali",
+    "category_legal": "Kisheria"
   },
   "careers": {
     "eyebrow": "Kazi",
