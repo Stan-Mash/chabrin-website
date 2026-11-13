@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import AnimatedHeadline from "@/components/ui/AnimatedHeadline";
 
 const TYPE_ICON: Record<string, React.ReactNode> = {
@@ -13,17 +14,23 @@ const TYPE_ICON: Record<string, React.ReactNode> = {
   retail:    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 21v-7.5a.75.75 0 01.75-.75h3a.75.75 0 01.75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349m-16.5 11.65V9.35m0 0a3.001 3.001 0 003.75-.615A2.993 2.993 0 009.75 9.75c.896 0 1.7-.393 2.25-1.016a2.993 2.993 0 002.25 1.016c.896 0 1.7-.393 2.25-1.015a3.001 3.001 0 003.75.614m-16.5 0a3.004 3.004 0 01-.621-4.72L4.318 3.44A1.5 1.5 0 015.378 3h13.243a1.5 1.5 0 011.06.44l1.19 1.189a3 3 0 01-.621 4.72m-13.5 8.65h3.75a.75.75 0 00.75-.75V13.5a.75.75 0 00-.75-.75H6.75a.75.75 0 00-.75.75v3.75c0 .415.336.75.75.75z"/></svg>,
 };
 
-// Quick-filter pills dispatch window events picked up by SearchInterface
-const TYPE_PILLS = [
-  { label: "Apartments", type: "apartment" },
-  { label: "Townhouses", type: "townhouse" },
-  { label: "Villas",     type: "villa" },
-  { label: "Offices",    type: "office" },
-  { label: "Retail",     type: "retail" },
-];
-
 export default function PropertiesHero() {
+  const t = useTranslations("properties");
   const [query, setQuery] = useState("");
+
+  const typePills = [
+    { type: "apartment", label: t("pill_apartments") },
+    { type: "townhouse", label: t("pill_townhouses") },
+    { type: "villa",     label: t("pill_villas") },
+    { type: "office",    label: t("pill_offices") },
+    { type: "retail",    label: t("pill_retail") },
+  ];
+
+  const stats = [
+    { stat: "7",    label: t("hero_stat_corridors") },
+    { stat: "30+",  label: t("hero_stat_experience") },
+    { stat: "100%", label: t("hero_stat_mgmt") },
+  ];
 
   const scrollToListings = () => {
     setTimeout(() => {
@@ -50,7 +57,7 @@ export default function PropertiesHero() {
 
   return (
     <section className="relative overflow-hidden" style={{ minHeight: 440 }} aria-label="Property search hero">
-      {/* ── Background image ── */}
+      {/* Background image */}
       <Image
         src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1600&q=75"
         alt="Modern apartment building in the greater Nairobi metropolitan region"
@@ -59,7 +66,6 @@ export default function PropertiesHero() {
         className="object-cover object-center"
         sizes="100vw"
       />
-      {/* Gradient overlay */}
       <div
         className="absolute inset-0"
         style={{
@@ -69,7 +75,7 @@ export default function PropertiesHero() {
         aria-hidden="true"
       />
 
-      {/* ── Content ── */}
+      {/* Content */}
       <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 pt-14 pb-10 text-center">
 
         {/* Available badge */}
@@ -79,26 +85,25 @@ export default function PropertiesHero() {
         >
           <span className="w-1.5 h-1.5 rounded-full bg-[#00C9C9] animate-pulse" aria-hidden="true" />
           <span className="text-[#00C9C9] text-xs font-bold tracking-widest uppercase">
-            Vacant Units - Available Now
+            {t("hero_badge")}
           </span>
         </div>
 
         {/* Headline */}
         <h1 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-extrabold text-white leading-tight mb-3">
-          <AnimatedHeadline text="Find Your Perfect Space" as="span" className="block" />
+          <AnimatedHeadline text={t("hero_title")} as="span" className="block" />
           <AnimatedHeadline
-            text="Across Kenya's Growth Markets"
+            text={t("hero_accent")}
             as="span"
             className="block text-brand-cyan"
             delay={0.25}
           />
         </h1>
         <p className="text-white/65 text-sm sm:text-base max-w-xl mx-auto mb-7 leading-relaxed">
-          Professionally managed properties spanning Nairobi, Kiambu, Murang&apos;a,
-          Kajiado, Machakos and beyond - organised into seven strategic corridors.
+          {t("hero_desc")}
         </p>
 
-        {/* ── Search box ── */}
+        {/* Search box */}
         <form onSubmit={handleSearch} className="max-w-lg mx-auto mb-6" role="search" aria-label="Search properties by area">
           <div className="flex gap-2 bg-white rounded-2xl p-1.5 shadow-2xl">
             <div className="flex-1 flex items-center gap-2 px-3 min-w-0">
@@ -114,7 +119,7 @@ export default function PropertiesHero() {
                 type="search"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Area or type - e.g. Kasarani, Kitengela, Thika, Villa..."
+                placeholder={t("hero_search_placeholder")}
                 className="w-full py-2 text-sm text-slate-700 placeholder:text-slate-400 bg-transparent outline-none"
                 aria-label="Search area or property type"
               />
@@ -124,14 +129,14 @@ export default function PropertiesHero() {
               className="px-5 py-2.5 rounded-xl text-white text-sm font-bold transition-colors hover:opacity-90 flex-shrink-0"
               style={{ background: "#0D1B8E" }}
             >
-              Search
+              {t("hero_search_btn")}
             </button>
           </div>
         </form>
 
-        {/* ── Quick-type pills ── */}
+        {/* Quick-type pills */}
         <div className="flex flex-wrap items-center justify-center gap-2" role="group" aria-label="Filter by property type">
-          {TYPE_PILLS.map((p) => (
+          {typePills.map((p) => (
             <button
               key={p.type}
               onClick={() => handleTypePill(p.type)}
@@ -149,18 +154,14 @@ export default function PropertiesHero() {
         </div>
       </div>
 
-      {/* ── Stats strip ── */}
+      {/* Stats strip */}
       <div
         className="relative z-10 border-t"
         style={{ borderColor: "rgba(255,255,255,0.1)", background: "rgba(0,0,0,0.3)" }}
         aria-label="Chabrin portfolio statistics"
       >
         <div className="max-w-2xl mx-auto px-4 py-4 flex items-center justify-center gap-6 sm:gap-10 flex-wrap">
-          {[
-            { stat: "7",      label: "Metro Corridors" },
-            { stat: "30+",    label: "Years Experience" },
-            { stat: "100%",   label: "Professional Mgmt" },
-          ].map((s) => (
+          {stats.map((s) => (
             <div key={s.stat} className="text-center">
               <p className="text-white font-extrabold text-lg leading-none">{s.stat}</p>
               <p className="text-white/45 text-[11px] mt-0.5 uppercase tracking-wide">{s.label}</p>

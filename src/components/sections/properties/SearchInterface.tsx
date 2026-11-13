@@ -15,22 +15,25 @@
 import { useState, useMemo, useCallback, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { AnimatePresence, motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import PropertyCard from "./PropertyCard";
 import { PropertyCardSkeleton } from "./PropertyCardSkeleton";
 import { siteConfig } from "@/config/site";
 
 // ── Lazy-load the map (Leaflet requires window) ───────────────────────────────
 
+function MapLoadingFallback() {
+  const t = useTranslations("properties");
+  return (
+    <div className="w-full h-full bg-slate-100 animate-pulse flex items-center justify-center">
+      <span className="text-slate-400 text-sm">{t("loading_map")}</span>
+    </div>
+  );
+}
+
 const InteractiveSearchMap = dynamic(
   () => import("./InteractiveSearchMap"),
-  {
-    ssr: false,
-    loading: () => (
-      <div className="w-full h-full bg-slate-100 animate-pulse flex items-center justify-center">
-        <span className="text-slate-400 text-sm">Loading map…</span>
-      </div>
-    ),
-  }
+  { ssr: false, loading: () => <MapLoadingFallback /> }
 );
 
 // ── Types ─────────────────────────────────────────────────────────────────────
@@ -522,19 +525,27 @@ const BED_OPTIONS = [
 // ── Bed pills ─────────────────────────────────────────────────────────────────
 
 function BedPills({ value, onChange }: { value: string; onChange: (v: string) => void }) {
+  const t = useTranslations("properties");
+  const bedOptions = [
+    { value: "",  label: t("beds_any") },
+    { value: "1", label: "1" },
+    { value: "2", label: "2" },
+    { value: "3", label: "3" },
+    { value: "4", label: "4+" },
+  ];
   return (
     <div
       className="flex items-center rounded-xl border border-slate-200 overflow-hidden flex-shrink-0"
       role="group"
       aria-label="Filter by number of bedrooms"
     >
-      {BED_OPTIONS.map((o, i) => (
+      {bedOptions.map((o, i) => (
         <button
           key={o.value}
           onClick={() => onChange(o.value)}
           aria-pressed={value === o.value}
           className={`px-3 py-2 text-xs font-semibold transition-colors focus:outline-none focus:ring-inset focus:ring-2 focus:ring-[#00C9C9]/50 ${
-            i < BED_OPTIONS.length - 1 ? "border-r border-slate-200" : ""
+            i < bedOptions.length - 1 ? "border-r border-slate-200" : ""
           } ${
             value === o.value
               ? "bg-[#0D1B8E] text-white"
@@ -542,7 +553,7 @@ function BedPills({ value, onChange }: { value: string; onChange: (v: string) =>
           }`}
         >
           {o.label}
-          {o.label !== "Any" && o.label !== "4+" && <span className="sr-only"> beds</span>}
+          {o.value !== "" && o.value !== "4" && <span className="sr-only"> beds</span>}
         </button>
       ))}
     </div>
@@ -568,9 +579,35 @@ function FilterBar({
   searchQuery, type, beds, maxPrice, sortBy,
   total, hasFilters, onSearch, onChange, onClear,
 }: FilterBarProps) {
+  const t = useTranslations("properties");
   const selectCls =
     "w-full pl-3 pr-8 py-2 rounded-xl border border-slate-200 text-[#0D1B8E] text-xs font-medium bg-white " +
     "focus:outline-none focus:border-[#00C9C9] focus:ring-2 focus:ring-[#00C9C9]/20 appearance-none cursor-pointer";
+
+  const typeOptions = [
+    { value: "",           label: t("filter_all_types") },
+    { value: "apartment",  label: t("filter_apartment") },
+    { value: "townhouse",  label: t("filter_townhouse") },
+    { value: "villa",      label: t("filter_villa") },
+    { value: "office",     label: t("filter_office") },
+    { value: "retail",     label: t("filter_retail") },
+    { value: "warehouse",  label: t("filter_warehouse") },
+    { value: "land",       label: t("filter_land") },
+  ];
+
+  const priceOptions = [
+    { value: "",        label: t("filter_any_price") },
+    { value: "30000",   label: t("filter_price_30k") },
+    { value: "60000",   label: t("filter_price_60k") },
+    { value: "100000",  label: t("filter_price_100k") },
+    { value: "200000",  label: t("filter_price_200k") },
+  ];
+
+  const sortOptions = [
+    { value: "newest",     label: t("sort_newest") },
+    { value: "price-asc",  label: t("sort_price_asc") },
+    { value: "price-desc", label: t("sort_price_desc") },
+  ];
 
   return (
     <div
@@ -581,7 +618,7 @@ function FilterBar({
       <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 py-3">
         <div className="flex flex-col sm:flex-row sm:flex-wrap lg:flex-nowrap items-start sm:items-center gap-2 lg:gap-2.5">
 
-          {/* ── Text search ── */}
+          {/* Text search */}
           <div className="relative w-full sm:flex-1 sm:min-w-[200px]">
             <svg
               className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400"
@@ -595,7 +632,7 @@ function FilterBar({
               type="search"
               value={searchQuery}
               onChange={(e) => onSearch(e.target.value)}
-              placeholder="Search area, e.g. Kasarani, Westlands…"
+              placeholder={t("filter_search_placeholder")}
               className="w-full pl-8 pr-8 py-2 rounded-xl border border-slate-200 text-xs text-[#0D1B8E]
                          placeholder:text-slate-400 bg-white focus:outline-none focus:border-[#00C9C9]
                          focus:ring-2 focus:ring-[#00C9C9]/20"
@@ -614,54 +651,54 @@ function FilterBar({
             )}
           </div>
 
-          {/* ── Type ── */}
+          {/* Type */}
           <div className="relative flex-shrink-0 w-full sm:w-auto sm:min-w-[130px]">
-            <label htmlFor="type-filter" className="sr-only">Property Type</label>
+            <label htmlFor="type-filter" className="sr-only">{t("filter_property_type_label")}</label>
             <select
               id="type-filter"
               value={type}
               onChange={(e) => onChange("type", e.target.value)}
               className={selectCls}
             >
-              {TYPE_OPTIONS.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
+              {typeOptions.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
             </select>
             <ChevDown />
           </div>
 
-          {/* ── Beds pills ── */}
+          {/* Beds pills */}
           <div className="flex-shrink-0">
             <BedPills value={beds} onChange={(v) => onChange("beds", v)} />
           </div>
 
-          {/* ── Max price ── */}
+          {/* Max price */}
           <div className="relative flex-shrink-0 w-full sm:w-auto sm:min-w-[140px]">
-            <label htmlFor="price-filter" className="sr-only">Maximum Rent</label>
+            <label htmlFor="price-filter" className="sr-only">{t("filter_max_rent_label")}</label>
             <select
               id="price-filter"
               value={maxPrice}
               onChange={(e) => onChange("maxPrice", e.target.value)}
               className={selectCls}
             >
-              {PRICE_OPTIONS.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
+              {priceOptions.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
             </select>
             <ChevDown />
           </div>
 
-          {/* ── Sort ── */}
+          {/* Sort */}
           <div className="relative flex-shrink-0 w-full sm:w-auto sm:min-w-[150px]">
-            <label htmlFor="sort-filter" className="sr-only">Sort by</label>
+            <label htmlFor="sort-filter" className="sr-only">{t("filter_sort_by_label")}</label>
             <select
               id="sort-filter"
               value={sortBy}
               onChange={(e) => onChange("sortBy", e.target.value)}
               className={selectCls}
             >
-              {SORT_OPTIONS.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
+              {sortOptions.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
             </select>
             <ChevDown />
           </div>
 
-          {/* ── Count + clear ── */}
+          {/* Count + clear */}
           <div className="flex items-center gap-3 flex-shrink-0 sm:ml-auto">
             <span
               className="text-xs text-slate-500 whitespace-nowrap"
@@ -669,7 +706,7 @@ function FilterBar({
               aria-atomic="true"
             >
               <span className="font-bold text-[#0D1B8E]">{total}</span>
-              {" "}{total === 1 ? "property" : "properties"}
+              {" "}{t(total === 1 ? "count_suffix_one" : "count_suffix_other")}
             </span>
             {hasFilters && (
               <button
@@ -678,7 +715,7 @@ function FilterBar({
                            border border-slate-200 hover:border-[#0D1B8E]
                            px-3 py-1.5 rounded-lg transition-colors focus:outline-none"
               >
-                ✕ Clear
+                ✕ {t("clear_btn")}
               </button>
             )}
           </div>
@@ -703,6 +740,7 @@ function ChevDown() {
 // ── Mobile map toggle ─────────────────────────────────────────────────────────
 
 function MobileMapToggle({ showMap, onToggle }: { showMap: boolean; onToggle: () => void }) {
+  const t = useTranslations("properties");
   return (
     <div className="lg:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-40">
       <button
@@ -717,7 +755,7 @@ function MobileMapToggle({ showMap, onToggle }: { showMap: boolean; onToggle: ()
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
             </svg>
-            Show List
+            {t("mobile_show_list")}
           </>
         ) : (
           <>
@@ -725,7 +763,7 @@ function MobileMapToggle({ showMap, onToggle }: { showMap: boolean; onToggle: ()
               <path strokeLinecap="round" strokeLinejoin="round"
                 d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
             </svg>
-            Show Map
+            {t("mobile_show_map")}
           </>
         )}
       </button>
@@ -736,6 +774,7 @@ function MobileMapToggle({ showMap, onToggle }: { showMap: boolean; onToggle: ()
 // ── Empty state ───────────────────────────────────────────────────────────────
 
 function EmptyState({ onClear }: { onClear: () => void }) {
+  const t = useTranslations("properties");
   const whatsapp = `https://wa.me/${siteConfig.contact.whatsapp}?text=${encodeURIComponent(
     "Hello, I am looking for a property and cannot find a match on your website. Can you help?"
   )}`;
@@ -749,12 +788,11 @@ function EmptyState({ onClear }: { onClear: () => void }) {
       </div>
       <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#00C9C9]/10 border border-[#00C9C9]/20 mb-4">
         <span className="w-1.5 h-1.5 rounded-full bg-[#00C9C9]" aria-hidden="true" />
-        <span className="text-[#00C9C9] text-xs font-bold tracking-widest uppercase">Concierge Search</span>
+        <span className="text-[#00C9C9] text-xs font-bold tracking-widest uppercase">{t("empty_badge")}</span>
       </div>
-      <h3 className="text-xl font-bold text-[#0D1B8E] mb-2">No Matches Found</h3>
+      <h3 className="text-xl font-bold text-[#0D1B8E] mb-2">{t("empty_title")}</h3>
       <p className="text-slate-500 text-sm leading-relaxed mb-6 max-w-xs">
-        No properties match your current filters. Try broadening your search or let our
-        concierge team find the right unit for you.
+        {t("empty_desc")}
       </p>
       <div className="flex flex-col sm:flex-row gap-3 justify-center">
         <button
@@ -762,7 +800,7 @@ function EmptyState({ onClear }: { onClear: () => void }) {
           className="px-6 py-2.5 rounded-full border-2 border-[#0D1B8E] text-[#0D1B8E]
                      font-semibold text-sm hover:bg-[#0D1B8E] hover:text-white transition-colors"
         >
-          Reset Filters
+          {t("empty_reset")}
         </button>
         <a
           href={whatsapp}
@@ -771,7 +809,7 @@ function EmptyState({ onClear }: { onClear: () => void }) {
           className="px-6 py-2.5 rounded-full bg-green-500 text-white font-semibold text-sm
                      hover:bg-green-600 transition-colors text-center"
         >
-          WhatsApp Concierge
+          {t("empty_whatsapp")}
         </a>
       </div>
     </div>

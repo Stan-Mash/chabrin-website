@@ -21,7 +21,7 @@ import { useState, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence, useMotionValue, useSpring } from "framer-motion";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { siteConfig } from "@/config/site";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import type { SearchListing } from "./SearchInterface";
@@ -69,14 +69,17 @@ function ChevronIcon({ dir }: { dir: "left" | "right" }) {
 }
 
 interface CarouselProps {
-  images:       string[];
-  title:        string;
-  propertyType: string;
-  publishedAt:  string;
-  isActive?:    boolean;
+  images:           string[];
+  title:            string;
+  propertyType:     string;
+  publishedAt:      string;
+  isActive?:        boolean;
+  newListingLabel:  string;
+  photoSoonLabel:   string;
+  managedLabel:     string;
 }
 
-function ImageCarousel({ images, title, propertyType, publishedAt, isActive }: CarouselProps) {
+function ImageCarousel({ images, title, propertyType, publishedAt, isActive, newListingLabel, photoSoonLabel, managedLabel }: CarouselProps) {
   const [idx, setIdx] = useState(0);
   const [dir, setDir] = useState<1 | -1>(1);
   const hasImages = images.length > 0;
@@ -194,7 +197,7 @@ function ImageCarousel({ images, title, propertyType, publishedAt, isActive }: C
             <path strokeLinecap="round" strokeLinejoin="round" d="M3 9.75L12 3l9 6.75V21H3V9.75z" />
             <path strokeLinecap="round" strokeLinejoin="round" d="M9 21V12h6v9" />
           </svg>
-          <span className="text-xs text-slate-300 font-medium">Photo coming soon</span>
+          <span className="text-xs text-slate-300 font-medium">{photoSoonLabel}</span>
         </div>
       )}
 
@@ -202,7 +205,7 @@ function ImageCarousel({ images, title, propertyType, publishedAt, isActive }: C
         {isNew && (
           <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#00C9C9] text-white text-[10px] font-extrabold tracking-widest uppercase shadow-sm">
             <svg className="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            New Listing
+            {newListingLabel}
           </span>
         )}
         <span className={`px-2.5 py-0.5 rounded-full text-white text-[10px] font-bold tracking-wide capitalize ${typeColour(propertyType)}`}>
@@ -212,7 +215,7 @@ function ImageCarousel({ images, title, propertyType, publishedAt, isActive }: C
 
       <div className="absolute top-3 right-3 z-10">
         <span className="px-2 py-0.5 rounded-full bg-[#0D1B8E]/80 text-white text-[9px] font-bold tracking-widest uppercase backdrop-blur-sm">
-          CHABRIN MANAGED
+          {managedLabel}
         </span>
       </div>
 
@@ -262,6 +265,7 @@ interface PropertyCardProps {
 
 export default function PropertyCard({ listing, isActive, onHover }: PropertyCardProps) {
   const locale = useLocale();
+  const t = useTranslations("properties");
   const [enquiryOpen, setEnquiryOpen] = useState(false);
 
   const isCommercial = listing.property_type === "office" ||
@@ -326,6 +330,9 @@ export default function PropertyCard({ listing, isActive, onHover }: PropertyCar
           propertyType={listing.property_type}
           publishedAt={listing.published_at}
           isActive={isActive}
+          newListingLabel={t("card_new_listing")}
+          photoSoonLabel={t("card_photo_soon")}
+          managedLabel={t("card_managed")}
         />
 
         <div className="p-4 flex flex-col flex-1 gap-2.5">
@@ -350,10 +357,10 @@ export default function PropertyCard({ listing, isActive, onHover }: PropertyCar
           {(!isCommercial || listing.size_m2) && (
             <div className="flex items-center gap-3 flex-wrap">
               {!isCommercial && listing.bedrooms !== null && listing.bedrooms > 0 && (
-                <Spec type="bed" label={`${listing.bedrooms} ${listing.bedrooms === 1 ? "bed" : "beds"}`} />
+                <Spec type="bed" label={`${listing.bedrooms} ${listing.bedrooms === 1 ? t("card_bed") : t("card_beds")}`} />
               )}
               {listing.bathrooms !== null && (
-                <Spec type="bath" label={`${listing.bathrooms} ${listing.bathrooms === 1 ? "bath" : "baths"}`} />
+                <Spec type="bath" label={`${listing.bathrooms} ${listing.bathrooms === 1 ? t("card_bath") : t("card_baths")}`} />
               )}
               {listing.size_m2 !== null && (
                 <Spec type="area" label={`${listing.size_m2} m²`} />
@@ -367,7 +374,7 @@ export default function PropertyCard({ listing, isActive, onHover }: PropertyCar
                 <FeaturePill key={f} label={f} />
               ))}
               {extraFeatures > 0 && (
-                <span className="text-[10px] text-slate-400 font-medium">+{extraFeatures} more</span>
+                <span className="text-[10px] text-slate-400 font-medium">{t("card_more", { count: extraFeatures })}</span>
               )}
             </div>
           )}
@@ -378,10 +385,10 @@ export default function PropertyCard({ listing, isActive, onHover }: PropertyCar
                 <span className="text-xl font-extrabold text-[#0D1B8E] tracking-tight">
                   KES {formattedRent}
                 </span>
-                <span className="text-slate-400 text-xs font-medium">/ mo</span>
+                <span className="text-slate-400 text-xs font-medium">{t("card_per_month")}</span>
               </div>
               <p className="text-[11px] text-slate-400 mt-0.5">
-                Deposit: <span className="font-semibold text-slate-500">KES {formattedDeposit}</span>
+                {t("card_deposit")} <span className="font-semibold text-slate-500">KES {formattedDeposit}</span>
               </p>
             </div>
           </div>
@@ -394,7 +401,7 @@ export default function PropertyCard({ listing, isActive, onHover }: PropertyCar
                          focus:ring-2 focus:ring-[#0D1B8E]/50"
               aria-label={`Enquire about ${listing.title}`}
             >
-              Enquire
+              {t("card_enquire")}
             </button>
             <a
               href={`https://wa.me/${siteConfig.contact.whatsapp}?text=${whatsappMsg}`}
@@ -405,7 +412,7 @@ export default function PropertyCard({ listing, isActive, onHover }: PropertyCar
                          text-center hover:bg-green-600 transition-colors focus:outline-none
                          focus:ring-2 focus:ring-green-500/50"
             >
-              WhatsApp
+              {t("card_whatsapp")}
             </a>
           </div>
         </div>
@@ -426,20 +433,20 @@ export default function PropertyCard({ listing, isActive, onHover }: PropertyCar
           <div className="flex-1 overflow-y-auto px-6 py-5 space-y-5">
             {/* Price summary */}
             <div className="bg-surface rounded-2xl p-4">
-              <p className="text-xs text-slate-400 font-semibold uppercase tracking-wide mb-1">Monthly Rent</p>
+              <p className="text-xs text-slate-400 font-semibold uppercase tracking-wide mb-1">{t("drawer_rent_label")}</p>
               <p className="text-2xl font-extrabold text-brand-navy">KES {formattedRent}</p>
               <p className="text-sm text-slate-500 mt-1">
-                Security deposit: <span className="font-semibold text-brand-navy">KES {formattedDeposit}</span>
+                {t("drawer_deposit")} <span className="font-semibold text-brand-navy">KES {formattedDeposit}</span>
               </p>
             </div>
 
             {/* Ref */}
             <p className="text-xs text-slate-400 font-mono">
-              Ref: <span className="text-brand-navy font-bold">{listing.reference}</span>
+              {t("drawer_ref")} <span className="text-brand-navy font-bold">{listing.reference}</span>
             </p>
 
             <div className="border-t border-slate-100 pt-4">
-              <p className="text-sm font-semibold text-brand-navy mb-3">How would you like to enquire?</p>
+              <p className="text-sm font-semibold text-brand-navy mb-3">{t("drawer_enquire_prompt")}</p>
 
               {/* WhatsApp CTA */}
               <a
@@ -452,7 +459,7 @@ export default function PropertyCard({ listing, isActive, onHover }: PropertyCar
                 <svg className="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
                 </svg>
-                Chat on WhatsApp
+                {t("drawer_whatsapp_cta")}
               </a>
 
               {/* Full form link */}
@@ -463,7 +470,7 @@ export default function PropertyCard({ listing, isActive, onHover }: PropertyCar
                            border-2 border-brand-navy text-brand-navy font-bold text-sm
                            hover:bg-brand-navy hover:text-white transition-all duration-200"
               >
-                Send a Detailed Enquiry
+                {t("drawer_enquiry_cta")}
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                 </svg>
