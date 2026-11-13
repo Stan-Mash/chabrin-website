@@ -27,7 +27,11 @@
     "badge_featured": "Featured",
     "badge_response": "24 h Response",
     "badge_sla": "Guaranteed landlord SLA",
-    "coverage_line": "Nairobi · Kiambu · Murang’a · Kajiado · Machakos & beyond"
+    "coverage_line": "Nairobi · Kiambu · Murang’a · Kajiado · Machakos & beyond",
+    "portfolio_mandate": "PORTFOLIO MANDATE · NAIROBI METROPOLITAN REGION",
+    "snapshot_label": "LIVE PORTFOLIO SNAPSHOT",
+    "showcase_caption": "Residential Blocks, Commercial Plazas & Industrial Warehouses Managed Across 7 Strategic Corridors",
+    "active_corridors": "ACTIVE CORRIDORS"
   },
   "stats": {
     "zones_value": "7",
@@ -35,7 +39,9 @@
     "years_value": "30+",
     "years_label": "Years of Experience",
     "retention_value": "98%",
-    "retention_label": "Client Retention"
+    "retention_label": "Client Retention",
+    "earb_label": "EARB Licensed",
+    "sla_label": "Response SLA"
   },
   "services_section": {
     "eyebrow": "What We Do",
@@ -71,7 +77,13 @@
     "local_title": "Deep Local Knowledge",
     "local_desc": "30+ years of on-the-ground experience across Nairobi, Kiambu, Murang'a, Kajiado, Machakos, and beyond. We know the market, the regulations, and the right price.",
     "local_stat": "30+",
-    "local_stat_label": "Years Experience"
+    "local_stat_label": "Years Experience",
+    "report_eyebrow": "Landlord Transparency",
+    "report_title": "Transparent Reporting.",
+    "report_accent": "Every Month.",
+    "report_subtitle": "Every managed property receives a detailed monthly remittance statement — rent collected, fees deducted, and net disbursement — delivered on the agreed SLA date.",
+    "sample_label": "SAMPLE STATEMENT",
+    "cta_label": "Get Free Consultation"
   },
   "cta_banner": {
     "eyebrow": "Property Owners",
@@ -536,5 +548,62 @@
     "download_again": "Download Again",
     "error_msg": "Something went wrong. Please try again.",
     "social_proof": "Downloaded by Nairobi property investors this quarter"
+  },
+  "featured_properties": {
+    "eyebrow": "Managed Portfolio",
+    "title": "Featured Properties",
+    "subtitle": "A snapshot of residential, commercial, and industrial properties currently under Chabrin management across the Nairobi Metropolitan Area.",
+    "enquire": "Enquire",
+    "view_all": "Browse Full Portfolio"
+  },
+  "corridors": {
+    "eyebrow": "Coverage Corridor",
+    "back_label": "All Corridors",
+    "portfolio_label": "Active Properties",
+    "yield_label": "Avg. Gross Yield",
+    "vacancy_label": "Vacancy Rate",
+    "enquire_cta": "Enquire About This Corridor",
+    "properties_cta": "Browse Properties",
+    "meta_desc_suffix": "— Property Management by Chabrin Agencies Limited, Nairobi"
+  },
+  "diaspora": {
+    "eyebrow": "Kenyan Diaspora",
+    "hero_title": "Invest in Kenya.",
+    "hero_title_accent": "From Anywhere.",
+    "hero_subtitle": "Chabrin Agencies manages properties on behalf of Kenyans living and working abroad. We handle everything — tenant placement to monthly remittance — so you can build wealth back home without being there.",
+    "why_title": "Why Trust Chabrin From Abroad?",
+    "why_subtitle": "We are the bridge between your investment and the Nairobi market.",
+    "pillar_1_title": "Fully Managed",
+    "pillar_1_desc": "We handle everything — advertising, vetting, leasing, maintenance, and rent collection — so you don't need to be present.",
+    "pillar_2_title": "Monthly Statements",
+    "pillar_2_desc": "Detailed financial statements delivered monthly, so you always know exactly what your property has earned and what was deducted.",
+    "pillar_3_title": "EARB Registered",
+    "pillar_3_desc": "Regulated by Kenya's Estate Agents Registration Board. Your investment is in accountable, professional hands.",
+    "pillar_4_title": "Remittance Ready",
+    "pillar_4_desc": "Net rental income disbursed on your agreed SLA date. We work with your preferred payment method for cross-border transfers.",
+    "cta_title": "Ready to Put Your Nairobi Property to Work?",
+    "cta_subtitle": "Get a free consultation with our team. We will assess your property, advise on rental potential, and walk you through the management process.",
+    "cta_contact": "Get Free Consultation",
+    "cta_whatsapp": "WhatsApp Our Team"
+  },
+  "yield_calc": {
+    "eyebrow": "Landlord Tool",
+    "title": "Rental Yield Calculator",
+    "subtitle": "Estimate your monthly net disbursement and annual yield from your Nairobi property.",
+    "gross_rent_label": "Gross Monthly Rent (KES)",
+    "gross_rent_placeholder": "e.g. 85,000",
+    "mgmt_fee_label": "Management Fee (%)",
+    "maintenance_label": "Monthly Maintenance Budget (KES)",
+    "maintenance_placeholder": "e.g. 5,000",
+    "insurance_label": "Annual Insurance (KES)",
+    "insurance_placeholder": "e.g. 24,000",
+    "calculate_btn": "Calculate Net Yield",
+    "result_title": "Your Estimated Returns",
+    "net_monthly_label": "Net Monthly Disbursement",
+    "net_annual_label": "Net Annual Income",
+    "gross_yield_label": "Gross Monthly Yield",
+    "deductions_label": "Monthly Deductions",
+    "disclaimer": "This is an illustrative estimate only. Actual returns depend on occupancy, market conditions, and specific management terms. Contact Chabrin for a bespoke analysis.",
+    "cta_consult": "Get a Free Property Analysis"
   }
 }

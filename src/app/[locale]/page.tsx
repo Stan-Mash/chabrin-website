@@ -4,6 +4,7 @@ import type { Locale } from "@/types";
 import Hero                from "@/components/sections/Hero";
 import StatsBar            from "@/components/sections/StatsBar";
 import Services            from "@/components/sections/Services";
+import FeaturedProperties  from "@/components/sections/FeaturedProperties";
 import WhyChabrin          from "@/components/sections/WhyChabrin";
 import ReachSection        from "@/components/sections/properties/ReachSection";
 import CTABanner           from "@/components/sections/CTABanner";
@@ -45,6 +46,7 @@ export default async function HomePage({ params }: HomePageProps) {
       <Hero />
       <StatsBar />
       <Services />
+      <FeaturedProperties />
       <WhyChabrin />
       <ReachSection />
       <CTABanner />

@@ -4,6 +4,7 @@ import ServicesHero from "@/components/sections/services/ServicesHero";
 import ServicesList from "@/components/sections/services/ServicesList";
 import Process from "@/components/sections/services/Process";
 import ServicesCTA from "@/components/sections/services/ServicesCTA";
+import LandlordYieldCalculator from "@/components/forms/LandlordYieldCalculator";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -24,6 +25,7 @@ export default async function ServicesPage({ params }: Props) {
       <ServicesHero />
       <ServicesList />
       <Process />
+      <LandlordYieldCalculator />
       <ServicesCTA />
     </>
   );

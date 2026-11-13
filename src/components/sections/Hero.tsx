@@ -1,18 +1,17 @@
 ﻿"use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useTranslations, useLocale } from "next-intl";
 import { motion } from "framer-motion";
 import AnimatedHeadline from "@/components/ui/AnimatedHeadline";
 import CursorSpotlight from "@/components/ui/CursorSpotlight";
 import HeroParallaxBlobs from "@/components/sections/HeroParallaxBlobs";
 
-const STATS = [
-  { value: "30+",  label: "Years",     cyan: false },
-  { value: "180+", label: "Listings",  cyan: true  },
-  { value: "98%",  label: "Satisfied", cyan: false },
-  { value: "EARB", label: "Licensed",  cyan: true  },
+const CORRIDORS = [
+  { label: "CBD & Kilimani",       slug: "cbd-kilimani" },
+  { label: "Thika Road & Ruiru",   slug: "thika-road-ruiru" },
+  { label: "Kasarani & Roysambu",  slug: "kasarani-roysambu" },
+  { label: "Eastlands & Embakasi", slug: "eastlands-embakasi" },
 ];
 
 export default function Hero() {
@@ -88,7 +87,7 @@ export default function Hero() {
                            hover:shadow-none hover:-translate-y-0.5 transition-all duration-200"
               >
                 {t("cta_primary")}
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                 </svg>
               </Link>
@@ -102,35 +101,40 @@ export default function Hero() {
               </Link>
             </motion.div>
 
-            {/* Mobile photo (lg: hidden) */}
+            {/* Mobile architectural card (lg: hidden) */}
             <motion.div
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.65, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="lg:hidden relative h-52 rounded-2xl overflow-hidden mb-8
-                         shadow-2xl border border-white/10"
+              className="lg:hidden mb-8"
             >
-              <Image
-                src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80"
-                alt="Premium property managed by Chabrin Agencies"
-                fill className="object-cover" sizes="100vw" priority
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-              <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between">
-                <div>
-                  <p className="text-brand-cyan text-[10px] font-bold uppercase tracking-widest mb-0.5">
-                    {t("badge_portfolio")}
-                  </p>
-                  <p className="text-white font-bold text-sm">{t("badge_tagline")}</p>
+              <div className="border border-white/15 bg-white/[0.03] rounded-xl overflow-hidden">
+                <div className="flex items-center justify-between px-4 py-2 border-b border-white/10">
+                  <span className="text-[9px] font-bold tracking-[0.2em] text-white/35 uppercase">
+                    {t("portfolio_mandate")}
+                  </span>
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-brand-cyan animate-pulse" />
+                    <span className="text-[10px] text-brand-cyan font-bold uppercase">Active</span>
+                  </div>
                 </div>
-                <span className="bg-brand-cyan text-brand-navy text-[10px] font-extrabold px-3 py-1.5 rounded-full">
-                  {t("badge_available")}
-                </span>
-              </div>
-              <div className="absolute top-3 left-3 flex items-center gap-1.5 bg-black/50
-                              backdrop-blur-sm border border-white/15 rounded-full px-3 py-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-brand-cyan animate-pulse" />
-                <span className="text-white text-[10px] font-semibold">{t("badge_earb")}</span>
+                <div className="px-4 py-3 grid grid-cols-3 gap-3 border-b border-white/10">
+                  {[
+                    { type: "RESIDENTIAL", count: "120+" },
+                    { type: "COMMERCIAL",  count: "45+"  },
+                    { type: "INDUSTRIAL",  count: "15+"  },
+                  ].map(({ type, count }) => (
+                    <div key={type} className="text-center">
+                      <p className="text-brand-cyan font-bold text-base leading-none">{count}</p>
+                      <p className="text-[9px] text-white/30 uppercase tracking-wide mt-0.5">{type}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="px-4 py-2.5">
+                  <p className="text-[10px] text-white/30 leading-relaxed">
+                    {t("coverage_line")}
+                  </p>
+                </div>
               </div>
             </motion.div>
 
@@ -155,140 +159,103 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* ══ RIGHT: clean two-column photo panel ════════════════════════ */}
-          <div className="hidden lg:grid grid-cols-5 gap-3 h-[500px]">
+          {/* ══ RIGHT: Architectural Portfolio Showcase Frame ═══════════════ */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.18, duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
+            className="hidden lg:flex flex-col h-[520px]"
+          >
+            {/* Meta hairline bar */}
+            <div className="flex items-center justify-between px-4 py-2.5
+                            border border-white/15 bg-white/5">
+              <span className="text-[9px] font-bold tracking-[0.2em] text-white/40 uppercase">
+                {t("portfolio_mandate")}
+              </span>
+              <span className="text-[9px] font-mono text-brand-cyan/60 tracking-wide select-none">
+                01&#176;17&#39;08.8&quot;S&#160;36&#176;50&#39;04.9&quot;E
+              </span>
+            </div>
 
-            {/* ── Main photo  (3 / 5 columns) ───────────────────────────── */}
-            <motion.div
-              initial={{ opacity: 0, x: 30, scale: 0.97 }}
-              animate={{ opacity: 1, x: 0, scale: 1 }}
-              transition={{ delay: 0.18, duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
-              className="col-span-3 relative rounded-2xl overflow-hidden
-                         shadow-[0_24px_64px_rgba(0,0,0,0.5)] border border-white/10"
-            >
-              <Image
-                src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=960&q=80"
-                alt="Premium residential property managed by Chabrin Agencies, Nairobi"
-                fill className="object-cover"
-                sizes="(max-width: 1280px) 30vw, 340px"
-                priority
-              />
-              {/* Gradient - darker at top and bottom for badge legibility */}
-              <div className="absolute inset-0 bg-gradient-to-t
-                              from-black/80 via-transparent to-black/40" />
+            {/* Main architectural frame */}
+            <div className="flex-1 border-x border-b border-white/15 bg-white/[0.03]
+                            flex flex-col min-h-0">
 
-              {/* EARB badge - top left */}
-              <div className="absolute top-4 left-4 flex items-center gap-1.5
-                              bg-black/50 backdrop-blur-md border border-white/20
-                              rounded-full px-3 py-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-brand-cyan animate-pulse" />
-                <span className="text-white text-[10px] font-bold tracking-wide uppercase">
-                  {t("badge_earb")}
-                </span>
-              </div>
+              {/* Portfolio snapshot */}
+              <div className="flex-1 p-5 flex flex-col gap-3 min-h-0 overflow-hidden">
 
-              {/* Bottom label */}
-              <div className="absolute bottom-0 left-0 right-0 px-5 pb-5">
-                <p className="text-brand-cyan text-[10px] font-bold uppercase tracking-widest mb-1">
-                  {t("badge_portfolio")}
-                </p>
-                <p className="text-white font-bold text-base leading-tight">
-                  {t("badge_tagline")}
-                </p>
-                <p className="text-white/55 text-xs mt-0.5">
-                  {t("coverage_line")}
-                </p>
-              </div>
-            </motion.div>
-
-            {/* ── Right panel  (2 / 5 columns) ──────────────────────────── */}
-            <div className="col-span-2 flex flex-col gap-3">
-
-              {/* Second photo */}
-              <motion.div
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.32, duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
-                className="relative rounded-2xl overflow-hidden flex-[1.15]
-                           shadow-[0_12px_36px_rgba(0,0,0,0.45)] border border-white/10 min-h-0"
-              >
-                <Image
-                  src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=600&q=80"
-                  alt="Interior of a Chabrin managed property in Nairobi"
-                  fill className="object-cover"
-                  sizes="(max-width: 1280px) 18vw, 220px"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                <div className="absolute top-3 right-3">
-                  <span className="bg-brand-cyan text-brand-navy text-[10px] font-extrabold
-                                   px-2.5 py-1 rounded-full">
-                    {t("badge_available")}
-                  </span>
-                </div>
-                <div className="absolute bottom-3 left-3">
-                  <p className="text-white/55 text-[9px] uppercase tracking-wide font-bold">{t("badge_featured")}</p>
-                  <p className="text-white font-bold text-xs">Kilimani · Nairobi</p>
-                </div>
-              </motion.div>
-
-              {/* Stats grid card */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.48, duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-                className="flex-1 rounded-2xl border border-white/12 bg-white/5
-                           backdrop-blur-sm p-4 grid grid-cols-2 gap-x-3 gap-y-4
-                           content-center min-h-0"
-              >
-                {STATS.map(({ value, label, cyan }) => (
-                  <div key={label}>
-                    <p className={`font-extrabold text-xl leading-none ${
-                      cyan ? "text-brand-cyan" : "text-white"
-                    }`}>
-                      {value}
+                {/* Header row */}
+                <div className="flex items-start justify-between border-b border-white/10 pb-3 flex-shrink-0">
+                  <div>
+                    <p className="text-[9px] tracking-[0.2em] text-brand-cyan/70 uppercase font-bold">
+                      {t("snapshot_label")}
                     </p>
-                    <p className="text-white/45 text-[10px] font-medium mt-1 uppercase tracking-wide">
+                    <p className="text-white font-bold text-sm mt-0.5">Chabrin Agencies Limited</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-[9px] text-white/30 uppercase tracking-wide">FY 2026</p>
+                    <div className="flex items-center gap-1 mt-0.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-brand-cyan animate-pulse" />
+                      <span className="text-[10px] text-brand-cyan font-bold">ACTIVE</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Asset type rows */}
+                <div className="space-y-2 flex-shrink-0">
+                  {[
+                    { type: "RESIDENTIAL", detail: "Apartments · Maisonettes · Townhouses", count: "120+", pct: 73 },
+                    { type: "COMMERCIAL",  detail: "Offices · Retail · Plazas",            count: "45+",  pct: 27 },
+                    { type: "INDUSTRIAL",  detail: "Warehouses · Light Industrial",         count: "15+",  pct: 9  },
+                  ].map(({ type, detail, count, pct }) => (
+                    <div key={type}
+                      className="p-3 border border-white/8 bg-white/[0.02] hover:border-white/15
+                                 transition-colors duration-200">
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="text-[9px] tracking-[0.18em] text-white/40 uppercase font-bold">
+                          {type}
+                        </span>
+                        <span className="text-brand-cyan font-bold text-sm leading-none">{count}</span>
+                      </div>
+                      <p className="text-white/30 text-[10px] mb-2">{detail}</p>
+                      <div className="h-px bg-white/8 relative">
+                        <div
+                          className="absolute left-0 top-0 h-px bg-brand-cyan/60"
+                          style={{ width: `${pct}%` }}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Caption */}
+                <p className="text-[10px] text-white/25 leading-relaxed italic mt-auto flex-shrink-0">
+                  {t("showcase_caption")}
+                </p>
+              </div>
+
+              {/* Corridor quick-links */}
+              <div className="border-t border-white/10 p-4 flex-shrink-0">
+                <p className="text-[8px] tracking-[0.25em] text-white/20 uppercase font-bold mb-2.5">
+                  {t("active_corridors")}
+                </p>
+                <div className="grid grid-cols-2 gap-1.5">
+                  {CORRIDORS.map(({ label, slug }) => (
+                    <Link
+                      key={slug}
+                      href={`/${locale}/corridors/${slug}`}
+                      className="flex items-center gap-1.5 text-[10px] text-white/40
+                                 hover:text-brand-cyan transition-colors duration-150 font-medium group"
+                    >
+                      <span className="w-1 h-1 rounded-full bg-brand-cyan/30
+                                       group-hover:bg-brand-cyan transition-colors flex-shrink-0" />
                       {label}
-                    </p>
-                  </div>
-                ))}
-              </motion.div>
-
-              {/* Credential pill row */}
-              <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.62, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-                className="flex flex-col gap-2"
-              >
-                <div className="flex items-center gap-2 bg-brand-cyan/10 border border-brand-cyan/25
-                                rounded-xl px-3 py-2.5">
-                  <svg className="w-3.5 h-3.5 text-brand-cyan flex-shrink-0" fill="none"
-                       viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round"
-                      d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <div className="min-w-0">
-                    <p className="text-brand-cyan font-bold text-xs leading-none">{t("trust_earb")}</p>
-                    <p className="text-white/45 text-[10px] mt-0.5">Kenya Estate Agents Board</p>
-                  </div>
+                    </Link>
+                  ))}
                 </div>
-                <div className="flex items-center gap-2 bg-white/5 border border-white/12
-                                rounded-xl px-3 py-2.5">
-                  <svg className="w-3.5 h-3.5 text-white/60 flex-shrink-0" fill="none"
-                       viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round"
-                      d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <div className="min-w-0">
-                    <p className="text-white font-bold text-xs leading-none">{t("badge_response")}</p>
-                    <p className="text-white/45 text-[10px] mt-0.5">{t("badge_sla")}</p>
-                  </div>
-                </div>
-              </motion.div>
-
-            </div>{/* end right panel */}
-          </div>{/* end grid */}
+              </div>
+            </div>
+          </motion.div>
 
         </div>
       </div>

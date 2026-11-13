@@ -15,6 +15,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Fetch all published listings for dynamic routes
   const listings = await getPublishedListings(undefined, undefined, 1000, 0).catch(() => []);
 
+  const CORRIDOR_SLUGS = [
+    "cbd-kilimani",
+    "thika-road-ruiru",
+    "kasarani-roysambu",
+    "eastlands-embakasi",
+    "westlands-parklands",
+    "south-b-south-c",
+    "south-metro-airport",
+  ];
+
   // Static routes - same in both English and Swahili
   const staticRoutes = [
     "",
@@ -25,6 +35,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/careers",
     "/contact",
     "/privacy-policy",
+    "/diaspora",
+    ...CORRIDOR_SLUGS.map((s) => `/corridors/${s}`),
   ];
 
   // Generate sitemap entries for both locales with hreflang alternates

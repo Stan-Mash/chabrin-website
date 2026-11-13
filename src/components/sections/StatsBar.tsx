@@ -8,12 +8,14 @@ export default function StatsBar() {
     { value: t("zones_value"),      label: t("zones_label") },
     { value: t("years_value"),      label: t("years_label") },
     { value: t("retention_value"),  label: t("retention_label") },
+    { value: "EARB",                label: t("earb_label") },
+    { value: "24h",                 label: t("sla_label") },
   ];
 
   return (
     <section className="bg-white border-b border-slate-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-3 divide-x divide-y sm:divide-y-0 divide-slate-100">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 divide-x divide-y lg:divide-y-0 divide-slate-100">
           {STATS.map(({ value, label }) => (
             <div
               key={label}

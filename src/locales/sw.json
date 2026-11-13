@@ -27,7 +27,11 @@
     "badge_featured": "Iliyoangaziwa",
     "badge_response": "Majibu ndani ya Masaa 24",
     "badge_sla": "SLA iliyohakikishiwa kwa mmiliki",
-    "coverage_line": "Nairobi · Kiambu · Murang’a · Kajiado · Machakos na maeneo mengine"
+    "coverage_line": "Nairobi · Kiambu · Murang’a · Kajiado · Machakos na maeneo mengine",
+    "portfolio_mandate": "AMRI YA PORTFOLIO · MKOA WA METROPOLITAN NAIROBI",
+    "snapshot_label": "MUHTASARI WA PORTFOLIO",
+    "showcase_caption": "Majengo ya Makazi, Viwanja vya Biashara na Maghala ya Viwanda katika Njia 7 za Kimkakati",
+    "active_corridors": "NJIA ZINAZOFANYA KAZI"
   },
   "stats": {
     "zones_value": "7",
@@ -35,7 +39,9 @@
     "years_value": "30+",
     "years_label": "Miaka ya Uzoefu",
     "retention_value": "98%",
-    "retention_label": "Wateja Wanaoendelea"
+    "retention_label": "Wateja Wanaoendelea",
+    "earb_label": "Leseni ya EARB",
+    "sla_label": "Muda wa Majibu"
   },
   "services_section": {
     "eyebrow": "Tunachofanya",
@@ -71,7 +77,13 @@
     "local_title": "Ujuzi wa Kina wa Eneo",
     "local_desc": "Miaka 30+ ya uzoefu wa moja kwa moja katika Nairobi, Kiambu, Murang'a, Kajiado, Machakos, na zaidi. Tunajua soko, kanuni, na bei sahihi.",
     "local_stat": "30+",
-    "local_stat_label": "Miaka ya Uzoefu"
+    "local_stat_label": "Miaka ya Uzoefu",
+    "report_eyebrow": "Uwazi kwa Wamiliki",
+    "report_title": "Ripoti Wazi.",
+    "report_accent": "Kila Mwezi.",
+    "report_subtitle": "Kila mali iliyosimamiwa inapata taarifa ya kina ya malipo kila mwezi — kodi iliyokusanywa, ada zilizokatwa, na malipo halisi — inayotolewa kulingana na makubaliano.",
+    "sample_label": "TAARIFA YA MFANO",
+    "cta_label": "Pata Ushauri Bure"
   },
   "cta_banner": {
     "eyebrow": "Wamiliki wa Mali",
@@ -536,5 +548,62 @@
         "a": "Tunachapisha maarifa na maoni ya soko kupitia tovuti yetu na ripoti za mara kwa mara. Kwa maelezo ya kina, maalum ya njia kulingana na data yetu ya sasa ya portfolio, wasiliana na timu yetu moja kwa moja. Tunaweza kupanga mkutano na wataalamu wetu wakuu wa mali kukuonyesha mwelekeo wa mahitaji, wastani wa mavuno, na viwango vya nafasi katika njia zetu za ufikajiwa."
       }
     ]
+  },
+  "featured_properties": {
+    "eyebrow": "Portfolio Inayosimamiwa",
+    "title": "Mali Zilizoangaziwa",
+    "subtitle": "Muhtasari wa mali za makazi, biashara, na viwanda zinazosimamiwa na Chabrin katika Mkoa wa Metropolitan Nairobi.",
+    "enquire": "Uliza",
+    "view_all": "Angalia Portfolio Yote"
+  },
+  "corridors": {
+    "eyebrow": "Njia ya Ufikajiwa",
+    "back_label": "Njia Zote",
+    "portfolio_label": "Mali Zinazofanya Kazi",
+    "yield_label": "Wastani wa Mavuno",
+    "vacancy_label": "Kiwango cha Nafasi",
+    "enquire_cta": "Uliza Kuhusu Njia Hii",
+    "properties_cta": "Angalia Mali",
+    "meta_desc_suffix": "— Usimamizi wa Mali na Chabrin Agencies Limited, Nairobi"
+  },
+  "diaspora": {
+    "eyebrow": "Diaspora ya Kenya",
+    "hero_title": "Wekeza Kenya.",
+    "hero_title_accent": "Kutoka Popote.",
+    "hero_subtitle": "Chabrin Agencies inasimamia mali kwa niaba ya Wakenya wanaoishi na kufanya kazi nje ya nchi. Tunashughulikia kila kitu — kuweka wapangaji hadi kulipa kodi — ili uweze kujenga utajiri nyumbani bila kuwepo.",
+    "why_title": "Kwa Nini Mwamini Chabrin Kutoka Nje?",
+    "why_subtitle": "Sisi ni daraja kati ya uwekezaji wako na soko la Nairobi.",
+    "pillar_1_title": "Simamiwa Kikamilifu",
+    "pillar_1_desc": "Tunashughulikia kila kitu — matangazo, uchunguzi, upangaji, matengenezo, na ukusanyaji wa kodi — hivyo huhitaji kuwepo.",
+    "pillar_2_title": "Taarifa za Kila Mwezi",
+    "pillar_2_desc": "Taarifa za kina za fedha zinazotolewa kila mwezi, ili ujue daima nini mali yako imepata na nini kilikatwa.",
+    "pillar_3_title": "Imesajiliwa EARB",
+    "pillar_3_desc": "Inadhibitiwa na Bodi ya Usajili wa Mawakala wa Mali ya Kenya. Uwekezaji wako uko mikononi ya uwajibikaji.",
+    "pillar_4_title": "Tayari kwa Uhamisho wa Fedha",
+    "pillar_4_desc": "Mapato halisi ya kodi yanasambazwa siku ya SLA iliyokubaliwa. Tunafanya kazi na njia yako inayopendelewa ya uhamisho wa fedha.",
+    "cta_title": "Uko Tayari Kufanya Mali Yako ya Nairobi Ifanye Kazi?",
+    "cta_subtitle": "Pata ushauri wa bure na timu yetu. Tutatathmini mali yako, kushauriwa kuhusu uwezekano wa kodi, na kukuongoza kupitia mchakato wa usimamizi.",
+    "cta_contact": "Pata Ushauri Bure",
+    "cta_whatsapp": "WhatsApp Timu Yetu"
+  },
+  "yield_calc": {
+    "eyebrow": "Zana ya Mmiliki",
+    "title": "Kikokotoo cha Mavuno ya Kodi",
+    "subtitle": "Kadiria usambazaji wako wa kila mwezi wa kodi na mavuno ya kila mwaka kutoka kwa mali yako ya Nairobi.",
+    "gross_rent_label": "Kodi ya Jumla ya Kila Mwezi (KES)",
+    "gross_rent_placeholder": "mfano 85,000",
+    "mgmt_fee_label": "Ada ya Usimamizi (%)",
+    "maintenance_label": "Bajeti ya Matengenezo ya Kila Mwezi (KES)",
+    "maintenance_placeholder": "mfano 5,000",
+    "insurance_label": "Bima ya Kila Mwaka (KES)",
+    "insurance_placeholder": "mfano 24,000",
+    "calculate_btn": "Kokotoa Mavuno Halisi",
+    "result_title": "Mapato Yako Yanayokadiriwa",
+    "net_monthly_label": "Usambazaji Halisi wa Kila Mwezi",
+    "net_annual_label": "Mapato Halisi ya Kila Mwaka",
+    "gross_yield_label": "Mavuno ya Jumla ya Kila Mwezi",
+    "deductions_label": "Makato ya Kila Mwezi",
+    "disclaimer": "Hii ni makadirio ya kielelezo tu. Mapato halisi yanategemea ukaliaji, hali ya soko, na masharti maalum ya usimamizi.",
+    "cta_consult": "Pata Uchambuzi Bure wa Mali"
   }
 }
