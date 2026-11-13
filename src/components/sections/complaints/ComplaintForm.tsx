@@ -2,6 +2,7 @@
 
 import { useState, useRef } from "react";
 import Link from "next/link";
+import { useTranslations, useLocale } from "next-intl";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -25,77 +26,63 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
-// ── Category → subcategory map ────────────────────────────────────────────────
+// ── Static colour/bg config (no translations) ─────────────────────────────────
 
-const SUBCATEGORIES: Record<string, { value: string; label: string }[]> = {
+const PRIORITY_CONFIG: Record<string, { colour: string; bg: string; labelKey: string; descKey: string }> = {
+  maintenance:     { colour: "#ea580c", bg: "#fff7ed", labelKey: "priority_urgent_label",    descKey: "priority_urgent_desc" },
+  billing:         { colour: "#7c3aed", bg: "#f5f3ff", labelKey: "priority_enquiry_label",   descKey: "priority_enquiry_desc" },
+  noise_neighbour: { colour: "#2563eb", bg: "#eff6ff", labelKey: "priority_routine_label",   descKey: "priority_routine_desc" },
+  safety:          { colour: "#dc2626", bg: "#fef2f2", labelKey: "priority_emergency_label", descKey: "priority_emergency_desc" },
+  management:      { colour: "#2563eb", bg: "#eff6ff", labelKey: "priority_routine_label",   descKey: "priority_routine_desc" },
+  general:         { colour: "#2563eb", bg: "#eff6ff", labelKey: "priority_routine_label",   descKey: "priority_routine_desc" },
+};
+
+const SUBCATEGORY_KEYS: Record<string, { value: string; labelKey: string }[]> = {
   maintenance: [
-    { value: "plumbing",    label: "Plumbing: Leak, Burst Pipe, No Water" },
-    { value: "electrical",  label: "Electrical: Power, Wiring, Sockets" },
-    { value: "structural",  label: "Structural: Roof, Walls, Ceiling" },
-    { value: "pest",        label: "Pest Control: Rodents, Insects" },
-    { value: "ac_hvac",     label: "AC / Ventilation" },
-    { value: "locks_doors", label: "Locks / Doors / Windows" },
-    { value: "general_repair", label: "General Repair" },
+    { value: "plumbing",       labelKey: "sub_plumbing" },
+    { value: "electrical",     labelKey: "sub_electrical" },
+    { value: "structural",     labelKey: "sub_structural" },
+    { value: "pest",           labelKey: "sub_pest" },
+    { value: "ac_hvac",        labelKey: "sub_ac_hvac" },
+    { value: "locks_doors",    labelKey: "sub_locks_doors" },
+    { value: "general_repair", labelKey: "sub_general_repair" },
   ],
   billing: [
-    { value: "incorrect_charge", label: "Incorrect Charge on Statement" },
-    { value: "payment_not_posted", label: "Payment Made But Not Posted" },
-    { value: "deposit_dispute",  label: "Security Deposit Dispute" },
-    { value: "service_charge",   label: "Service Charge Query" },
-    { value: "other_billing",    label: "Other Billing Issue" },
+    { value: "incorrect_charge",   labelKey: "sub_incorrect_charge" },
+    { value: "payment_not_posted", labelKey: "sub_payment_not_posted" },
+    { value: "deposit_dispute",    labelKey: "sub_deposit_dispute" },
+    { value: "service_charge",     labelKey: "sub_service_charge" },
+    { value: "other_billing",      labelKey: "sub_other_billing" },
   ],
   noise_neighbour: [
-    { value: "noise_music",    label: "Loud Music / Noise" },
-    { value: "noise_night",    label: "Late-Night Disturbance" },
-    { value: "neighbour_conflict", label: "Neighbour Conflict" },
-    { value: "parking",        label: "Parking Dispute" },
-    { value: "common_areas",   label: "Common Area Misuse" },
+    { value: "noise_music",        labelKey: "sub_noise_music" },
+    { value: "noise_night",        labelKey: "sub_noise_night" },
+    { value: "neighbour_conflict", labelKey: "sub_neighbour_conflict" },
+    { value: "parking",            labelKey: "sub_parking" },
+    { value: "common_areas",       labelKey: "sub_common_areas" },
   ],
   safety: [
-    { value: "security_breach", label: "Security Breach / Break-in" },
-    { value: "hazard",          label: "Physical Hazard / Injury Risk" },
-    { value: "lighting",        label: "Inadequate Lighting" },
-    { value: "fire_safety",     label: "Fire Safety Concern" },
-    { value: "unauthorized_entry", label: "Unauthorized Entry by Staff" },
+    { value: "security_breach",    labelKey: "sub_security_breach" },
+    { value: "hazard",             labelKey: "sub_hazard" },
+    { value: "lighting",           labelKey: "sub_lighting" },
+    { value: "fire_safety",        labelKey: "sub_fire_safety" },
+    { value: "unauthorized_entry", labelKey: "sub_unauthorized_entry" },
   ],
   management: [
-    { value: "unresponsive",   label: "Unresponsive Management" },
-    { value: "unprofessional", label: "Unprofessional Conduct" },
-    { value: "communication",  label: "Poor Communication" },
-    { value: "privacy",        label: "Privacy / Lack of Notice" },
-    { value: "lease_issue",    label: "Lease / Contract Issue" },
+    { value: "unresponsive",   labelKey: "sub_unresponsive" },
+    { value: "unprofessional", labelKey: "sub_unprofessional" },
+    { value: "communication",  labelKey: "sub_communication" },
+    { value: "privacy",        labelKey: "sub_privacy" },
+    { value: "lease_issue",    labelKey: "sub_lease_issue" },
   ],
   general: [
-    { value: "suggestion", label: "Suggestion / Improvement Idea" },
-    { value: "compliment",  label: "Compliment / Positive Feedback" },
-    { value: "other",       label: "Other" },
+    { value: "suggestion", labelKey: "sub_suggestion" },
+    { value: "compliment",  labelKey: "sub_compliment" },
+    { value: "other",       labelKey: "sub_other" },
   ],
 };
 
-const CATEGORY_OPTIONS = [
-  { value: "maintenance",     label: "Maintenance & Repairs",   description: "Plumbing, electrical, structural, pests" },
-  { value: "billing",         label: "Billing Dispute",         description: "Charges, payments, deposit" },
-  { value: "noise_neighbour", label: "Noise / Neighbour",       description: "Noise, parking, common areas" },
-  { value: "safety",          label: "Safety & Security",       description: "Hazards, breach, unauthorized entry" },
-  { value: "management",      label: "Management Quality",      description: "Response, conduct, communication" },
-  { value: "general",         label: "General Feedback",        description: "Suggestions, compliments, other" },
-];
-
-const SUBMITTER_OPTIONS = [
-  { value: "tenant",      label: "Tenant" },
-  { value: "landlord",    label: "Property Owner" },
-  { value: "prospective", label: "Prospective Tenant" },
-  { value: "public",      label: "General Public" },
-];
-
-const PRIORITY_BADGE: Record<string, { label: string; colour: string; bg: string; description: string }> = {
-  maintenance:     { label: "Urgent",    colour: "#ea580c", bg: "#fff7ed", description: "Response within 8 hours" },
-  billing:         { label: "Enquiry",   colour: "#7c3aed", bg: "#f5f3ff", description: "Response within 1 business day" },
-  noise_neighbour: { label: "Routine",   colour: "#2563eb", bg: "#eff6ff", description: "Response within 72 hours" },
-  safety:          { label: "Emergency", colour: "#dc2626", bg: "#fef2f2", description: "Response within 1 hour" },
-  management:      { label: "Routine",   colour: "#2563eb", bg: "#eff6ff", description: "Response within 72 hours" },
-  general:         { label: "Routine",   colour: "#2563eb", bg: "#eff6ff", description: "Response within 72 hours" },
-};
+const CATEGORY_VALUES = ["maintenance", "billing", "noise_neighbour", "safety", "management", "general"] as const;
 
 // ── Shared input class ────────────────────────────────────────────────────────
 
@@ -125,6 +112,7 @@ function FieldError({ message }: { message?: string }) {
 // ── Success state ─────────────────────────────────────────────────────────────
 
 function SuccessPanel({ reference, onReset }: { reference: string; onReset: () => void }) {
+  const t = useTranslations("complaints");
   return (
     <div className="bg-white rounded-2xl p-8 shadow-sm border border-slate-100 text-center">
       <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-5" aria-hidden="true">
@@ -134,19 +122,16 @@ function SuccessPanel({ reference, onReset }: { reference: string; onReset: () =
       </div>
       <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-green-50 border border-green-200 mb-4">
         <span className="w-1.5 h-1.5 rounded-full bg-green-500" aria-hidden="true" />
-        <span className="text-green-700 text-xs font-bold tracking-widest uppercase">Complaint Submitted</span>
+        <span className="text-green-700 text-xs font-bold tracking-widest uppercase">{t("success_badge")}</span>
       </div>
-      <h3 className="text-xl font-bold text-[#0D1B8E] mb-3">We&apos;ve Received Your Complaint</h3>
-      <p className="text-slate-500 text-sm mb-6 leading-relaxed">
-        A confirmation email with your reference number has been sent to you.
-        Use it to track your complaint below.
-      </p>
+      <h3 className="text-xl font-bold text-[#0D1B8E] mb-3">{t("success_title")}</h3>
+      <p className="text-slate-500 text-sm mb-6 leading-relaxed">{t("success_desc")}</p>
 
       {/* Reference box */}
       <div className="bg-[#f0f4ff] border-2 border-[#0D1B8E] rounded-2xl p-6 mb-6">
-        <p className="text-xs text-indigo-500 font-bold tracking-widest uppercase mb-2">Your Reference Number</p>
+        <p className="text-xs text-indigo-500 font-bold tracking-widest uppercase mb-2">{t("success_ref_label")}</p>
         <p className="text-3xl font-black text-[#0D1B8E] tracking-widest">{reference}</p>
-        <p className="text-xs text-slate-400 mt-2">Keep this safe - you will need it to track your complaint</p>
+        <p className="text-xs text-slate-400 mt-2">{t("success_ref_hint")}</p>
       </div>
 
       <div className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -155,14 +140,14 @@ function SuccessPanel({ reference, onReset }: { reference: string; onReset: () =
           className="px-6 py-2.5 rounded-full bg-[#0D1B8E] text-white font-semibold text-sm
                      hover:bg-[#0a1570] transition-colors text-center"
         >
-          Track This Complaint
+          {t("success_track_btn")}
         </a>
         <button
           onClick={onReset}
           className="px-6 py-2.5 rounded-full border-2 border-[#0D1B8E] text-[#0D1B8E]
                      font-semibold text-sm hover:bg-[#0D1B8E] hover:text-white transition-colors"
         >
-          Submit Another
+          {t("success_another_btn")}
         </button>
       </div>
     </div>
@@ -172,6 +157,9 @@ function SuccessPanel({ reference, onReset }: { reference: string; onReset: () =
 // ── Main form ─────────────────────────────────────────────────────────────────
 
 export default function ComplaintForm() {
+  const t      = useTranslations("complaints");
+  const locale = useLocale();
+
   const [status,            setStatus]            = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [reference,         setReference]         = useState("");
   const [turnstileVerified, setTurnstileVerified] = useState(false);
@@ -188,9 +176,23 @@ export default function ComplaintForm() {
     defaultValues: { submitter_type: "tenant", category: "maintenance" },
   });
 
-  const watchedCategory = watch("category");
-  const priorityInfo = PRIORITY_BADGE[watchedCategory];
-  const subcategoryOptions = SUBCATEGORIES[watchedCategory] ?? [];
+  const watchedCategory  = watch("category");
+  const priorityInfo     = PRIORITY_CONFIG[watchedCategory];
+  const subcategoryItems = SUBCATEGORY_KEYS[watchedCategory] ?? [];
+
+  // translated option arrays built inside render so t() is available
+  const SUBMITTER_OPTIONS = [
+    { value: "tenant",      label: t("submitter_tenant") },
+    { value: "landlord",    label: t("submitter_landlord") },
+    { value: "prospective", label: t("submitter_prospective") },
+    { value: "public",      label: t("submitter_public") },
+  ];
+
+  const CATEGORY_OPTIONS = CATEGORY_VALUES.map((v) => ({
+    value: v,
+    label: t(`cat_${v === "noise_neighbour" ? "noise" : v}_label`),
+    description: t(`cat_${v === "noise_neighbour" ? "noise" : v}_desc`),
+  }));
 
   const onSubmit = async (data: FormData) => {
     setStatus("submitting");
@@ -217,10 +219,11 @@ export default function ComplaintForm() {
     <div id="submit" className="bg-white rounded-2xl shadow-sm border border-slate-100">
       {/* Form header */}
       <div className="px-6 pt-6 pb-4 border-b border-slate-100">
-        <h2 className="text-xl font-bold text-[#0D1B8E]">Submit a Complaint or Request</h2>
+        <h2 className="text-xl font-bold text-[#0D1B8E]">{t("form_title")}</h2>
         <p className="text-slate-500 text-sm mt-1">
-          All fields marked <span className="text-[#00C9C9] font-semibold">*</span> are required.
-          You will receive a reference number by email immediately.
+          {t("form_subtitle").split("*")[0]}
+          <span className="text-[#00C9C9] font-semibold">*</span>
+          {t("form_subtitle").split("*")[1]}
         </p>
       </div>
 
@@ -229,7 +232,7 @@ export default function ComplaintForm() {
         {/* ── Step 1: Who are you? ── */}
         <fieldset>
           <legend className="text-sm font-semibold text-[#0D1B8E] mb-3">
-            I am a <span className="text-[#00C9C9]">*</span>
+            {t("field_who")} <span className="text-[#00C9C9]">*</span>
           </legend>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
             {SUBMITTER_OPTIONS.map((opt) => (
@@ -257,7 +260,7 @@ export default function ComplaintForm() {
         {/* ── Step 2: Category ── */}
         <fieldset>
           <legend className="text-sm font-semibold text-[#0D1B8E] mb-3">
-            Category <span className="text-[#00C9C9]">*</span>
+            {t("field_category")} <span className="text-[#00C9C9]">*</span>
           </legend>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {CATEGORY_OPTIONS.map((opt) => (
@@ -295,17 +298,17 @@ export default function ComplaintForm() {
                 aria-hidden="true"
               />
               <span style={{ color: priorityInfo.colour }} className="font-bold text-xs uppercase tracking-wide">
-                {priorityInfo.label}
+                {t(priorityInfo.labelKey)}
               </span>
-              <span className="text-slate-500 text-xs">{priorityInfo.description}</span>
+              <span className="text-slate-500 text-xs">{t(priorityInfo.descKey)}</span>
             </div>
           )}
         </fieldset>
 
         {/* ── Subcategory ── */}
-        {subcategoryOptions.length > 0 && (
+        {subcategoryItems.length > 0 && (
           <div>
-            <Label>Specific Issue</Label>
+            <Label>{t("field_subcategory")}</Label>
             <div className="relative">
               <select
                 {...register("subcategory")}
@@ -313,9 +316,9 @@ export default function ComplaintForm() {
                            focus:outline-none focus:border-[#00C9C9] focus:ring-2 focus:ring-[#00C9C9]/20
                            bg-white text-[#0D1B8E] appearance-none cursor-pointer"
               >
-                <option value="">- Select specific issue (optional) -</option>
-                {subcategoryOptions.map((o) => (
-                  <option key={o.value} value={o.value}>{o.label}</option>
+                <option value="">{t("subcategory_placeholder")}</option>
+                {subcategoryItems.map((o) => (
+                  <option key={o.value} value={o.value}>{t(o.labelKey)}</option>
                 ))}
               </select>
               <svg className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400"
@@ -328,37 +331,33 @@ export default function ComplaintForm() {
 
         {/* ── Description ── */}
         <div>
-          <Label required>Describe the Issue</Label>
+          <Label required>{t("field_description")}</Label>
           <textarea
             {...register("description")}
             rows={5}
-            placeholder="Please describe your issue in detail - what happened, when it started, and what you would like done about it..."
+            placeholder={t("description_placeholder")}
             className={`${inp(!!errors.description)} resize-none`}
           />
           <FieldError message={errors.description?.message} />
-          <p className="text-xs text-slate-400 mt-1">
-            Minimum 20 characters. The more detail you provide, the faster we can help.
-          </p>
+          <p className="text-xs text-slate-400 mt-1">{t("description_hint")}</p>
         </div>
 
         {/* ── Property area ── */}
         <div>
-          <Label>Property Area / Neighbourhood</Label>
+          <Label>{t("field_area")}</Label>
           <input
             {...register("property_area")}
             type="text"
-            placeholder="e.g. Kasarani, Westlands, Kahawa Wendani - no exact address required"
+            placeholder={t("area_placeholder")}
             className={inp(false)}
           />
-          <p className="text-xs text-slate-400 mt-1">
-            Approximate area only - we do not require your exact address.
-          </p>
+          <p className="text-xs text-slate-400 mt-1">{t("area_hint")}</p>
         </div>
 
         {/* ── Contact details ── */}
         <div className="grid sm:grid-cols-2 gap-5">
           <div>
-            <Label required>Full Name</Label>
+            <Label required>{t("field_name")}</Label>
             <input
               {...register("full_name")}
               type="text"
@@ -368,7 +367,7 @@ export default function ComplaintForm() {
             <FieldError message={errors.full_name?.message} />
           </div>
           <div>
-            <Label required>Email Address</Label>
+            <Label required>{t("field_email")}</Label>
             <input
               {...register("email")}
               type="email"
@@ -380,7 +379,7 @@ export default function ComplaintForm() {
         </div>
 
         <div>
-          <Label required>Phone Number</Label>
+          <Label required>{t("field_phone")}</Label>
           <input
             {...register("phone")}
             type="tel"
@@ -409,7 +408,7 @@ export default function ComplaintForm() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                 </svg>
               </span>
-              <span className="text-xs font-semibold text-green-700">Secured by Cloudflare · Verified</span>
+              <span className="text-xs font-semibold text-green-700">{t("cloudflare_verified")}</span>
             </div>
           )}
         </div>
@@ -423,12 +422,11 @@ export default function ComplaintForm() {
               className="mt-0.5 w-4 h-4 rounded border-slate-300 accent-[#0D1B8E]"
             />
             <span className="text-sm text-slate-600 leading-relaxed">
-              I consent to the processing of my personal data for the purpose of handling
-              this complaint, in accordance with the{" "}
-              <Link href="/en/privacy-policy" className="text-[#00C9C9] hover:underline font-medium">
-                Privacy Policy
+              {t("consent_text")}{" "}
+              <Link href={`/${locale}/privacy-policy`} className="text-[#00C9C9] hover:underline font-medium">
+                {t("consent_policy")}
               </Link>{" "}
-              and the Kenya Data Protection Act 2019.{" "}
+              {t("consent_law")}{" "}
               <span className="text-[#00C9C9]">*</span>
             </span>
           </label>
@@ -438,8 +436,8 @@ export default function ComplaintForm() {
         {/* ── Error banner ── */}
         {status === "error" && (
           <div className="p-4 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm">
-            Something went wrong. Please try again or reach us directly on{" "}
-            <a href="https://wa.me/254720854389" className="font-semibold underline">WhatsApp</a>.
+            {t("error_banner")}{" "}
+            <a href="https://wa.me/254720854389" className="font-semibold underline">{t("error_whatsapp")}</a>.
           </div>
         )}
 
@@ -457,22 +455,22 @@ export default function ComplaintForm() {
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
               </svg>
-              Submitting…
+              {t("submitting")}
             </span>
           ) : (
-            "Submit Complaint"
+            t("submit_btn")
           )}
         </button>
 
         <p className="text-center text-xs text-slate-400">
-          Need immediate help?{" "}
+          {t("help_text")}{" "}
           <a
             href="https://wa.me/254720854389?text=I+have+an+urgent+complaint"
             target="_blank"
             rel="noopener noreferrer"
             className="text-green-600 font-semibold hover:underline"
           >
-            WhatsApp us directly
+            {t("help_whatsapp")}
           </a>
         </p>
       </form>

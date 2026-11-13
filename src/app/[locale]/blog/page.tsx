@@ -202,9 +202,7 @@ export default async function BlogPage({ params }: Props) {
                           className="object-cover"
                         />
                       </div>
-                    ) : (
-                      <div className="h-2 bg-gradient-to-r from-brand-navy to-brand-cyan" />
-                    )}
+                    ) : null}
                     <div className="p-6 flex flex-col flex-1">
                       <span className={`self-start text-xs font-bold px-3 py-1 rounded-full mb-3
                         ${CATEGORY_COLORS[post.category] ?? "bg-slate-100 text-slate-600"}`}>
@@ -239,7 +237,7 @@ export default async function BlogPage({ params }: Props) {
               {t("newsletter_subtitle")}
             </p>
             <Link
-              href="/en/contact"
+              href={`/${locale}/contact`}
               className="inline-block px-8 py-3 rounded-full bg-brand-cyan text-brand-navy
                          font-bold text-sm hover:bg-white transition-colors"
             >

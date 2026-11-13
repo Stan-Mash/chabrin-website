@@ -107,98 +107,50 @@ export default function WhyChabrin() {
             </div>
           </ScrollReveal>
 
-          {/* ── RIGHT: Sample Monthly Remittance Statement ─────────────── */}
+          {/* ── RIGHT: Management Services Panel ─────────────────────── */}
           <ScrollReveal delay={0.15}>
             <div className="border border-white/15 bg-white/[0.03]">
 
-              {/* Statement header */}
+              {/* Panel header */}
               <div className="border-b border-white/15 px-5 py-4">
                 <p className="text-[9px] tracking-[0.25em] text-brand-cyan/60 uppercase font-bold mb-1">
-                  {t("sample_label")}
+                  {t("services_panel_label")}
                 </p>
-                <p className="text-white font-bold text-sm">Chabrin Agencies Limited</p>
-                <p className="text-[10px] text-white/35 uppercase tracking-wide font-medium">
-                  Monthly Landlord Remittance Statement
-                </p>
+                <p className="text-white font-bold text-sm">{t("services_panel_title")}</p>
               </div>
 
-              {/* Statement meta */}
-              <div className="px-5 py-3 border-b border-white/8 grid grid-cols-2 gap-x-4 gap-y-1.5">
-                {[
-                  ["Statement Ref",  "CAL-STMT-2026-08"],
-                  ["Period",         "August 2026"],
-                  ["Property",       "24-Unit Residential Block"],
-                  ["Location",       "Kasarani-Ruaraka"],
-                ].map(([label, value]) => (
-                  <div key={label}>
-                    <p className="text-[9px] text-white/25 uppercase tracking-wide">{label}</p>
-                    <p className="text-[11px] text-white/70 font-medium mt-0.5">{value}</p>
+              {/* Services checklist */}
+              <div className="px-5 py-5 space-y-3">
+                {([
+                  t("service_1"),
+                  t("service_2"),
+                  t("service_3"),
+                  t("service_4"),
+                  t("service_5"),
+                  t("service_6"),
+                  t("service_7"),
+                  t("service_8"),
+                ] as string[]).map((service) => (
+                  <div key={service} className="flex items-start gap-3">
+                    <svg
+                      className="w-4 h-4 text-brand-cyan flex-shrink-0 mt-0.5"
+                      fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}
+                      aria-hidden="true"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span className="text-white/70 text-sm leading-snug">{service}</span>
                   </div>
                 ))}
               </div>
 
-              {/* Income */}
-              <div className="px-5 py-3 border-b border-white/8">
-                <p className="text-[9px] tracking-[0.2em] text-white/25 uppercase font-bold mb-2">
-                  INCOME
+              {/* SLA note */}
+              <div className="border-t border-white/10 px-5 py-4 bg-brand-cyan/5">
+                <p className="text-[9px] tracking-[0.2em] text-brand-cyan/70 uppercase font-bold mb-1.5">
+                  {t("services_sla_label")}
                 </p>
-                {[
-                  ["Gross Rent Collected",   "KES 840,000"],
-                  ["Late Payment Charges",   "KES     4,200"],
-                  ["Total Income",           "KES 844,200"],
-                ].map(([label, value], i) => (
-                  <div
-                    key={label}
-                    className={`flex justify-between py-1 ${
-                      i === 2 ? "border-t border-white/10 mt-1 pt-2" : ""
-                    }`}
-                  >
-                    <span className={`text-[11px] ${i === 2 ? "text-white/60 font-semibold" : "text-white/40"}`}>
-                      {label}
-                    </span>
-                    <span className={`text-[11px] font-mono ${i === 2 ? "text-white/60 font-bold" : "text-white/40"}`}>
-                      {value}
-                    </span>
-                  </div>
-                ))}
-              </div>
-
-              {/* Deductions */}
-              <div className="px-5 py-3 border-b border-white/8">
-                <p className="text-[9px] tracking-[0.2em] text-white/25 uppercase font-bold mb-2">
-                  DEDUCTIONS
-                </p>
-                {[
-                  ["Management Fee (10%)",    "(KES  84,000)"],
-                  ["Maintenance & Repairs",   "(KES  12,000)"],
-                  ["Miscellaneous",           "(KES    6,000)"],
-                ].map(([label, value]) => (
-                  <div key={label} className="flex justify-between py-1">
-                    <span className="text-[11px] text-white/40">{label}</span>
-                    <span className="text-[11px] font-mono text-white/40">{value}</span>
-                  </div>
-                ))}
-              </div>
-
-              {/* Net disbursement */}
-              <div className="px-5 py-4 bg-brand-cyan/8 border-t border-brand-cyan/20">
-                <div className="flex justify-between items-center">
-                  <span className="text-[11px] text-brand-cyan font-bold uppercase tracking-wide">
-                    NET DISBURSEMENT
-                  </span>
-                  <span className="text-brand-cyan font-extrabold text-lg font-mono">
-                    KES 742,200
-                  </span>
-                </div>
-                <p className="text-[9px] text-white/25 mt-1.5">
-                  Occupancy: 23/24 units (95.8%) &nbsp;|&nbsp; Disbursed on SLA date
-                </p>
-              </div>
-
-              {/* Disclaimer */}
-              <div className="px-5 py-3">
-                <p className="text-[9px] text-white/20 italic leading-relaxed">
-                  Sample statement for illustration purposes. Actual values vary by property and market conditions.
+                <p className="text-white/55 text-xs leading-relaxed">
+                  {t("services_sla_note")}
                 </p>
               </div>
             </div>

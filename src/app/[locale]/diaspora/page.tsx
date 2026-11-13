@@ -12,8 +12,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const base        = siteConfig.url;
   return {
     title: isSwahili
-      ? "Wekeza Kenya Kutoka Nje — Usimamizi wa Mali"
-      : "Invest in Kenya From Abroad — Property Management for Diaspora",
+      ? "Wekeza Kenya Kutoka Nje: Usimamizi wa Mali"
+      : "Invest in Kenya From Abroad: Property Management for Diaspora",
     description: isSwahili
       ? "Chabrin Agencies inasimamia mali za Wakenya wanaoishi nje. Upangaji, ukusanyaji wa kodi, na taarifa za kila mwezi. Imesajiliwa EARB."
       : "Chabrin Agencies manages Nairobi properties for Kenyans living abroad. Full management, monthly remittance statements, and EARB-registered accountability.",

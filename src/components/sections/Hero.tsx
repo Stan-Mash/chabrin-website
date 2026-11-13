@@ -1,18 +1,13 @@
 ﻿"use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useTranslations, useLocale } from "next-intl";
 import { motion } from "framer-motion";
 import AnimatedHeadline from "@/components/ui/AnimatedHeadline";
 import CursorSpotlight from "@/components/ui/CursorSpotlight";
 import HeroParallaxBlobs from "@/components/sections/HeroParallaxBlobs";
 
-const CORRIDORS = [
-  { label: "CBD & Kilimani",       slug: "cbd-kilimani" },
-  { label: "Thika Road & Ruiru",   slug: "thika-road-ruiru" },
-  { label: "Kasarani & Roysambu",  slug: "kasarani-roysambu" },
-  { label: "Eastlands & Embakasi", slug: "eastlands-embakasi" },
-];
 
 export default function Hero() {
   const t      = useTranslations("hero");
@@ -159,100 +154,39 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* ══ RIGHT: Architectural Portfolio Showcase Frame ═══════════════ */}
+          {/* ══ RIGHT: Property Image ══════════════════════════════════════ */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.18, duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
-            className="hidden lg:flex flex-col h-[520px]"
+            className="hidden lg:block relative h-[520px] overflow-hidden"
           >
-            {/* Meta hairline bar */}
-            <div className="flex items-center justify-between px-4 py-2.5
-                            border border-white/15 bg-white/5">
-              <span className="text-[9px] font-bold tracking-[0.2em] text-white/40 uppercase">
+            <Image
+              src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&auto=format&fit=crop&q=80"
+              alt="Modern Nairobi apartment building managed by Chabrin Agencies"
+              fill
+              className="object-cover"
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              priority
+            />
+            {/* Bottom gradient */}
+            <div className="absolute inset-0 bg-gradient-to-t from-brand-navy via-brand-navy/30 to-transparent" />
+            {/* Stats overlay */}
+            <div className="absolute bottom-0 left-0 right-0 p-6">
+              <p className="text-[9px] tracking-[0.25em] text-brand-cyan/60 uppercase font-bold mb-4">
                 {t("portfolio_mandate")}
-              </span>
-              <span className="text-[9px] font-mono text-brand-cyan/60 tracking-wide select-none">
-                01&#176;17&#39;08.8&quot;S&#160;36&#176;50&#39;04.9&quot;E
-              </span>
-            </div>
-
-            {/* Main architectural frame */}
-            <div className="flex-1 border-x border-b border-white/15 bg-white/[0.03]
-                            flex flex-col min-h-0">
-
-              {/* Portfolio snapshot */}
-              <div className="flex-1 p-5 flex flex-col gap-3 min-h-0 overflow-hidden">
-
-                {/* Header row */}
-                <div className="flex items-start justify-between border-b border-white/10 pb-3 flex-shrink-0">
-                  <div>
-                    <p className="text-[9px] tracking-[0.2em] text-brand-cyan/70 uppercase font-bold">
-                      {t("snapshot_label")}
-                    </p>
-                    <p className="text-white font-bold text-sm mt-0.5">Chabrin Agencies Limited</p>
+              </p>
+              <div className="grid grid-cols-3 gap-2">
+                {[
+                  { value: "180+", label: t("stat_properties") },
+                  { value: "7",    label: t("stat_corridors") },
+                  { value: "98%",  label: t("stat_retention") },
+                ].map(({ value, label }) => (
+                  <div key={label} className="border border-white/15 bg-white/[0.08] px-3 py-2.5 backdrop-blur-sm">
+                    <p className="text-brand-cyan font-bold text-xl leading-none">{value}</p>
+                    <p className="text-white/50 text-[9px] uppercase tracking-wide mt-1.5 leading-tight">{label}</p>
                   </div>
-                  <div className="text-right">
-                    <p className="text-[9px] text-white/30 uppercase tracking-wide">FY 2026</p>
-                    <div className="flex items-center gap-1 mt-0.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-brand-cyan animate-pulse" />
-                      <span className="text-[10px] text-brand-cyan font-bold">ACTIVE</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Asset type rows */}
-                <div className="space-y-2 flex-shrink-0">
-                  {[
-                    { type: "RESIDENTIAL", detail: "Apartments · Maisonettes · Townhouses", count: "120+", pct: 73 },
-                    { type: "COMMERCIAL",  detail: "Offices · Retail · Plazas",            count: "45+",  pct: 27 },
-                    { type: "INDUSTRIAL",  detail: "Warehouses · Light Industrial",         count: "15+",  pct: 9  },
-                  ].map(({ type, detail, count, pct }) => (
-                    <div key={type}
-                      className="p-3 border border-white/8 bg-white/[0.02] hover:border-white/15
-                                 transition-colors duration-200">
-                      <div className="flex items-center justify-between mb-1">
-                        <span className="text-[9px] tracking-[0.18em] text-white/40 uppercase font-bold">
-                          {type}
-                        </span>
-                        <span className="text-brand-cyan font-bold text-sm leading-none">{count}</span>
-                      </div>
-                      <p className="text-white/30 text-[10px] mb-2">{detail}</p>
-                      <div className="h-px bg-white/8 relative">
-                        <div
-                          className="absolute left-0 top-0 h-px bg-brand-cyan/60"
-                          style={{ width: `${pct}%` }}
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Caption */}
-                <p className="text-[10px] text-white/25 leading-relaxed italic mt-auto flex-shrink-0">
-                  {t("showcase_caption")}
-                </p>
-              </div>
-
-              {/* Corridor quick-links */}
-              <div className="border-t border-white/10 p-4 flex-shrink-0">
-                <p className="text-[8px] tracking-[0.25em] text-white/20 uppercase font-bold mb-2.5">
-                  {t("active_corridors")}
-                </p>
-                <div className="grid grid-cols-2 gap-1.5">
-                  {CORRIDORS.map(({ label, slug }) => (
-                    <Link
-                      key={slug}
-                      href={`/${locale}/corridors/${slug}`}
-                      className="flex items-center gap-1.5 text-[10px] text-white/40
-                                 hover:text-brand-cyan transition-colors duration-150 font-medium group"
-                    >
-                      <span className="w-1 h-1 rounded-full bg-brand-cyan/30
-                                       group-hover:bg-brand-cyan transition-colors flex-shrink-0" />
-                      {label}
-                    </Link>
-                  ))}
-                </div>
+                ))}
               </div>
             </div>
           </motion.div>

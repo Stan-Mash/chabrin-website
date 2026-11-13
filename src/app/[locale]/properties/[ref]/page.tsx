@@ -229,7 +229,7 @@ export default async function PropertyDetailPage({ params }: PageProps) {
                 <>
                   <p className="text-slate-600 leading-relaxed mb-4">
                     This {listing.property_type === "warehouse" ? "industrial warehouse unit" : listing.property_type === "retail" ? "ground-floor retail space" : "commercial office space"} is
-                    situated in {listing.area}, {listing.zone} — a key commercial node within Nairobi&apos;s metropolitan corridor.
+                    situated in {listing.area}, {listing.zone}, a key commercial node within Nairobi&apos;s metropolitan corridor.
                     {listing.size_m2 ? ` The unit spans ${listing.size_m2} m² of usable space,` : ""} making it well-suited for
                     {listing.property_type === "warehouse" ? " logistics, storage, light manufacturing, or distribution operations." : listing.property_type === "retail" ? " retail trade, service businesses, or showroom use." : " professional offices, co-working, or business operations."}
                   </p>

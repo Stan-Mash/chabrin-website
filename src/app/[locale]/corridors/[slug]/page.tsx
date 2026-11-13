@@ -114,7 +114,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const base = siteConfig.url;
   return {
-    title:       `${corridor.name} Property Management — Chabrin Agencies`,
+    title:       `${corridor.name} Property Management | Chabrin Agencies`,
     description: `${corridor.tagline}. ${corridor.description.slice(0, 155)}…`,
     keywords:    corridor.seoKeywords,
     alternates:  {
@@ -227,7 +227,7 @@ export default async function CorridorPage({ params }: Props) {
                 Let Chabrin Manage Your {corridor.name} Property
               </h3>
               <p className="text-white/55 text-sm leading-relaxed mb-6">
-                We provide full-service property management in this corridor — tenant screening, rent collection, monthly reporting, and 24h response SLA.
+                We provide full-service property management in this corridor: tenant screening, rent collection, monthly reporting, and 24h response SLA.
               </p>
               <div className="space-y-3">
                 <Link

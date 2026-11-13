@@ -60,8 +60,6 @@ export default async function FeaturedProperties() {
           {FEATURED.map(({ id, type, zone, area, rooms, rent, badge }) => (
             <div key={id} className="bg-white border border-slate-100 flex flex-col">
 
-              {/* Top colour band */}
-              <div className={`h-1 ${id === "res-01" ? "bg-brand-cyan" : "bg-brand-navy/30"}`} />
 
               <div className="p-6 flex flex-col flex-1">
                 {/* Type badge + available */}
