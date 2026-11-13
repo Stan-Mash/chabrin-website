@@ -99,19 +99,74 @@ const FALLBACK_POSTS: SanityPost[] = [
   },
 ];
 
+const FALLBACK_POSTS_SW: SanityPost[] = [
+  {
+    slug: "understanding-lease-agreements-kenya",
+    category: "Landlord Guide",
+    title: "Kuelewa Mikataba ya Upangaji Kenya: Kila Mmiliki Anahitaji Kujua Nini",
+    excerpt: "Mkataba wa upangaji si formaliti tu — unalinda mmiliki na mpangaji. Tunafafanua vifungu muhimu ambavyo kila mmiliki wa Kenya anapaswa kujumuisha.",
+    publishedAt: "2026-03-01T00:00:00Z",
+    readTime: "Dakika 6",
+    featured: true,
+    coverImage: null,
+  },
+  {
+    slug: "nairobi-rental-market-2026",
+    category: "Market Insights",
+    title: "Sasisho la Soko la Upangaji Nairobi 2026: Maeneo ya Kuangalia",
+    excerpt: "Kutoka Westlands hadi Ruaka, mwelekeo wa mahitaji unabadilika. Uchambuzi wetu unashughulikia maeneo yanayoona ukaliaji wa juu zaidi na kinachosukuma harakati za wapangaji.",
+    publishedAt: "2026-02-01T00:00:00Z",
+    readTime: "Dakika 8",
+    featured: false,
+    coverImage: null,
+  },
+  {
+    slug: "tenant-rights-kenya",
+    category: "Tenant Guide",
+    title: "Jua Haki Zako kama Mpangaji Kenya",
+    excerpt: "Sheria ya Mmiliki na Mpangaji (Maduka, Hoteli na Mahali pa Chakula) na Sheria ya Kuzuia Kodi zote zinalinda wapangaji. Hapa kuna unachohitaji kujua.",
+    publishedAt: "2026-01-01T00:00:00Z",
+    readTime: "Dakika 5",
+    featured: false,
+    coverImage: null,
+  },
+  {
+    slug: "property-valuation-guide",
+    category: "Valuation",
+    title: "Jinsi Tathmini za Mali Zinavyofanya Kazi Kenya — na Kwa Nini Zinamaanisha",
+    excerpt: "Iwe ni kwa ajili ya uuzaji, mkopo, au bima, tathmini ya kitaalamu ni muhimu. Tunaelezea mbinu ambazo wathamini wetu waliosajiliwa wanatumia na unachopaswa kutarajia.",
+    publishedAt: "2025-12-01T00:00:00Z",
+    readTime: "Dakika 7",
+    featured: false,
+    coverImage: null,
+  },
+  {
+    slug: "kdpa-landlords-tenants",
+    category: "Legal",
+    title: "Maana ya Sheria ya Ulinzi wa Data ya Kenya kwa Wamiliki na Wasimamizi wa Mali",
+    excerpt: "Kukusanya vitambulisho vya wapangaji na data ya fedha sasa kuna wajibu wa kisheria chini ya KDPA 2019. Hapa ndivyo unavyoweza kufuata sheria.",
+    publishedAt: "2025-10-01T00:00:00Z",
+    readTime: "Dakika 6",
+    featured: false,
+    coverImage: null,
+  },
+];
+
 type Props = { params: Promise<{ locale: string }> };
 
 export default async function BlogPage({ params }: Props) {
   const { locale } = await params;
   const t = await getTranslations("blog");
 
+  const localFallback = locale === "sw" ? FALLBACK_POSTS_SW : FALLBACK_POSTS;
+
   // Fetch from Sanity; fall back to hardcoded posts if not configured
   let posts: SanityPost[] = [];
   try {
     const fetched = await getAllPosts();
-    posts = fetched.length > 0 ? fetched : FALLBACK_POSTS;
+    posts = fetched.length > 0 ? fetched : localFallback;
   } catch {
-    posts = FALLBACK_POSTS;
+    posts = localFallback;
   }
 
   // Featured = first post marked featured, or just the first post
