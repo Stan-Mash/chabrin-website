@@ -487,41 +487,6 @@ function resolveListings(): SearchListing[] {
 
 const ALL_LISTINGS = resolveListings();
 
-// ── Filter / sort options ─────────────────────────────────────────────────────
-
-const TYPE_OPTIONS = [
-  { value: "",          label: "All Types" },
-  { value: "apartment", label: "Apartment" },
-  { value: "townhouse", label: "Townhouse" },
-  { value: "villa",     label: "Villa" },
-  { value: "office",    label: "Office" },
-  { value: "retail",    label: "Retail" },
-  { value: "warehouse", label: "Warehouse" },
-  { value: "land",      label: "Land" },
-];
-
-const PRICE_OPTIONS = [
-  { value: "",        label: "Any Price" },
-  { value: "30000",   label: "Up to KES 30k" },
-  { value: "60000",   label: "Up to KES 60k" },
-  { value: "100000",  label: "Up to KES 100k" },
-  { value: "200000",  label: "Up to KES 200k" },
-];
-
-const SORT_OPTIONS = [
-  { value: "newest",     label: "Newest First" },
-  { value: "price-asc",  label: "Price: Low to High" },
-  { value: "price-desc", label: "Price: High to Low" },
-];
-
-const BED_OPTIONS = [
-  { value: "",  label: "Any" },
-  { value: "1", label: "1" },
-  { value: "2", label: "2" },
-  { value: "3", label: "3" },
-  { value: "4", label: "4+" },
-];
-
 // ── Bed pills ─────────────────────────────────────────────────────────────────
 
 function BedPills({ value, onChange }: { value: string; onChange: (v: string) => void }) {
