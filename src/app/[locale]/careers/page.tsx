@@ -204,7 +204,7 @@ export default async function CareersPage({ params }: { params: Promise<{ locale
                       <h3 className="text-lg font-bold text-brand-navy group-hover:text-brand-cyan transition-colors mb-2">
                         {job.title}
                       </h3>
-                      <p className="text-slate-600 text-sm leading-relaxed line-clamp-2">{job.summary}</p>
+                      <p className="text-slate-600 text-sm leading-relaxed line-clamp-2">{job.summary.replace(/\s*—\s*/g, ", ")}</p>
                     </div>
                     <Link
                       href={`/${locale}/careers/${job.slug}`}

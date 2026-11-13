@@ -33,7 +33,7 @@ const CORRIDORS = {
     vacancy:       "~5%",
     seoKeywords:   "property management Thika Road, property management Ruiru, rental apartments Githurai",
   },
-  "kasarani-roysambu": {
+  "kasarani-ruaraka-belt": {
     name:          "Kasarani & Roysambu",
     zone:          "Kasarani-Ruaraka Belt",
     tagline:       "Nairobi's Middle-Market Residential Hub",
@@ -114,7 +114,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const base = siteConfig.url;
   return {
-    title:       `${corridor.name} Property Management | Chabrin Agencies`,
+    title:       `Property Management in ${corridor.neighborhoods.slice(0, 3).join(", ")}`,
     description: `${corridor.tagline}. ${corridor.description.slice(0, 155)}…`,
     keywords:    corridor.seoKeywords,
     alternates:  {

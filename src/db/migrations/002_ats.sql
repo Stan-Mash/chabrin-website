@@ -137,7 +137,7 @@ VALUES
   'Administration',
   'Full-time',
   'Nairobi (On-site)',
-  'Provide front-office and administrative support — managing correspondence, filing, scheduling, and client reception for our Landhies Road head office.',
+  'Provide front-office and administrative support, managing correspondence, filing, scheduling, and client reception for our Landhies Road head office.',
   E'## About the Role\n\nYou will be the face of Chabrin Agencies at our Nacico Plaza head office, ensuring smooth day-to-day office operations and delivering excellent client service to walk-in landlords and tenants.\n\n## Responsibilities\n\n- Manage front-office reception and handle all walk-in clients professionally\n- Handle all incoming and outgoing correspondence (email, phone, physical mail)\n- Maintain filing systems for lease agreements, landlord files, and tenant records\n- Schedule and coordinate meetings and property viewings\n- Assist the accounts team with basic data entry and invoice filing\n- Prepare standard documents, reports, and presentations\n- Order and manage office supplies\n\n## What We Offer\n\n- Competitive salary\n- Structured onboarding and training\n- Professional working environment\n- Career growth within an established company',
   ARRAY[
     'Diploma in Business Administration, Secretarial Studies, or related field',
