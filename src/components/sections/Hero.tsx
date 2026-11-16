@@ -62,9 +62,23 @@ export default function Hero() {
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.44, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-              className="text-white/65 text-lg md:text-xl leading-relaxed max-w-lg mb-10"
+              className="text-white/65 text-lg md:text-xl leading-relaxed max-w-lg mb-5"
             >
               {t("subheadline")}
+            </motion.p>
+
+            {/* Corporate motto */}
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.52, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              className="text-white/30 text-xs font-bold uppercase tracking-[0.22em] mb-10"
+            >
+              {locale === "sw" ? (
+                <>Ufanisi <span style={{ color: "#14A8B8" }}>Ulioboreshwa</span> kwa Mafanikio</>
+              ) : (
+                <>Productivity <span style={{ color: "#14A8B8" }}>Redefined</span> for Success</>
+              )}
             </motion.p>
 
             {/* CTAs */}

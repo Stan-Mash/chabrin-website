@@ -18,11 +18,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const CORRIDOR_SLUGS = [
     "cbd-kilimani",
     "thika-road-ruiru",
-    "kasarani-roysambu",
+    "kasarani-ruaraka-belt",
     "eastlands-embakasi",
     "westlands-parklands",
     "south-b-south-c",
     "south-metro-airport",
+  ];
+
+  // Blog post slugs (Sanity-managed; keep in sync when new posts publish)
+  const BLOG_SLUGS = [
+    "understanding-lease-agreements-kenya",
+    "nairobi-rental-market-2026",
+    "tenant-rights-kenya",
+    "property-valuation-guide",
+    "kdpa-landlords-tenants",
   ];
 
   // Static routes - same in both English and Swahili
@@ -36,7 +45,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/contact",
     "/privacy-policy",
     "/diaspora",
+    "/faq",
+    "/complaints",
     ...CORRIDOR_SLUGS.map((s) => `/corridors/${s}`),
+    ...BLOG_SLUGS.map((s) => `/blog/${s}`),
   ];
 
   // Generate sitemap entries for both locales with hreflang alternates

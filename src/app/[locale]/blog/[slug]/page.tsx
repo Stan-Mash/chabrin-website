@@ -408,8 +408,29 @@ export default async function BlogPostPage({ params }: Props) {
   const readTime    = sanityPost?.readTime ?? article!.readTime;
   const body        = article?.body ?? "";
 
+  const base = siteConfig.url;
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": title,
+    "datePublished": publishedAt,
+    "dateModified": publishedAt,
+    "author": { "@type": "Organization", "name": "Chabrin Agencies Limited", "url": base },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Chabrin Agencies Limited",
+      "url": base,
+      "logo": { "@type": "ImageObject", "url": `${base}/logo-wordmark.png` },
+    },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": `${base}/${locale}/blog/${slug}` },
+  };
+
   return (
     <main className="min-h-screen bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
       {/* Header strip */}
       <div className="bg-brand-navy text-white py-12 px-4">
         <div className="max-w-3xl mx-auto">

@@ -134,8 +134,23 @@ export default async function CorridorPage({ params }: Props) {
   const corridor = CORRIDORS[slug as SlugKey];
   if (!corridor) notFound();
 
+  const base = siteConfig.url;
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home",        "item": `${base}/${locale}` },
+      { "@type": "ListItem", "position": 2, "name": "Properties",  "item": `${base}/${locale}/properties` },
+      { "@type": "ListItem", "position": 3, "name": corridor.name, "item": `${base}/${locale}/corridors/${slug}` },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       {/* Hero */}
       <section className="bg-brand-navy py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

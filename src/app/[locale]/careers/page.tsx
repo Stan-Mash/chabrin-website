@@ -161,18 +161,98 @@ export default async function CareersPage({ params }: { params: Promise<{ locale
           </div>
 
           {jobs.length === 0 ? (
-            <div className="text-center py-16 bg-slate-50 rounded-2xl border border-slate-100">
-              <div className="flex justify-center mb-4">
-                <svg className="w-12 h-12 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1} aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0M12 12.75h.008v.008H12v-.008z"/></svg>
+            /* ── Divisions + Talent Registry (zero-state) ──────────────────── */
+            <div className="space-y-10" id="spontaneous">
+              {/* Divisions grid */}
+              <div>
+                <p className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-5">
+                  Operational Divisions
+                </p>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {[
+                    {
+                      id: "01",
+                      title: "Property Management",
+                      dept: "Operations",
+                      colour: "border-brand-cyan/40 bg-brand-cyan/5",
+                      desc: "Portfolio management, tenant relations, rent collection, maintenance coordination across residential and commercial properties in 7 Nairobi corridors.",
+                      roles: ["Property Manager", "Field Officer", "Maintenance Coordinator"],
+                    },
+                    {
+                      id: "02",
+                      title: "Letting & Leasing",
+                      dept: "Operations",
+                      colour: "border-blue-200 bg-blue-50/40",
+                      desc: "New tenant acquisition, unit marketing, lease negotiations, void period management and landlord onboarding for the growing Chabrin portfolio.",
+                      roles: ["Letting Agent", "Lease Executive", "Client Relations Officer"],
+                    },
+                    {
+                      id: "03",
+                      title: "Finance & Accounts",
+                      dept: "Finance",
+                      colour: "border-amber-200 bg-amber-50/40",
+                      desc: "Landlord disbursements, KRA compliance, service charge reconciliation, audit preparation, and financial reporting for the full managed portfolio.",
+                      roles: ["Accounts Officer", "Bookkeeper", "Finance Analyst"],
+                    },
+                    {
+                      id: "04",
+                      title: "Administration & IT",
+                      dept: "Administration",
+                      colour: "border-purple-200 bg-purple-50/40",
+                      desc: "Front-office operations, records management, CHIPS system support, digital marketing, and infrastructure for Chabrin's Nacico Plaza headquarters.",
+                      roles: ["Admin Assistant", "IT Support Officer", "Digital Marketer"],
+                    },
+                  ].map((div) => (
+                    <div key={div.id} className={`border ${div.colour} p-6`}>
+                      <div className="flex items-start justify-between mb-3">
+                        <span className="text-[9px] font-mono font-bold text-slate-300">{div.id}</span>
+                        <span className={`text-xs font-semibold px-2 py-0.5 ${deptColour(div.dept)}`}>
+                          {div.dept}
+                        </span>
+                      </div>
+                      <h3 className="text-base font-bold text-brand-navy mb-2">{div.title}</h3>
+                      <p className="text-slate-500 text-sm leading-relaxed mb-4">{div.desc}</p>
+                      <div className="space-y-1">
+                        {div.roles.map((r) => (
+                          <p key={r} className="text-xs text-slate-400 flex items-center gap-2">
+                            <span className="w-1 h-1 rounded-full bg-brand-cyan inline-block" />
+                            {r}
+                          </p>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
-              <p className="text-brand-navy font-semibold text-lg mb-2">{t("no_positions_title")}</p>
-              <p className="text-slate-500 text-sm">{t("no_positions_desc")}</p>
-              <a
-                href={`mailto:${siteConfig.contact.careersEmail}?subject=Spontaneous%20Application`}
-                className="mt-6 inline-block px-6 py-2.5 rounded-full bg-brand-navy text-white text-sm font-bold hover:bg-brand-cyan hover:text-brand-navy transition-colors"
-              >
-                {t("email_cv_btn")}
-              </a>
+
+              {/* Talent Registry CTA */}
+              <div className="border border-brand-navy/15 bg-brand-navy/[0.03] p-8">
+                <div className="max-w-2xl">
+                  <p className="text-xs font-bold uppercase tracking-widest text-brand-cyan mb-3">
+                    Talent Registry
+                  </p>
+                  <h3 className="text-xl font-bold text-brand-navy mb-3 leading-snug">
+                    No Current Openings — Express Interest for Future Roles
+                  </h3>
+                  <p className="text-slate-500 text-sm leading-relaxed mb-6">
+                    Chabrin Agencies is a growing company. We review our talent registry when new roles open. Submit your CV and preferred division below and we will reach out when a matching position arises.
+                  </p>
+                  <a
+                    href={`mailto:${siteConfig.contact.careersEmail}?subject=Talent%20Registry%20–%20Spontaneous%20Application`}
+                    className="inline-flex items-center gap-2 px-7 py-3 bg-brand-navy text-white font-bold text-sm uppercase tracking-widest hover:bg-brand-navy-dark transition-colors"
+                  >
+                    Submit CV to Talent Registry
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                    </svg>
+                  </a>
+                  <p className="text-xs text-slate-400 mt-4">
+                    Email your CV + a one-paragraph cover note to{" "}
+                    <span className="text-brand-navy font-medium">{siteConfig.contact.careersEmail}</span>.
+                    KDPA: your data is held only for recruitment purposes and deleted after 12 months if no position arises.
+                  </p>
+                </div>
+              </div>
             </div>
           ) : (
             <div className="space-y-4">

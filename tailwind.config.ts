@@ -17,12 +17,28 @@ const config: Config = {
       },
       colors: {
         brand: {
+          // ── Core tokens (DO NOT CHANGE — CLAUDE.md mandate) ─────────────
           navy: "#0D1B8E",   // Primary — deep backgrounds, headings, nav
           cyan: "#00C9C9",   // Accent — CTAs, highlights, "LIMITED" wordmark
-          "navy-dark": "#091466",   // Hover state for navy
-          "cyan-dark": "#00A8A8",   // Hover state for cyan
-          "navy-light": "#1A2FB5",  // Light variant for gradients
-          "cyan-light": "#33D4D4",  // Light variant for highlights
+          // ── Extended navy scale ─────────────────────────────────────────
+          "navy-950": "#060D45",
+          "navy-900": "#091466",
+          "navy-dark": "#091466",   // alias kept for backwards compat
+          "navy-800": "#0D1B8E",
+          "navy-light": "#1A2FB5",
+          "navy-700": "#2338CC",
+          "navy-600": "#3049E8",
+          // ── Extended cyan scale ─────────────────────────────────────────
+          "cyan-dark": "#00A8A8",
+          "cyan-600": "#00A8A8",
+          "cyan-500": "#00C9C9",
+          "cyan-400": "#1ADADA",
+          "cyan-light": "#33D4D4",
+          "cyan-300": "#4DE0E0",
+          // ── UI neutrals ─────────────────────────────────────────────────
+          "slate-400": "#94A3B8",
+          "ice-50":  "#F0F4FF",
+          "ice-100": "#E4EAFF",
         },
         // Neutral palette tuned for property listing cards
         surface: {

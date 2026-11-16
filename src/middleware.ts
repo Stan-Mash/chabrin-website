@@ -11,6 +11,19 @@ const intlMiddleware = createMiddleware({
 export default function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // ── HTTP 410 Gone: de-indexed dummy property slugs ────────────────────────
+  // Google previously crawled CAL-NBO-2026-* URLs from the seed data.
+  // 410 is the correct signal to permanently remove them from the index.
+  if (/\/properties\/CAL-NBO-2026-/i.test(pathname)) {
+    return new NextResponse("This listing has been archived or removed.", {
+      status: 410,
+      headers: {
+        "X-Robots-Tag": "noindex",
+        "Content-Type": "text/plain",
+      },
+    });
+  }
+
   // ── Maintenance mode ───────────────────────────────────────────────────────
   // Enable by setting MAINTENANCE_MODE=true in Vercel env vars (production only).
   // Admin panel, API routes, and static assets remain accessible at all times.

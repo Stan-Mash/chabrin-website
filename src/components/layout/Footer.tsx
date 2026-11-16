@@ -47,8 +47,19 @@ export default function Footer() {
                 />
               </div>
             </Link>
-            <p className="text-white/60 text-sm leading-relaxed mb-6">
+            <p className="text-white/60 text-sm leading-relaxed mb-3">
               {tFoot("tagline")}
+            </p>
+            {/* Corporate motto — "Redefined" in cyan */}
+            <p className="text-white/40 text-xs font-semibold uppercase tracking-widest mb-6">
+              {tFoot("motto").split(tFoot("motto_accent")).map((part, i, arr) => (
+                <span key={i}>
+                  {part}
+                  {i < arr.length - 1 && (
+                    <span style={{ color: "#14A8B8" }}>{tFoot("motto_accent")}</span>
+                  )}
+                </span>
+              ))}
             </p>
           </div>
 
