@@ -24,16 +24,16 @@ export default async function ComplaintsPage({ params }: Props) {
       <ComplaintsHero locale={locale} />
 
       <div className="bg-slate-50 min-h-screen">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid lg:grid-cols-[3fr_2fr] gap-8 items-start">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="grid lg:grid-cols-12 gap-8 items-start">
 
             {/* Left: Submission form */}
-            <div>
+            <div className="lg:col-span-7">
               <ComplaintForm />
             </div>
 
             {/* Right: Status checker + info */}
-            <div className="space-y-6">
+            <div className="lg:col-span-5 space-y-6">
               <ComplaintStatus />
 
               {/* Contact fallback card */}

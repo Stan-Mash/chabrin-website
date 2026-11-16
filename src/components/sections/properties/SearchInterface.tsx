@@ -147,7 +147,7 @@ const STRATEGIC_REGIONS: Record<string, string> = {
 };
 
 // ── Live dataset placeholder ──────────────────────────────────────────────────
-// CHIPS syncs verified vacancies into Neon → getPublishedListings() feeds this.
+// Live vacancies are synced into Neon → getPublishedListings() feeds this.
 // When the array is empty, SearchInterface renders the Space Acquisition Desk.
 
 const MOCK_LISTINGS_RAW: (Omit<SearchListing, "lat" | "lng" | "strategic_region"> & { zone: string })[] = [];
@@ -554,7 +554,7 @@ export default function SearchInterface() {
     });
   }, [searchQuery, type, beds, maxPrice, sortBy]);
 
-  // No listings in CHIPS yet — show the institutional acquisition desk
+  // No live listings yet — show the Space Acquisition Desk
   if (ALL_LISTINGS.length === 0) return <SpaceAcquisitionDesk />;
 
   return (

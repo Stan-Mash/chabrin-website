@@ -8,8 +8,8 @@ export default function StatsBar() {
     { value: t("zones_value"),      label: t("zones_label") },
     { value: t("years_value"),      label: t("years_label") },
     { value: t("retention_value"),  label: t("retention_label") },
-    { value: "EARB",                label: t("earb_label") },
-    { value: "24h",                 label: t("sla_label") },
+    { value: t("counties_value"),    label: t("counties_label") },
+    { value: t("dedicated_value"),  label: t("dedicated_label") },
   ];
 
   return (

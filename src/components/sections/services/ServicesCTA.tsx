@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 export default function ServicesCTA() {
-  const t = useTranslations("services_page");
+  const t      = useTranslations("services_page");
+  const locale = useLocale();
 
   return (
     <section className="py-20 bg-white">
@@ -25,7 +26,7 @@ export default function ServicesCTA() {
               {t("landlord_desc")}
             </p>
             <Link
-              href="/en/contact"
+              href={`/${locale}/contact`}
               className="self-start px-8 py-3 rounded-full bg-brand-cyan text-white font-bold hover:bg-brand-cyan-dark transition-colors shadow-cyan"
             >
               {t("landlord_cta")}
@@ -44,7 +45,7 @@ export default function ServicesCTA() {
               {t("tenant_desc")}
             </p>
             <Link
-              href="/en/properties"
+              href={`/${locale}/properties`}
               className="self-start px-8 py-3 rounded-full bg-white text-brand-cyan font-bold hover:bg-white/90 transition-colors shadow-md"
             >
               {t("tenant_cta")}

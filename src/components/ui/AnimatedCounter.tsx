@@ -9,20 +9,20 @@ interface Props {
   duration?: number;
 }
 
-function parse(raw: string): { number: number; suffix: string } {
+function parse(raw: string): { number: number; suffix: string; isNumeric: boolean } {
   const m = raw.match(/^(\d+)(.*)$/);
-  if (!m) return { number: 0, suffix: raw };
-  return { number: parseInt(m[1], 10), suffix: m[2] ?? "" };
+  if (!m) return { number: 0, suffix: "", isNumeric: false };
+  return { number: parseInt(m[1], 10), suffix: m[2] ?? "", isNumeric: true };
 }
 
 export default function AnimatedCounter({ value, className, duration = 1800 }: Props) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref as React.RefObject<Element>, { once: true, amount: 0.5 });
-  const { number, suffix } = parse(value);
+  const { number, suffix, isNumeric } = parse(value);
   const [display, setDisplay] = useState(number.toString());
 
   useEffect(() => {
-    if (!inView) return;
+    if (!inView || !isNumeric) return;
     let start: number | null = null;
 
     const step = (ts: number) => {
@@ -35,11 +35,11 @@ export default function AnimatedCounter({ value, className, duration = 1800 }: P
     };
 
     requestAnimationFrame(step);
-  }, [inView, number, duration]);
+  }, [inView, number, duration, isNumeric]);
 
   return (
     <span ref={ref} className={className}>
-      {display}{suffix}
+      {isNumeric ? `${display}${suffix}` : value}
     </span>
   );
 }

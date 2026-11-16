@@ -151,7 +151,7 @@ export default function ZoneDensityMap() {
             aria-label={t("map_aria")}
           >
             <div className="p-3 border-b border-white/10 flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-brand-cyan animate-pulse" />
+              <span className="w-2.5 h-2.5 rounded-full bg-brand-cyan" />
               <span className="text-xs text-slate-400 font-mono uppercase tracking-widest">
                 {t("map_label")}
               </span>
@@ -277,15 +277,23 @@ export default function ZoneDensityMap() {
                   </div>
                 </div>
                 <p className="text-slate-400 text-xs mb-3">{active.areas}</p>
-                <div className="grid grid-cols-2 gap-2">
-                  <div className="rounded-xl p-2.5" style={{ background: "rgba(0,0,0,0.3)" }}>
-                    <p className="text-brand-cyan font-extrabold text-lg">{active.properties}+</p>
-                    <p className="text-slate-400 text-[10px] uppercase tracking-wide">{t("stat_properties")}</p>
-                  </div>
-                  <div className="rounded-xl p-2.5" style={{ background: "rgba(0,0,0,0.3)" }}>
-                    <p className="text-brand-cyan font-extrabold text-lg">{active.density}/10</p>
-                    <p className="text-slate-400 text-[10px] uppercase tracking-wide">{t("stat_density")}</p>
-                  </div>
+                <div className="grid grid-cols-1 gap-2 mt-3">
+                  <a
+                    href={`/en/properties?corridor=${active.id}`}
+                    className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl
+                               bg-brand-cyan text-brand-navy font-bold text-xs
+                               hover:brightness-105 transition-all"
+                  >
+                    Enquire About This Zone
+                  </a>
+                  <a
+                    href={`/en/corridors/${active.id}`}
+                    className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl
+                               border border-white/20 text-white font-semibold text-xs
+                               hover:border-brand-cyan/50 transition-colors"
+                  >
+                    View Zone Overview
+                  </a>
                 </div>
               </div>
             )}
@@ -305,7 +313,7 @@ export default function ZoneDensityMap() {
                   onMouseLeave={() => setActiveZone(null)}
                   onFocus={() => setActiveZone(zone.id)}
                   onBlur={() => setActiveZone(null)}
-                  aria-label={`${t("zone_aria_prefix")} ${zone.id}: ${zone.name}, ${zone.properties} ${t("stat_properties")}`}
+                  aria-label={`${t("zone_aria_prefix")} ${zone.id}: ${zone.name}`}
                 >
                   <div className="flex items-center justify-between gap-3">
                     <div className="flex items-center gap-2.5 min-w-0">
@@ -320,7 +328,7 @@ export default function ZoneDensityMap() {
                         <p className={`text-xs font-semibold leading-tight truncate ${isActive ? "text-white" : "text-slate-300"}`}>
                           {zone.name}
                         </p>
-                        <p className="text-[10px] text-slate-500 mt-0.5">{zone.properties}+ {t("stat_properties_short")}</p>
+                        <p className="text-[10px] text-slate-500 mt-0.5">{zone.areas.split(",")[0]}</p>
                       </div>
                     </div>
 
@@ -344,10 +352,7 @@ export default function ZoneDensityMap() {
             {/* Total count */}
             <div className="pt-2 border-t border-white/10">
               <p className="text-center text-xs text-slate-500">
-                {t("total_prefix")}{" "}
-                <span className="text-brand-cyan font-bold">
-                  {ZONES.reduce((s, z) => s + z.properties, 0).toLocaleString()}+
-                </span>{" "}
+                <span className="text-brand-cyan font-bold">7</span>{" "}
                 {t("total_suffix")}
               </p>
             </div>

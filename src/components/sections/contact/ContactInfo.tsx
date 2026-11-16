@@ -124,7 +124,7 @@ export default function ContactInfo() {
       <div className="rounded-2xl overflow-hidden shadow-card">
         <iframe
           title="Nacico Plaza, Landhies Road, Nairobi"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.8186!2d36.8347!3d-1.2858!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f10d0a2b2b2b3%3A0x0!2sNacico+Plaza%2C+Landhies+Road%2C+Nairobi!5e0!3m2!1sen!2ske!4v1699999999999!5m2!1sen!2ske"
+          src="https://maps.google.com/maps?q=Nacico+Plaza,+Landhies+Road,+Nairobi&t=&z=16&ie=UTF8&iwloc=&output=embed"
           width="100%"
           height="220"
           style={{ border: 0, display: "block" }}
@@ -134,24 +134,57 @@ export default function ContactInfo() {
         />
       </div>
 
-      {/* ── Find us ────────────────────────────────────────────────────── */}
-      <div className="bg-brand-navy/5 border border-brand-navy/10 rounded-2xl p-5">
-        <p className="text-xs font-semibold text-brand-navy uppercase tracking-wide mb-2">
+      {/* ── How to Find Us ─────────────────────────────────────────────── */}
+      <div className="bg-white rounded-2xl p-6 shadow-card">
+        <p className="text-xs font-bold text-brand-navy uppercase tracking-widest mb-4">
           How to Find Us
         </p>
-        <p className="text-slate-600 text-sm leading-relaxed">
-          Take any matatu heading to <strong>Landhies Road</strong> (near Gikomba/River Road area).
-          Nacico Plaza is a prominent building on Landhies Road. Take the lift or stairs to
-          the <strong>5th Floor, Room 517</strong>.
-        </p>
+        <div className="space-y-4">
+          {/* By Vehicle / Taxi */}
+          <div className="flex gap-3">
+            <span className="flex-shrink-0 w-8 h-8 rounded-lg bg-brand-navy flex items-center justify-center">
+              <svg className="w-4 h-4 text-brand-cyan" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
+              </svg>
+            </span>
+            <div>
+              <p className="text-xs font-bold text-brand-navy mb-0.5">By Vehicle / Taxi</p>
+              <p className="text-slate-500 text-xs leading-relaxed">Head to Landhies Road near River Road. Nacico Plaza is prominent on the right. Paid parking is available on the street and nearby.</p>
+            </div>
+          </div>
+          {/* Walking from CBD */}
+          <div className="flex gap-3">
+            <span className="flex-shrink-0 w-8 h-8 rounded-lg bg-brand-navy flex items-center justify-center">
+              <svg className="w-4 h-4 text-brand-cyan" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+              </svg>
+            </span>
+            <div>
+              <p className="text-xs font-bold text-brand-navy mb-0.5">Walking from CBD</p>
+              <p className="text-slate-500 text-xs leading-relaxed">From Tom Mboya Street, head east on River Road. Turn right onto Landhies Road — Nacico Plaza is a 5-minute walk on your left. Take the lift to 5th Floor, Room 517.</p>
+            </div>
+          </div>
+          {/* Public Transit */}
+          <div className="flex gap-3">
+            <span className="flex-shrink-0 w-8 h-8 rounded-lg bg-brand-navy flex items-center justify-center">
+              <svg className="w-4 h-4 text-brand-cyan" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 3.75H19.5a.75.75 0 01.75.75v4.5a.75.75 0 01-.75.75H8.25m0-6H6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 006 20.25h1.5m0-16.5v16.5m0 0H19.5a.75.75 0 00.75-.75V8.25a.75.75 0 00-.75-.75H7.5" />
+              </svg>
+            </span>
+            <div>
+              <p className="text-xs font-bold text-brand-navy mb-0.5">By Public Transit</p>
+              <p className="text-slate-500 text-xs leading-relaxed">Take any matatu serving the River Road / Gikomba / Landhies Road route. Alight at the Landhies Road stage. Nacico Plaza is directly visible from the stage.</p>
+            </div>
+          </div>
+        </div>
         <Link
-          href={`https://maps.google.com/?q=Nacico+Plaza+Landhies+Road+Nairobi`}
+          href="https://maps.google.com/?q=Nacico+Plaza+Landhies+Road+Nairobi"
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-3 inline-flex items-center gap-1.5 text-brand-cyan text-sm font-semibold hover:underline"
+          className="mt-4 inline-flex items-center gap-1.5 text-brand-cyan text-xs font-semibold hover:underline"
         >
           Open in Google Maps
-          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+          <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
             <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
           </svg>
         </Link>

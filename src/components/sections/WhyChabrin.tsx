@@ -8,30 +8,10 @@ export default function WhyChabrin() {
   const locale = useLocale();
 
   const PILLARS = [
-    {
-      num:   "01",
-      title: t("licensed_title"),
-      desc:  t("licensed_desc"),
-      stat:  t("licensed_stat"),
-    },
-    {
-      num:   "02",
-      title: t("responsive_title"),
-      desc:  t("responsive_desc"),
-      stat:  t("responsive_stat"),
-    },
-    {
-      num:   "03",
-      title: t("tech_title"),
-      desc:  t("tech_desc"),
-      stat:  t("tech_stat"),
-    },
-    {
-      num:   "04",
-      title: t("local_title"),
-      desc:  t("local_desc"),
-      stat:  t("local_stat"),
-    },
+    { num: "01", title: t("pillar1_title"), desc: t("pillar1_desc") },
+    { num: "02", title: t("pillar2_title"), desc: t("pillar2_desc") },
+    { num: "03", title: t("pillar3_title"), desc: t("pillar3_desc") },
+    { num: "04", title: t("pillar4_title"), desc: t("pillar4_desc") },
   ];
 
   return (
@@ -40,22 +20,22 @@ export default function WhyChabrin() {
 
         {/* Section header */}
         <ScrollReveal className="max-w-2xl mb-14">
-          <p className="text-brand-cyan text-sm font-bold tracking-widest uppercase mb-3">
-            {t("report_eyebrow")}
+          <p className="text-brand-cyan text-xs font-bold tracking-widest uppercase mb-3">
+            {t("eyebrow")}
           </p>
           <AnimatedHeadline
-            text={t("report_title")}
+            text={t("title")}
             as="h2"
             className="text-3xl md:text-4xl font-bold text-white leading-tight"
           />
           <AnimatedHeadline
-            text={t("report_accent")}
+            text={t("title_accent")}
             as="span"
             className="text-3xl md:text-4xl font-bold text-brand-cyan leading-tight block mb-4"
             delay={0.1}
           />
           <p className="text-white/55 text-lg leading-relaxed">
-            {t("report_subtitle")}
+            {t("subtitle")}
           </p>
         </ScrollReveal>
 
@@ -64,7 +44,7 @@ export default function WhyChabrin() {
 
           {/* ── LEFT: 4 numbered pillars ─────────────────────────────── */}
           <ScrollReveal className="space-y-0">
-            {PILLARS.map(({ num, title, desc, stat }, i) => (
+            {PILLARS.map(({ num, title, desc }, i) => (
               <div
                 key={num}
                 className={`flex gap-5 py-6 ${
@@ -79,12 +59,7 @@ export default function WhyChabrin() {
                 </div>
                 {/* Content */}
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-3 mb-1.5">
-                    <h3 className="text-white font-bold text-base leading-snug">{title}</h3>
-                    <span className="ml-auto flex-shrink-0 text-brand-cyan font-extrabold text-sm">
-                      {stat}
-                    </span>
-                  </div>
+                  <h3 className="text-white font-bold text-base leading-snug mb-1.5">{title}</h3>
                   <p className="text-white/45 text-sm leading-relaxed">{desc}</p>
                 </div>
               </div>
@@ -144,7 +119,7 @@ export default function WhyChabrin() {
                 ))}
               </div>
 
-              {/* SLA note */}
+              {/* Consultation note */}
               <div className="border-t border-white/10 px-5 py-4 bg-brand-cyan/5">
                 <p className="text-[9px] tracking-[0.2em] text-brand-cyan/70 uppercase font-bold mb-1.5">
                   {t("services_sla_label")}

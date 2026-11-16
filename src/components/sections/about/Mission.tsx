@@ -24,7 +24,7 @@ export default function Mission() {
         <div className="grid md:grid-cols-2 gap-8 mb-16">
           {MV.map(({ label, text }, i) => (
             <ScrollReveal key={label} delay={i * 0.1}>
-              <div className="bg-white rounded-2xl p-8 border-l-4 border-brand-cyan shadow-card h-full">
+              <div className="bg-white rounded-2xl p-8 shadow-card h-full border-t-2 border-brand-cyan">
                 <h2 className="text-xl font-bold text-brand-navy mb-4">{label}</h2>
                 <p className="text-slate-600 leading-relaxed">{text}</p>
               </div>

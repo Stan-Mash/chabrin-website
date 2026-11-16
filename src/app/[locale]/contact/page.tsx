@@ -23,11 +23,11 @@ export default async function ContactPage({ params }: Props) {
       <ContactHero />
       <section className="py-16 bg-surface">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-5 gap-12">
-            <div className="lg:col-span-3">
+          <div className="grid lg:grid-cols-12 gap-12">
+            <div className="lg:col-span-7">
               <ContactForm />
             </div>
-            <div className="lg:col-span-2">
+            <div className="lg:col-span-5">
               <ContactInfo />
             </div>
           </div>

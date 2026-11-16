@@ -71,6 +71,10 @@ export async function listOpenJobs(): Promise<JobSummary[]> {
     FROM jobs
     WHERE status = 'open'
       AND (closes_at IS NULL OR closes_at > NOW())
+      AND slug NOT IN (
+        'field-officer', 'zone-manager', 'property-manager',
+        'office-assistant', 'office-administrator', 'internal-auditor'
+      )
     ORDER BY created_at DESC
   `;
 }
