@@ -1,18 +1,23 @@
 ﻿import type { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
+import { siteConfig } from "@/config/site";
 import ComplaintsHero   from "@/components/sections/complaints/ComplaintsHero";
 import ComplaintForm    from "@/components/sections/complaints/ComplaintForm";
 import ComplaintStatus  from "@/components/sections/complaints/ComplaintStatus";
 
 type Props = { params: Promise<{ locale: string }> };
 
-export const metadata: Metadata = {
-  title: "Complaints & Issue Tracker",
-  description:
-    "Submit a complaint, maintenance request, or feedback to Chabrin Agencies. " +
-    "Every submission is acknowledged with a reference number and tracked to resolution. " +
-    "Serving tenants and landlords across Nairobi, Kiambu, Murang'a, Kajiado, Machakos, and beyond.",
-};
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  return {
+    title: "Complaints & Issue Tracker",
+    description:
+      "Submit a complaint, maintenance request, or feedback to Chabrin Agencies. " +
+      "Every submission is acknowledged with a reference number and tracked to resolution. " +
+      "Serving tenants and landlords across Nairobi, Kiambu, Murang'a, Kajiado, Machakos, and beyond.",
+    alternates: { canonical: `${siteConfig.url}/${locale}/complaints` },
+  };
+}
 
 export default async function ComplaintsPage({ params }: Props) {
   const { locale } = await params;

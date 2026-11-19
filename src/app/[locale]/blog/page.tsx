@@ -3,13 +3,14 @@ import Link from "next/link";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { getAllPosts, type SanityPost } from "@/sanity/queries/blog";
+import { siteConfig } from "@/config/site";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   return {
     title: "Blog & Insights",
     description: "Property market insights, landlord guides, tenant tips, and real estate news from Chabrin Agencies Limited.",
-    alternates: { canonical: `https://www.chabrinagencies.com/${locale}/blog` },
+    alternates: { canonical: `${siteConfig.url}/${locale}/blog` },
   };
 }
 

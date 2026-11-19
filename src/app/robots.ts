@@ -13,10 +13,11 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: "*",
         allow: "/",
         disallow: [
-          "/api/",           // Hide API routes
-          "/admin/",         // Hide admin routes (when added)
-          "/_next/",         // Hide Next.js internal
-          "/private/",       // Hide private pages
+          "/api/",
+          "/admin/",
+          "/_next/",
+          "/private/",
+          "/studio/",
         ],
       },
     ],

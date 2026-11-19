@@ -11,7 +11,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title: "Careers",
     description: "Join Chabrin Agencies Limited - Kenya's trusted property management company. View open positions across Nairobi, Kiambu, Murang'a, Kajiado, Machakos and beyond.",
-    alternates: { canonical: `https://www.chabrinagencies.com/${locale}/careers` },
+    alternates: { canonical: `${siteConfig.url}/${locale}/careers` },
   };
 }
 

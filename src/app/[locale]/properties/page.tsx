@@ -1,5 +1,6 @@
 ﻿import { setRequestLocale } from "next-intl/server";
 import type { Metadata } from "next";
+import { siteConfig } from "@/config/site";
 import PropertiesHero from "@/components/sections/properties/PropertiesHero";
 import SearchInterface from "@/components/sections/properties/SearchInterface";
 
@@ -10,7 +11,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: "Search Properties",
     description: "Browse available residential and commercial properties managed by Chabrin Agencies across Nairobi, Kiambu, Murang'a, Kajiado, Machakos and beyond. Filter by region, type, bedrooms and budget - with an interactive map.",
-    alternates: { canonical: `https://www.chabrinagencies.com/${locale}/properties` },
+    alternates: { canonical: `${siteConfig.url}/${locale}/properties` },
   };
 }
 

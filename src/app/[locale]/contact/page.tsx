@@ -1,5 +1,6 @@
 import { setRequestLocale } from "next-intl/server";
 import type { Metadata } from "next";
+import { siteConfig } from "@/config/site";
 import ContactHero from "@/components/sections/contact/ContactHero";
 import ContactForm from "@/components/sections/contact/ContactForm";
 import ContactInfo from "@/components/sections/contact/ContactInfo";
@@ -11,7 +12,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: "Contact Us",
     description: "Get in touch with Chabrin Agencies. Send an enquiry, request a property management consultation, or ask about available properties across Kenya.",
-    alternates: { canonical: `https://www.chabrinagencies.com/${locale}/contact` },
+    alternates: { canonical: `${siteConfig.url}/${locale}/contact` },
   };
 }
 

@@ -1,5 +1,6 @@
 import { setRequestLocale } from "next-intl/server";
 import type { Metadata } from "next";
+import { siteConfig } from "@/config/site";
 import AboutHero from "@/components/sections/about/AboutHero";
 import Mission from "@/components/sections/about/Mission";
 import Timeline from "@/components/sections/about/Timeline";
@@ -12,7 +13,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: "About Us",
     description: "Over 30 years of trusted property management across Nairobi, Kiambu, Murang'a, Kajiado, Machakos, and beyond. Learn about Chabrin Agencies.",
-    alternates: { canonical: `https://www.chabrinagencies.com/${locale}/about` },
+    alternates: { canonical: `${siteConfig.url}/${locale}/about` },
   };
 }
 

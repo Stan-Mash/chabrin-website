@@ -7,7 +7,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title: "Privacy Policy",
     description: "How Chabrin Agencies Limited collects, uses, and protects your personal data under the Kenya Data Protection Act 2019.",
-    alternates: { canonical: `https://www.chabrinagencies.com/${locale}/privacy-policy` },
+    alternates: { canonical: `${siteConfig.url}/${locale}/privacy-policy` },
   };
 }
 

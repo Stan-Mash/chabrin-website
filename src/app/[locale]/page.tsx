@@ -1,6 +1,7 @@
 import { setRequestLocale } from "next-intl/server";
 import type { Metadata } from "next";
 import type { Locale } from "@/types";
+import { siteConfig } from "@/config/site";
 import Hero                from "@/components/sections/Hero";
 import StatsBar            from "@/components/sections/StatsBar";
 import Services            from "@/components/sections/Services";
@@ -19,7 +20,7 @@ export async function generateMetadata({
   const { locale } = await params;
   const isSwahili  = locale === "sw";
 
-  const base = "https://www.chabrinagencies.com";
+  const base = siteConfig.url;
   return {
     title: isSwahili
       ? "Usimamizi wa Mali Kenya"

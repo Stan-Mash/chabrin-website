@@ -13,6 +13,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: t("hero_title"),
     description: t("hero_subtitle"),
+    alternates: { canonical: `${siteConfig.url}/${locale}/faq` },
   };
 }
 
